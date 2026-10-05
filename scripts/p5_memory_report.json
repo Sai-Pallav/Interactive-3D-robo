@@ -1,0 +1,85 @@
+{
+  "initial": {
+    "geometries": 353,
+    "textures": 2,
+    "materialsCount": 11,
+    "heapMB": 99.4
+  },
+  "afterDebug": {
+    "geometries": 353,
+    "textures": 2,
+    "materialsCount": 11,
+    "heapMB": 97.8
+  },
+  "afterExploded": {
+    "geometries": 353,
+    "textures": 2,
+    "materialsCount": 11,
+    "heapMB": 101.6
+  },
+  "afterLOD": {
+    "geometries": 353,
+    "textures": 2,
+    "materialsCount": 11,
+    "heapMB": 105.3
+  },
+  "afterDRS": {
+    "geometries": 353,
+    "textures": 2,
+    "materialsCount": 11,
+    "heapMB": 69.8
+  },
+  "afterCamera": {
+    "geometries": 353,
+    "textures": 2,
+    "materialsCount": 11,
+    "heapMB": 75.2
+  },
+  "remountResults": [
+    {
+      "cycle": 1,
+      "geometries": 353,
+      "textures": 2,
+      "materialsCount": 11,
+      "heapMB": 68.8
+    },
+    {
+      "cycle": 2,
+      "geometries": 353,
+      "textures": 2,
+      "materialsCount": 11,
+      "heapMB": 90.3
+    },
+    {
+      "cycle": 3,
+      "geometries": 353,
+      "textures": 2,
+      "materialsCount": 11,
+      "heapMB": 87.7
+    },
+    {
+      "cycle": 4,
+      "geometries": 353,
+      "textures": 2,
+      "materialsCount": 11,
+      "heapMB": 84.7
+    },
+    {
+      "cycle": 5,
+      "geometries": 353,
+      "textures": 2,
+      "materialsCount": 11,
+      "heapMB": 80.8
+    }
+  ],
+  "final": {
+    "geometries": 353,
+    "textures": 2,
+    "materialsCount": 11,
+    "heapMB": 80.8
+  },
+  "geometryLeak": 0,
+  "textureLeak": 0,
+  "materialLeak": 0,
+  "passed": true
+}

@@ -1,0 +1,208 @@
+{
+  "timestamp": "2026-10-03T19:16:43.670Z",
+  "lod0": {
+    "level": 0,
+    "fps": 60,
+    "avgFrameTimeMs": 16.67,
+    "minFrameTimeMs": 9,
+    "maxFrameTimeMs": 24.9,
+    "p50FrameTimeMs": 16.7,
+    "p95FrameTimeMs": 19.5,
+    "p99FrameTimeMs": 21.1,
+    "renderSubmitTimeMs": {
+      "avg": 4.22,
+      "p50": 4.3,
+      "p95": 5.2,
+      "p99": 9
+    },
+    "drawCalls": 423,
+    "renderedTriangles": 356536,
+    "geometries": 343,
+    "lodStats": {
+      "currentLevel": 0,
+      "distance": 2.17,
+      "lod1MeshCount": 26,
+      "lod2MeshCount": 8,
+      "culledMeshCount": 0
+    },
+    "sampleCount": 150
+  },
+  "lod1": {
+    "level": 1,
+    "fps": 60,
+    "avgFrameTimeMs": 16.66,
+    "minFrameTimeMs": 11.4,
+    "maxFrameTimeMs": 24.9,
+    "p50FrameTimeMs": 16.6,
+    "p95FrameTimeMs": 19.1,
+    "p99FrameTimeMs": 22.6,
+    "renderSubmitTimeMs": {
+      "avg": 3.85,
+      "p50": 3.9,
+      "p95": 5,
+      "p99": 6
+    },
+    "drawCalls": 397,
+    "renderedTriangles": 354264,
+    "geometries": 343,
+    "lodStats": {
+      "currentLevel": 1,
+      "distance": 2.17,
+      "lod1MeshCount": 26,
+      "lod2MeshCount": 8,
+      "culledMeshCount": 26
+    },
+    "sampleCount": 151
+  },
+  "lod2": {
+    "level": 2,
+    "fps": 59.9,
+    "avgFrameTimeMs": 16.68,
+    "minFrameTimeMs": 11.8,
+    "maxFrameTimeMs": 22.6,
+    "p50FrameTimeMs": 16.7,
+    "p95FrameTimeMs": 19.4,
+    "p99FrameTimeMs": 21.3,
+    "renderSubmitTimeMs": {
+      "avg": 3.73,
+      "p50": 4,
+      "p95": 4.9,
+      "p99": 5.5
+    },
+    "drawCalls": 391,
+    "renderedTriangles": 354192,
+    "geometries": 343,
+    "lodStats": {
+      "currentLevel": 2,
+      "distance": 2.17,
+      "lod1MeshCount": 26,
+      "lod2MeshCount": 8,
+      "culledMeshCount": 34
+    },
+    "sampleCount": 150
+  },
+  "hysteresisTest": [
+    {
+      "label": "Hero close-up (2.2m)",
+      "z": 2.2,
+      "level": 0,
+      "expected": 0,
+      "passed": true,
+      "stats": {
+        "currentLevel": 0,
+        "distance": 2.21,
+        "lod1MeshCount": 26,
+        "lod2MeshCount": 8,
+        "culledMeshCount": 0
+      }
+    },
+    {
+      "label": "Beyond LOD1 threshold (3.2m)",
+      "z": 3.2,
+      "level": 1,
+      "expected": 1,
+      "passed": true,
+      "stats": {
+        "currentLevel": 1,
+        "distance": 3.2,
+        "lod1MeshCount": 26,
+        "lod2MeshCount": 8,
+        "culledMeshCount": 26
+      }
+    },
+    {
+      "label": "Inside LOD1 exit hysteresis (2.8m)",
+      "z": 2.8,
+      "level": 1,
+      "expected": 1,
+      "passed": true,
+      "stats": {
+        "currentLevel": 1,
+        "distance": 2.81,
+        "lod1MeshCount": 26,
+        "lod2MeshCount": 8,
+        "culledMeshCount": 26
+      }
+    },
+    {
+      "label": "Below LOD1 exit threshold (2.5m)",
+      "z": 2.5,
+      "level": 0,
+      "expected": 0,
+      "passed": true,
+      "stats": {
+        "currentLevel": 0,
+        "distance": 2.51,
+        "lod1MeshCount": 26,
+        "lod2MeshCount": 8,
+        "culledMeshCount": 0
+      }
+    },
+    {
+      "label": "Beyond LOD2 threshold (4.5m)",
+      "z": 4.5,
+      "level": 2,
+      "expected": 2,
+      "passed": true,
+      "stats": {
+        "currentLevel": 2,
+        "distance": 4.5,
+        "lod1MeshCount": 26,
+        "lod2MeshCount": 8,
+        "culledMeshCount": 34
+      }
+    },
+    {
+      "label": "Inside LOD2 exit hysteresis (3.9m)",
+      "z": 3.9,
+      "level": 2,
+      "expected": 2,
+      "passed": true,
+      "stats": {
+        "currentLevel": 2,
+        "distance": 3.9,
+        "lod1MeshCount": 26,
+        "lod2MeshCount": 8,
+        "culledMeshCount": 34
+      }
+    },
+    {
+      "label": "Below LOD2 exit threshold (3.5m)",
+      "z": 3.5,
+      "level": 1,
+      "expected": 1,
+      "passed": true,
+      "stats": {
+        "currentLevel": 1,
+        "distance": 3.5,
+        "lod1MeshCount": 26,
+        "lod2MeshCount": 8,
+        "culledMeshCount": 26
+      }
+    },
+    {
+      "label": "Returned to hero (2.4m)",
+      "z": 2.4,
+      "level": 0,
+      "expected": 0,
+      "passed": true,
+      "stats": {
+        "currentLevel": 0,
+        "distance": 2.41,
+        "lod1MeshCount": 26,
+        "lod2MeshCount": 8,
+        "culledMeshCount": 0
+      }
+    }
+  ],
+  "deltaLOD0toLOD1": {
+    "drawCallReduction": 26,
+    "triangleReduction": 2272,
+    "renderSubmitDeltaMs": -0.37
+  },
+  "deltaLOD0toLOD2": {
+    "drawCallReduction": 32,
+    "triangleReduction": 2344,
+    "renderSubmitDeltaMs": -0.49
+  }
+}

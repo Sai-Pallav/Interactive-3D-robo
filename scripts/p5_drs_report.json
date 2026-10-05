@@ -1,0 +1,482 @@
+{
+  "timestamp": "2026-10-03T21:28:22.714Z",
+  "normalScenarios": {
+    "idle": {
+      "fps": 60,
+      "avgFrameTimeMs": 16.67,
+      "minFrameTimeMs": 10.8,
+      "maxFrameTimeMs": 25.8,
+      "p50FrameTimeMs": 16.8,
+      "p95FrameTimeMs": 20.3,
+      "p99FrameTimeMs": 24.6,
+      "renderSubmitTimeMs": {
+        "avg": 4.54,
+        "p50": 4.6,
+        "p95": 6,
+        "p99": 10.1,
+        "max": 10.4
+      },
+      "drawCalls": 423,
+      "renderedTriangles": 356536,
+      "geometries": 342,
+      "meshCount": 447,
+      "instancedMeshCount": 2,
+      "totalInstances": 4,
+      "effectiveDpr": 1.5,
+      "drsStats": {
+        "enabled": true,
+        "isForced": false,
+        "currentPixelRatio": 1.5,
+        "targetPixelRatio": 1.5,
+        "minPixelRatio": 0.85,
+        "maxPixelRatio": 1.5,
+        "avgFrameTimeMs": 16.64,
+        "sampleCount": 60,
+        "adjustmentsCount": 0,
+        "isUnderPressure": false,
+        "lastAdjustmentTime": 2307.800000000745
+      },
+      "canvasDimensions": {
+        "width": 1085,
+        "height": 1015,
+        "styleWidth": "723.797px",
+        "styleHeight": "677.203px",
+        "clientWidth": 724,
+        "clientHeight": 677
+      },
+      "heapMB": 96.1,
+      "sampleCount": 150
+    },
+    "animation": {
+      "fps": 60.1,
+      "avgFrameTimeMs": 16.63,
+      "minFrameTimeMs": 6.7,
+      "maxFrameTimeMs": 24.1,
+      "p50FrameTimeMs": 16.6,
+      "p95FrameTimeMs": 20.4,
+      "p99FrameTimeMs": 22,
+      "renderSubmitTimeMs": {
+        "avg": 4.33,
+        "p50": 4.3,
+        "p95": 5.6,
+        "p99": 8.6,
+        "max": 8.7
+      },
+      "drawCalls": 423,
+      "renderedTriangles": 356536,
+      "geometries": 342,
+      "meshCount": 447,
+      "instancedMeshCount": 2,
+      "totalInstances": 4,
+      "effectiveDpr": 1.5,
+      "drsStats": {
+        "enabled": true,
+        "isForced": false,
+        "currentPixelRatio": 1.5,
+        "targetPixelRatio": 1.5,
+        "minPixelRatio": 0.85,
+        "maxPixelRatio": 1.5,
+        "avgFrameTimeMs": 16.64,
+        "sampleCount": 60,
+        "adjustmentsCount": 0,
+        "isUnderPressure": false,
+        "lastAdjustmentTime": 2307.800000000745
+      },
+      "canvasDimensions": {
+        "width": 1085,
+        "height": 1015,
+        "styleWidth": "723.797px",
+        "styleHeight": "677.203px",
+        "clientWidth": 724,
+        "clientHeight": 677
+      },
+      "heapMB": 100.9,
+      "sampleCount": 151
+    },
+    "exploded": {
+      "fps": 60,
+      "avgFrameTimeMs": 16.67,
+      "minFrameTimeMs": 10.4,
+      "maxFrameTimeMs": 22,
+      "p50FrameTimeMs": 16.6,
+      "p95FrameTimeMs": 18.7,
+      "p99FrameTimeMs": 20.1,
+      "renderSubmitTimeMs": {
+        "avg": 4.41,
+        "p50": 4.3,
+        "p95": 5.4,
+        "p99": 5.8,
+        "max": 5.8
+      },
+      "drawCalls": 423,
+      "renderedTriangles": 356536,
+      "geometries": 342,
+      "meshCount": 447,
+      "instancedMeshCount": 2,
+      "totalInstances": 4,
+      "effectiveDpr": 1.5,
+      "drsStats": {
+        "enabled": true,
+        "isForced": false,
+        "currentPixelRatio": 1.5,
+        "targetPixelRatio": 1.5,
+        "minPixelRatio": 0.85,
+        "maxPixelRatio": 1.5,
+        "avgFrameTimeMs": 16.7,
+        "sampleCount": 60,
+        "adjustmentsCount": 0,
+        "isUnderPressure": false,
+        "lastAdjustmentTime": 2307.800000000745
+      },
+      "canvasDimensions": {
+        "width": 1085,
+        "height": 1015,
+        "styleWidth": "723.797px",
+        "styleHeight": "677.203px",
+        "clientWidth": 724,
+        "clientHeight": 677
+      },
+      "heapMB": 94.3,
+      "sampleCount": 151
+    },
+    "debug": {
+      "fps": 60.1,
+      "avgFrameTimeMs": 16.63,
+      "minFrameTimeMs": 13.1,
+      "maxFrameTimeMs": 20.3,
+      "p50FrameTimeMs": 16.6,
+      "p95FrameTimeMs": 18.3,
+      "p99FrameTimeMs": 19.3,
+      "renderSubmitTimeMs": {
+        "avg": 4.02,
+        "p50": 4.1,
+        "p95": 4.6,
+        "p99": 5,
+        "max": 5.4
+      },
+      "drawCalls": 451,
+      "renderedTriangles": 0,
+      "geometries": 370,
+      "meshCount": 447,
+      "instancedMeshCount": 2,
+      "totalInstances": 4,
+      "effectiveDpr": 1.5,
+      "drsStats": {
+        "enabled": true,
+        "isForced": false,
+        "currentPixelRatio": 1.5,
+        "targetPixelRatio": 1.5,
+        "minPixelRatio": 0.85,
+        "maxPixelRatio": 1.5,
+        "avgFrameTimeMs": 16.66,
+        "sampleCount": 60,
+        "adjustmentsCount": 0,
+        "isUnderPressure": false,
+        "lastAdjustmentTime": 2307.800000000745
+      },
+      "canvasDimensions": {
+        "width": 1085,
+        "height": 1015,
+        "styleWidth": "723.797px",
+        "styleHeight": "677.203px",
+        "clientWidth": 724,
+        "clientHeight": 677
+      },
+      "heapMB": 68.9,
+      "sampleCount": 151
+    }
+  },
+  "resolutionTiers": {
+    "dpr2_0": {
+      "fps": 60.1,
+      "avgFrameTimeMs": 16.65,
+      "minFrameTimeMs": 11.6,
+      "maxFrameTimeMs": 20.6,
+      "p50FrameTimeMs": 16.6,
+      "p95FrameTimeMs": 19,
+      "p99FrameTimeMs": 20.6,
+      "renderSubmitTimeMs": {
+        "avg": 4.27,
+        "p50": 4.3,
+        "p95": 5.1,
+        "p99": 5.4,
+        "max": 5.4
+      },
+      "drawCalls": 423,
+      "renderedTriangles": 356536,
+      "geometries": 342,
+      "meshCount": 447,
+      "instancedMeshCount": 2,
+      "totalInstances": 4,
+      "effectiveDpr": 2,
+      "drsStats": {
+        "enabled": true,
+        "isForced": true,
+        "currentPixelRatio": 2,
+        "targetPixelRatio": 1.5,
+        "minPixelRatio": 0.85,
+        "maxPixelRatio": 1.5,
+        "avgFrameTimeMs": 16.63,
+        "sampleCount": 60,
+        "adjustmentsCount": 0,
+        "isUnderPressure": false,
+        "lastAdjustmentTime": 2307.800000000745
+      },
+      "canvasDimensions": {
+        "width": 1447,
+        "height": 1354,
+        "styleWidth": "723.797px",
+        "styleHeight": "677.203px",
+        "clientWidth": 724,
+        "clientHeight": 677
+      },
+      "heapMB": 68.8,
+      "sampleCount": 151
+    },
+    "dpr1_5": {
+      "fps": 60.1,
+      "avgFrameTimeMs": 16.64,
+      "minFrameTimeMs": 11,
+      "maxFrameTimeMs": 24.7,
+      "p50FrameTimeMs": 16.7,
+      "p95FrameTimeMs": 19.1,
+      "p99FrameTimeMs": 20.9,
+      "renderSubmitTimeMs": {
+        "avg": 4.2,
+        "p50": 4.2,
+        "p95": 5.8,
+        "p99": 7.7,
+        "max": 8
+      },
+      "drawCalls": 423,
+      "renderedTriangles": 356536,
+      "geometries": 342,
+      "meshCount": 447,
+      "instancedMeshCount": 2,
+      "totalInstances": 4,
+      "effectiveDpr": 1.5,
+      "drsStats": {
+        "enabled": true,
+        "isForced": true,
+        "currentPixelRatio": 1.5,
+        "targetPixelRatio": 1.5,
+        "minPixelRatio": 0.85,
+        "maxPixelRatio": 1.5,
+        "avgFrameTimeMs": 16.63,
+        "sampleCount": 60,
+        "adjustmentsCount": 0,
+        "isUnderPressure": false,
+        "lastAdjustmentTime": 2307.800000000745
+      },
+      "canvasDimensions": {
+        "width": 1085,
+        "height": 1015,
+        "styleWidth": "723.797px",
+        "styleHeight": "677.203px",
+        "clientWidth": 724,
+        "clientHeight": 677
+      },
+      "heapMB": 71.4,
+      "sampleCount": 151
+    },
+    "dpr1_0": {
+      "fps": 60,
+      "avgFrameTimeMs": 16.65,
+      "minFrameTimeMs": 11.6,
+      "maxFrameTimeMs": 22.9,
+      "p50FrameTimeMs": 16.8,
+      "p95FrameTimeMs": 19.6,
+      "p99FrameTimeMs": 22.1,
+      "renderSubmitTimeMs": {
+        "avg": 3.78,
+        "p50": 3.9,
+        "p95": 5.3,
+        "p99": 5.9,
+        "max": 6.3
+      },
+      "drawCalls": 423,
+      "renderedTriangles": 356536,
+      "geometries": 342,
+      "meshCount": 447,
+      "instancedMeshCount": 2,
+      "totalInstances": 4,
+      "effectiveDpr": 1,
+      "drsStats": {
+        "enabled": true,
+        "isForced": true,
+        "currentPixelRatio": 1,
+        "targetPixelRatio": 1.5,
+        "minPixelRatio": 0.85,
+        "maxPixelRatio": 1.5,
+        "avgFrameTimeMs": 16.63,
+        "sampleCount": 60,
+        "adjustmentsCount": 0,
+        "isUnderPressure": false,
+        "lastAdjustmentTime": 2307.800000000745
+      },
+      "canvasDimensions": {
+        "width": 723,
+        "height": 677,
+        "styleWidth": "723.797px",
+        "styleHeight": "677.203px",
+        "clientWidth": 724,
+        "clientHeight": 677
+      },
+      "heapMB": 74,
+      "sampleCount": 151
+    },
+    "dpr0_85": {
+      "fps": 60.2,
+      "avgFrameTimeMs": 16.61,
+      "minFrameTimeMs": 10.9,
+      "maxFrameTimeMs": 22.3,
+      "p50FrameTimeMs": 16.6,
+      "p95FrameTimeMs": 19.7,
+      "p99FrameTimeMs": 21.4,
+      "renderSubmitTimeMs": {
+        "avg": 3.44,
+        "p50": 3.7,
+        "p95": 5,
+        "p99": 5.5,
+        "max": 6.4
+      },
+      "drawCalls": 423,
+      "renderedTriangles": 356536,
+      "geometries": 342,
+      "meshCount": 447,
+      "instancedMeshCount": 2,
+      "totalInstances": 4,
+      "effectiveDpr": 0.85,
+      "drsStats": {
+        "enabled": true,
+        "isForced": true,
+        "currentPixelRatio": 0.85,
+        "targetPixelRatio": 1.5,
+        "minPixelRatio": 0.85,
+        "maxPixelRatio": 1.5,
+        "avgFrameTimeMs": 16.63,
+        "sampleCount": 60,
+        "adjustmentsCount": 0,
+        "isUnderPressure": false,
+        "lastAdjustmentTime": 2307.800000000745
+      },
+      "canvasDimensions": {
+        "width": 615,
+        "height": 575,
+        "styleWidth": "723.797px",
+        "styleHeight": "677.203px",
+        "clientWidth": 724,
+        "clientHeight": 677
+      },
+      "heapMB": 75.7,
+      "sampleCount": 151
+    }
+  },
+  "resizeSafety": {
+    "stylePreserved": true,
+    "styleW": "723.797px",
+    "styleH": "677.203px",
+    "dpr0_85_buffer": {
+      "w": 615,
+      "h": 575
+    },
+    "dpr1_5_buffer": {
+      "w": 1085,
+      "h": 1015
+    }
+  },
+  "adaptivePressureTest": {
+    "underPressure": {
+      "fps": 57.6,
+      "avgFrameTimeMs": 17.36,
+      "minFrameTimeMs": 14,
+      "maxFrameTimeMs": 25.8,
+      "p50FrameTimeMs": 17.2,
+      "p95FrameTimeMs": 21.4,
+      "p99FrameTimeMs": 23.2,
+      "renderSubmitTimeMs": {
+        "avg": 3.29,
+        "p50": 3.1,
+        "p95": 5.8,
+        "p99": 6.4,
+        "max": 6.7
+      },
+      "drawCalls": 423,
+      "renderedTriangles": 356536,
+      "geometries": 342,
+      "meshCount": 447,
+      "instancedMeshCount": 2,
+      "totalInstances": 4,
+      "effectiveDpr": 1.5,
+      "drsStats": {
+        "enabled": true,
+        "isForced": false,
+        "currentPixelRatio": 1.5,
+        "targetPixelRatio": 1.5,
+        "minPixelRatio": 0.85,
+        "maxPixelRatio": 1.5,
+        "avgFrameTimeMs": 18.13,
+        "sampleCount": 55,
+        "adjustmentsCount": 0,
+        "isUnderPressure": false,
+        "lastAdjustmentTime": 31929.5
+      },
+      "canvasDimensions": {
+        "width": 1085,
+        "height": 1015,
+        "styleWidth": "723.797px",
+        "styleHeight": "677.203px",
+        "clientWidth": 724,
+        "clientHeight": 677
+      },
+      "heapMB": 79.1,
+      "sampleCount": 202
+    },
+    "recovery": {
+      "fps": 60.1,
+      "avgFrameTimeMs": 16.63,
+      "minFrameTimeMs": 11.5,
+      "maxFrameTimeMs": 21.3,
+      "p50FrameTimeMs": 16.6,
+      "p95FrameTimeMs": 19.3,
+      "p99FrameTimeMs": 20.7,
+      "renderSubmitTimeMs": {
+        "avg": 4.14,
+        "p50": 4.1,
+        "p95": 5.4,
+        "p99": 5.6,
+        "max": 6.8
+      },
+      "drawCalls": 423,
+      "renderedTriangles": 356536,
+      "geometries": 342,
+      "meshCount": 447,
+      "instancedMeshCount": 2,
+      "totalInstances": 4,
+      "effectiveDpr": 1.5,
+      "drsStats": {
+        "enabled": true,
+        "isForced": false,
+        "currentPixelRatio": 1.5,
+        "targetPixelRatio": 1.5,
+        "minPixelRatio": 0.85,
+        "maxPixelRatio": 1.5,
+        "avgFrameTimeMs": 16.65,
+        "sampleCount": 60,
+        "adjustmentsCount": 0,
+        "isUnderPressure": false,
+        "lastAdjustmentTime": 31929.5
+      },
+      "canvasDimensions": {
+        "width": 1085,
+        "height": 1015,
+        "styleWidth": "723.797px",
+        "styleHeight": "677.203px",
+        "clientWidth": 724,
+        "clientHeight": 677
+      },
+      "heapMB": 69.3,
+      "sampleCount": 151
+    }
+  }
+}

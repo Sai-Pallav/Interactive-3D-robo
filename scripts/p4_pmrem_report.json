@@ -1,0 +1,53 @@
+{
+  "res_256": {
+    "fps": 60.3,
+    "avgFrameTimeMs": 16.58,
+    "minFrameTimeMs": 4.5,
+    "maxFrameTimeMs": 16.9,
+    "p50FrameTimeMs": 16.7,
+    "p95FrameTimeMs": 16.8,
+    "p99FrameTimeMs": 16.8,
+    "renderSubmitTimeMs": {
+      "avg": 4.16,
+      "p50": 4.2,
+      "p95": 4.9,
+      "p99": 5.6,
+      "max": 5.8
+    },
+    "sampleCount": 150
+  },
+  "res_128": {
+    "fps": 57.7,
+    "avgFrameTimeMs": 17.33,
+    "minFrameTimeMs": 16.3,
+    "maxFrameTimeMs": 116.7,
+    "p50FrameTimeMs": 16.7,
+    "p95FrameTimeMs": 16.9,
+    "p99FrameTimeMs": 17,
+    "renderSubmitTimeMs": {
+      "avg": 4.52,
+      "p50": 4.7,
+      "p95": 6.3,
+      "p99": 7.7,
+      "max": 7.8
+    },
+    "sampleCount": 150
+  },
+  "res_512": {
+    "fps": 56.6,
+    "avgFrameTimeMs": 17.67,
+    "minFrameTimeMs": 16.4,
+    "maxFrameTimeMs": 150.2,
+    "p50FrameTimeMs": 16.7,
+    "p95FrameTimeMs": 16.8,
+    "p99FrameTimeMs": 33.3,
+    "renderSubmitTimeMs": {
+      "avg": 4.49,
+      "p50": 4.7,
+      "p95": 5.9,
+      "p99": 7,
+      "max": 7.2
+    },
+    "sampleCount": 150
+  }
+}

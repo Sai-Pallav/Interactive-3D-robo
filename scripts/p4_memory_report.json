@@ -1,0 +1,50 @@
+{
+  "initial": {
+    "geometries": 342,
+    "textures": 2,
+    "heapMB": 94.1
+  },
+  "afterDebug": {
+    "geometries": 342,
+    "textures": 2,
+    "heapMB": 96.4
+  },
+  "afterExploded": {
+    "geometries": 342,
+    "textures": 2,
+    "heapMB": 96.7
+  },
+  "afterLOD": {
+    "geometries": 342,
+    "textures": 2,
+    "heapMB": 96.1
+  },
+  "remountResults": [
+    {
+      "cycle": 1,
+      "geometries": 342,
+      "textures": 2,
+      "heapMB": 101.9
+    },
+    {
+      "cycle": 2,
+      "geometries": 342,
+      "textures": 2,
+      "heapMB": 106.5
+    },
+    {
+      "cycle": 3,
+      "geometries": 342,
+      "textures": 2,
+      "heapMB": 97.9
+    }
+  ],
+  "final": {
+    "geometries": 342,
+    "textures": 2,
+    "heapMB": 97.9
+  },
+  "geometryLeak": 0,
+  "textureLeak": 0,
+  "passed": true
+}

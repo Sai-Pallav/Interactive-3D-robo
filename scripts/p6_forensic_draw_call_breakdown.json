@@ -1,0 +1,4193 @@
+{
+  "Head": {
+    "meshCount": 35,
+    "drawCalls": 35,
+    "uniqueMaterials": 10,
+    "materialBreakdown": {
+      "RobotDarkTitaniumMaterial": 8,
+      "RobotMetallicMaterial": 6,
+      "RobotPurpleBloomMaterial": 4,
+      "RobotDarkTitaniumDoubleSideMaterial": 3,
+      "RobotWhiteArmorMaterial": 1,
+      "RobotPurpleEmissiveMaterial": 6,
+      "RobotWhiteCoreEmissiveMaterial": 4,
+      "RobotObsidianVisorMaterial": 1,
+      "RobotVisorOuterFrameMaterial": 1,
+      "RobotWhiteArmorDoubleSideMaterial": 1
+    },
+    "uniqueGeometries": 32,
+    "totalPolygons": 59504,
+    "instancedMeshes": 0,
+    "meshes": [
+      {
+        "name": "BearingHousingGroup_L_RobotDarkTitaniumMaterial_Merged",
+        "parent": "BearingHousingGroup_L",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 7344,
+        "geoId": 207,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "BearingHousingGroup_L_RobotMetallicMaterial_Merged",
+        "parent": "BearingHousingGroup_L",
+        "mat": "RobotMetallicMaterial",
+        "polys": 3248,
+        "geoId": 229,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "BearingHousingGroup_L_RobotPurpleBloomMaterial_Merged",
+        "parent": "BearingHousingGroup_L",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 704,
+        "geoId": 231,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "BearingHousingGroup_L_RobotDarkTitaniumDoubleSideMaterial_Merged",
+        "parent": "BearingHousingGroup_L",
+        "mat": "RobotDarkTitaniumDoubleSideMaterial",
+        "polys": 192,
+        "geoId": 251,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LateralActuatorDisc_Race_RobotMetallicMaterial_Merged",
+        "parent": "LateralActuatorDisc_BearingRace",
+        "mat": "RobotMetallicMaterial",
+        "polys": 576,
+        "geoId": 1387,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MedialActuatorDisc_Race_RobotMetallicMaterial_Merged",
+        "parent": "MedialActuatorDisc_BearingRace",
+        "mat": "RobotMetallicMaterial",
+        "polys": 576,
+        "geoId": 1420,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "BearingHousingGroup_R_RobotDarkTitaniumMaterial_Merged",
+        "parent": "BearingHousingGroup_R",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 7344,
+        "geoId": 418,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "BearingHousingGroup_R_RobotMetallicMaterial_Merged",
+        "parent": "BearingHousingGroup_R",
+        "mat": "RobotMetallicMaterial",
+        "polys": 3248,
+        "geoId": 440,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "BearingHousingGroup_R_RobotPurpleBloomMaterial_Merged",
+        "parent": "BearingHousingGroup_R",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 704,
+        "geoId": 442,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "BearingHousingGroup_R_RobotDarkTitaniumDoubleSideMaterial_Merged",
+        "parent": "BearingHousingGroup_R",
+        "mat": "RobotDarkTitaniumDoubleSideMaterial",
+        "polys": 192,
+        "geoId": 462,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LateralActuatorDisc_Race_RobotMetallicMaterial_Merged",
+        "parent": "LateralActuatorDisc_BearingRace",
+        "mat": "RobotMetallicMaterial",
+        "polys": 576,
+        "geoId": 2272,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MedialActuatorDisc_Race_RobotMetallicMaterial_Merged",
+        "parent": "MedialActuatorDisc_BearingRace",
+        "mat": "RobotMetallicMaterial",
+        "polys": 576,
+        "geoId": 2305,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "NeckCollar",
+        "parent": "UpperTorsoFrame",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 2880,
+        "geoId": 42,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "NeckCollarLightRing",
+        "parent": "UpperTorsoFrame",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 800,
+        "geoId": 50,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "NeckCollarLightSlit",
+        "parent": "UpperTorsoFrame",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 12,
+        "geoId": 51,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "NeckStructure_Merged",
+        "parent": "Neck",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 5680,
+        "geoId": 1150,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "NeckSpacers_Merged",
+        "parent": "Neck",
+        "mat": "RobotDarkTitaniumDoubleSideMaterial",
+        "polys": 336,
+        "geoId": 1155,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "InnerSkullCore",
+        "parent": "RobotHead",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 816,
+        "geoId": 1070,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "BrowTrim",
+        "parent": "OuterShell",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 576,
+        "geoId": 1072,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "RearNapeLEDGroup",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 256,
+        "geoId": 1084,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RearNapeLED",
+        "parent": "RearNapeLEDGroup",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 256,
+        "geoId": 1085,
+        "isOcclusionCandidate": true,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "RearNapeLEDGroup",
+        "mat": "RobotWhiteCoreEmissiveMaterial",
+        "polys": 192,
+        "geoId": 1086,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "BlackVisor",
+        "parent": "VisorAssembly",
+        "mat": "RobotObsidianVisorMaterial",
+        "polys": 3888,
+        "geoId": 1087,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VisorOuterFrame",
+        "parent": "VisorAssembly",
+        "mat": "RobotVisorOuterFrameMaterial",
+        "polys": 1600,
+        "geoId": 1088,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VisorLEDBloom",
+        "parent": "PurpleVisorLED",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 1056,
+        "geoId": 1089,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VisorLEDBar",
+        "parent": "PurpleVisorLED",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 1056,
+        "geoId": 1090,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VisorLEDCore",
+        "parent": "PurpleVisorLED",
+        "mat": "RobotWhiteCoreEmissiveMaterial",
+        "polys": 880,
+        "geoId": 1091,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "EarEmissiveRing",
+        "parent": "LeftSideModule",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 1920,
+        "geoId": 1096,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "EarCoreRingWhite",
+        "parent": "LeftSideModule",
+        "mat": "RobotWhiteCoreEmissiveMaterial",
+        "polys": 1536,
+        "geoId": 1097,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftSideModule_JointMerged",
+        "parent": "LeftSideModule",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 1776,
+        "geoId": 1106,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "EarEmissiveRing",
+        "parent": "RightSideModule",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 1920,
+        "geoId": 1096,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "EarCoreRingWhite",
+        "parent": "RightSideModule",
+        "mat": "RobotWhiteCoreEmissiveMaterial",
+        "polys": 1536,
+        "geoId": 1097,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightSideModule_JointMerged",
+        "parent": "RightSideModule",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 1776,
+        "geoId": 1106,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "JawShell",
+        "parent": "JawAssembly",
+        "mat": "RobotWhiteArmorDoubleSideMaterial",
+        "polys": 3240,
+        "geoId": 1107,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "JawJoint_Merged",
+        "parent": "JawAssembly",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 236,
+        "geoId": 1115,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      }
+    ]
+  },
+  "Torso": {
+    "meshCount": 42,
+    "drawCalls": 42,
+    "uniqueMaterials": 5,
+    "materialBreakdown": {
+      "RobotWhiteArmorMaterial": 3,
+      "RobotPurpleEmissiveMaterial": 16,
+      "RobotWhiteArmorDoubleSideMaterial": 3,
+      "RobotDarkTitaniumMaterial": 11,
+      "RobotMetallicMaterial": 9
+    },
+    "uniqueGeometries": 41,
+    "totalPolygons": 40932,
+    "instancedMeshes": 0,
+    "meshes": [
+      {
+        "name": "ChestPlate_Central",
+        "parent": "ChestArmor",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 13820,
+        "geoId": 32,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ChestLogo_A",
+        "parent": "ChestPlate_Central",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 68,
+        "geoId": 33,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ChestLowerUndersideCowl",
+        "parent": "ChestPlate_Central",
+        "mat": "RobotWhiteArmorDoubleSideMaterial",
+        "polys": 1008,
+        "geoId": 34,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ChestSidePanel_Left",
+        "parent": "ChestArmor",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 1336,
+        "geoId": 35,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ChestSidePanel_Right",
+        "parent": "ChestArmor",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 1336,
+        "geoId": 37,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ChestLightStrip_Left",
+        "parent": "ChestArmor",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 56,
+        "geoId": 36,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ChestLightStrip_Right",
+        "parent": "ChestArmor",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 56,
+        "geoId": 36,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftChestTransitionPanel",
+        "parent": "LeftWhiteStructuralAssembly",
+        "mat": "RobotWhiteArmorDoubleSideMaterial",
+        "polys": 112,
+        "geoId": 122,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightChestTransitionPanel",
+        "parent": "RightWhiteStructuralAssembly",
+        "mat": "RobotWhiteArmorDoubleSideMaterial",
+        "polys": 112,
+        "geoId": 357,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "UpperChestFrameJoint_Merged",
+        "parent": "UpperTorsoFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 336,
+        "geoId": 49,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "BackLightBar",
+        "parent": "UpperTorsoFrame",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 12,
+        "geoId": 53,
+        "isOcclusionCandidate": true,
+        "isInstanced": false
+      },
+      {
+        "name": "SubXiphoidStatusLed",
+        "parent": "LowerChestFrame",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 12,
+        "geoId": 63,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LowerChestFrame_Merged",
+        "parent": "LowerChestFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 984,
+        "geoId": 109,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LowerChestMetallic_Merged",
+        "parent": "LowerChestFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 392,
+        "geoId": 118,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "LowerChestFrame",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 512,
+        "geoId": 119,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "LowerChestFrame",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 12,
+        "geoId": 120,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "LowerChestFrame",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 12,
+        "geoId": 121,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "SpineUpperMount_Joint_Merged",
+        "parent": "SpineUpperMount",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 128,
+        "geoId": 550,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "SpineUpperMount_Metallic_Merged",
+        "parent": "SpineUpperMount",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1416,
+        "geoId": 554,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "SpineUpperMount",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 512,
+        "geoId": 555,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "SpineCentralShaft",
+        "parent": "ArticulatedSpineAssembly",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 96,
+        "geoId": 556,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VertebraModule_01_RobotDarkTitaniumMaterial_Merged",
+        "parent": "VertebraModule_01",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 608,
+        "geoId": 595,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VertebraModule_01_RobotMetallicMaterial_Merged",
+        "parent": "VertebraModule_01",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1016,
+        "geoId": 607,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VertebraModule_01_RobotPurpleEmissiveMaterial_Merged",
+        "parent": "VertebraModule_01",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 24,
+        "geoId": 615,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VertebraModule_02_RobotDarkTitaniumMaterial_Merged",
+        "parent": "VertebraModule_02",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 572,
+        "geoId": 644,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VertebraModule_02_RobotMetallicMaterial_Merged",
+        "parent": "VertebraModule_02",
+        "mat": "RobotMetallicMaterial",
+        "polys": 920,
+        "geoId": 654,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VertebraModule_02_RobotPurpleEmissiveMaterial_Merged",
+        "parent": "VertebraModule_02",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 12,
+        "geoId": 658,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VertebraModule_03_RobotDarkTitaniumMaterial_Merged",
+        "parent": "VertebraModule_03",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 596,
+        "geoId": 695,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VertebraModule_03_RobotMetallicMaterial_Merged",
+        "parent": "VertebraModule_03",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1112,
+        "geoId": 708,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VertebraModule_03_RobotPurpleEmissiveMaterial_Merged",
+        "parent": "VertebraModule_03",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 108,
+        "geoId": 714,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VertebraModule_04_RobotDarkTitaniumMaterial_Merged",
+        "parent": "VertebraModule_04",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 572,
+        "geoId": 743,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VertebraModule_04_RobotMetallicMaterial_Merged",
+        "parent": "VertebraModule_04",
+        "mat": "RobotMetallicMaterial",
+        "polys": 920,
+        "geoId": 753,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VertebraModule_04_RobotPurpleEmissiveMaterial_Merged",
+        "parent": "VertebraModule_04",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 12,
+        "geoId": 757,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VertebraModule_05_RobotDarkTitaniumMaterial_Merged",
+        "parent": "VertebraModule_05",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 272,
+        "geoId": 780,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VertebraModule_05_RobotMetallicMaterial_Merged",
+        "parent": "VertebraModule_05",
+        "mat": "RobotMetallicMaterial",
+        "polys": 920,
+        "geoId": 790,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VertebraModule_05_RobotPurpleEmissiveMaterial_Merged",
+        "parent": "VertebraModule_05",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 12,
+        "geoId": 794,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftActuatorClusterAssembly_RobotDarkTitaniumMaterial_Merged",
+        "parent": "LeftActuatorClusterAssembly",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 1776,
+        "geoId": 919,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftActuatorClusterAssembly_RobotMetallicMaterial_Merged",
+        "parent": "LeftActuatorClusterAssembly",
+        "mat": "RobotMetallicMaterial",
+        "polys": 3432,
+        "geoId": 923,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftActuatorClusterAssembly_RobotPurpleEmissiveMaterial_Merged",
+        "parent": "LeftActuatorClusterAssembly",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 256,
+        "geoId": 927,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightActuatorClusterAssembly_RobotDarkTitaniumMaterial_Merged",
+        "parent": "RightActuatorClusterAssembly",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 1776,
+        "geoId": 974,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightActuatorClusterAssembly_RobotMetallicMaterial_Merged",
+        "parent": "RightActuatorClusterAssembly",
+        "mat": "RobotMetallicMaterial",
+        "polys": 3432,
+        "geoId": 978,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightActuatorClusterAssembly_RobotPurpleEmissiveMaterial_Merged",
+        "parent": "RightActuatorClusterAssembly",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 256,
+        "geoId": 982,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      }
+    ]
+  },
+  "Shoulders": {
+    "meshCount": 42,
+    "drawCalls": 42,
+    "uniqueMaterials": 6,
+    "materialBreakdown": {
+      "RobotDarkTitaniumMaterial": 14,
+      "RobotMetallicMaterial": 14,
+      "RobotWhiteArmorDoubleSideMaterial": 2,
+      "RobotPurpleEmissiveMaterial": 6,
+      "RobotPurpleBloomMaterial": 4,
+      "RobotMachinedLinkMaterial": 2
+    },
+    "uniqueGeometries": 37,
+    "totalPolygons": 39424,
+    "instancedMeshes": 0,
+    "meshes": [
+      {
+        "name": "LeftMountingFrame",
+        "parent": "LeftWhiteStructuralAssembly",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 1536,
+        "geoId": 123,
+        "isOcclusionCandidate": true,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftMountingFrame_Bolts_Merged",
+        "parent": "LeftMountingFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 288,
+        "geoId": 138,
+        "isOcclusionCandidate": true,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftUpperShoulderHood",
+        "parent": "LeftUpperShoulderShell",
+        "mat": "RobotWhiteArmorDoubleSideMaterial",
+        "polys": 4288,
+        "geoId": 139,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "PauldronSubRim_TitaniumSeal",
+        "parent": "LeftPauldronSubRim",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 112,
+        "geoId": 140,
+        "isOcclusionCandidate": true,
+        "isInstanced": false
+      },
+      {
+        "name": "PauldronSubRim_MetallicRace",
+        "parent": "LeftPauldronSubRim",
+        "mat": "RobotMetallicMaterial",
+        "polys": 48,
+        "geoId": 141,
+        "isOcclusionCandidate": true,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftShoulderNeckLed",
+        "parent": "StationaryAnchorGroup_L",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 576,
+        "geoId": 145,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "StationaryAnchorGroup_L_RobotDarkTitaniumMaterial_Merged",
+        "parent": "StationaryAnchorGroup_L",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 472,
+        "geoId": 166,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "StationaryAnchorGroup_L_RobotMetallicMaterial_Merged",
+        "parent": "StationaryAnchorGroup_L",
+        "mat": "RobotMetallicMaterial",
+        "polys": 272,
+        "geoId": 171,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "StationaryAnchorGroup_L_RobotPurpleBloomMaterial_Merged",
+        "parent": "StationaryAnchorGroup_L",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 432,
+        "geoId": 173,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ShoulderEnergyRing_L",
+        "parent": "BearingHousingGroup_L",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 1232,
+        "geoId": 178,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "PrimaryPivotRing_L",
+        "parent": "PrimaryHubGroup_L",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 320,
+        "geoId": 257,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "PrimaryHubGroup_L_RobotDarkTitaniumMaterial_Merged",
+        "parent": "PrimaryHubGroup_L",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 408,
+        "geoId": 277,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "PrimaryHubGroup_L_RobotMetallicMaterial_Merged",
+        "parent": "PrimaryHubGroup_L",
+        "mat": "RobotMetallicMaterial",
+        "polys": 624,
+        "geoId": 281,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftSecondaryAxisCarrier_LinksMerged_RobotDarkTitaniumMaterial_Merged",
+        "parent": "LeftSecondaryAxisCarrier_LinksMerged",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 2008,
+        "geoId": 322,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftSecondaryAxisCarrier_LinksMerged_RobotMetallicMaterial_Merged",
+        "parent": "LeftSecondaryAxisCarrier_LinksMerged",
+        "mat": "RobotMetallicMaterial",
+        "polys": 624,
+        "geoId": 327,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftSecondaryAxisCarrier_LinksMerged_RobotMachinedLinkMaterial_Merged",
+        "parent": "LeftSecondaryAxisCarrier_LinksMerged",
+        "mat": "RobotMachinedLinkMaterial",
+        "polys": 128,
+        "geoId": 331,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftShoulderSocketReceiver_RobotDarkTitaniumMaterial_Merged",
+        "parent": "LeftShoulderSocketReceiver",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 496,
+        "geoId": 344,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftShoulderSocketReceiver_RobotMetallicMaterial_Merged",
+        "parent": "LeftShoulderSocketReceiver",
+        "mat": "RobotMetallicMaterial",
+        "polys": 976,
+        "geoId": 356,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "LeftShoulderArmAdapter",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 768,
+        "geoId": 1165,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "AdapterJoint_Merged",
+        "parent": "LeftShoulderArmAdapter",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 1976,
+        "geoId": 1183,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "AdapterMetallic_Merged",
+        "parent": "LeftShoulderArmAdapter",
+        "mat": "RobotMetallicMaterial",
+        "polys": 2128,
+        "geoId": 1202,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightMountingFrame",
+        "parent": "RightWhiteStructuralAssembly",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 1536,
+        "geoId": 123,
+        "isOcclusionCandidate": true,
+        "isInstanced": false
+      },
+      {
+        "name": "RightMountingFrame_Bolts_Merged",
+        "parent": "RightMountingFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 288,
+        "geoId": 371,
+        "isOcclusionCandidate": true,
+        "isInstanced": false
+      },
+      {
+        "name": "RightUpperShoulderHood",
+        "parent": "RightUpperShoulderShell",
+        "mat": "RobotWhiteArmorDoubleSideMaterial",
+        "polys": 4288,
+        "geoId": 372,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "PauldronSubRim_TitaniumSeal",
+        "parent": "RightPauldronSubRim",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 112,
+        "geoId": 373,
+        "isOcclusionCandidate": true,
+        "isInstanced": false
+      },
+      {
+        "name": "PauldronSubRim_MetallicRace",
+        "parent": "RightPauldronSubRim",
+        "mat": "RobotMetallicMaterial",
+        "polys": 48,
+        "geoId": 374,
+        "isOcclusionCandidate": true,
+        "isInstanced": false
+      },
+      {
+        "name": "RightShoulderNeckLed",
+        "parent": "StationaryAnchorGroup_R",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 576,
+        "geoId": 145,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "StationaryAnchorGroup_R_RobotDarkTitaniumMaterial_Merged",
+        "parent": "StationaryAnchorGroup_R",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 472,
+        "geoId": 392,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "StationaryAnchorGroup_R_RobotMetallicMaterial_Merged",
+        "parent": "StationaryAnchorGroup_R",
+        "mat": "RobotMetallicMaterial",
+        "polys": 272,
+        "geoId": 397,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "StationaryAnchorGroup_R_RobotPurpleBloomMaterial_Merged",
+        "parent": "StationaryAnchorGroup_R",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 432,
+        "geoId": 399,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ShoulderEnergyRing_R",
+        "parent": "BearingHousingGroup_R",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 1232,
+        "geoId": 178,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "PrimaryPivotRing_R",
+        "parent": "PrimaryHubGroup_R",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 320,
+        "geoId": 257,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "PrimaryHubGroup_R_RobotDarkTitaniumMaterial_Merged",
+        "parent": "PrimaryHubGroup_R",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 408,
+        "geoId": 482,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "PrimaryHubGroup_R_RobotMetallicMaterial_Merged",
+        "parent": "PrimaryHubGroup_R",
+        "mat": "RobotMetallicMaterial",
+        "polys": 624,
+        "geoId": 486,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightSecondaryAxisCarrier_LinksMerged_RobotDarkTitaniumMaterial_Merged",
+        "parent": "RightSecondaryAxisCarrier_LinksMerged",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 2008,
+        "geoId": 518,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightSecondaryAxisCarrier_LinksMerged_RobotMetallicMaterial_Merged",
+        "parent": "RightSecondaryAxisCarrier_LinksMerged",
+        "mat": "RobotMetallicMaterial",
+        "polys": 624,
+        "geoId": 523,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightSecondaryAxisCarrier_LinksMerged_RobotMachinedLinkMaterial_Merged",
+        "parent": "RightSecondaryAxisCarrier_LinksMerged",
+        "mat": "RobotMachinedLinkMaterial",
+        "polys": 128,
+        "geoId": 527,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightShoulderSocketReceiver_RobotDarkTitaniumMaterial_Merged",
+        "parent": "RightShoulderSocketReceiver",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 496,
+        "geoId": 533,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightShoulderSocketReceiver_RobotMetallicMaterial_Merged",
+        "parent": "RightShoulderSocketReceiver",
+        "mat": "RobotMetallicMaterial",
+        "polys": 976,
+        "geoId": 545,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "RightShoulderArmAdapter",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 768,
+        "geoId": 1165,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "AdapterJoint_Merged",
+        "parent": "RightShoulderArmAdapter",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 1976,
+        "geoId": 2123,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "AdapterMetallic_Merged",
+        "parent": "RightShoulderArmAdapter",
+        "mat": "RobotMetallicMaterial",
+        "polys": 2128,
+        "geoId": 2142,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      }
+    ]
+  },
+  "Arms": {
+    "meshCount": 142,
+    "drawCalls": 142,
+    "uniqueMaterials": 6,
+    "materialBreakdown": {
+      "RobotWhiteArmorMaterial": 53,
+      "RobotPurpleEmissiveMaterial": 14,
+      "RobotDarkTitaniumMaterial": 32,
+      "RobotMetallicMaterial": 30,
+      "RobotPurpleBloomMaterial": 8,
+      "RobotWhiteArmorDoubleSideMaterial": 5
+    },
+    "uniqueGeometries": 104,
+    "totalPolygons": 119892,
+    "instancedMeshes": 0,
+    "meshes": [
+      {
+        "name": "ChestFlankArmor_Left",
+        "parent": "ChestArmor",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 1196,
+        "geoId": 38,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ChestFlankArmor_Right",
+        "parent": "ChestArmor",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 1196,
+        "geoId": 39,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "BearingHousingGroup_L_RobotWhiteArmorMaterial_Merged",
+        "parent": "BearingHousingGroup_L",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 704,
+        "geoId": 233,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftBicepRotationalLed",
+        "parent": "LeftShoulderArmAdapter",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 768,
+        "geoId": 1164,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftElbowRoot_UpperHousing_Joint_Merged",
+        "parent": "ElbowUpperHousing",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 600,
+        "geoId": 1331,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftElbowRoot_UpperHousing_Metallic_Merged",
+        "parent": "ElbowUpperHousing",
+        "mat": "RobotMetallicMaterial",
+        "polys": 964,
+        "geoId": 1342,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ElbowHydraulicRam_RobotDarkTitaniumMaterial_Merged",
+        "parent": "ElbowHydraulicRam",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 136,
+        "geoId": 1439,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ElbowHydraulicRam_RobotMetallicMaterial_Merged",
+        "parent": "ElbowHydraulicRam",
+        "mat": "RobotMetallicMaterial",
+        "polys": 304,
+        "geoId": 1443,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ElbowCentralAxlePin_RobotMetallicMaterial_Merged",
+        "parent": "ElbowCentralAxlePin",
+        "mat": "RobotMetallicMaterial",
+        "polys": 112,
+        "geoId": 1347,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ElbowCentralAxlePin_RobotDarkTitaniumMaterial_Merged",
+        "parent": "ElbowCentralAxlePin",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 224,
+        "geoId": 1352,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LateralActuatorDisc_Bezel_RobotDarkTitaniumMaterial_Merged",
+        "parent": "LateralActuatorDisc_OuterBezel",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 640,
+        "geoId": 1369,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LateralActuatorDisc_Bezel_RobotMetallicMaterial_Merged",
+        "parent": "LateralActuatorDisc_OuterBezel",
+        "mat": "RobotMetallicMaterial",
+        "polys": 144,
+        "geoId": 1383,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LateralActuatorDisc_PurpleEmissiveRing",
+        "parent": "LateralActuatorDisc",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 512,
+        "geoId": 1358,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "LateralActuatorDisc",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 288,
+        "geoId": 1359,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "LateralActuatorDisc",
+        "mat": "RobotMetallicMaterial",
+        "polys": 240,
+        "geoId": 1360,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "LateralActuatorDisc",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 96,
+        "geoId": 1361,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LateralActuatorDisc_CenterDot",
+        "parent": "LateralActuatorDisc_HubCap",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 56,
+        "geoId": 1364,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LateralActuatorDisc_HubCap_RobotDarkTitaniumMaterial_Merged",
+        "parent": "LateralActuatorDisc_HubCap",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 240,
+        "geoId": 1396,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LateralActuatorDisc_HubCap_RobotMetallicMaterial_Merged",
+        "parent": "LateralActuatorDisc_HubCap",
+        "mat": "RobotMetallicMaterial",
+        "polys": 200,
+        "geoId": 1398,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MedialActuatorDisc_Bezel_RobotDarkTitaniumMaterial_Merged",
+        "parent": "MedialActuatorDisc_OuterBezel",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 640,
+        "geoId": 1402,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MedialActuatorDisc_Bezel_RobotMetallicMaterial_Merged",
+        "parent": "MedialActuatorDisc_OuterBezel",
+        "mat": "RobotMetallicMaterial",
+        "polys": 144,
+        "geoId": 1416,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MedialActuatorDisc_PurpleEmissiveRing",
+        "parent": "MedialActuatorDisc",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 512,
+        "geoId": 1358,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "MedialActuatorDisc",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 288,
+        "geoId": 1359,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "MedialActuatorDisc",
+        "mat": "RobotMetallicMaterial",
+        "polys": 240,
+        "geoId": 1360,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "MedialActuatorDisc",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 96,
+        "geoId": 1361,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MedialActuatorDisc_CenterDot",
+        "parent": "MedialActuatorDisc_HubCap",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 56,
+        "geoId": 1364,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MedialActuatorDisc_HubCap_RobotDarkTitaniumMaterial_Merged",
+        "parent": "MedialActuatorDisc_HubCap",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 240,
+        "geoId": 1429,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MedialActuatorDisc_HubCap_RobotMetallicMaterial_Merged",
+        "parent": "MedialActuatorDisc_HubCap",
+        "mat": "RobotMetallicMaterial",
+        "polys": 200,
+        "geoId": 1431,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftElbowRoot_LowerHousing_Joint_Merged",
+        "parent": "ElbowLowerHousing",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 236,
+        "geoId": 1451,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ElbowOlecranonArmor",
+        "parent": "ElbowLowerHousing",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 168,
+        "geoId": 1452,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ElbowOlecranonSpineRib",
+        "parent": "ElbowLowerHousing",
+        "mat": "RobotMetallicMaterial",
+        "polys": 12,
+        "geoId": 1453,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexProximal_ArmorShell",
+        "parent": "IndexProximal",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 396,
+        "geoId": 1684,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexMiddle_ArmorShell",
+        "parent": "IndexMiddle",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 396,
+        "geoId": 1722,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexDistal_ArmorShell",
+        "parent": "IndexDistal",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 552,
+        "geoId": 1749,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleProximal_ArmorShell",
+        "parent": "MiddleProximal",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 396,
+        "geoId": 1789,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleMiddle_ArmorShell",
+        "parent": "MiddleMiddle",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 396,
+        "geoId": 1827,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleDistal_ArmorShell",
+        "parent": "MiddleDistal",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 552,
+        "geoId": 1854,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingProximal_ArmorShell",
+        "parent": "RingProximal",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 396,
+        "geoId": 1883,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingMiddle_ArmorShell",
+        "parent": "RingMiddle",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 396,
+        "geoId": 1910,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingDistal_ArmorShell",
+        "parent": "RingDistal",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 552,
+        "geoId": 1931,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleProximal_ArmorShell",
+        "parent": "LittleProximal",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 396,
+        "geoId": 1969,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleMiddle_ArmorShell",
+        "parent": "LittleMiddle",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 396,
+        "geoId": 2004,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleDistal_ArmorShell",
+        "parent": "LittleDistal",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 552,
+        "geoId": 2031,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftForearmCore_RobotDarkTitaniumMaterial_Merged",
+        "parent": "LeftForearmMechanicalCore",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 452,
+        "geoId": 1521,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftForearmCore_RobotMetallicMaterial_Merged",
+        "parent": "LeftForearmMechanicalCore",
+        "mat": "RobotMetallicMaterial",
+        "polys": 832,
+        "geoId": 1528,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "LeftForearmAssembly",
+        "mat": "RobotMetallicMaterial",
+        "polys": 336,
+        "geoId": 1464,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftForearmArmor_RobotWhiteArmorDoubleSideMaterial_Merged",
+        "parent": "LeftForearmArmorGroup",
+        "mat": "RobotWhiteArmorDoubleSideMaterial",
+        "polys": 8176,
+        "geoId": 1480,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftForearmArmor_RobotDarkTitaniumMaterial_Merged",
+        "parent": "LeftForearmArmorGroup",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 680,
+        "geoId": 1499,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftForearmArmor_RobotMetallicMaterial_Merged",
+        "parent": "LeftForearmArmorGroup",
+        "mat": "RobotMetallicMaterial",
+        "polys": 12,
+        "geoId": 1501,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftForearmArmor_RobotPurpleEmissiveMaterial_Merged",
+        "parent": "LeftForearmArmorGroup",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 544,
+        "geoId": 1503,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftForearmArmor_RobotPurpleBloomMaterial_Merged",
+        "parent": "LeftForearmArmorGroup",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 544,
+        "geoId": 1505,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftUpperArmCore_RobotDarkTitaniumMaterial_Merged",
+        "parent": "LeftUpperArmMechanicalCore",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 948,
+        "geoId": 1292,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftUpperArmCore_RobotMetallicMaterial_Merged",
+        "parent": "LeftUpperArmMechanicalCore",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1720,
+        "geoId": 1307,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftUpperArmArmor_RobotWhiteArmorDoubleSideMaterial_Merged",
+        "parent": "LeftUpperArmArmorGroup",
+        "mat": "RobotWhiteArmorDoubleSideMaterial",
+        "polys": 9760,
+        "geoId": 1250,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftUpperArmArmor_RobotDarkTitaniumMaterial_Merged",
+        "parent": "LeftUpperArmArmorGroup",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 296,
+        "geoId": 1268,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftUpperArmArmor_RobotMetallicMaterial_Merged",
+        "parent": "LeftUpperArmArmorGroup",
+        "mat": "RobotMetallicMaterial",
+        "polys": 12,
+        "geoId": 1270,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftUpperArmArmor_RobotPurpleEmissiveMaterial_Merged",
+        "parent": "LeftUpperArmArmorGroup",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 544,
+        "geoId": 1272,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftUpperArmArmor_RobotPurpleBloomMaterial_Merged",
+        "parent": "LeftUpperArmArmorGroup",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 544,
+        "geoId": 1274,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "BearingHousingGroup_R_RobotWhiteArmorMaterial_Merged",
+        "parent": "BearingHousingGroup_R",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 704,
+        "geoId": 444,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightBicepRotationalLed",
+        "parent": "RightShoulderArmAdapter",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 768,
+        "geoId": 1164,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightElbowRoot_UpperHousing_Joint_Merged",
+        "parent": "ElbowUpperHousing",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 600,
+        "geoId": 2232,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightElbowRoot_UpperHousing_Metallic_Merged",
+        "parent": "ElbowUpperHousing",
+        "mat": "RobotMetallicMaterial",
+        "polys": 964,
+        "geoId": 2243,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ElbowHydraulicRam_RobotDarkTitaniumMaterial_Merged",
+        "parent": "ElbowHydraulicRam",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 136,
+        "geoId": 2320,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ElbowHydraulicRam_RobotMetallicMaterial_Merged",
+        "parent": "ElbowHydraulicRam",
+        "mat": "RobotMetallicMaterial",
+        "polys": 304,
+        "geoId": 2324,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ElbowCentralAxlePin_RobotMetallicMaterial_Merged",
+        "parent": "ElbowCentralAxlePin",
+        "mat": "RobotMetallicMaterial",
+        "polys": 112,
+        "geoId": 2245,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ElbowCentralAxlePin_RobotDarkTitaniumMaterial_Merged",
+        "parent": "ElbowCentralAxlePin",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 224,
+        "geoId": 2250,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LateralActuatorDisc_Bezel_RobotDarkTitaniumMaterial_Merged",
+        "parent": "LateralActuatorDisc_OuterBezel",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 640,
+        "geoId": 2254,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LateralActuatorDisc_Bezel_RobotMetallicMaterial_Merged",
+        "parent": "LateralActuatorDisc_OuterBezel",
+        "mat": "RobotMetallicMaterial",
+        "polys": 144,
+        "geoId": 2268,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LateralActuatorDisc_PurpleEmissiveRing",
+        "parent": "LateralActuatorDisc",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 512,
+        "geoId": 1358,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "LateralActuatorDisc",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 288,
+        "geoId": 1359,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "LateralActuatorDisc",
+        "mat": "RobotMetallicMaterial",
+        "polys": 240,
+        "geoId": 1360,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "LateralActuatorDisc",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 96,
+        "geoId": 1361,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LateralActuatorDisc_CenterDot",
+        "parent": "LateralActuatorDisc_HubCap",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 56,
+        "geoId": 1364,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LateralActuatorDisc_HubCap_RobotDarkTitaniumMaterial_Merged",
+        "parent": "LateralActuatorDisc_HubCap",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 240,
+        "geoId": 2281,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LateralActuatorDisc_HubCap_RobotMetallicMaterial_Merged",
+        "parent": "LateralActuatorDisc_HubCap",
+        "mat": "RobotMetallicMaterial",
+        "polys": 200,
+        "geoId": 2283,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MedialActuatorDisc_Bezel_RobotDarkTitaniumMaterial_Merged",
+        "parent": "MedialActuatorDisc_OuterBezel",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 640,
+        "geoId": 2287,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MedialActuatorDisc_Bezel_RobotMetallicMaterial_Merged",
+        "parent": "MedialActuatorDisc_OuterBezel",
+        "mat": "RobotMetallicMaterial",
+        "polys": 144,
+        "geoId": 2301,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MedialActuatorDisc_PurpleEmissiveRing",
+        "parent": "MedialActuatorDisc",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 512,
+        "geoId": 1358,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "MedialActuatorDisc",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 288,
+        "geoId": 1359,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "MedialActuatorDisc",
+        "mat": "RobotMetallicMaterial",
+        "polys": 240,
+        "geoId": 1360,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "MedialActuatorDisc",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 96,
+        "geoId": 1361,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MedialActuatorDisc_CenterDot",
+        "parent": "MedialActuatorDisc_HubCap",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 56,
+        "geoId": 1364,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MedialActuatorDisc_HubCap_RobotDarkTitaniumMaterial_Merged",
+        "parent": "MedialActuatorDisc_HubCap",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 240,
+        "geoId": 2314,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MedialActuatorDisc_HubCap_RobotMetallicMaterial_Merged",
+        "parent": "MedialActuatorDisc_HubCap",
+        "mat": "RobotMetallicMaterial",
+        "polys": 200,
+        "geoId": 2316,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightElbowRoot_LowerHousing_Joint_Merged",
+        "parent": "ElbowLowerHousing",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 236,
+        "geoId": 2329,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ElbowOlecranonArmor",
+        "parent": "ElbowLowerHousing",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 168,
+        "geoId": 1452,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ElbowOlecranonSpineRib",
+        "parent": "ElbowLowerHousing",
+        "mat": "RobotMetallicMaterial",
+        "polys": 12,
+        "geoId": 1453,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexProximal_ArmorShell",
+        "parent": "IndexProximal",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 396,
+        "geoId": 1684,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexMiddle_ArmorShell",
+        "parent": "IndexMiddle",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 396,
+        "geoId": 1722,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexDistal_ArmorShell",
+        "parent": "IndexDistal",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 552,
+        "geoId": 1749,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleProximal_ArmorShell",
+        "parent": "MiddleProximal",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 396,
+        "geoId": 1789,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleMiddle_ArmorShell",
+        "parent": "MiddleMiddle",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 396,
+        "geoId": 1827,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleDistal_ArmorShell",
+        "parent": "MiddleDistal",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 552,
+        "geoId": 1854,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingProximal_ArmorShell",
+        "parent": "RingProximal",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 396,
+        "geoId": 1883,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingMiddle_ArmorShell",
+        "parent": "RingMiddle",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 396,
+        "geoId": 1910,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingDistal_ArmorShell",
+        "parent": "RingDistal",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 552,
+        "geoId": 1931,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleProximal_ArmorShell",
+        "parent": "LittleProximal",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 396,
+        "geoId": 1969,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleMiddle_ArmorShell",
+        "parent": "LittleMiddle",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 396,
+        "geoId": 2004,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleDistal_ArmorShell",
+        "parent": "LittleDistal",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 552,
+        "geoId": 2031,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightForearmCore_RobotDarkTitaniumMaterial_Merged",
+        "parent": "RightForearmMechanicalCore",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 452,
+        "geoId": 2376,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightForearmCore_RobotMetallicMaterial_Merged",
+        "parent": "RightForearmMechanicalCore",
+        "mat": "RobotMetallicMaterial",
+        "polys": 832,
+        "geoId": 2383,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "RightForearmAssembly",
+        "mat": "RobotMetallicMaterial",
+        "polys": 336,
+        "geoId": 1464,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightForearmArmor_RobotWhiteArmorDoubleSideMaterial_Merged",
+        "parent": "RightForearmArmorGroup",
+        "mat": "RobotWhiteArmorDoubleSideMaterial",
+        "polys": 8176,
+        "geoId": 2335,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightForearmArmor_RobotDarkTitaniumMaterial_Merged",
+        "parent": "RightForearmArmorGroup",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 680,
+        "geoId": 2354,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightForearmArmor_RobotMetallicMaterial_Merged",
+        "parent": "RightForearmArmorGroup",
+        "mat": "RobotMetallicMaterial",
+        "polys": 12,
+        "geoId": 2356,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightForearmArmor_RobotPurpleEmissiveMaterial_Merged",
+        "parent": "RightForearmArmorGroup",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 544,
+        "geoId": 2358,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightForearmArmor_RobotPurpleBloomMaterial_Merged",
+        "parent": "RightForearmArmorGroup",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 544,
+        "geoId": 2360,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightUpperArmCore_RobotDarkTitaniumMaterial_Merged",
+        "parent": "RightUpperArmMechanicalCore",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 948,
+        "geoId": 2205,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightUpperArmCore_RobotMetallicMaterial_Merged",
+        "parent": "RightUpperArmMechanicalCore",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1720,
+        "geoId": 2220,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightUpperArmArmor_RobotWhiteArmorDoubleSideMaterial_Merged",
+        "parent": "RightUpperArmArmorGroup",
+        "mat": "RobotWhiteArmorDoubleSideMaterial",
+        "polys": 9760,
+        "geoId": 2163,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightUpperArmArmor_RobotDarkTitaniumMaterial_Merged",
+        "parent": "RightUpperArmArmorGroup",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 296,
+        "geoId": 2181,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightUpperArmArmor_RobotMetallicMaterial_Merged",
+        "parent": "RightUpperArmArmorGroup",
+        "mat": "RobotMetallicMaterial",
+        "polys": 12,
+        "geoId": 2183,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightUpperArmArmor_RobotPurpleEmissiveMaterial_Merged",
+        "parent": "RightUpperArmArmorGroup",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 544,
+        "geoId": 2185,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightUpperArmArmor_RobotPurpleBloomMaterial_Merged",
+        "parent": "RightUpperArmArmorGroup",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 544,
+        "geoId": 2187,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ChestBackArmor",
+        "parent": "UpperTorsoFrame",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 1036,
+        "geoId": 52,
+        "isOcclusionCandidate": true,
+        "isInstanced": false
+      },
+      {
+        "name": "HelmetArmor_Merged",
+        "parent": "OuterShell",
+        "mat": "RobotWhiteArmorDoubleSideMaterial",
+        "polys": 8824,
+        "geoId": 1083,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "EarMount",
+        "parent": "LeftSideModule",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 1280,
+        "geoId": 1092,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "EarMount",
+        "parent": "RightSideModule",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 1280,
+        "geoId": 1092,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VertebraModule_01_RobotWhiteArmorMaterial_Merged",
+        "parent": "VertebraModule_01",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 40,
+        "geoId": 611,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VertebraModule_02_RobotWhiteArmorMaterial_Merged",
+        "parent": "VertebraModule_02",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 28,
+        "geoId": 656,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VertebraModule_03_RobotWhiteArmorMaterial_Merged",
+        "parent": "VertebraModule_03",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 28,
+        "geoId": 710,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VertebraModule_04_RobotWhiteArmorMaterial_Merged",
+        "parent": "VertebraModule_04",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 28,
+        "geoId": 755,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "VertebraModule_05_RobotWhiteArmorMaterial_Merged",
+        "parent": "VertebraModule_05",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 28,
+        "geoId": 792,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "WaistTransitionDeck_RobotWhiteArmorMaterial_Merged",
+        "parent": "WaistTransitionDeckAssembly",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 24,
+        "geoId": 849,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HipBracketArm",
+        "parent": "LeftHipPivot",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 432,
+        "geoId": 1038,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HipCowlArmor",
+        "parent": "LeftHipPivot",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 812,
+        "geoId": 1041,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThighAnteriorArmor_L",
+        "parent": "LeftThigh",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 4516,
+        "geoId": 2824,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThighLateralArmor_L",
+        "parent": "LeftThigh",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 1196,
+        "geoId": 2825,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThighStaticArmor_L",
+        "parent": "LeftThigh",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 2804,
+        "geoId": 2834,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "CalfArmor_L",
+        "parent": "LeftShin",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 1308,
+        "geoId": 2924,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "FootDorsalArmor_L",
+        "parent": "LeftFoot",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 524,
+        "geoId": 2964,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ToeArmor_L",
+        "parent": "LeftToePivot",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 728,
+        "geoId": 2966,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HeelArmor_L",
+        "parent": "LeftFoot",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 296,
+        "geoId": 2967,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HipBracketArm",
+        "parent": "RightHipPivot",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 432,
+        "geoId": 1042,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HipCowlArmor",
+        "parent": "RightHipPivot",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 812,
+        "geoId": 1045,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThighAnteriorArmor_R",
+        "parent": "RightThigh",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 4516,
+        "geoId": 2824,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThighLateralArmor_R",
+        "parent": "RightThigh",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 1196,
+        "geoId": 2825,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThighStaticArmor_R",
+        "parent": "RightThigh",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 2804,
+        "geoId": 3053,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "CalfArmor_R",
+        "parent": "RightShin",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 1308,
+        "geoId": 2924,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "FootDorsalArmor_R",
+        "parent": "RightFoot",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 524,
+        "geoId": 2964,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ToeArmor_R",
+        "parent": "RightToePivot",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 728,
+        "geoId": 2966,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HeelArmor_R",
+        "parent": "RightFoot",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 296,
+        "geoId": 2967,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      }
+    ]
+  },
+  "Hands": {
+    "meshCount": 26,
+    "drawCalls": 26,
+    "uniqueMaterials": 5,
+    "materialBreakdown": {
+      "RobotDarkTitaniumMaterial": 12,
+      "RobotPurpleEmissiveMaterial": 4,
+      "RobotMetallicMaterial": 4,
+      "RobotPurpleBloomMaterial": 4,
+      "RobotWhiteArmorMaterial": 2
+    },
+    "uniqueGeometries": 20,
+    "totalPolygons": 15036,
+    "instancedMeshes": 0,
+    "meshes": [
+      {
+        "name": "WristSmartCuff",
+        "parent": "WristMechanics",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 672,
+        "geoId": 1529,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "WristPurpleEmissiveSlot",
+        "parent": "WristMechanics",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 544,
+        "geoId": 1534,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftWristStatic_RobotMetallicMaterial_Merged",
+        "parent": "WristMechanics",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1304,
+        "geoId": 1557,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftWristStatic_RobotDarkTitaniumMaterial_Merged",
+        "parent": "WristMechanics",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 220,
+        "geoId": 1563,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftWristStatic_RobotPurpleBloomMaterial_Merged",
+        "parent": "WristMechanics",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 544,
+        "geoId": 1565,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "WristDistalClevis",
+        "parent": "LeftWristTrunnion",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 12,
+        "geoId": 1544,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HandDorsalArmor",
+        "parent": "LeftHandRoot",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 1558,
+        "geoId": 1582,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HandTelemetryLED",
+        "parent": "LeftHandRoot",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 12,
+        "geoId": 1586,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HandTelemetryBloom",
+        "parent": "LeftHandRoot",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 12,
+        "geoId": 1587,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HandPalmJoint_Merged",
+        "parent": "StaticPalmAssembly",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 1008,
+        "geoId": 1626,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HandPalmMetallic_Merged",
+        "parent": "StaticPalmAssembly",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1296,
+        "geoId": 1646,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LeftWristTrunnion_RobotDarkTitaniumMaterial_Merged",
+        "parent": "LeftWristTrunnion",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 224,
+        "geoId": 1570,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ForearmWristTransitionCollar",
+        "parent": "LeftForearmAssembly",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 112,
+        "geoId": 1463,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "WristSmartCuff",
+        "parent": "WristMechanics",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 672,
+        "geoId": 1529,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "WristPurpleEmissiveSlot",
+        "parent": "WristMechanics",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 544,
+        "geoId": 1534,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightWristStatic_RobotMetallicMaterial_Merged",
+        "parent": "WristMechanics",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1304,
+        "geoId": 2395,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightWristStatic_RobotDarkTitaniumMaterial_Merged",
+        "parent": "WristMechanics",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 220,
+        "geoId": 2401,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightWristStatic_RobotPurpleBloomMaterial_Merged",
+        "parent": "WristMechanics",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 544,
+        "geoId": 2403,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "WristDistalClevis",
+        "parent": "RightWristTrunnion",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 12,
+        "geoId": 1544,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HandDorsalArmor",
+        "parent": "RightHandRoot",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 1558,
+        "geoId": 2409,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HandTelemetryLED",
+        "parent": "RightHandRoot",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 12,
+        "geoId": 1586,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HandTelemetryBloom",
+        "parent": "RightHandRoot",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 12,
+        "geoId": 1587,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HandPalmJoint_Merged",
+        "parent": "StaticPalmAssembly",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 1008,
+        "geoId": 2437,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HandPalmMetallic_Merged",
+        "parent": "StaticPalmAssembly",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1296,
+        "geoId": 2457,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RightWristTrunnion_RobotDarkTitaniumMaterial_Merged",
+        "parent": "RightWristTrunnion",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 224,
+        "geoId": 2408,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ForearmWristTransitionCollar",
+        "parent": "RightForearmAssembly",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 112,
+        "geoId": 1463,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      }
+    ]
+  },
+  "Fingers": {
+    "meshCount": 86,
+    "drawCalls": 86,
+    "uniqueMaterials": 5,
+    "materialBreakdown": {
+      "RobotDarkTitaniumMaterial": 30,
+      "RobotMetallicMaterial": 30,
+      "RobotPurpleEmissiveMaterial": 12,
+      "RobotPurpleBloomMaterial": 10,
+      "RobotWhiteArmorMaterial": 4
+    },
+    "uniqueGeometries": 65,
+    "totalPolygons": 41888,
+    "instancedMeshes": 0,
+    "meshes": [
+      {
+        "name": "IndexProximal_Joint_Merged",
+        "parent": "IndexProximal_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 516,
+        "geoId": 1673,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexProximal_Metallic_Merged",
+        "parent": "IndexProximal_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1204,
+        "geoId": 1683,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexMiddle_Joint_Merged",
+        "parent": "IndexMiddle_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 516,
+        "geoId": 1711,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexMiddle_Metallic_Merged",
+        "parent": "IndexMiddle_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1204,
+        "geoId": 1721,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexDistal_Joint_Merged",
+        "parent": "IndexDistal_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 288,
+        "geoId": 1744,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexDistal_Metallic_Merged",
+        "parent": "IndexDistal_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 276,
+        "geoId": 1748,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexDistal_SensorJewel",
+        "parent": "IndexDistal",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 140,
+        "geoId": 1750,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexDistal_SensorJewelBloom",
+        "parent": "IndexDistal",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 80,
+        "geoId": 1751,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleProximal_Joint_Merged",
+        "parent": "MiddleProximal_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 516,
+        "geoId": 1778,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleProximal_Metallic_Merged",
+        "parent": "MiddleProximal_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1204,
+        "geoId": 1788,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleMiddle_Joint_Merged",
+        "parent": "MiddleMiddle_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 516,
+        "geoId": 1816,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleMiddle_Metallic_Merged",
+        "parent": "MiddleMiddle_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1204,
+        "geoId": 1826,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleDistal_Joint_Merged",
+        "parent": "MiddleDistal_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 288,
+        "geoId": 1849,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleDistal_Metallic_Merged",
+        "parent": "MiddleDistal_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 276,
+        "geoId": 1853,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleDistal_SensorJewel",
+        "parent": "MiddleDistal",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 140,
+        "geoId": 1750,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleDistal_SensorJewelBloom",
+        "parent": "MiddleDistal",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 80,
+        "geoId": 1751,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingProximal_Joint_Merged",
+        "parent": "RingProximal_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 516,
+        "geoId": 1872,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingProximal_Metallic_Merged",
+        "parent": "RingProximal_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1204,
+        "geoId": 1882,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingMiddle_Joint_Merged",
+        "parent": "RingMiddle_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 516,
+        "geoId": 1899,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingMiddle_Metallic_Merged",
+        "parent": "RingMiddle_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1204,
+        "geoId": 1909,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingDistal_Joint_Merged",
+        "parent": "RingDistal_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 288,
+        "geoId": 1926,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingDistal_Metallic_Merged",
+        "parent": "RingDistal_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 276,
+        "geoId": 1930,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingDistal_SensorJewel",
+        "parent": "RingDistal",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 140,
+        "geoId": 1750,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingDistal_SensorJewelBloom",
+        "parent": "RingDistal",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 80,
+        "geoId": 1751,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleProximal_Joint_Merged",
+        "parent": "LittleProximal_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 516,
+        "geoId": 1958,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleProximal_Metallic_Merged",
+        "parent": "LittleProximal_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1204,
+        "geoId": 1968,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleMiddle_Joint_Merged",
+        "parent": "LittleMiddle_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 516,
+        "geoId": 1993,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleMiddle_Metallic_Merged",
+        "parent": "LittleMiddle_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1204,
+        "geoId": 2003,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleDistal_Joint_Merged",
+        "parent": "LittleDistal_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 288,
+        "geoId": 2026,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleDistal_Metallic_Merged",
+        "parent": "LittleDistal_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 276,
+        "geoId": 2030,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleDistal_SensorJewel",
+        "parent": "LittleDistal",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 140,
+        "geoId": 1750,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleDistal_SensorJewelBloom",
+        "parent": "LittleDistal",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 80,
+        "geoId": 1751,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbBaseJoint_Merged",
+        "parent": "ThumbBase_Static",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 240,
+        "geoId": 2041,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbBaseMetallic_Merged",
+        "parent": "ThumbBase_Static",
+        "mat": "RobotMetallicMaterial",
+        "polys": 344,
+        "geoId": 2045,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbProximal_Joint_Merged",
+        "parent": "ThumbProximal_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 516,
+        "geoId": 2072,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbProximal_Metallic_Merged",
+        "parent": "ThumbProximal_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1204,
+        "geoId": 2082,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbProximal_ArmorShell",
+        "parent": "ThumbProximal",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 396,
+        "geoId": 2083,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbDistal_Joint_Merged",
+        "parent": "ThumbDistal_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 288,
+        "geoId": 2105,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbDistal_Metallic_Merged",
+        "parent": "ThumbDistal_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 276,
+        "geoId": 2109,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbDistal_ArmorShell",
+        "parent": "ThumbDistal",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 552,
+        "geoId": 2110,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbDistal_SensorJewel",
+        "parent": "ThumbDistal",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 140,
+        "geoId": 1750,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbDistal_SensorJewelBloom",
+        "parent": "ThumbDistal",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 80,
+        "geoId": 1751,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbTelemetryLed",
+        "parent": "ThumbDistal",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 12,
+        "geoId": 2111,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexProximal_Joint_Merged",
+        "parent": "IndexProximal_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 516,
+        "geoId": 2470,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexProximal_Metallic_Merged",
+        "parent": "IndexProximal_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1204,
+        "geoId": 2480,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexMiddle_Joint_Merged",
+        "parent": "IndexMiddle_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 516,
+        "geoId": 2493,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexMiddle_Metallic_Merged",
+        "parent": "IndexMiddle_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1204,
+        "geoId": 2503,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexDistal_Joint_Merged",
+        "parent": "IndexDistal_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 288,
+        "geoId": 2514,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexDistal_Metallic_Merged",
+        "parent": "IndexDistal_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 276,
+        "geoId": 2518,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexDistal_SensorJewel",
+        "parent": "IndexDistal",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 140,
+        "geoId": 1750,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "IndexDistal_SensorJewelBloom",
+        "parent": "IndexDistal",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 80,
+        "geoId": 1751,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleProximal_Joint_Merged",
+        "parent": "MiddleProximal_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 516,
+        "geoId": 2531,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleProximal_Metallic_Merged",
+        "parent": "MiddleProximal_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1204,
+        "geoId": 2541,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleMiddle_Joint_Merged",
+        "parent": "MiddleMiddle_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 516,
+        "geoId": 2554,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleMiddle_Metallic_Merged",
+        "parent": "MiddleMiddle_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1204,
+        "geoId": 2564,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleDistal_Joint_Merged",
+        "parent": "MiddleDistal_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 288,
+        "geoId": 2575,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleDistal_Metallic_Merged",
+        "parent": "MiddleDistal_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 276,
+        "geoId": 2579,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleDistal_SensorJewel",
+        "parent": "MiddleDistal",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 140,
+        "geoId": 1750,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "MiddleDistal_SensorJewelBloom",
+        "parent": "MiddleDistal",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 80,
+        "geoId": 1751,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingProximal_Joint_Merged",
+        "parent": "RingProximal_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 516,
+        "geoId": 2592,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingProximal_Metallic_Merged",
+        "parent": "RingProximal_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1204,
+        "geoId": 2602,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingMiddle_Joint_Merged",
+        "parent": "RingMiddle_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 516,
+        "geoId": 2615,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingMiddle_Metallic_Merged",
+        "parent": "RingMiddle_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1204,
+        "geoId": 2625,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingDistal_Joint_Merged",
+        "parent": "RingDistal_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 288,
+        "geoId": 2636,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingDistal_Metallic_Merged",
+        "parent": "RingDistal_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 276,
+        "geoId": 2640,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingDistal_SensorJewel",
+        "parent": "RingDistal",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 140,
+        "geoId": 1750,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "RingDistal_SensorJewelBloom",
+        "parent": "RingDistal",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 80,
+        "geoId": 1751,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleProximal_Joint_Merged",
+        "parent": "LittleProximal_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 516,
+        "geoId": 2653,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleProximal_Metallic_Merged",
+        "parent": "LittleProximal_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1204,
+        "geoId": 2663,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleMiddle_Joint_Merged",
+        "parent": "LittleMiddle_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 516,
+        "geoId": 2676,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleMiddle_Metallic_Merged",
+        "parent": "LittleMiddle_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1204,
+        "geoId": 2686,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleDistal_Joint_Merged",
+        "parent": "LittleDistal_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 288,
+        "geoId": 2697,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleDistal_Metallic_Merged",
+        "parent": "LittleDistal_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 276,
+        "geoId": 2701,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleDistal_SensorJewel",
+        "parent": "LittleDistal",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 140,
+        "geoId": 1750,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "LittleDistal_SensorJewelBloom",
+        "parent": "LittleDistal",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 80,
+        "geoId": 1751,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbBaseJoint_Merged",
+        "parent": "ThumbBase_Static",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 240,
+        "geoId": 2706,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbBaseMetallic_Merged",
+        "parent": "ThumbBase_Static",
+        "mat": "RobotMetallicMaterial",
+        "polys": 344,
+        "geoId": 2710,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbProximal_Joint_Merged",
+        "parent": "ThumbProximal_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 516,
+        "geoId": 2723,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbProximal_Metallic_Merged",
+        "parent": "ThumbProximal_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1204,
+        "geoId": 2733,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbProximal_ArmorShell",
+        "parent": "ThumbProximal",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 396,
+        "geoId": 2083,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbDistal_Joint_Merged",
+        "parent": "ThumbDistal_StaticFrame",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 288,
+        "geoId": 2744,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbDistal_Metallic_Merged",
+        "parent": "ThumbDistal_StaticFrame",
+        "mat": "RobotMetallicMaterial",
+        "polys": 276,
+        "geoId": 2748,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbDistal_ArmorShell",
+        "parent": "ThumbDistal",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 552,
+        "geoId": 2110,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbDistal_SensorJewel",
+        "parent": "ThumbDistal",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 140,
+        "geoId": 1750,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbDistal_SensorJewelBloom",
+        "parent": "ThumbDistal",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 80,
+        "geoId": 1751,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThumbTelemetryLed",
+        "parent": "ThumbDistal",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 12,
+        "geoId": 2111,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      }
+    ]
+  },
+  "Waist": {
+    "meshCount": 22,
+    "drawCalls": 22,
+    "uniqueMaterials": 4,
+    "materialBreakdown": {
+      "RobotMetallicMaterial": 2,
+      "RobotDarkTitaniumMaterial": 10,
+      "RobotPurpleEmissiveMaterial": 7,
+      "RobotWhiteArmorMaterial": 3
+    },
+    "uniqueGeometries": 22,
+    "totalPolygons": 27236,
+    "instancedMeshes": 0,
+    "meshes": [
+      {
+        "name": "WaistTransitionDeck_RobotMetallicMaterial_Merged",
+        "parent": "WaistTransitionDeckAssembly",
+        "mat": "RobotMetallicMaterial",
+        "polys": 1688,
+        "geoId": 839,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "WaistTransitionDeck_RobotDarkTitaniumMaterial_Merged",
+        "parent": "WaistTransitionDeckAssembly",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 416,
+        "geoId": 841,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "WaistTransitionDeck_RobotPurpleEmissiveMaterial_Merged",
+        "parent": "WaistTransitionDeckAssembly",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 1344,
+        "geoId": 845,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "WaistCore_Merged",
+        "parent": "WaistCore",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 14952,
+        "geoId": 1029,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "WaistMetallic_Merged",
+        "parent": "WaistCore",
+        "mat": "RobotMetallicMaterial",
+        "polys": 864,
+        "geoId": 1031,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "WaistCoreAccentRings_Merged",
+        "parent": "WaistCore",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 1152,
+        "geoId": 1037,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HipRotaryHub",
+        "parent": "LeftHipPivot",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 96,
+        "geoId": 1039,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HipAccentRing",
+        "parent": "LeftHipPivot",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 448,
+        "geoId": 1040,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HipHousingJoint_L",
+        "parent": "HipHousing_L",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 1184,
+        "geoId": 2764,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HipAccentRing_L",
+        "parent": "LeftHip",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 512,
+        "geoId": 2765,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HipRotaryHub",
+        "parent": "RightHipPivot",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 96,
+        "geoId": 1043,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HipAccentRing",
+        "parent": "RightHipPivot",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 448,
+        "geoId": 1044,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HipHousingJoint_R",
+        "parent": "HipHousing_R",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 1184,
+        "geoId": 2998,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "HipAccentRing_R",
+        "parent": "RightHip",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 512,
+        "geoId": 2999,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "PelvicShieldPlate",
+        "parent": "HipConnection",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 1024,
+        "geoId": 1046,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "PelvicIntakePocket",
+        "parent": "PelvicShieldPlate",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 36,
+        "geoId": 1054,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "PelvicAccentLight",
+        "parent": "PelvicShieldPlate",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 12,
+        "geoId": 1055,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "InguinalFlap_L",
+        "parent": "HipConnection",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 512,
+        "geoId": 1056,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "InguinalFlap_L",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 48,
+        "geoId": 1057,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "InguinalFlap_R",
+        "parent": "HipConnection",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 512,
+        "geoId": 1058,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "InguinalFlap_R",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 48,
+        "geoId": 1059,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "SubPelvisCradle",
+        "parent": "HipConnection",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 148,
+        "geoId": 1069,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      }
+    ]
+  },
+  "Legs": {
+    "meshCount": 38,
+    "drawCalls": 38,
+    "uniqueMaterials": 5,
+    "materialBreakdown": {
+      "RobotDarkTitaniumMaterial": 14,
+      "RobotPurpleEmissiveMaterial": 12,
+      "RobotPurpleBloomMaterial": 6,
+      "RobotWhiteArmorMaterial": 4,
+      "RobotWhiteCoreEmissiveMaterial": 2
+    },
+    "uniqueGeometries": 27,
+    "totalPolygons": 16560,
+    "instancedMeshes": 0,
+    "meshes": [
+      {
+        "name": "ThighMount_Merged_L",
+        "parent": "ThighMount_L",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 536,
+        "geoId": 2793,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThighFrame_Merged_L",
+        "parent": "ThighFrame_L",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 688,
+        "geoId": 2822,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThighLedStrip_L",
+        "parent": "LeftThigh",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 12,
+        "geoId": 2826,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "LeftThigh",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 12,
+        "geoId": 2827,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "KneeCondyleMesh_L",
+        "parent": "KneeCore_L",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 1200,
+        "geoId": 2870,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "KneeAccents_L",
+        "parent": "LeftKnee",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 1536,
+        "geoId": 2876,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "PatellaShield_L",
+        "parent": "LeftKnee",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 236,
+        "geoId": 2877,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "PatellaLedBezel",
+        "parent": "PatellaShield_L",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 12,
+        "geoId": 2878,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "PatellaLed_L",
+        "parent": "PatellaShield_L",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 544,
+        "geoId": 2879,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "PatellaShield_L",
+        "mat": "RobotWhiteCoreEmissiveMaterial",
+        "polys": 544,
+        "geoId": 2880,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "PatellaShield_L",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 544,
+        "geoId": 2881,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "KneeLowerStructure_L",
+        "parent": "LeftShinPivot",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 124,
+        "geoId": 2887,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ShinFrame_Merged_L",
+        "parent": "ShinFrame_L",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 596,
+        "geoId": 2919,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "LeftShin",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 384,
+        "geoId": 2920,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ShinAnteriorKeel_L",
+        "parent": "LeftShin",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 1216,
+        "geoId": 2921,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ShinLedStrip_L",
+        "parent": "LeftShin",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 12,
+        "geoId": 2922,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "LeftShin",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 12,
+        "geoId": 2923,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "CalfVents_L",
+        "parent": "LeftShin",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 36,
+        "geoId": 2931,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "CalfGlows_L",
+        "parent": "LeftShin",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 36,
+        "geoId": 2936,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThighMount_Merged_R",
+        "parent": "ThighMount_R",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 536,
+        "geoId": 3027,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThighFrame_Merged_R",
+        "parent": "ThighFrame_R",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 688,
+        "geoId": 3048,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ThighLedStrip_R",
+        "parent": "RightThigh",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 12,
+        "geoId": 2826,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "RightThigh",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 12,
+        "geoId": 2827,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "KneeCondyleMesh_R",
+        "parent": "KneeCore_R",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 1200,
+        "geoId": 3080,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "KneeAccents_R",
+        "parent": "RightKnee",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 1536,
+        "geoId": 3084,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "PatellaShield_R",
+        "parent": "RightKnee",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 236,
+        "geoId": 2877,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "PatellaLedBezel",
+        "parent": "PatellaShield_R",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 12,
+        "geoId": 2878,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "PatellaLed_R",
+        "parent": "PatellaShield_R",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 544,
+        "geoId": 2879,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "PatellaShield_R",
+        "mat": "RobotWhiteCoreEmissiveMaterial",
+        "polys": 544,
+        "geoId": 2880,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "PatellaShield_R",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 544,
+        "geoId": 2881,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "KneeLowerStructure_R",
+        "parent": "RightShinPivot",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 124,
+        "geoId": 3088,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ShinFrame_Merged_R",
+        "parent": "ShinFrame_R",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 596,
+        "geoId": 3110,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "RightShin",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 384,
+        "geoId": 2920,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ShinAnteriorKeel_R",
+        "parent": "RightShin",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 1216,
+        "geoId": 2921,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "ShinLedStrip_R",
+        "parent": "RightShin",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 12,
+        "geoId": 2922,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "RightShin",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 12,
+        "geoId": 2923,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "CalfVents_R",
+        "parent": "RightShin",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 36,
+        "geoId": 3115,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "CalfGlows_R",
+        "parent": "RightShin",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 36,
+        "geoId": 3120,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      }
+    ]
+  },
+  "Feet": {
+    "meshCount": 14,
+    "drawCalls": 14,
+    "uniqueMaterials": 4,
+    "materialBreakdown": {
+      "RobotDarkTitaniumMaterial": 4,
+      "RobotPurpleEmissiveMaterial": 6,
+      "RobotWhiteArmorMaterial": 2,
+      "RobotPurpleBloomMaterial": 2
+    },
+    "uniqueGeometries": 11,
+    "totalPolygons": 6228,
+    "instancedMeshes": 2,
+    "meshes": [
+      {
+        "name": "AnkleJointMesh_L",
+        "parent": "AnkleJointCore_L",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 948,
+        "geoId": 2955,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "AnkleAccents_L",
+        "parent": "LeftAnkle",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 384,
+        "geoId": 2940,
+        "isOcclusionCandidate": false,
+        "isInstanced": true
+      },
+      {
+        "name": "AnkleCaps_L",
+        "parent": "LeftAnkle",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 160,
+        "geoId": 2945,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "FootJointMesh_L",
+        "parent": "FootJointCore_L",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 1304,
+        "geoId": 2977,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "LeftFoot",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 2,
+        "geoId": 2963,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "LeftFoot",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 12,
+        "geoId": 2965,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "FootUnderglow_L",
+        "parent": "LeftFoot",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 304,
+        "geoId": 2982,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "AnkleJointMesh_R",
+        "parent": "AnkleJointCore_R",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 948,
+        "geoId": 3138,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "AnkleAccents_R",
+        "parent": "RightAnkle",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 384,
+        "geoId": 2940,
+        "isOcclusionCandidate": false,
+        "isInstanced": true
+      },
+      {
+        "name": "AnkleCaps_R",
+        "parent": "RightAnkle",
+        "mat": "RobotWhiteArmorMaterial",
+        "polys": 160,
+        "geoId": 3128,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "FootJointMesh_R",
+        "parent": "FootJointCore_R",
+        "mat": "RobotDarkTitaniumMaterial",
+        "polys": 1304,
+        "geoId": 3147,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "RightFoot",
+        "mat": "RobotPurpleBloomMaterial",
+        "polys": 2,
+        "geoId": 2963,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "unnamed",
+        "parent": "RightFoot",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 12,
+        "geoId": 2965,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      },
+      {
+        "name": "FootUnderglow_R",
+        "parent": "RightFoot",
+        "mat": "RobotPurpleEmissiveMaterial",
+        "polys": 304,
+        "geoId": 3151,
+        "isOcclusionCandidate": false,
+        "isInstanced": false
+      }
+    ]
+  },
+  "Other": {
+    "meshCount": 0,
+    "drawCalls": 0,
+    "uniqueMaterials": 0,
+    "materialBreakdown": {},
+    "uniqueGeometries": 0,
+    "totalPolygons": 0,
+    "instancedMeshes": 0,
+    "meshes": []
+  }
+}

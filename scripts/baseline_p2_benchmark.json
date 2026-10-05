@@ -1,0 +1,64 @@
+{
+  "timestamp": "2026-10-03T18:11:32.098Z",
+  "sceneStats": {
+    "meshCount": 449,
+    "uniqueGeometries": 360,
+    "triangleCount": 367468,
+    "materialCount": 12
+  },
+  "idle": {
+    "fps": 58.6,
+    "avgFrameTimeMs": 17.07,
+    "minFrameTimeMs": 8.7,
+    "maxFrameTimeMs": 60.5,
+    "drawCalls": 423,
+    "triangles": 356536,
+    "geometries": 343,
+    "heapMB": 96.8,
+    "sampleCount": 147
+  },
+  "cursor": {
+    "fps": 60.2,
+    "avgFrameTimeMs": 16.62,
+    "minFrameTimeMs": 8.3,
+    "maxFrameTimeMs": 25.6,
+    "drawCalls": 423,
+    "triangles": 356536,
+    "geometries": 343,
+    "heapMB": 97.3,
+    "sampleCount": 133
+  },
+  "animation": {
+    "fps": 60,
+    "avgFrameTimeMs": 16.66,
+    "minFrameTimeMs": 9.5,
+    "maxFrameTimeMs": 24.5,
+    "drawCalls": 423,
+    "triangles": 356536,
+    "geometries": 343,
+    "heapMB": 103,
+    "sampleCount": 151
+  },
+  "exploded": {
+    "fps": 60.1,
+    "avgFrameTimeMs": 16.65,
+    "minFrameTimeMs": 10.3,
+    "maxFrameTimeMs": 22.8,
+    "drawCalls": 423,
+    "triangles": 356536,
+    "geometries": 343,
+    "heapMB": 99.6,
+    "sampleCount": 151
+  },
+  "debug": {
+    "fps": 32.4,
+    "avgFrameTimeMs": 30.87,
+    "minFrameTimeMs": 18.4,
+    "maxFrameTimeMs": 44.1,
+    "drawCalls": 451,
+    "triangles": 0,
+    "geometries": 371,
+    "heapMB": 102.8,
+    "sampleCount": 81
+  }
+}

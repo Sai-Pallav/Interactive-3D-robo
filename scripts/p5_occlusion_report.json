@@ -1,0 +1,354 @@
+{
+  "timestamp": "2026-10-04T06:30:38.288Z",
+  "comparison": {
+    "occlusionOff": {
+      "fps": 6.4,
+      "avgFrameTimeMs": 155.97,
+      "minFrameTimeMs": 13.9,
+      "maxFrameTimeMs": 288.6,
+      "p50FrameTimeMs": 181.4,
+      "p95FrameTimeMs": 288.6,
+      "p99FrameTimeMs": 288.6,
+      "renderSubmitTimeMs": {
+        "avg": 4.32,
+        "p50": 4,
+        "p95": 6.9,
+        "p99": 6.9,
+        "max": 6.9
+      },
+      "drawCalls": 423,
+      "renderedTriangles": 356536,
+      "geometries": 342,
+      "meshCount": 447,
+      "instancedMeshCount": 2,
+      "totalInstances": 4,
+      "occStats": {
+        "enabled": true,
+        "isOccluding": false,
+        "isExploded": false,
+        "isDebug": false,
+        "cameraAzimuthDeg": 0,
+        "totalCandidateCount": 11,
+        "culledMeshCount": 0,
+        "culledTriangles": 0
+      },
+      "heapMB": 96,
+      "sampleCount": 17
+    },
+    "occlusionOn": {
+      "fps": 21.9,
+      "avgFrameTimeMs": 45.57,
+      "minFrameTimeMs": 7.2,
+      "maxFrameTimeMs": 247.2,
+      "p50FrameTimeMs": 20.6,
+      "p95FrameTimeMs": 211.7,
+      "p99FrameTimeMs": 247.2,
+      "renderSubmitTimeMs": {
+        "avg": 7,
+        "p50": 7.3,
+        "p95": 9.6,
+        "p99": 10.1,
+        "max": 10.1
+      },
+      "drawCalls": 412,
+      "renderedTriangles": 351264,
+      "geometries": 342,
+      "meshCount": 447,
+      "instancedMeshCount": 2,
+      "totalInstances": 4,
+      "occStats": {
+        "enabled": true,
+        "isOccluding": true,
+        "isExploded": false,
+        "isDebug": false,
+        "cameraAzimuthDeg": 0,
+        "totalCandidateCount": 11,
+        "culledMeshCount": 11,
+        "culledTriangles": 5272
+      },
+      "heapMB": 64.5,
+      "sampleCount": 55
+    },
+    "drawCallReduction": 11,
+    "triangleReduction": 5272,
+    "renderSubmitImprovementMs": -2.68
+  },
+  "angleDynamics": {
+    "front": {
+      "fps": 58.7,
+      "avgFrameTimeMs": 17.04,
+      "minFrameTimeMs": 6,
+      "maxFrameTimeMs": 37.9,
+      "p50FrameTimeMs": 16.7,
+      "p95FrameTimeMs": 24.6,
+      "p99FrameTimeMs": 37.9,
+      "renderSubmitTimeMs": {
+        "avg": 5.72,
+        "p50": 5.4,
+        "p95": 10.6,
+        "p99": 15.8,
+        "max": 15.8
+      },
+      "drawCalls": 425,
+      "renderedTriangles": 357602,
+      "geometries": 354,
+      "meshCount": 447,
+      "instancedMeshCount": 2,
+      "totalInstances": 4,
+      "occStats": {
+        "enabled": true,
+        "isOccluding": true,
+        "isExploded": false,
+        "isDebug": false,
+        "cameraAzimuthDeg": 0,
+        "totalCandidateCount": 11,
+        "culledMeshCount": 11,
+        "culledTriangles": 5272
+      },
+      "heapMB": 73.5,
+      "sampleCount": 89
+    },
+    "threeQuarter": {
+      "fps": 55.5,
+      "avgFrameTimeMs": 18,
+      "minFrameTimeMs": 9.4,
+      "maxFrameTimeMs": 31,
+      "p50FrameTimeMs": 17.1,
+      "p95FrameTimeMs": 27,
+      "p99FrameTimeMs": 31,
+      "renderSubmitTimeMs": {
+        "avg": 6.28,
+        "p50": 5.5,
+        "p95": 11.2,
+        "p99": 13.7,
+        "max": 13.7
+      },
+      "drawCalls": 429,
+      "renderedTriangles": 359026,
+      "geometries": 357,
+      "meshCount": 447,
+      "instancedMeshCount": 2,
+      "totalInstances": 4,
+      "occStats": {
+        "enabled": true,
+        "isOccluding": true,
+        "isExploded": false,
+        "isDebug": false,
+        "cameraAzimuthDeg": 39.3,
+        "totalCandidateCount": 11,
+        "culledMeshCount": 11,
+        "culledTriangles": 5272
+      },
+      "heapMB": 67.4,
+      "sampleCount": 84
+    },
+    "side": {
+      "fps": 50.1,
+      "avgFrameTimeMs": 19.95,
+      "minFrameTimeMs": 11.6,
+      "maxFrameTimeMs": 116.9,
+      "p50FrameTimeMs": 18.1,
+      "p95FrameTimeMs": 29.2,
+      "p99FrameTimeMs": 116.9,
+      "renderSubmitTimeMs": {
+        "avg": 8.03,
+        "p50": 7.5,
+        "p95": 12,
+        "p99": 25.2,
+        "max": 25.2
+      },
+      "drawCalls": 433,
+      "renderedTriangles": 361002,
+      "geometries": 357,
+      "meshCount": 447,
+      "instancedMeshCount": 2,
+      "totalInstances": 4,
+      "occStats": {
+        "enabled": true,
+        "isOccluding": false,
+        "isExploded": false,
+        "isDebug": false,
+        "cameraAzimuthDeg": 90,
+        "totalCandidateCount": 11,
+        "culledMeshCount": 0,
+        "culledTriangles": 0
+      },
+      "heapMB": 67.3,
+      "sampleCount": 77
+    },
+    "rear": {
+      "fps": 46.6,
+      "avgFrameTimeMs": 21.45,
+      "minFrameTimeMs": 14,
+      "maxFrameTimeMs": 41.9,
+      "p50FrameTimeMs": 20.9,
+      "p95FrameTimeMs": 31.5,
+      "p99FrameTimeMs": 41.9,
+      "renderSubmitTimeMs": {
+        "avg": 9.78,
+        "p50": 9.8,
+        "p95": 15.2,
+        "p99": 22.4,
+        "max": 22.4
+      },
+      "drawCalls": 441,
+      "renderedTriangles": 365600,
+      "geometries": 359,
+      "meshCount": 447,
+      "instancedMeshCount": 2,
+      "totalInstances": 4,
+      "occStats": {
+        "enabled": true,
+        "isOccluding": false,
+        "isExploded": false,
+        "isDebug": false,
+        "cameraAzimuthDeg": 180,
+        "totalCandidateCount": 11,
+        "culledMeshCount": 0,
+        "culledTriangles": 0
+      },
+      "heapMB": 65.6,
+      "sampleCount": 71
+    }
+  },
+  "explodedSafety": {
+    "explodedActive": {
+      "fps": 59.3,
+      "avgFrameTimeMs": 16.87,
+      "minFrameTimeMs": 7,
+      "maxFrameTimeMs": 49.3,
+      "p50FrameTimeMs": 16.4,
+      "p95FrameTimeMs": 23.1,
+      "p99FrameTimeMs": 49.3,
+      "renderSubmitTimeMs": {
+        "avg": 6.9,
+        "p50": 6.2,
+        "p95": 10.2,
+        "p99": 16.8,
+        "max": 16.8
+      },
+      "drawCalls": 437,
+      "renderedTriangles": 363398,
+      "geometries": 359,
+      "meshCount": 447,
+      "instancedMeshCount": 2,
+      "totalInstances": 4,
+      "occStats": {
+        "enabled": true,
+        "isOccluding": false,
+        "isExploded": true,
+        "isDebug": false,
+        "cameraAzimuthDeg": 0,
+        "totalCandidateCount": 11,
+        "culledMeshCount": 0,
+        "culledTriangles": 0
+      },
+      "heapMB": 72.6,
+      "sampleCount": 89
+    },
+    "explodedClosed": {
+      "fps": 58.5,
+      "avgFrameTimeMs": 17.1,
+      "minFrameTimeMs": 11.2,
+      "maxFrameTimeMs": 30.3,
+      "p50FrameTimeMs": 16.6,
+      "p95FrameTimeMs": 22,
+      "p99FrameTimeMs": 30.3,
+      "renderSubmitTimeMs": {
+        "avg": 6.7,
+        "p50": 6.1,
+        "p95": 10.4,
+        "p99": 13.7,
+        "max": 13.7
+      },
+      "drawCalls": 425,
+      "renderedTriangles": 357602,
+      "geometries": 359,
+      "meshCount": 447,
+      "instancedMeshCount": 2,
+      "totalInstances": 4,
+      "occStats": {
+        "enabled": true,
+        "isOccluding": true,
+        "isExploded": false,
+        "isDebug": false,
+        "cameraAzimuthDeg": 0,
+        "totalCandidateCount": 11,
+        "culledMeshCount": 11,
+        "culledTriangles": 5272
+      },
+      "heapMB": 74.6,
+      "sampleCount": 88
+    }
+  },
+  "debugSafety": {
+    "debugActive": {
+      "fps": 53.9,
+      "avgFrameTimeMs": 18.54,
+      "minFrameTimeMs": 9.4,
+      "maxFrameTimeMs": 54.7,
+      "p50FrameTimeMs": 16.9,
+      "p95FrameTimeMs": 32.8,
+      "p99FrameTimeMs": 54.7,
+      "renderSubmitTimeMs": {
+        "avg": 5.91,
+        "p50": 5.4,
+        "p95": 8.1,
+        "p99": 9.2,
+        "max": 9.2
+      },
+      "drawCalls": 471,
+      "renderedTriangles": 0,
+      "geometries": 393,
+      "meshCount": 447,
+      "instancedMeshCount": 2,
+      "totalInstances": 4,
+      "occStats": {
+        "enabled": true,
+        "isOccluding": false,
+        "isExploded": false,
+        "isDebug": true,
+        "cameraAzimuthDeg": 0,
+        "totalCandidateCount": 11,
+        "culledMeshCount": 0,
+        "culledTriangles": 0
+      },
+      "heapMB": 80.2,
+      "sampleCount": 82
+    },
+    "debugClosed": {
+      "fps": 60.5,
+      "avgFrameTimeMs": 16.52,
+      "minFrameTimeMs": 10.8,
+      "maxFrameTimeMs": 23.4,
+      "p50FrameTimeMs": 16.4,
+      "p95FrameTimeMs": 21.5,
+      "p99FrameTimeMs": 23.4,
+      "renderSubmitTimeMs": {
+        "avg": 5.92,
+        "p50": 5.7,
+        "p95": 9,
+        "p99": 10.9,
+        "max": 10.9
+      },
+      "drawCalls": 427,
+      "renderedTriangles": 358286,
+      "geometries": 359,
+      "meshCount": 447,
+      "instancedMeshCount": 2,
+      "totalInstances": 4,
+      "occStats": {
+        "enabled": true,
+        "isOccluding": true,
+        "isExploded": false,
+        "isDebug": false,
+        "cameraAzimuthDeg": 0,
+        "totalCandidateCount": 11,
+        "culledMeshCount": 11,
+        "culledTriangles": 5272
+      },
+      "heapMB": 79,
+      "sampleCount": 91
+    }
+  }
+}

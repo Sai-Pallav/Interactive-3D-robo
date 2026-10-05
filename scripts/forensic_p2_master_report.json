@@ -1,0 +1,578 @@
+{
+  "timestamp": "2026-10-03T14:50:05.172Z",
+  "environment": {
+    "browser": "Google Chrome (Headless new)",
+    "version": "Chrome/154.0.8037.97",
+    "viewport": "1536x860",
+    "dpr": 1
+  },
+  "initialStartup": {
+    "initialLoadReadyMs": 3738.52
+  },
+  "sceneAudit": {
+    "totalObjects": 793,
+    "meshCount": 449,
+    "groupCount": 332,
+    "lightCount": 11,
+    "cameraCount": 0,
+    "maxDepth": 30,
+    "matrixAutoUpdateTrue": 557,
+    "matrixAutoUpdateFalse": 236,
+    "uniqueGeometries": 360,
+    "uniqueMaterials": 12,
+    "totalTriangles": 367468,
+    "transparentMeshes": 38,
+    "doubleSidedMeshes": 14,
+    "emissiveMeshes": 320,
+    "materialTypes": {
+      "MeshPhysicalMaterial": 320,
+      "MeshStandardMaterial": 0,
+      "MeshBasicMaterial": 129,
+      "ShaderMaterial": 0,
+      "Other": 0
+    },
+    "subsystemCounts": {
+      "Torso": 42,
+      "Arms": 142,
+      "Shoulders": 42,
+      "Head": 35,
+      "Hands": 26,
+      "Fingers": 86,
+      "Waist": 22,
+      "Legs": 38,
+      "Feet": 16
+    },
+    "lights": [
+      {
+        "type": "AmbientLight",
+        "name": "unnamed",
+        "color": "0e0d1a",
+        "intensity": 0.42,
+        "castShadow": false,
+        "position": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "DirectionalLight",
+        "name": "unnamed",
+        "color": "f2f6fd",
+        "intensity": 1.15,
+        "castShadow": true,
+        "position": [
+          -2,
+          2.2,
+          2.2
+        ]
+      },
+      {
+        "type": "DirectionalLight",
+        "name": "unnamed",
+        "color": "7680a4",
+        "intensity": 0.32,
+        "castShadow": false,
+        "position": [
+          2.2,
+          0.8,
+          1.8
+        ]
+      },
+      {
+        "type": "DirectionalLight",
+        "name": "unnamed",
+        "color": "404870",
+        "intensity": 0.65,
+        "castShadow": false,
+        "position": [
+          -2.4,
+          1.4,
+          -2
+        ]
+      },
+      {
+        "type": "DirectionalLight",
+        "name": "unnamed",
+        "color": "a855f7",
+        "intensity": 1.45,
+        "castShadow": false,
+        "position": [
+          2.4,
+          1.6,
+          -1.8
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "unnamed",
+        "color": "a855f7",
+        "intensity": 0.45,
+        "castShadow": false,
+        "position": [
+          0.12,
+          0.1,
+          0.65
+        ]
+      },
+      {
+        "type": "DirectionalLight",
+        "name": "unnamed",
+        "color": "38186e",
+        "intensity": 0.25,
+        "castShadow": false,
+        "position": [
+          0.2,
+          -0.6,
+          1.6
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "unnamed",
+        "color": "a855f7",
+        "intensity": 0.65,
+        "castShadow": false,
+        "position": [
+          0,
+          0.132,
+          0.045
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "unnamed",
+        "color": "a855f7",
+        "intensity": 1.4,
+        "castShadow": false,
+        "position": [
+          0,
+          0.02,
+          0.2
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "unnamed",
+        "color": "a855f7",
+        "intensity": 1.8,
+        "castShadow": false,
+        "position": [
+          0,
+          0,
+          0.03
+        ]
+      },
+      {
+        "type": "PointLight",
+        "name": "unnamed",
+        "color": "a855f7",
+        "intensity": 1.8,
+        "castShadow": false,
+        "position": [
+          0,
+          0,
+          0.03
+        ]
+      }
+    ],
+    "shadowMapEnabled": false,
+    "renderInfo": {
+      "calls": 423,
+      "triangles": 356536,
+      "lines": 0,
+      "points": 0,
+      "geometries": 343,
+      "textures": 2,
+      "programs": 9
+    }
+  },
+  "classificationInvestigation": {
+    "totalAudited": 449,
+    "shoulderCount": 280,
+    "armCount": 275,
+    "handCount": 136,
+    "fingerCount": 110,
+    "sampleShoulder": [
+      {
+        "meshName": "LeftChestTransitionPanel",
+        "ancestry": "RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftWhiteStructuralAssembly -> LeftChestTransitionPanel",
+        "parentName": "LeftWhiteStructuralAssembly",
+        "geometryId": 124
+      },
+      {
+        "meshName": "LeftMountingFrame",
+        "ancestry": "RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftWhiteStructuralAssembly -> LeftMountingFrame",
+        "parentName": "LeftWhiteStructuralAssembly",
+        "geometryId": 125
+      },
+      {
+        "meshName": "LeftMountingFrame_Bolts_Merged",
+        "ancestry": "RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftWhiteStructuralAssembly -> LeftMountingFrame -> LeftMountingFrame_Bolts_Merged",
+        "parentName": "LeftMountingFrame",
+        "geometryId": 140
+      },
+      {
+        "meshName": "LeftUpperShoulderHood",
+        "ancestry": "RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftWhiteStructuralAssembly -> LeftUpperShoulderShell -> LeftUpperShoulderHood",
+        "parentName": "LeftUpperShoulderShell",
+        "geometryId": 141
+      },
+      {
+        "meshName": "PauldronSubRim_TitaniumSeal",
+        "ancestry": "RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftWhiteStructuralAssembly -> LeftUpperShoulderShell -> LeftPauldronSubRim -> PauldronSubRim_TitaniumSeal",
+        "parentName": "LeftPauldronSubRim",
+        "geometryId": 142
+      }
+    ],
+    "sampleHand": [
+      {
+        "meshName": "WristSmartCuff",
+        "ancestry": "RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> LeftForearmPivot -> LeftForearmAssembly -> LeftForearmMechanicalCore -> LeftDistalWristMount -> LeftWristPivot -> WristMechanics -> WristSmartCuff",
+        "parentName": "WristMechanics",
+        "geometryId": 1531
+      },
+      {
+        "meshName": "WristPurpleEmissiveSlot",
+        "ancestry": "RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> LeftForearmPivot -> LeftForearmAssembly -> LeftForearmMechanicalCore -> LeftDistalWristMount -> LeftWristPivot -> WristMechanics -> WristPurpleEmissiveSlot",
+        "parentName": "WristMechanics",
+        "geometryId": 1536
+      },
+      {
+        "meshName": "LeftWristStatic_RobotMetallicMaterial_Merged",
+        "ancestry": "RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> LeftForearmPivot -> LeftForearmAssembly -> LeftForearmMechanicalCore -> LeftDistalWristMount -> LeftWristPivot -> WristMechanics -> LeftWristStatic_RobotMetallicMaterial_Merged",
+        "parentName": "WristMechanics",
+        "geometryId": 1559
+      },
+      {
+        "meshName": "LeftWristStatic_RobotDarkTitaniumMaterial_Merged",
+        "ancestry": "RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> LeftForearmPivot -> LeftForearmAssembly -> LeftForearmMechanicalCore -> LeftDistalWristMount -> LeftWristPivot -> WristMechanics -> LeftWristStatic_RobotDarkTitaniumMaterial_Merged",
+        "parentName": "WristMechanics",
+        "geometryId": 1565
+      },
+      {
+        "meshName": "LeftWristStatic_RobotPurpleBloomMaterial_Merged",
+        "ancestry": "RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> LeftForearmPivot -> LeftForearmAssembly -> LeftForearmMechanicalCore -> LeftDistalWristMount -> LeftWristPivot -> WristMechanics -> LeftWristStatic_RobotPurpleBloomMaterial_Merged",
+        "parentName": "WristMechanics",
+        "geometryId": 1567
+      }
+    ],
+    "sampleArm": [
+      {
+        "meshName": "ChestPlate_Central",
+        "ancestry": "RobotTorso -> ChestPivot -> ChestArmor -> ChestPlate_Central",
+        "parentName": "ChestArmor",
+        "geometryId": 34
+      },
+      {
+        "meshName": "ChestLogo_A",
+        "ancestry": "RobotTorso -> ChestPivot -> ChestArmor -> ChestPlate_Central -> ChestLogo_A",
+        "parentName": "ChestPlate_Central",
+        "geometryId": 35
+      },
+      {
+        "meshName": "ChestLowerUndersideCowl",
+        "ancestry": "RobotTorso -> ChestPivot -> ChestArmor -> ChestPlate_Central -> ChestLowerUndersideCowl",
+        "parentName": "ChestPlate_Central",
+        "geometryId": 36
+      },
+      {
+        "meshName": "ChestSidePanel_Left",
+        "ancestry": "RobotTorso -> ChestPivot -> ChestArmor -> ChestSidePanel_Left",
+        "parentName": "ChestArmor",
+        "geometryId": 37
+      },
+      {
+        "meshName": "ChestSidePanel_Right",
+        "ancestry": "RobotTorso -> ChestPivot -> ChestArmor -> ChestSidePanel_Right",
+        "parentName": "ChestArmor",
+        "geometryId": 39
+      }
+    ]
+  },
+  "cpuProfile": {
+    "samplesCount": 120,
+    "summary": {
+      "inputTime": {
+        "mean": 0.005,
+        "p50": 0,
+        "p95": 0.1,
+        "p99": 0.1,
+        "max": 0.1
+      },
+      "lookTime": {
+        "mean": 0.017,
+        "p50": 0,
+        "p95": 0.1,
+        "p99": 0.1,
+        "max": 0.1
+      },
+      "torsoTime": {
+        "mean": 0.005,
+        "p50": 0,
+        "p95": 0.1,
+        "p99": 0.1,
+        "max": 0.1
+      },
+      "shoulderTime": {
+        "mean": 0.001,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0.1
+      },
+      "armElbowTime": {
+        "mean": 0.01,
+        "p50": 0,
+        "p95": 0.1,
+        "p99": 0.1,
+        "max": 0.2
+      },
+      "handFingerTime": {
+        "mean": 0.001,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0.1
+      },
+      "armAnimTime": {
+        "mean": 0.031,
+        "p50": 0,
+        "p95": 0.1,
+        "p99": 0.1,
+        "max": 0.1
+      },
+      "legAnimTime": {
+        "mean": 0.012,
+        "p50": 0,
+        "p95": 0.1,
+        "p99": 0.1,
+        "max": 0.2
+      },
+      "idleTime": {
+        "mean": 0.001,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0.1
+      },
+      "emissiveTime": {
+        "mean": 0.003,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0.1,
+        "max": 0.1
+      },
+      "totalControllerTime": {
+        "mean": 0.047,
+        "p50": 0,
+        "p95": 0.1,
+        "p99": 0.2,
+        "max": 0.2
+      },
+      "matrixUpdateTime": {
+        "mean": 0.167,
+        "p50": 0.1,
+        "p95": 0.3,
+        "p99": 1,
+        "max": 1
+      },
+      "renderSubmissionTime": {
+        "mean": 1.668,
+        "p50": 1.6,
+        "p95": 2.5,
+        "p99": 2.8,
+        "max": 2.9
+      }
+    }
+  },
+  "distributions": {
+    "idle": {
+      "fps": 60.22,
+      "avg": 16.61,
+      "min": 7.1,
+      "p50": 16.6,
+      "p90": 17.7,
+      "p95": 17.9,
+      "p99": 18.2,
+      "max": 18.4,
+      "drawCalls": 423,
+      "triangles": 356536,
+      "sampleCount": 151
+    },
+    "cursor": {
+      "fps": 60.14,
+      "avg": 16.63,
+      "min": 10.3,
+      "p50": 16.7,
+      "p90": 17.4,
+      "p95": 17.7,
+      "p99": 18.2,
+      "max": 18.3,
+      "drawCalls": 423,
+      "triangles": 356536,
+      "sampleCount": 151
+    },
+    "animation": {
+      "fps": 60.23,
+      "avg": 16.6,
+      "min": 6.5,
+      "p50": 16.6,
+      "p90": 17.5,
+      "p95": 17.6,
+      "p99": 17.9,
+      "max": 18.1,
+      "drawCalls": 423,
+      "triangles": 356536,
+      "sampleCount": 151
+    },
+    "exploded": {
+      "fps": 60.09,
+      "avg": 16.64,
+      "min": 9.4,
+      "p50": 16.7,
+      "p90": 17.4,
+      "p95": 17.6,
+      "p99": 18.1,
+      "max": 23.2,
+      "drawCalls": 423,
+      "triangles": 356536,
+      "sampleCount": 151
+    },
+    "debugTrials": [
+      {
+        "fps": 30.38,
+        "avg": 32.91,
+        "min": 24,
+        "p50": 33,
+        "p90": 37.4,
+        "p95": 39,
+        "p99": 41.3,
+        "max": 41.3,
+        "drawCalls": 451,
+        "triangles": 0,
+        "sampleCount": 61
+      },
+      {
+        "fps": 28.42,
+        "avg": 35.18,
+        "min": 29.4,
+        "p50": 35.3,
+        "p90": 39,
+        "p95": 41.6,
+        "p99": 44.7,
+        "max": 44.7,
+        "drawCalls": 451,
+        "triangles": 0,
+        "sampleCount": 57
+      },
+      {
+        "fps": 29.31,
+        "avg": 34.12,
+        "min": 26.5,
+        "p50": 34.2,
+        "p90": 37.7,
+        "p95": 39.7,
+        "p99": 42.3,
+        "max": 42.3,
+        "drawCalls": 451,
+        "triangles": 0,
+        "sampleCount": 59
+      }
+    ]
+  },
+  "routeCycles": [
+    {
+      "cycle": 1,
+      "unmountMs": 202.34,
+      "remountMs": 792.36,
+      "heapMB": 77.16,
+      "drawCalls": 423,
+      "geometries": 343,
+      "textures": 2
+    },
+    {
+      "cycle": 2,
+      "unmountMs": 73.2,
+      "remountMs": 592.53,
+      "heapMB": 101.56,
+      "drawCalls": 423,
+      "geometries": 343,
+      "textures": 2
+    },
+    {
+      "cycle": 3,
+      "unmountMs": 134.18,
+      "remountMs": 645.33,
+      "heapMB": 84.45,
+      "drawCalls": 423,
+      "geometries": 343,
+      "textures": 2
+    },
+    {
+      "cycle": 4,
+      "unmountMs": 170.71,
+      "remountMs": 781.03,
+      "heapMB": 89.95,
+      "drawCalls": 423,
+      "geometries": 343,
+      "textures": 2
+    },
+    {
+      "cycle": 5,
+      "unmountMs": 136.4,
+      "remountMs": 757.59,
+      "heapMB": 101.42,
+      "drawCalls": 423,
+      "geometries": 343,
+      "textures": 2
+    },
+    {
+      "cycle": 6,
+      "unmountMs": 208.61,
+      "remountMs": 880.34,
+      "heapMB": 106.34,
+      "drawCalls": 423,
+      "geometries": 343,
+      "textures": 2
+    },
+    {
+      "cycle": 7,
+      "unmountMs": 187.57,
+      "remountMs": 864.25,
+      "heapMB": 112.19,
+      "drawCalls": 423,
+      "geometries": 343,
+      "textures": 2
+    },
+    {
+      "cycle": 8,
+      "unmountMs": 189.24,
+      "remountMs": 922.29,
+      "heapMB": 92.6,
+      "drawCalls": 423,
+      "geometries": 343,
+      "textures": 2
+    },
+    {
+      "cycle": 9,
+      "unmountMs": 87.97,
+      "remountMs": 876.77,
+      "heapMB": 118.91,
+      "drawCalls": 423,
+      "geometries": 343,
+      "textures": 2
+    },
+    {
+      "cycle": 10,
+      "unmountMs": 66.16,
+      "remountMs": 861.2,
+      "heapMB": 97.64,
+      "drawCalls": 423,
+      "geometries": 343,
+      "textures": 2
+    }
+  ],
+  "initialHeapMB": 95.75,
+  "finalHeapMB": 97.64
+}

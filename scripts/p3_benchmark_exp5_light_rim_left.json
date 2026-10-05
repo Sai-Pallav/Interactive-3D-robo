@@ -1,0 +1,131 @@
+{
+  "timestamp": "2026-10-03T18:28:41.627Z",
+  "label": "exp5_light_rim_left",
+  "modes": {
+    "idle": {
+      "fps": 59,
+      "avgFrameTimeMs": 16.95,
+      "minFrameTimeMs": 5.4,
+      "maxFrameTimeMs": 27.3,
+      "p50FrameTimeMs": 16.7,
+      "p95FrameTimeMs": 21.4,
+      "p99FrameTimeMs": 25.9,
+      "renderSubmitTimeMs": {
+        "avg": 5.38,
+        "p50": 4.9,
+        "p95": 9.1,
+        "p99": 11.3,
+        "max": 11.5
+      },
+      "gpuTimerQueryAvailable": true,
+      "drawCalls": 423,
+      "renderedTriangles": 356536,
+      "geometries": 343,
+      "materialCount": 11,
+      "activeLightCount": 9,
+      "meshCount": 449,
+      "heapMB": 96.9,
+      "sampleCount": 148
+    },
+    "cursor": {
+      "fps": 57.3,
+      "avgFrameTimeMs": 17.44,
+      "minFrameTimeMs": 5.5,
+      "maxFrameTimeMs": 29.8,
+      "p50FrameTimeMs": 17.4,
+      "p95FrameTimeMs": 23.6,
+      "p99FrameTimeMs": 27.1,
+      "renderSubmitTimeMs": {
+        "avg": 6.59,
+        "p50": 6.3,
+        "p95": 10.3,
+        "p99": 11.2,
+        "max": 12.4
+      },
+      "gpuTimerQueryAvailable": true,
+      "drawCalls": 423,
+      "renderedTriangles": 356536,
+      "geometries": 343,
+      "materialCount": 11,
+      "activeLightCount": 9,
+      "meshCount": 449,
+      "heapMB": 90.5,
+      "sampleCount": 127
+    },
+    "animation": {
+      "fps": 60.1,
+      "avgFrameTimeMs": 16.65,
+      "minFrameTimeMs": 7.1,
+      "maxFrameTimeMs": 28.2,
+      "p50FrameTimeMs": 16.4,
+      "p95FrameTimeMs": 22.4,
+      "p99FrameTimeMs": 26.2,
+      "renderSubmitTimeMs": {
+        "avg": 5.66,
+        "p50": 5.4,
+        "p95": 9.7,
+        "p99": 10.2,
+        "max": 10.6
+      },
+      "gpuTimerQueryAvailable": true,
+      "drawCalls": 423,
+      "renderedTriangles": 356536,
+      "geometries": 343,
+      "materialCount": 11,
+      "activeLightCount": 9,
+      "meshCount": 449,
+      "heapMB": 93.9,
+      "sampleCount": 151
+    },
+    "exploded": {
+      "fps": 57.7,
+      "avgFrameTimeMs": 17.33,
+      "minFrameTimeMs": 5.6,
+      "maxFrameTimeMs": 52.6,
+      "p50FrameTimeMs": 16.8,
+      "p95FrameTimeMs": 26.4,
+      "p99FrameTimeMs": 34.2,
+      "renderSubmitTimeMs": {
+        "avg": 6.07,
+        "p50": 5.9,
+        "p95": 9.7,
+        "p99": 13.6,
+        "max": 15.1
+      },
+      "gpuTimerQueryAvailable": true,
+      "drawCalls": 423,
+      "renderedTriangles": 356536,
+      "geometries": 343,
+      "materialCount": 11,
+      "activeLightCount": 9,
+      "meshCount": 449,
+      "heapMB": 88.7,
+      "sampleCount": 145
+    },
+    "debug": {
+      "fps": 19.6,
+      "avgFrameTimeMs": 51.05,
+      "minFrameTimeMs": 30.1,
+      "maxFrameTimeMs": 64.8,
+      "p50FrameTimeMs": 52.4,
+      "p95FrameTimeMs": 63,
+      "p99FrameTimeMs": 64.8,
+      "renderSubmitTimeMs": {
+        "avg": 7.66,
+        "p50": 7.6,
+        "p95": 10.3,
+        "p99": 11,
+        "max": 11
+      },
+      "gpuTimerQueryAvailable": true,
+      "drawCalls": 451,
+      "renderedTriangles": 0,
+      "geometries": 371,
+      "materialCount": 11,
+      "activeLightCount": 9,
+      "meshCount": 449,
+      "heapMB": 94.6,
+      "sampleCount": 50
+    }
+  }
+}

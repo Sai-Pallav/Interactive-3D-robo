@@ -1,0 +1,594 @@
+[
+  {
+    "uuid": "41ea5380-82cb-4195-a475-2ff6a1e1971a",
+    "name": "RobotWhiteArmorMaterial",
+    "type": "MeshPhysicalMaterial",
+    "color": "#e2e7f4",
+    "roughness": 0.22,
+    "metalness": 0.12,
+    "clearcoat": 0.98,
+    "clearcoatRoughness": 0.06,
+    "sheen": 0.36,
+    "sheenColor": "#b4c2e6",
+    "reflectivity": 0.95,
+    "ior": 2.225806451612903,
+    "emissive": "#000000",
+    "transparent": false,
+    "opacity": 1,
+    "side": "FrontSide",
+    "toneMapped": true,
+    "wireframe": false,
+    "depthTest": true,
+    "depthWrite": true,
+    "meshCount": 72,
+    "meshSamples": [
+      {
+        "meshName": "ChestPlate_Central",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> ChestArmor -> ChestPlate_Central"
+      },
+      {
+        "meshName": "ChestSidePanel_Left",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> ChestArmor -> ChestSidePanel_Left"
+      },
+      {
+        "meshName": "ChestSidePanel_Right",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> ChestArmor -> ChestSidePanel_Right"
+      },
+      {
+        "meshName": "ChestFlankArmor_Left",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> ChestArmor -> ChestFlankArmor_Left"
+      },
+      {
+        "meshName": "ChestFlankArmor_Right",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> ChestArmor -> ChestFlankArmor_Right"
+      },
+      {
+        "meshName": "BearingHousingGroup_L_RobotWhiteArmorMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> BearingHousingGroup_L -> BearingHousingGroup_L_RobotWhiteArmorMaterial_Merged"
+      },
+      {
+        "meshName": "HandDorsalArmor",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> LeftForearmPivot -> LeftForearmAssembly -> LeftForearmMechanicalCore -> LeftDistalWristMount -> LeftWristPivot -> LeftWristTrunnion -> LeftDistalHandMount -> LeftHandRoot -> HandDorsalArmor"
+      },
+      {
+        "meshName": "IndexProximal_ArmorShell",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> LeftForearmPivot -> LeftForearmAssembly -> LeftForearmMechanicalCore -> LeftDistalWristMount -> LeftWristPivot -> LeftWristTrunnion -> LeftDistalHandMount -> LeftHandRoot -> IndexFinger -> IndexProximal -> IndexProximal_ArmorShell"
+      },
+      {
+        "meshName": "IndexMiddle_ArmorShell",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> LeftForearmPivot -> LeftForearmAssembly -> LeftForearmMechanicalCore -> LeftDistalWristMount -> LeftWristPivot -> LeftWristTrunnion -> LeftDistalHandMount -> LeftHandRoot -> IndexFinger -> IndexProximal -> IndexMiddle -> IndexMiddle_ArmorShell"
+      },
+      {
+        "meshName": "IndexDistal_ArmorShell",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> LeftForearmPivot -> LeftForearmAssembly -> LeftForearmMechanicalCore -> LeftDistalWristMount -> LeftWristPivot -> LeftWristTrunnion -> LeftDistalHandMount -> LeftHandRoot -> IndexFinger -> IndexProximal -> IndexMiddle -> IndexDistal -> IndexDistal_ArmorShell"
+      }
+    ]
+  },
+  {
+    "uuid": "7199a524-ba7a-4c58-a14e-860a806cca41",
+    "name": "RobotPurpleEmissiveMaterial",
+    "type": "MeshBasicMaterial",
+    "color": "#a855f7",
+    "roughness": null,
+    "metalness": null,
+    "clearcoat": null,
+    "clearcoatRoughness": null,
+    "sheen": null,
+    "sheenColor": null,
+    "reflectivity": 1,
+    "ior": null,
+    "emissive": null,
+    "transparent": false,
+    "opacity": 1,
+    "side": "FrontSide",
+    "toneMapped": false,
+    "wireframe": false,
+    "depthTest": true,
+    "depthWrite": true,
+    "meshCount": 85,
+    "meshSamples": [
+      {
+        "meshName": "ChestLogo_A",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> ChestArmor -> ChestPlate_Central -> ChestLogo_A"
+      },
+      {
+        "meshName": "ChestLightStrip_Left",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> ChestArmor -> ChestLightStrip_Left"
+      },
+      {
+        "meshName": "ChestLightStrip_Right",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> ChestArmor -> ChestLightStrip_Right"
+      },
+      {
+        "meshName": "LeftShoulderNeckLed",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> StationaryAnchorGroup_L -> LeftShoulderNeckLed"
+      },
+      {
+        "meshName": "ShoulderEnergyRing_L",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> BearingHousingGroup_L -> ShoulderEnergyRing_L"
+      },
+      {
+        "meshName": "PrimaryPivotRing_L",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> PrimaryHubGroup_L -> PrimaryPivotRing_L"
+      },
+      {
+        "meshName": "LeftBicepRotationalLed",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftShoulderArmAdapter -> LeftBicepRotationalLed"
+      },
+      {
+        "meshName": "LateralActuatorDisc_PurpleEmissiveRing",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> LateralActuatorDisc -> LateralActuatorDisc_PurpleEmissiveRing"
+      },
+      {
+        "meshName": "LateralActuatorDisc_CenterDot",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> LateralActuatorDisc -> LateralActuatorDisc_HubCap -> LateralActuatorDisc_CenterDot"
+      },
+      {
+        "meshName": "MedialActuatorDisc_PurpleEmissiveRing",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> MedialActuatorDisc -> MedialActuatorDisc_PurpleEmissiveRing"
+      }
+    ]
+  },
+  {
+    "uuid": "68b86297-49f9-48eb-8c1e-8586a968ec07",
+    "name": "RobotWhiteArmorDoubleSideMaterial",
+    "type": "MeshPhysicalMaterial",
+    "color": "#e2e7f4",
+    "roughness": 0.22,
+    "metalness": 0.12,
+    "clearcoat": 0.98,
+    "clearcoatRoughness": 0.06,
+    "sheen": 0.36,
+    "sheenColor": "#b4c2e6",
+    "reflectivity": 0.95,
+    "ior": 2.225806451612903,
+    "emissive": "#000000",
+    "transparent": false,
+    "opacity": 1,
+    "side": "DoubleSide",
+    "toneMapped": true,
+    "wireframe": false,
+    "depthTest": true,
+    "depthWrite": true,
+    "meshCount": 11,
+    "meshSamples": [
+      {
+        "meshName": "ChestLowerUndersideCowl",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> ChestArmor -> ChestPlate_Central -> ChestLowerUndersideCowl"
+      },
+      {
+        "meshName": "LeftChestTransitionPanel",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftWhiteStructuralAssembly -> LeftChestTransitionPanel"
+      },
+      {
+        "meshName": "LeftUpperShoulderHood",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftWhiteStructuralAssembly -> LeftUpperShoulderShell -> LeftUpperShoulderHood"
+      },
+      {
+        "meshName": "LeftForearmArmor_RobotWhiteArmorDoubleSideMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> LeftForearmPivot -> LeftForearmAssembly -> LeftForearmArmorGroup -> LeftForearmArmor_RobotWhiteArmorDoubleSideMaterial_Merged"
+      },
+      {
+        "meshName": "LeftUpperArmArmor_RobotWhiteArmorDoubleSideMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmArmorGroup -> LeftUpperArmArmor_RobotWhiteArmorDoubleSideMaterial_Merged"
+      },
+      {
+        "meshName": "RightChestTransitionPanel",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> RightShoulderModule -> RightWhiteStructuralAssembly -> RightChestTransitionPanel"
+      },
+      {
+        "meshName": "RightUpperShoulderHood",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> RightShoulderModule -> RightWhiteStructuralAssembly -> RightUpperShoulderShell -> RightUpperShoulderHood"
+      },
+      {
+        "meshName": "RightForearmArmor_RobotWhiteArmorDoubleSideMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> RightShoulderModule -> RightShoulderFoundation -> RightShoulderJoint -> RightPrimaryAxisPivot -> RightSecondaryAxisCarrier -> RightSecondaryAxisPivot -> RightArmMount -> RightRobotArmRoot -> RightUpperArmAssembly -> RightUpperArmMechanicalCore -> RightDistalElbowMount -> RightElbowRoot -> RightForearmPivot -> RightForearmAssembly -> RightForearmArmorGroup -> RightForearmArmor_RobotWhiteArmorDoubleSideMaterial_Merged"
+      },
+      {
+        "meshName": "RightUpperArmArmor_RobotWhiteArmorDoubleSideMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> RightShoulderModule -> RightShoulderFoundation -> RightShoulderJoint -> RightPrimaryAxisPivot -> RightSecondaryAxisCarrier -> RightSecondaryAxisPivot -> RightArmMount -> RightRobotArmRoot -> RightUpperArmAssembly -> RightUpperArmArmorGroup -> RightUpperArmArmor_RobotWhiteArmorDoubleSideMaterial_Merged"
+      },
+      {
+        "meshName": "HelmetArmor_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> UpperTorsoFrame -> Neck -> RobotHead -> OuterShell -> HelmetArmor_Merged"
+      }
+    ]
+  },
+  {
+    "uuid": "6c8f878d-72eb-42b2-bf30-8c5301cfa48a",
+    "name": "RobotDarkTitaniumMaterial",
+    "type": "MeshPhysicalMaterial",
+    "color": "#141624",
+    "roughness": 0.3,
+    "metalness": 0.9,
+    "clearcoat": 0.42,
+    "clearcoatRoughness": 0.16,
+    "sheen": 0,
+    "sheenColor": "#000000",
+    "reflectivity": 0.9399999999999998,
+    "ior": 2.205128205128205,
+    "emissive": "#000000",
+    "transparent": false,
+    "opacity": 1,
+    "side": "FrontSide",
+    "toneMapped": true,
+    "wireframe": false,
+    "depthTest": true,
+    "depthWrite": true,
+    "meshCount": 135,
+    "meshSamples": [
+      {
+        "meshName": "LeftMountingFrame",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftWhiteStructuralAssembly -> LeftMountingFrame"
+      },
+      {
+        "meshName": "PauldronSubRim_TitaniumSeal",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftWhiteStructuralAssembly -> LeftUpperShoulderShell -> LeftPauldronSubRim -> PauldronSubRim_TitaniumSeal"
+      },
+      {
+        "meshName": "StationaryAnchorGroup_L_RobotDarkTitaniumMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> StationaryAnchorGroup_L -> StationaryAnchorGroup_L_RobotDarkTitaniumMaterial_Merged"
+      },
+      {
+        "meshName": "BearingHousingGroup_L_RobotDarkTitaniumMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> BearingHousingGroup_L -> BearingHousingGroup_L_RobotDarkTitaniumMaterial_Merged"
+      },
+      {
+        "meshName": "PrimaryHubGroup_L_RobotDarkTitaniumMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> PrimaryHubGroup_L -> PrimaryHubGroup_L_RobotDarkTitaniumMaterial_Merged"
+      },
+      {
+        "meshName": "LeftSecondaryAxisCarrier_LinksMerged_RobotDarkTitaniumMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisCarrier_LinksMerged -> LeftSecondaryAxisCarrier_LinksMerged_RobotDarkTitaniumMaterial_Merged"
+      },
+      {
+        "meshName": "LeftShoulderSocketReceiver_RobotDarkTitaniumMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftShoulderSocketReceiver -> LeftShoulderSocketReceiver_RobotDarkTitaniumMaterial_Merged"
+      },
+      {
+        "meshName": "AdapterJoint_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftShoulderArmAdapter -> AdapterJoint_Merged"
+      },
+      {
+        "meshName": "LeftElbowRoot_UpperHousing_Joint_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> ElbowUpperHousing -> LeftElbowRoot_UpperHousing_Joint_Merged"
+      },
+      {
+        "meshName": "ElbowHydraulicRam_RobotDarkTitaniumMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> ElbowUpperHousing -> ElbowHydraulicRam -> ElbowHydraulicRam_RobotDarkTitaniumMaterial_Merged"
+      }
+    ]
+  },
+  {
+    "uuid": "2bf862f8-379d-4767-b92e-bda83cafb2f4",
+    "name": "RobotMetallicMaterial",
+    "type": "MeshPhysicalMaterial",
+    "color": "#d8e2f0",
+    "roughness": 0.14,
+    "metalness": 0.96,
+    "clearcoat": 0.92,
+    "clearcoatRoughness": 0.06,
+    "sheen": 0,
+    "sheenColor": "#000000",
+    "reflectivity": 1,
+    "ior": 2.3333333333333335,
+    "emissive": "#000000",
+    "transparent": false,
+    "opacity": 1,
+    "side": "FrontSide",
+    "toneMapped": true,
+    "wireframe": false,
+    "depthTest": true,
+    "depthWrite": true,
+    "meshCount": 95,
+    "meshSamples": [
+      {
+        "meshName": "LeftMountingFrame_Bolts_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftWhiteStructuralAssembly -> LeftMountingFrame -> LeftMountingFrame_Bolts_Merged"
+      },
+      {
+        "meshName": "PauldronSubRim_MetallicRace",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftWhiteStructuralAssembly -> LeftUpperShoulderShell -> LeftPauldronSubRim -> PauldronSubRim_MetallicRace"
+      },
+      {
+        "meshName": "StationaryAnchorGroup_L_RobotMetallicMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> StationaryAnchorGroup_L -> StationaryAnchorGroup_L_RobotMetallicMaterial_Merged"
+      },
+      {
+        "meshName": "BearingHousingGroup_L_RobotMetallicMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> BearingHousingGroup_L -> BearingHousingGroup_L_RobotMetallicMaterial_Merged"
+      },
+      {
+        "meshName": "PrimaryHubGroup_L_RobotMetallicMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> PrimaryHubGroup_L -> PrimaryHubGroup_L_RobotMetallicMaterial_Merged"
+      },
+      {
+        "meshName": "LeftSecondaryAxisCarrier_LinksMerged_RobotMetallicMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisCarrier_LinksMerged -> LeftSecondaryAxisCarrier_LinksMerged_RobotMetallicMaterial_Merged"
+      },
+      {
+        "meshName": "LeftShoulderSocketReceiver_RobotMetallicMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftShoulderSocketReceiver -> LeftShoulderSocketReceiver_RobotMetallicMaterial_Merged"
+      },
+      {
+        "meshName": "AdapterMetallic_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftShoulderArmAdapter -> AdapterMetallic_Merged"
+      },
+      {
+        "meshName": "LeftElbowRoot_UpperHousing_Metallic_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> ElbowUpperHousing -> LeftElbowRoot_UpperHousing_Metallic_Merged"
+      },
+      {
+        "meshName": "ElbowHydraulicRam_RobotMetallicMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> ElbowUpperHousing -> ElbowHydraulicRam -> ElbowHydraulicRam_RobotMetallicMaterial_Merged"
+      }
+    ]
+  },
+  {
+    "uuid": "de96d62d-7fc8-4017-a129-38399aff2662",
+    "name": "RobotPurpleBloomMaterial",
+    "type": "MeshBasicMaterial",
+    "color": "#a855f7",
+    "roughness": null,
+    "metalness": null,
+    "clearcoat": null,
+    "clearcoatRoughness": null,
+    "sheen": null,
+    "sheenColor": null,
+    "reflectivity": 1,
+    "ior": null,
+    "emissive": null,
+    "transparent": true,
+    "opacity": 0.18,
+    "side": "FrontSide",
+    "toneMapped": false,
+    "wireframe": false,
+    "depthTest": true,
+    "depthWrite": true,
+    "meshCount": 38,
+    "meshSamples": [
+      {
+        "meshName": "StationaryAnchorGroup_L_RobotPurpleBloomMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> StationaryAnchorGroup_L -> StationaryAnchorGroup_L_RobotPurpleBloomMaterial_Merged"
+      },
+      {
+        "meshName": "BearingHousingGroup_L_RobotPurpleBloomMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> BearingHousingGroup_L -> BearingHousingGroup_L_RobotPurpleBloomMaterial_Merged"
+      },
+      {
+        "meshName": "",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftShoulderArmAdapter -> unnamed"
+      },
+      {
+        "meshName": "",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> LateralActuatorDisc -> unnamed"
+      },
+      {
+        "meshName": "",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> MedialActuatorDisc -> unnamed"
+      },
+      {
+        "meshName": "LeftWristStatic_RobotPurpleBloomMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> LeftForearmPivot -> LeftForearmAssembly -> LeftForearmMechanicalCore -> LeftDistalWristMount -> LeftWristPivot -> WristMechanics -> LeftWristStatic_RobotPurpleBloomMaterial_Merged"
+      },
+      {
+        "meshName": "",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> LeftForearmPivot -> LeftForearmAssembly -> LeftForearmMechanicalCore -> LeftDistalWristMount -> LeftWristPivot -> LeftWristTrunnion -> LeftDistalHandMount -> LeftHandRoot -> unnamed"
+      },
+      {
+        "meshName": "",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> LeftForearmPivot -> LeftForearmAssembly -> LeftForearmMechanicalCore -> LeftDistalWristMount -> LeftWristPivot -> LeftWristTrunnion -> LeftDistalHandMount -> LeftHandRoot -> IndexFinger -> IndexProximal -> IndexMiddle -> IndexDistal -> unnamed"
+      },
+      {
+        "meshName": "",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> LeftForearmPivot -> LeftForearmAssembly -> LeftForearmMechanicalCore -> LeftDistalWristMount -> LeftWristPivot -> LeftWristTrunnion -> LeftDistalHandMount -> LeftHandRoot -> MiddleFinger -> MiddleProximal -> MiddleMiddle -> MiddleDistal -> unnamed"
+      },
+      {
+        "meshName": "",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisPivot -> LeftArmMount -> LeftRobotArmRoot -> LeftUpperArmAssembly -> LeftUpperArmMechanicalCore -> LeftDistalElbowMount -> LeftElbowRoot -> LeftForearmPivot -> LeftForearmAssembly -> LeftForearmMechanicalCore -> LeftDistalWristMount -> LeftWristPivot -> LeftWristTrunnion -> LeftDistalHandMount -> LeftHandRoot -> RingFinger -> RingProximal -> RingMiddle -> RingDistal -> unnamed"
+      }
+    ]
+  },
+  {
+    "uuid": "a9972017-5c94-4f0d-8028-d842d5739383",
+    "name": "RobotDarkTitaniumDoubleSideMaterial",
+    "type": "MeshPhysicalMaterial",
+    "color": "#141624",
+    "roughness": 0.3,
+    "metalness": 0.9,
+    "clearcoat": 0.42,
+    "clearcoatRoughness": 0.16,
+    "sheen": 0,
+    "sheenColor": "#000000",
+    "reflectivity": 0.9399999999999998,
+    "ior": 2.205128205128205,
+    "emissive": "#000000",
+    "transparent": false,
+    "opacity": 1,
+    "side": "DoubleSide",
+    "toneMapped": true,
+    "wireframe": false,
+    "depthTest": true,
+    "depthWrite": true,
+    "meshCount": 3,
+    "meshSamples": [
+      {
+        "meshName": "BearingHousingGroup_L_RobotDarkTitaniumDoubleSideMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> BearingHousingGroup_L -> BearingHousingGroup_L_RobotDarkTitaniumDoubleSideMaterial_Merged"
+      },
+      {
+        "meshName": "BearingHousingGroup_R_RobotDarkTitaniumDoubleSideMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> RightShoulderModule -> RightShoulderFoundation -> RightShoulderJoint -> RightPrimaryAxisPivot -> BearingHousingGroup_R -> BearingHousingGroup_R_RobotDarkTitaniumDoubleSideMaterial_Merged"
+      },
+      {
+        "meshName": "NeckSpacers_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> UpperTorsoFrame -> Neck -> NeckSpacers_Merged"
+      }
+    ]
+  },
+  {
+    "uuid": "f713c966-df60-4b94-a43a-0fa14c820cdb",
+    "name": "RobotMachinedLinkMaterial",
+    "type": "MeshPhysicalMaterial",
+    "color": "#dde6f5",
+    "roughness": 0.18,
+    "metalness": 0.9,
+    "clearcoat": 0.7,
+    "clearcoatRoughness": 0.1,
+    "sheen": 0,
+    "sheenColor": "#000000",
+    "reflectivity": 0.9799999999999999,
+    "ior": 2.289473684210526,
+    "emissive": "#000000",
+    "transparent": false,
+    "opacity": 1,
+    "side": "FrontSide",
+    "toneMapped": true,
+    "wireframe": false,
+    "depthTest": true,
+    "depthWrite": true,
+    "meshCount": 1,
+    "meshSamples": [
+      {
+        "meshName": "LeftSecondaryAxisCarrier_LinksMerged_RobotMachinedLinkMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> LeftShoulderModule -> LeftShoulderFoundation -> LeftShoulderJoint -> LeftPrimaryAxisPivot -> LeftSecondaryAxisCarrier -> LeftSecondaryAxisCarrier_LinksMerged -> LeftSecondaryAxisCarrier_LinksMerged_RobotMachinedLinkMaterial_Merged"
+      }
+    ]
+  },
+  {
+    "uuid": "25bc8e36-3f8e-4b6f-aaf9-bb05f1b0a036",
+    "name": "RobotMachinedLinkMaterial",
+    "type": "MeshPhysicalMaterial",
+    "color": "#dde6f5",
+    "roughness": 0.18,
+    "metalness": 0.9,
+    "clearcoat": 0.7,
+    "clearcoatRoughness": 0.1,
+    "sheen": 0,
+    "sheenColor": "#000000",
+    "reflectivity": 0.9799999999999999,
+    "ior": 2.289473684210526,
+    "emissive": "#000000",
+    "transparent": false,
+    "opacity": 1,
+    "side": "FrontSide",
+    "toneMapped": true,
+    "wireframe": false,
+    "depthTest": true,
+    "depthWrite": true,
+    "meshCount": 1,
+    "meshSamples": [
+      {
+        "meshName": "RightSecondaryAxisCarrier_LinksMerged_RobotMachinedLinkMaterial_Merged",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> RightShoulderModule -> RightShoulderFoundation -> RightShoulderJoint -> RightPrimaryAxisPivot -> RightSecondaryAxisCarrier -> RightSecondaryAxisCarrier_LinksMerged -> RightSecondaryAxisCarrier_LinksMerged_RobotMachinedLinkMaterial_Merged"
+      }
+    ]
+  },
+  {
+    "uuid": "501815e4-cdf6-45e1-afed-80182fe4601e",
+    "name": "RobotWhiteCoreEmissiveMaterial",
+    "type": "MeshBasicMaterial",
+    "color": "#ffffff",
+    "roughness": null,
+    "metalness": null,
+    "clearcoat": null,
+    "clearcoatRoughness": null,
+    "sheen": null,
+    "sheenColor": null,
+    "reflectivity": 1,
+    "ior": null,
+    "emissive": null,
+    "transparent": false,
+    "opacity": 1,
+    "side": "FrontSide",
+    "toneMapped": false,
+    "wireframe": false,
+    "depthTest": true,
+    "depthWrite": true,
+    "meshCount": 6,
+    "meshSamples": [
+      {
+        "meshName": "",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> UpperTorsoFrame -> Neck -> RobotHead -> OuterShell -> RearNapeLEDGroup -> unnamed"
+      },
+      {
+        "meshName": "VisorLEDCore",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> UpperTorsoFrame -> Neck -> RobotHead -> VisorAssembly -> PurpleVisorLED -> VisorLEDCore"
+      },
+      {
+        "meshName": "EarCoreRingWhite",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> UpperTorsoFrame -> Neck -> RobotHead -> LeftSideModule -> EarCoreRingWhite"
+      },
+      {
+        "meshName": "EarCoreRingWhite",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> UpperTorsoFrame -> Neck -> RobotHead -> RightSideModule -> EarCoreRingWhite"
+      },
+      {
+        "meshName": "",
+        "path": "RobotRoot -> RobotTorso -> WaistAssembly -> WaistPivot -> HipConnection -> LeftHipPivot -> LeftLegRoot -> LeftHip -> ThighMount_L -> LeftThigh -> KneePivot_L -> LeftKnee -> PatellaShield_L -> unnamed"
+      },
+      {
+        "meshName": "",
+        "path": "RobotRoot -> RobotTorso -> WaistAssembly -> WaistPivot -> HipConnection -> RightHipPivot -> RightLegRoot -> RightHip -> ThighMount_R -> RightThigh -> KneePivot_R -> RightKnee -> PatellaShield_R -> unnamed"
+      }
+    ]
+  },
+  {
+    "uuid": "4cccff6a-e100-46b8-8c12-e0962435cd6d",
+    "name": "RobotObsidianVisorMaterial",
+    "type": "MeshPhysicalMaterial",
+    "color": "#020108",
+    "roughness": 0.01,
+    "metalness": 0.18,
+    "clearcoat": 1,
+    "clearcoatRoughness": 0.01,
+    "sheen": 0,
+    "sheenColor": "#000000",
+    "reflectivity": 0.5916030534351145,
+    "ior": 1.62,
+    "emissive": "#000000",
+    "transparent": false,
+    "opacity": 1,
+    "side": "FrontSide",
+    "toneMapped": true,
+    "wireframe": false,
+    "depthTest": true,
+    "depthWrite": true,
+    "meshCount": 1,
+    "meshSamples": [
+      {
+        "meshName": "BlackVisor",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> UpperTorsoFrame -> Neck -> RobotHead -> VisorAssembly -> BlackVisor"
+      }
+    ]
+  },
+  {
+    "uuid": "fd363fe0-e0ac-4e33-907b-eded43cb136a",
+    "name": "RobotVisorOuterFrameMaterial",
+    "type": "MeshPhysicalMaterial",
+    "color": "#101218",
+    "roughness": 0.32,
+    "metalness": 0.88,
+    "clearcoat": 0.35,
+    "clearcoatRoughness": 0.22,
+    "sheen": 0,
+    "sheenColor": "#000000",
+    "reflectivity": 0.5,
+    "ior": 1.5,
+    "emissive": "#000000",
+    "transparent": false,
+    "opacity": 1,
+    "side": "FrontSide",
+    "toneMapped": true,
+    "wireframe": false,
+    "depthTest": true,
+    "depthWrite": true,
+    "meshCount": 1,
+    "meshSamples": [
+      {
+        "meshName": "VisorOuterFrame",
+        "path": "RobotRoot -> RobotTorso -> ChestPivot -> UpperTorsoFrame -> Neck -> RobotHead -> VisorAssembly -> VisorOuterFrame"
+      }
+    ]
+  }
+]
