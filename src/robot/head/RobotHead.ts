@@ -7,11 +7,15 @@ import { createRobotVisorLight, VisorLightNodes } from './RobotVisorLight';
 import { createRobotSideModule, SideModuleNodes } from './RobotSideModule';
 import { createRobotJaw, JawNodes } from './RobotJaw';
 import { createRobotNeck, NeckNodes } from './RobotNeck';
+import { createRearHeadAssembly, RearHeadAssemblyNodes } from './RearHeadAssembly';
+import { createRearNeckAssembly, RearNeckAssemblyNodes } from './RearNeckAssembly';
 
 export interface HeadAssemblyNodes {
   head: THREE.Group;
   neck: THREE.Group;
   shell: ShellNodes;
+  rearHead?: RearHeadAssemblyNodes;
+  rearNeck?: RearNeckAssemblyNodes;
   visorAssembly: VisorAssemblyNodes;
   visorLight: VisorLightNodes;
   leftSideModule: SideModuleNodes;
@@ -55,6 +59,11 @@ export function createRobotHead(materials: RobotMaterialPalette): HeadAssemblyNo
   head.add(shell.group);
   ledMeshes.push(shell.rearNapeLED);
 
+  // 2b. Sculpted Rear Cranial Armor Shell & Occipital Mechanism
+  const rearHead = createRearHeadAssembly(materials);
+  head.add(rearHead.group);
+  ledMeshes.push(...rearHead.ledMeshes);
+
   // 3. Glossy Obsidian Face Visor Assembly (Part 4 & 5)
   const visorAssembly = createRobotVisor(materials);
   head.add(visorAssembly.group);
@@ -80,8 +89,12 @@ export function createRobotHead(materials: RobotMaterialPalette): HeadAssemblyNo
   const jaw = createRobotJaw(materials);
   head.add(jaw.group);
 
-  // 7. Stacked Telescoping Mechanical Neck (Part 10)
+  // 7. Stacked Telescoping Mechanical Neck & Posterior Cervical Mechanism
   const neckAssembly = createRobotNeck(materials);
+  const rearNeck = createRearNeckAssembly(materials);
+  neckAssembly.group.add(rearNeck.group);
+  ledMeshes.push(...rearNeck.ledMeshes);
+
   // Head mounts directly onto neck upper cervical connector
   neckAssembly.group.add(head);
 
@@ -89,6 +102,8 @@ export function createRobotHead(materials: RobotMaterialPalette): HeadAssemblyNo
     head,
     neck: neckAssembly.group,
     shell,
+    rearHead,
+    rearNeck,
     visorAssembly,
     visorLight,
     leftSideModule,

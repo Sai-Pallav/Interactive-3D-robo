@@ -42,6 +42,8 @@ export class LegAnimationController {
 
   // Exploded view state
   private explodedProgress: number = 0;
+  private leftRestPositions: any;
+  private rightRestPositions: any;
 
   constructor(leftLeg: RobotLegNodes, rightLeg: RobotLegNodes) {
     this.leftLeg = leftLeg;
@@ -55,6 +57,23 @@ export class LegAnimationController {
 
     this.baseLeftAnkleRot = leftLeg.ankle.footPivot.rotation.clone();
     this.baseRightAnkleRot = rightLeg.ankle.footPivot.rotation.clone();
+
+    // Cache rest positions of articulated armor shells for seamless exploded view
+    const cacheRestPositions = (leg: RobotLegNodes) => ({
+      thighAntZ: leg.thigh.anteriorArmor.position.z,
+      thighLatX: leg.thigh.lateralArmor.position.x,
+      thighMedX: leg.thigh.medialArmor.position.x,
+      thighTrochY: leg.thigh.trochanterHood.position.y,
+      thighPostZ: leg.thigh.posteriorPlate.position.z,
+      kneePatellaZ: leg.knee.patellaShield.position.z,
+      shinKeelZ: leg.shin.anteriorKeelArmor.position.z,
+      shinCalfZ: leg.shin.posteriorCalfArmor.position.z,
+      footDorsalY: leg.foot.dorsalArmor.position.y,
+      footToeZ: leg.foot.toeArmor.position.z,
+      footHeelZ: leg.foot.heelArmor.position.z,
+    });
+    this.leftRestPositions = cacheRestPositions(leftLeg);
+    this.rightRestPositions = cacheRestPositions(rightLeg);
 
     // Cache original materials for wireframe toggling
     const cacheMaterials = (leg: RobotLegNodes) => {
@@ -124,29 +143,38 @@ export class LegAnimationController {
     this.explodedProgress = Math.max(0, Math.min(1, progress));
     const p = this.explodedProgress;
 
-    const applyExplodedToLeg = (leg: RobotLegNodes, side: -1 | 1) => {
-      // Anterior Thigh armor slides forward (+Z) and outward (+X)
-      leg.thigh.anteriorArmor.position.z = 0.027 + p * 0.045;
-      leg.thigh.lateralArmor.position.x = side * (0.024 + p * 0.040);
+    const applyExplodedToLeg = (leg: RobotLegNodes, side: -1 | 1, rest: any) => {
+      // Anterior Thigh armor slides forward (+Z)
+      leg.thigh.anteriorArmor.position.z = rest.thighAntZ + p * 0.045;
+      // Lateral and medial thigh cowls separate symmetrically
+      leg.thigh.lateralArmor.position.x = rest.thighLatX + side * (p * 0.040);
+      leg.thigh.medialArmor.position.x = rest.thighMedX - side * (p * 0.035);
+      // Trochanter hood slides upward
+      leg.thigh.trochanterHood.position.y = rest.thighTrochY + p * 0.020;
+      // Posterior hamstring plates move backward (-Z)
+      leg.thigh.posteriorPlate.position.z = rest.thighPostZ - p * 0.040;
 
       // Patellar shield pops forward
-      leg.knee.patellaShield.position.z = LEG_CONFIG.knee.patella.offsetZ + p * 0.040;
+      leg.knee.patellaShield.position.z = rest.kneePatellaZ + p * 0.040;
 
       // Shin anterior keel plate pushes forward
-      leg.shin.anteriorKeelArmor.position.z = 0.025 + p * 0.045;
-
+      leg.shin.anteriorKeelArmor.position.z = rest.shinKeelZ + p * 0.045;
       // Calf armor moves backward (-Z)
-      leg.shin.posteriorCalfArmor.position.z = -0.025 - p * 0.040;
+      leg.shin.posteriorCalfArmor.position.z = rest.shinCalfZ - p * 0.040;
 
       // Foot dorsal plate lifts upward
-      leg.foot.dorsalArmor.position.y = -LEG_CONFIG.foot.height * 0.42 + p * 0.030;
-
+      leg.foot.dorsalArmor.position.y = rest.footDorsalY + p * 0.030;
       // Toe armor slides forward
-      leg.foot.toeArmor.position.z = LEG_CONFIG.foot.toeCap.length * 0.35 + p * 0.035;
+      leg.foot.toeArmor.position.z = rest.footToeZ + p * 0.035;
+      // Heel armor slides backward
+      leg.foot.heelArmor.position.z = rest.footHeelZ - p * 0.030;
+
+      // Dynamically track Achilles hydraulic damper
+      leg.ankle.achillesDamper?.update?.();
     };
 
-    applyExplodedToLeg(this.leftLeg, -1);
-    applyExplodedToLeg(this.rightLeg, 1);
+    applyExplodedToLeg(this.leftLeg, -1, this.leftRestPositions);
+    applyExplodedToLeg(this.rightLeg, 1, this.rightRestPositions);
   }
 
   // ==============================================================
@@ -193,5 +221,9 @@ export class LegAnimationController {
     const rAnkle = this.rightLeg.ankle.footPivot;
     rAnkle.rotation.x = this.baseRightAnkleRot.x + (this.rightOverrides.anklePitch ?? breathAnkle);
     rAnkle.rotation.z = this.baseRightAnkleRot.z + (this.rightOverrides.ankleRoll ?? -weightShift * 0.7);
+
+    // 3. Dynamic telescoping compliance for Achilles dampers
+    this.leftLeg.ankle.achillesDamper?.update?.();
+    this.rightLeg.ankle.achillesDamper?.update?.();
   }
 }

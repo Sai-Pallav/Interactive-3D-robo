@@ -114,6 +114,9 @@ export function createRobotLeg(
   ankle.footPivot.rotation.x = st.anklePitch;
   ankle.footPivot.rotation.z = -side * st.ankleRoll;
 
+  // Align Achilles hydraulic damper with stance posture
+  ankle.achillesDamper?.update?.();
+
   return {
     root: legRoot,
     hip,

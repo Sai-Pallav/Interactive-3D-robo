@@ -164,30 +164,6 @@ export function createHip(
   interlockingCollar.receiveShadow = true;
   mountGroup.add(interlockingCollar);
 
-  // D. Heavy Bilateral Structural Yoke Ears (Direct load path into thigh spine)
-  for (const bSide of [-1, 1]) {
-    const earGeo = new THREE.BoxGeometry(0.008, 0.024, 0.020);
-    const ear = new THREE.Mesh(earGeo, materials.joint);
-    ear.position.set(
-      bSide * (cfg.collarRadius * 0.86),
-      -cfg.collarHeight * 0.55,
-      0
-    );
-    ear.castShadow = true;
-    mountGroup.add(ear);
-
-    // Cross clamp bolt through each yoke ear
-    const earBoltGeo = new THREE.CylinderGeometry(0.002, 0.002, 0.010, 6);
-    const earBolt = new THREE.Mesh(earBoltGeo, materials.joint);
-    earBolt.rotation.z = Math.PI / 2;
-    earBolt.position.set(
-      bSide * (cfg.collarRadius * 0.86),
-      -cfg.collarHeight * 0.65,
-      0
-    );
-    mountGroup.add(earBolt);
-  }
-
   const mergedMount = mergeGroupMeshesByMaterial(
     mountGroup,
     materials.joint,

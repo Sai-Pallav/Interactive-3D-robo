@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { RobotMaterialPalette } from '../materials/RobotMaterials';
 import { TORSO_CONFIG } from './TorsoConfig';
 import { mergeGroupMeshesByMaterial } from '../utils/geometryMerger';
+import { createRearWaistAssembly, RearWaistAssemblyNodes } from './RearWaistAssembly';
 
 export interface HipConnectionNodes {
   group: THREE.Group;
@@ -40,6 +41,7 @@ export interface WaistAssemblyNodes {
   rightHip: HipConnectionNodes;
   pelvicPlate: THREE.Mesh;
   pelvicAccentLight?: THREE.Mesh;
+  rearWaist?: RearWaistAssemblyNodes;
   ledMeshes: THREE.Mesh[];
 
   // Discrete nodes for mechanical & shell hierarchy
@@ -511,6 +513,11 @@ export function createWaistAssembly(materials: RobotMaterialPalette): WaistAssem
   subPelvisCradle.castShadow = true;
   hipConnectionGroup.add(subPelvisCradle);
 
+  // 4. Rear Waist Bearing Housing, Sacral Armor & Posterior Hip Wishbones
+  const rearWaist = createRearWaistAssembly(materials);
+  hipConnectionGroup.add(rearWaist.group);
+  ledMeshes.push(...rearWaist.ledMeshes);
+
   return {
     group: waistGroup,
     waistPivot,
@@ -531,6 +538,7 @@ export function createWaistAssembly(materials: RobotMaterialPalette): WaistAssem
     inguinalFlapLeft,
     inguinalFlapRight,
     subPelvisCradle,
+    rearWaist,
     waistCollar: upperWaistRing,
     waistRing01: upperWaistRing,
     waistRing02: lowerWaistRing,

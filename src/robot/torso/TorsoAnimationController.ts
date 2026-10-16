@@ -38,6 +38,9 @@ export class TorsoAnimationController {
   private baseSubPelvisCradleY: number;
   private baseLeftIliacCrestX: number;
   private baseRightIliacCrestX: number;
+  private baseScapularArmorLeftPos: THREE.Vector3 | null = null;
+  private baseScapularArmorRightPos: THREE.Vector3 | null = null;
+  private baseSacralArmorPos: THREE.Vector3 | null = null;
 
   // Exploded view state
   private explodedProgress: number = 0;
@@ -72,6 +75,15 @@ export class TorsoAnimationController {
     this.baseSubPelvisCradleY = torso.waist.subPelvisCradle ? torso.waist.subPelvisCradle.position.y : -0.262;
     this.baseLeftIliacCrestX = torso.waist.leftHip.iliacCrestArmor ? torso.waist.leftHip.iliacCrestArmor.position.x : -0.008;
     this.baseRightIliacCrestX = torso.waist.rightHip.iliacCrestArmor ? torso.waist.rightHip.iliacCrestArmor.position.x : 0.008;
+    const rt = torso.upperTorsoFrame.rearThoracic;
+    if (rt) {
+      this.baseScapularArmorLeftPos = rt.scapularArmorLeft.position.clone();
+      this.baseScapularArmorRightPos = rt.scapularArmorRight.position.clone();
+    }
+    const rw = torso.waist.rearWaist;
+    if (rw) {
+      this.baseSacralArmorPos = rw.sacralArmor.position.clone();
+    }
 
     // Cache original materials for wireframe toggling
     torso.group.traverse((obj) => {
@@ -175,6 +187,20 @@ export class TorsoAnimationController {
       // - Back armor moves -Z (backward)
       this.torso.upperTorsoFrame.backArmor.position.z = -0.085 - exp * 0.10;
       this.torso.upperTorsoFrame.backLightBar.position.z = -0.100 - exp * 0.10;
+      // - Rear Scapular armor panels slide backward in -Z and laterally in ±X
+      const rt = this.torso.upperTorsoFrame.rearThoracic;
+      if (rt && this.baseScapularArmorLeftPos && this.baseScapularArmorRightPos) {
+        rt.scapularArmorLeft.position.set(
+          this.baseScapularArmorLeftPos.x - exp * 0.05,
+          this.baseScapularArmorLeftPos.y,
+          this.baseScapularArmorLeftPos.z - exp * 0.10
+        );
+        rt.scapularArmorRight.position.set(
+          this.baseScapularArmorRightPos.x + exp * 0.05,
+          this.baseScapularArmorRightPos.y,
+          this.baseScapularArmorRightPos.z - exp * 0.10
+        );
+      }
       // - Stomach rings spread vertically along spine
       const ringCount = this.torso.stomach.rings.length;
       const midIdx = (ringCount - 1) / 2;
@@ -199,6 +225,16 @@ export class TorsoAnimationController {
 
       // - Pelvic shield (carrying nested intake vent & violet optical sensor) moves forward in +Z
       this.torso.waist.pelvicPlate.position.z = 0.046 + exp * 0.09;
+
+      // - Rear Sacral pelvic armor plate slides backward in -Z
+      const rw = this.torso.waist.rearWaist;
+      if (rw && this.baseSacralArmorPos) {
+        rw.sacralArmor.position.set(
+          this.baseSacralArmorPos.x,
+          this.baseSacralArmorPos.y,
+          this.baseSacralArmorPos.z - exp * 0.08
+        );
+      }
 
       // - Left & Right Inguinal Flaps slide diagonally outward and forward in ±X, +Z
       if (this.torso.waist.inguinalFlapLeft && this.torso.waist.inguinalFlapRight) {

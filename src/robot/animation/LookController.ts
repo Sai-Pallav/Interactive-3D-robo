@@ -194,15 +194,21 @@ export class LookController {
           Math.sqrt(this.tempDirLocal.x * this.tempDirLocal.x + this.tempDirLocal.z * this.tempDirLocal.z)
         );
       } else {
-        // Natural eye-contact with user: look directly at camera lens
+        // Natural eye-contact with user: look directly at camera lens when facing front
         this.tempDirWorld.copy(this.camera.position).sub(this.tempHeadPos).normalize();
         this.tempDirLocal.copy(this.tempDirWorld).applyQuaternion(this.tempInvParentQuat);
 
-        rawYaw = Math.atan2(this.tempDirLocal.x, this.tempDirLocal.z);
-        rawPitch = Math.atan2(
-          -this.tempDirLocal.y,
-          Math.sqrt(this.tempDirLocal.x * this.tempDirLocal.x + this.tempDirLocal.z * this.tempDirLocal.z)
-        );
+        if (this.tempDirLocal.z < 0) {
+          // Camera is behind the robot's dorsal aspect: maintain majestic neutral forward posture
+          rawYaw = 0;
+          rawPitch = 0;
+        } else {
+          rawYaw = Math.atan2(this.tempDirLocal.x, this.tempDirLocal.z);
+          rawPitch = Math.atan2(
+            -this.tempDirLocal.y,
+            Math.sqrt(this.tempDirLocal.x * this.tempDirLocal.x + this.tempDirLocal.z * this.tempDirLocal.z)
+          );
+        }
       }
     } else {
       // Offline fallback: symmetrical calibrated normalized mapping

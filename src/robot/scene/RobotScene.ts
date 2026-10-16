@@ -36,7 +36,9 @@ export class RobotScene {
   private drsManager: DynamicResolutionManager;
   private interaction: RobotInteraction;
   private mixer?: THREE.AnimationMixer;
-  private robotNodes: RobotNodes | null = null;
+  public robotNodes: RobotNodes | null = null;
+  private targetRobotYaw: number = ROBOT_ROTATION.yaw;
+  private isAnimatingYaw: boolean = false;
 
   private isRunning: boolean = false;
   private isVisible: boolean = true;
@@ -59,7 +61,7 @@ export class RobotScene {
   private isPinching: boolean = false;
   private lastTapTime: number = 0;
 
-  public isReady: boolean = false;
+  private _isReady: boolean = false;
   public modelSource: 'procedural' = 'procedural';
   private _tempFacePos = new THREE.Vector3();
   private currentPmremResolution: number = 256;
@@ -182,7 +184,7 @@ export class RobotScene {
       this.renderer.render(this.scene, this.cameraManager.camera);
       startupProfiler.mark('T8_firstRender');
 
-      this.isReady = true;
+      this._isReady = true;
       (window as any).__robotScene = this;
       (window as any).__setHandPose = (side: any, pose: any, dur?: any) => this.controller?.setHandPose(side, pose, dur);
       if (options.onLoaded) {
@@ -276,7 +278,7 @@ export class RobotScene {
       // Stage 2: Initialize Developer Debug Mode Manager (wireframes/axes) post-first-frame
       this.debugManager = new DebugManager(result.nodes.root);
 
-      this.isReady = true;
+      this._isReady = true;
       (window as any).__robotScene = this;
       (window as any).__setHandPose = (side: any, pose: any, dur?: any) => this.controller?.setHandPose(side, pose, dur);
       if (options.onLoaded) {
@@ -320,7 +322,7 @@ export class RobotScene {
     this.robotNodes.root.position.set(pos.x, pos.y, pos.z);
 
     // Subtle 3/4 orientation toward screen-left and slight ground perspective
-    this.robotNodes.root.rotation.y = ROBOT_ROTATION.yaw;
+    this.robotNodes.root.rotation.y = this.targetRobotYaw;
     this.robotNodes.root.rotation.x = ROBOT_ROTATION.pitch;
     this.robotNodes.root.rotation.z = ROBOT_ROTATION.roll;
 
@@ -359,6 +361,7 @@ export class RobotScene {
           this.renderer.setSize(width, height, false);
           this.cameraManager.updateAspect(aspect);
           this.updateRobotTransform();
+          this.interaction.updateRect();
         }
       }
     });
@@ -500,6 +503,23 @@ export class RobotScene {
 
     // Update smooth camera zoom interpolation
     if (this.cameraManager.update(dt)) {
+      this.updateFaceProjection();
+    }
+
+    // Update smooth robot yaw rotation interpolation
+    if (this.isAnimatingYaw && this.robotNodes?.root) {
+      const currentYaw = this.robotNodes.root.rotation.y;
+      let diff = this.targetRobotYaw - currentYaw;
+      while (diff < -Math.PI) diff += Math.PI * 2;
+      while (diff > Math.PI) diff -= Math.PI * 2;
+
+      if (Math.abs(diff) < 0.002) {
+        this.robotNodes.root.rotation.y = this.targetRobotYaw;
+        this.isAnimatingYaw = false;
+      } else {
+        const alpha = 1.0 - Math.exp(-9.0 * dt);
+        this.robotNodes.root.rotation.y += diff * alpha;
+      }
       this.updateFaceProjection();
     }
 
@@ -815,6 +835,25 @@ export class RobotScene {
 
   public isZoomed(): boolean {
     return this.cameraManager.isZoomed();
+  }
+
+  public get isReady(): boolean {
+    return this._isReady && !!this.robotNodes?.root;
+  }
+
+  public setRobotYaw(yaw: number, smooth: boolean = true): void {
+    this.targetRobotYaw = yaw;
+    if (!smooth && this.robotNodes?.root) {
+      this.robotNodes.root.rotation.y = yaw;
+      this.isAnimatingYaw = false;
+      this.updateFaceProjection();
+    } else {
+      this.isAnimatingYaw = true;
+    }
+  }
+
+  public getRobotYaw(): number {
+    return this.robotNodes?.root ? this.robotNodes.root.rotation.y : this.targetRobotYaw;
   }
 
   public dispose(): void {

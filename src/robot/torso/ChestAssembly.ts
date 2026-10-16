@@ -5,6 +5,7 @@ import { mergeGroupMeshesByMaterial } from '../utils/geometryMerger';
 import { ROBOT_ACCENT } from '../config';
 import { createChestShoulderExtension, ShoulderExtensionNodes } from '../shoulder/ChestShoulderExtension';
 import { geoCache } from '../utils/GeometryCache';
+import { createRearThoracicAssembly, RearThoracicAssemblyNodes } from './RearThoracicAssembly';
 
 // ─── Public interfaces (strictly preserved for animation controller compatibility) ──
 
@@ -32,6 +33,7 @@ export interface UpperTorsoFrameNodes {
   neckCollarLightSlit?: THREE.Mesh;
   backArmor: THREE.Mesh;
   backLightBar: THREE.Mesh;
+  rearThoracic?: RearThoracicAssemblyNodes;
   lowerFrame: THREE.Group;
   ledMeshes: THREE.Mesh[];
 }
@@ -50,6 +52,7 @@ export interface ChestAssemblyNodes {
   upperTorsoFrame: UpperTorsoFrameNodes;
   shoulderMountLeft: ShoulderMountNodes;
   shoulderMountRight: ShoulderMountNodes;
+  rearThoracic?: RearThoracicAssemblyNodes;
   ledMeshes: THREE.Mesh[];
 }
 
@@ -281,51 +284,102 @@ function createChestSidePanel(
 }
 
 // ─── 4. LOWER FLANK ARMOR WITH ARCHED UNDER-COWL ───────────────────────────
+// ─── 4. FULL MID-AXILLARY FLANK ARMOR & RIB VENTILATION GILLS ──────────────
+/**
+ * Engineered mid-axillary lateral ribcage armor panels (Rule 4: Torso & Back Profile).
+ * Completely eliminates the hollow, see-through cavity under the armpit:
+ * - Spans along Z from the chest side panel (Z = +0.024) back to the rear thoracic scapula (Z = -0.065)
+ * - Contours smoothly underneath the shoulder socket bearing with calibrated 5mm articulation clearance arch
+ * - Docks flush into the lower thoracic sub-costal arch at Y = -0.046
+ * - Features recessed dark titanium heat-exchange louvers and beveled ceramic armor edges
+ */
 function createChestFlankArmor(
   side: -1 | 1,
   materials: RobotMaterialPalette
 ): THREE.Mesh {
-  const geo = geoCache.get(`ChestFlankArmorGeo_${side}`, () => {
+  const geo = geoCache.get(`ChestFlankArmorGeo_v3_${side}`, () => {
     const shape = new THREE.Shape();
-    shape.moveTo(0.048, 0.048);
-    shape.lineTo(0.056, 0.018);
-    // Curves downward with controlled clearance, contouring cleanly into rib actuator clearance
-    shape.bezierCurveTo(0.058, -0.015, 0.048, -0.036, 0.028, -0.044);
-    shape.quadraticCurveTo(0.005, -0.038, -0.018, -0.038);
-    shape.bezierCurveTo(-0.036, -0.036, -0.046, -0.015, -0.048, 0.018);
-    shape.lineTo(-0.032, 0.048);
+    // 2D Shape Coordinates: X maps to 3D Z, Y maps to 3D Y
+    // Anterior top corner meeting chest side panel
+    shape.moveTo(0.024, 0.016);
+    // Sub-shoulder concave articulation relief arch
+    shape.bezierCurveTo(0.010, -0.002, -0.020, -0.002, -0.038, 0.014);
+    // Sweeps up-rear to meet the suprascapular return crest
+    shape.lineTo(-0.065, 0.032);
+    // Posterior vertical boundary framing the rear thoracic scapula panel
+    shape.lineTo(-0.065, -0.046);
+    // Lower boundary meeting the sub-sternal arch and abdominal transition ring
+    shape.bezierCurveTo(-0.042, -0.048, -0.010, -0.048, 0.024, -0.046);
+    // Anterior vertical boundary meeting chest side panel
     shape.closePath();
 
+    // Recessed mid-axillary cooling louver window
+    const louverWindow = new THREE.Path();
+    louverWindow.moveTo(-0.012, -0.016);
+    louverWindow.lineTo(-0.050, -0.016);
+    louverWindow.lineTo(-0.050, -0.028);
+    louverWindow.lineTo(-0.012, -0.028);
+    louverWindow.closePath();
+    shape.holes.push(louverWindow);
+
     const g = new THREE.ExtrudeGeometry(shape, {
-      depth: 0.026,
+      depth: 0.008,
       bevelEnabled: true,
-      bevelThickness: 0.0045,
-      bevelSize: 0.0035,
+      bevelThickness: 0.0022,
+      bevelSize: 0.0018,
       bevelSegments: 3,
       curveSegments: 24,
     });
     g.center();
 
+    // Rotate 2D shape so X maps to 3D Z and extrusion depth maps to 3D X
+    g.rotateY(-Math.PI / 2);
+
+    // Anatomical lateral ribcage crowning: subtle outward curvature along mid-axillary line
     const pos = g.attributes.position;
     for (let i = 0; i < pos.count; i++) {
-      const x = pos.getX(i);
+      const y = pos.getY(i);
       const z = pos.getZ(i);
-      if (z > 0) {
-        const d = Math.abs(x) / 0.05;
-        pos.setZ(i, z + Math.cos(d * Math.PI * 0.5) * 0.008);
-      }
+      const x = pos.getX(i);
+
+      // Crown curvature peaking at center of panel
+      const zNorm = (z + 0.020) / 0.045;
+      const yNorm = (y + 0.010) / 0.035;
+      const crown = Math.cos(Math.max(-1, Math.min(1, zNorm)) * Math.PI * 0.5) *
+                    Math.cos(Math.max(-1, Math.min(1, yNorm)) * Math.PI * 0.5) * 0.0035;
+      pos.setX(i, x + (side === -1 ? -crown : crown));
     }
+
     g.computeVertexNormals();
     return g;
   });
 
   const mesh = new THREE.Mesh(geo, materials.armor);
   mesh.name = side === -1 ? 'ChestFlankArmor_Left' : 'ChestFlankArmor_Right';
-  mesh.position.set(side * 0.114, -0.029, 0.028);
-  mesh.rotation.y = -side * 0.20;
-  mesh.rotation.x = -0.03;
+  mesh.position.set(side * 0.148, -0.006, -0.020);
+  mesh.rotation.y = -side * 0.05;
   mesh.castShadow = true;
   mesh.receiveShadow = true;
+
+  // Inset dark titanium radiator louver core inside the ventilation window
+  const louverCoreGeo = geoCache.get(`FlankLouverCoreGeo_v3_${side}`, () => {
+    const box = new THREE.BoxGeometry(0.003, 0.011, 0.036);
+    return box;
+  });
+  const louverCore = new THREE.Mesh(louverCoreGeo, materials.joint);
+  louverCore.name = side === -1 ? 'FlankLouverCore_L' : 'FlankLouverCore_R';
+  louverCore.position.set(-side * 0.0015, -0.022, -0.011);
+  mesh.add(louverCore);
+
+  // Louver slats inside the window
+  for (let s = 0; s < 3; s++) {
+    const slatGeo = geoCache.get('FlankLouverSlatGeo_v3', () => new THREE.BoxGeometry(0.004, 0.0016, 0.034));
+    const slat = new THREE.Mesh(slatGeo, materials.metallic);
+    slat.position.set(0, -0.018 - s * 0.004, -0.011);
+    slat.rotation.z = side * 0.20;
+    mesh.add(slat);
+  }
+
   return mesh;
 }
 
@@ -596,17 +650,21 @@ export function createUpperTorsoFrame(materials: RobotMaterialPalette): UpperTor
   backArmor.name = 'ChestBackArmor';
   backArmor.position.set(0, -0.032, -0.080);
   backArmor.rotation.x = 0.05;
-  backArmor.castShadow = true;
-  backArmor.receiveShadow = true;
-  group.add(backArmor);
+  backArmor.castShadow = false;
+  backArmor.receiveShadow = false;
+  backArmor.visible = false; // Superseded by high-precision RearThoracicAssembly scapular armor & backbone
 
-  // Horizontal Purple Emissive Scapula Light Bar
+  // Obsolete placeholder back light bar (superseded by PDU diagnostic status LED in RearThoracicAssembly)
   const backLightGeo = geoCache.get('ChestBackLightGeo', () => new THREE.BoxGeometry(0.100, 0.0050, 0.006));
   const backLightBar = new THREE.Mesh(backLightGeo, materials.purpleEmissive);
   backLightBar.name = 'BackLightBar';
   backLightBar.position.set(0, 0.001, -0.094);
-  group.add(backLightBar);
-  ledMeshes.push(backLightBar);
+  backLightBar.visible = false;
+
+  // Complete Rear Thoracic & Scapular Mechanical Assembly
+  const rearThoracic = createRearThoracicAssembly(materials);
+  group.add(rearThoracic.group);
+  ledMeshes.push(...rearThoracic.ledMeshes);
 
   // ==============================================================
   // LOWER CHEST FRAME — SUB-STERNAL TRANSITION GIRDLE & GIMBAL BRIDGE
@@ -792,6 +850,7 @@ export function createUpperTorsoFrame(materials: RobotMaterialPalette): UpperTor
     neckCollarLightSlit: mergedCollarLights || neckCollarLightSlit,
     backArmor,
     backLightBar,
+    rearThoracic,
     lowerFrame,
     ledMeshes,
   };
@@ -833,6 +892,7 @@ export function createChestAssembly(materials: RobotMaterialPalette): ChestAssem
     upperTorsoFrame,
     shoulderMountLeft,
     shoulderMountRight,
+    rearThoracic: upperTorsoFrame.rearThoracic,
     ledMeshes,
   };
 }

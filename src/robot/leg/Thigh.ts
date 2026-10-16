@@ -22,6 +22,7 @@ export interface ThighNodes {
  * Features:
  * - Controlled athletic taper: broader at upper thigh, tapering gracefully toward knee
  * - Aerodynamic central keel ridge with 35° chamfered lateral/medial facets
+ * - Recessed longitudinal and transverse panel seams catching specular highlights
  * - Open suprapatellar articulation arch leaving generous clearance above the knee
  * - Substantial composite armor thickness with precision bevels
  */
@@ -66,7 +67,8 @@ function createSegmentedAnteriorArmorGeometry(
   // Multi-faceted 3D Sculpting:
   // 1. Central longitudinal keel ridge peaking along x = 0
   // 2. Chamfered lateral facets
-  // 3. Flank curvature wrapping backward toward the structural frame
+  // 3. Recessed maintenance panel seams
+  // 4. Flank curvature wrapping backward toward the structural frame
   const pos = geo.attributes.position;
   for (let i = 0; i < pos.count; i++) {
     const x = pos.getX(i);
@@ -79,7 +81,13 @@ function createSegmentedAnteriorArmorGeometry(
       const yNorm = (y + halfL) / length;
       const muscleBulge = Math.sin(yNorm * Math.PI * 0.92) * 0.006;
       const flankWrap = -Math.pow(nx, 1.8) * 0.008;
-      pos.setZ(i, z + keel + muscleBulge + flankWrap);
+
+      // Recessed panel seam lines along longitudinal facet boundaries and mid-height service groove
+      const isFacetSeam = Math.abs(Math.abs(x) - halfWT * 0.48) < 0.0016 && Math.abs(y) < halfL * 0.85;
+      const isServiceSeam = Math.abs(y - halfL * 0.18) < 0.0014 && Math.abs(x) > halfWT * 0.22;
+      const seamIndent = (isFacetSeam || isServiceSeam) ? -0.0016 : 0;
+
+      pos.setZ(i, z + keel + muscleBulge + flankWrap + seamIndent);
     } else {
       const nx = Math.min(1.0, Math.abs(x) / halfWT);
       pos.setZ(i, z - Math.pow(nx, 2.0) * 0.004);
@@ -95,32 +103,33 @@ function createSegmentedAnteriorArmorGeometry(
  * - Anterior high facet consistently meets anterior quad armor at +Z
  * - Posterior lower facet meets hamstring cover at -Z
  * - Supracondylar relief arch cleanly frames the knee rotary condyle disc at -Y
+ * - Subtle recessed panel line dividing upper and lower sections
  */
 function createThighFlankArmorGeometry(
   length: number,
   width: number,
-  thickness: number
+  thickness: number,
+  facingSign: 1 | -1
 ): THREE.BufferGeometry {
   const shape = new THREE.Shape();
   const halfW = width * 0.5;
   const halfL = length * 0.5;
 
   // In 2D shape coordinates:
-  // +X is ANTERIOR (+Z in local 3D thigh frame)
-  // -X is POSTERIOR (-Z in local 3D thigh frame)
-  // +Y is SUPERIOR (+Y in local 3D thigh frame)
-  // -Y is INFERIOR (-Y in local 3D thigh frame)
-  const antZ = halfW * 0.72;
-  const postZ = -halfW * 0.68;
+  // When facingSign === -1, geo.rotateY(-PI/2) maps shape +X to 3D +Z (anterior) and +Z (front) to 3D -X (exterior)
+  // When facingSign === +1, geo.rotateY(+PI/2) maps shape -X to 3D +Z (anterior) and +Z (front) to 3D +X (exterior)
+  const antDir = facingSign === -1 ? 1 : -1;
+  const antZ = antDir * halfW * 0.72;
+  const postZ = -antDir * halfW * 0.68;
 
   shape.moveTo(antZ, halfL); // Anterior upper corner
   shape.lineTo(postZ, halfL * 0.88); // Posterior upper slope
-  shape.quadraticCurveTo(-halfW * 1.02, 0, -halfW * 0.65, -halfL * 0.85);
-  shape.lineTo(-halfW * 0.50, -halfL);
+  shape.quadraticCurveTo(-antDir * halfW * 1.02, 0, -antDir * halfW * 0.65, -halfL * 0.85);
+  shape.lineTo(-antDir * halfW * 0.50, -halfL);
   // Supracondylar relief arch — curves upward to cleanly frame the rotary condyle bearing
-  shape.quadraticCurveTo(0, -halfL + 0.012, halfW * 0.50, -halfL);
-  shape.lineTo(halfW * 0.65, -halfL * 0.85);
-  shape.quadraticCurveTo(halfW * 1.02, 0, antZ, halfL);
+  shape.quadraticCurveTo(0, -halfL + 0.012, antDir * halfW * 0.50, -halfL);
+  shape.lineTo(antDir * halfW * 0.65, -halfL * 0.85);
+  shape.quadraticCurveTo(antDir * halfW * 1.02, 0, antZ, halfL);
   shape.closePath();
 
   const geo = new THREE.ExtrudeGeometry(shape, {
@@ -133,8 +142,78 @@ function createThighFlankArmorGeometry(
   });
   geo.center();
 
-  // Rotate so 2D +X maps directly to 3D +Z (anterior) and 2D thickness maps along X
-  geo.rotateY(-Math.PI / 2);
+  // Subtle curved hard-surface flank contour with recessed horizontal divide seam
+  const pos = geo.attributes.position;
+  for (let i = 0; i < pos.count; i++) {
+    const y = pos.getY(i);
+    const z = pos.getZ(i);
+
+    if (z > 0) {
+      const isSeam = Math.abs(y - halfL * 0.05) < 0.0015;
+      const seamIndent = isSeam ? -0.0014 : 0;
+      const flankCrown = Math.cos((y / halfL) * Math.PI * 0.45) * 0.0024;
+      pos.setZ(i, z + flankCrown + seamIndent);
+    }
+  }
+
+  // Pure 3D rigid rotation: maps 2D shape so exterior crowned face faces facingSign * X and anterior faces +Z
+  geo.rotateY((facingSign * Math.PI) / 2);
+  geo.computeVertexNormals();
+  return geo;
+}
+
+/**
+ * Creates the sculpted white ceramic posterior hamstring armor cowl.
+ * Features a unified, continuous hard-surface armor shell wrapping the rear femur
+ * spine with bilateral symmetry, chamfered lateral facets, subtle vertical panel seam,
+ * and a lower popliteal relief arch providing clean knee articulation clearance.
+ */
+function createUnifiedHamstringArmorGeometry(
+  length: number,
+  width: number,
+  thickness: number
+): THREE.BufferGeometry {
+  const shape = new THREE.Shape();
+  const halfW = width * 0.5;
+  const halfL = length * 0.5;
+
+  shape.moveTo(-halfW * 0.70, halfL);
+  shape.lineTo(halfW * 0.70, halfL);
+  shape.quadraticCurveTo(halfW * 1.02, halfL * 0.40, halfW * 0.95, 0);
+  shape.quadraticCurveTo(halfW * 0.88, -halfL * 0.45, halfW * 0.65, -halfL * 0.82);
+  shape.lineTo(halfW * 0.50, -halfL);
+  // Lower popliteal relief arch above knee
+  shape.quadraticCurveTo(halfW * 0.25, -halfL + 0.012, 0, -halfL + 0.014);
+  shape.quadraticCurveTo(-halfW * 0.25, -halfL + 0.012, -halfW * 0.50, -halfL);
+  shape.lineTo(-halfW * 0.65, -halfL * 0.82);
+  shape.quadraticCurveTo(-halfW * 0.88, -halfL * 0.45, -halfW * 0.95, 0);
+  shape.quadraticCurveTo(-halfW * 1.02, halfL * 0.40, -halfW * 0.70, halfL);
+  shape.closePath();
+
+  const geo = new THREE.ExtrudeGeometry(shape, {
+    depth: thickness,
+    bevelEnabled: true,
+    bevelThickness: 0.0030,
+    bevelSize: 0.0024,
+    bevelSegments: 3,
+    curveSegments: 24,
+  });
+  geo.center();
+
+  // Curvature wrapping toward the femur spine and flank cowls with subtle midline seam
+  const pos = geo.attributes.position;
+  for (let i = 0; i < pos.count; i++) {
+    const x = pos.getX(i);
+    const y = pos.getY(i);
+    const z = pos.getZ(i);
+    if (z > 0) {
+      const crown = Math.cos((y / halfL) * Math.PI * 0.40) * 0.0032;
+      const wrap = -Math.pow(Math.abs(x) / halfW, 1.8) * 0.0040;
+      const isSeam = Math.abs(x) < 0.0012 && Math.abs(y) < halfL * 0.88;
+      const seamIndent = isSeam ? -0.0014 : 0;
+      pos.setZ(i, z + crown + wrap + seamIndent);
+    }
+  }
   geo.computeVertexNormals();
   return geo;
 }
@@ -145,14 +224,13 @@ function createThighFlankArmorGeometry(
  * eliminating bare rectangular neck gaps while preserving mechanical clearance.
  */
 function createTrochanterArmorGeometry(
-  side: -1 | 1,
   radius: number,
   height: number,
   thickness: number
 ): THREE.BufferGeometry {
   const shape = new THREE.Shape();
   const halfH = height * 0.5;
-  const halfW = radius * 1.08;
+  const halfW = radius * 1.05;
 
   // Sleek faceted mecha trochanter cowl cupping the hip socket
   shape.moveTo(0, halfH);
@@ -187,22 +265,22 @@ function createTrochanterArmorGeometry(
 }
 
 /**
- * REBUILDS THE VISIBLE THIGH (RULES #1, #2, #3):
+ * REBUILDS THE VISIBLE THIGH (RULES #1, #2, #3, #4, #6):
  *
  *   HIP MOUNT YOKE
  *          │
  *          ▼
  * ┌────────────────────────┐
- * │ UPPER THIGH COLLAR     │ (Titanium Socket Flange, Bolts, Trochanter Shell)
+ * │ UPPER THIGH COLLAR     │ (Titanium Socket Collar, Trochanter Armor Shell)
  * └──────────┬─────────────┘
  *            │
  * ┌──────────▼─────────────┐
- * │ STRUCTURAL FEMUR CHASSIS│ (Titanium Spine, Transverse Ribs, Distal Fork)
+ * │ STRUCTURAL FEMUR CHASSIS│ (Titanium Spine, CNC Pockets, Distal Fork Interface)
  * └──────────┬─────────────┘
  *            │
  *       ┌────▼────┐
- *       │  ARMOR  │ (Segmented White Ceramic Quad Plate & Flank Cowls)
- *       │  SHELL  │ (Mounted around chassis; exposes ~60mm frame & knee clearance)
+ *       │  ARMOR  │ (Segmented White Ceramic Quad Plate, Flank Cowls & Unified Hamstring Shell)
+ *       │  SHELL  │ (Precision-fit armor over structural titanium backbone)
  *       └────┬────┘
  *            │
  *            ▼
@@ -223,97 +301,40 @@ export function createThigh(
   frameGroup.name = side === -1 ? 'ThighFrame_L' : 'ThighFrame_R';
   thighGroup.add(frameGroup);
 
-  // Group containing secondary static armor parts
-  const staticArmorGroup = new THREE.Group();
-  staticArmorGroup.name = side === -1 ? 'ThighStaticArmorGroup_L' : 'ThighStaticArmorGroup_R';
-
   // =========================================================================
-  // 1. ENGINEERED UPPER THIGH COLLAR (Direct Mechanical Bridge from Hip Mount)
+  // 1. ENGINEERED UPPER THIGH COLLAR (Receives Hip Mount Spigot Sleeve Cleanly)
+  // Consolidated receiving collar sleeve with zero duplicate overlapping flanges
   // =========================================================================
-
-  // A. Titanium Receiving Socket Flange (Bolts flush to Hip Mount Flange)
   const collarSocketGeo = geoCache.get('Thigh_CollarSocketGeo', () => new THREE.CylinderGeometry(
-    cfg.frame.upperCollarRadius * 1.08,
-    cfg.frame.upperCollarRadius * 1.02,
-    cfg.frame.upperCollarHeight * 0.45,
+    cfg.frame.upperCollarRadius * 0.96,
+    cfg.frame.upperCollarRadius * 0.92,
+    cfg.frame.upperCollarHeight * 0.65,
     28
   ));
   const collarSocket = new THREE.Mesh(collarSocketGeo, materials.joint);
-  collarSocket.position.set(0, -cfg.frame.upperCollarHeight * 0.22, 0);
+  collarSocket.position.set(0, -cfg.frame.upperCollarHeight * 0.45, 0);
   collarSocket.castShadow = true;
   collarSocket.receiveShadow = true;
   frameGroup.add(collarSocket);
 
-  // Perimeter coupling bolts through the receiving flange
-  const boltGeo = geoCache.get('Thigh_FlangeBoltGeo', () => new THREE.CylinderGeometry(0.0020, 0.0020, 0.004, 6));
-  for (let i = 0; i < 6; i++) {
-    const angle = (i / 6) * Math.PI * 2;
-    const bolt = new THREE.Mesh(boltGeo, materials.joint);
-    bolt.position.set(
-      Math.cos(angle) * (cfg.frame.upperCollarRadius * 0.96),
-      -0.002,
-      Math.sin(angle) * (cfg.frame.upperCollarRadius * 0.96)
-    );
-    frameGroup.add(bolt);
-  }
-
-  // B. Lower Clamping Sleeve (Clamps the titanium femur spine)
-  const lowerCollarGeo = geoCache.get('Thigh_LowerCollarGeo', () => new THREE.CylinderGeometry(
-    cfg.frame.upperCollarRadius * 0.98,
-    cfg.frame.upperCollarRadius * 0.92,
-    cfg.frame.upperCollarHeight * 0.55,
-    28
-  ));
-  const lowerCollar = new THREE.Mesh(lowerCollarGeo, materials.joint);
-  lowerCollar.position.set(0, -cfg.frame.upperCollarHeight * 0.72, 0);
-  lowerCollar.castShadow = true;
-  lowerCollar.receiveShadow = true;
-  frameGroup.add(lowerCollar);
-
-  // Structural diagonal side gussets (outriggers transferring torque to femur flanks)
-  const gussetGeo = geoCache.get('Thigh_GussetGeo', () => new THREE.BoxGeometry(0.006, 0.024, 0.018));
-  for (const bSide of [-1, 1]) {
-    const gusset = new THREE.Mesh(gussetGeo, materials.joint);
-    gusset.position.set(
-      bSide * (cfg.frame.upperCollarRadius * 0.85),
-      -cfg.frame.upperCollarHeight * 0.65,
-      0
-    );
-    gusset.castShadow = true;
-    frameGroup.add(gusset);
-  }
-
   // =========================================================================
-  // 2. CENTRAL TITANIUM BOX-SECTION BACKBONE SPINE
+  // 2. CENTRAL TITANIUM BOX-SECTION BACKBONE SPINE & CNC POCKETS
   // Continuous load-bearing column running directly to the distal mount
   // =========================================================================
-  const spineGeo = geoCache.get('Thigh_SpineGeo', () => new THREE.BoxGeometry(
+  const spineGeo = geoCache.get('Thigh_SpineGeo_v2', () => new THREE.BoxGeometry(
     cfg.frame.spineWidth,
-    0.204,
+    0.175,
     cfg.frame.spineDepth
   ));
   const spineMesh = new THREE.Mesh(spineGeo, materials.joint);
-  spineMesh.position.set(0, -0.118, 0);
+  spineMesh.position.set(0, -0.1035, 0);
   spineMesh.castShadow = true;
   spineMesh.receiveShadow = true;
   frameGroup.add(spineMesh);
 
-  // CNC transverse reinforcement bulkheads along the femur spine
-  const ribGeo = geoCache.get('Thigh_BulkheadRibGeo', () => new THREE.BoxGeometry(
-    cfg.frame.spineWidth * 1.25,
-    0.007,
-    cfg.frame.spineDepth * 1.15
-  ));
-  for (const bY of [-0.050, -0.095, -0.140, -0.185]) {
-    const rib = new THREE.Mesh(ribGeo, materials.joint);
-    rib.position.set(0, bY, 0);
-    rib.castShadow = true;
-    frameGroup.add(rib);
-  }
-
   // =========================================================================
-  // 3. DISTAL FEMUR FRAME INTERFACE
-  // Precision-machined titanium interface mount with chamfers meeting knee upper housing
+  // 3. DISTAL FEMUR FRAME INTERFACE & DUAL-SHEAR KNEE FORK
+  // Precision-machined titanium interface mount cradling the knee upper housing
   // =========================================================================
   const distalMountGeo = geoCache.get('Thigh_DistalMountGeo', () => {
     const mountShape = new THREE.Shape();
@@ -330,10 +351,10 @@ export function createThigh(
     mountShape.closePath();
 
     const g = new THREE.ExtrudeGeometry(mountShape, {
-      depth: 0.016,
+      depth: 0.018,
       bevelEnabled: true,
-      bevelThickness: 0.0016,
-      bevelSize: 0.0012,
+      bevelThickness: 0.0018,
+      bevelSize: 0.0014,
       bevelSegments: 2,
     });
     g.center();
@@ -342,14 +363,30 @@ export function createThigh(
 
   const distalMount = new THREE.Mesh(distalMountGeo, materials.joint);
   distalMount.rotation.x = Math.PI / 2;
-  distalMount.position.set(0, -0.228, 0);
+  distalMount.position.set(0, -0.200, 0);
   distalMount.castShadow = true;
   distalMount.receiveShadow = true;
   frameGroup.add(distalMount);
 
+  // Dual-shear clevis fork ears cradling the knee upper housing
+  const forkEarGeo = geoCache.get('Thigh_ForkEarGeo', () => new THREE.BoxGeometry(0.006, 0.022, 0.026));
+  for (const fSide of [-1, 1]) {
+    const ear = new THREE.Mesh(forkEarGeo, materials.joint);
+    ear.position.set(fSide * (cfg.frame.spineWidth * 0.44), -0.214, 0);
+    ear.castShadow = true;
+    frameGroup.add(ear);
+
+    // Cross-clamp bolt through clevis fork ear
+    const forkBoltGeo = geoCache.get('Thigh_ForkBoltGeo', () => new THREE.CylinderGeometry(0.0022, 0.0022, 0.008, 6));
+    const forkBolt = new THREE.Mesh(forkBoltGeo, materials.joint);
+    forkBolt.rotation.z = Math.PI / 2;
+    forkBolt.position.set(fSide * (cfg.frame.spineWidth * 0.44), -0.216, 0);
+    frameGroup.add(forkBolt);
+  }
+
   // Armor mounting standoffs/bosses along the spine
   const bossGeo = geoCache.get('Thigh_BossGeo', () => new THREE.CylinderGeometry(0.0045, 0.0045, 0.018, 12));
-  for (const bY of [-0.065, -0.125, -0.185]) {
+  for (const bY of [-0.058, -0.108, -0.158]) {
     const boss = new THREE.Mesh(bossGeo, materials.joint);
     boss.rotation.x = Math.PI / 2;
     boss.position.set(0, bY, cfg.frame.spineDepth * 0.5 + 0.005);
@@ -367,30 +404,29 @@ export function createThigh(
   // 4. ENGINEERED WHITE CERAMIC TROCHANTER SHELL COLLAR
   // Sculpted transition cowl cupping upper femur neck and bridging hip flange into quad armor
   // =========================================================================
-  const trochanterGeo = geoCache.get('Thigh_TrochanterGeo', () => createTrochanterArmorGeometry(
-    side,
+  const trochanterGeo = geoCache.get('Thigh_TrochanterGeo_v2', () => createTrochanterArmorGeometry(
     cfg.frame.upperCollarRadius,
-    0.036,
+    0.046,
     0.012
   ));
   const trochanterHood = new THREE.Mesh(trochanterGeo, materials.armor);
   trochanterHood.name = side === -1 ? 'TrochanterHood_L' : 'TrochanterHood_R';
   trochanterHood.position.set(
-    side * (cfg.frame.upperCollarRadius * 0.28),
-    -cfg.frame.upperCollarHeight * 0.95,
-    cfg.frame.spineDepth * 0.42
+    side * (cfg.frame.upperCollarRadius * 0.18),
+    -cfg.frame.upperCollarHeight * 0.85,
+    cfg.frame.spineDepth * 0.40
   );
-  trochanterHood.rotation.y = side * -0.16;
-  trochanterHood.rotation.x = -0.06;
+  trochanterHood.rotation.y = side * -0.14;
+  trochanterHood.rotation.x = -0.05;
   trochanterHood.castShadow = true;
   trochanterHood.receiveShadow = true;
-  staticArmorGroup.add(trochanterHood);
+  thighGroup.add(trochanterHood);
 
   // =========================================================================
   // 5. SEGMENTED SCULPTED WHITE CERAMIC ANTERIOR QUAD ARMOR
-  // Segmented length: leaves ~60mm of visible frame & clearance above knee!
+  // Segmented length: leaves visible frame & calibrated 5mm clearance above knee
   // =========================================================================
-  const antGeo = geoCache.get('Thigh_AnteriorArmorGeo', () => createSegmentedAnteriorArmorGeometry(
+  const antGeo = geoCache.get('Thigh_AnteriorArmorGeo_v2', () => createSegmentedAnteriorArmorGeometry(
     cfg.anteriorArmor.widthTop,
     cfg.anteriorArmor.widthBottom,
     cfg.anteriorArmor.length,
@@ -399,7 +435,6 @@ export function createThigh(
   ));
   const anteriorArmor = new THREE.Mesh(antGeo, materials.armor);
   anteriorArmor.name = side === -1 ? 'ThighAnteriorArmor_L' : 'ThighAnteriorArmor_R';
-  // Positioned over the spine standoffs, leaving upper collar and lower fork exposed
   anteriorArmor.position.set(
     0,
     -cfg.length * 0.48,
@@ -410,13 +445,14 @@ export function createThigh(
   thighGroup.add(anteriorArmor);
 
   // =========================================================================
-  // 6. SCULPTED LATERAL ARMOR COWL (Vastus Lateralis)
-  // Mounted flush to outer flank with verified bilateral mirror symmetry
+  // 6. SCULPTED LATERAL ARMOR COWL (Vastus Lateralis) WITH PURPLE LED CONDUIT
   // =========================================================================
-  const latGeo = geoCache.get('Thigh_LateralArmorGeo', () => createThighFlankArmorGeometry(
+  const latFacing: 1 | -1 = side === -1 ? -1 : 1;
+  const latGeo = geoCache.get(`Thigh_LateralArmorGeo_${side}`, () => createThighFlankArmorGeometry(
     cfg.lateralArmor.cowlLength,
     cfg.lateralArmor.width,
-    cfg.lateralArmor.thickness
+    cfg.lateralArmor.thickness,
+    latFacing
   ));
   const lateralArmor = new THREE.Mesh(latGeo, materials.armor);
   lateralArmor.name = side === -1 ? 'ThighLateralArmor_L' : 'ThighLateralArmor_R';
@@ -430,36 +466,38 @@ export function createThigh(
   lateralArmor.receiveShadow = true;
   thighGroup.add(lateralArmor);
 
-  // Recessed purple neon LED conduit along the lateral armor edge
-  const ledGeo = geoCache.get('Thigh_LedGeo', () => new THREE.BoxGeometry(cfg.ledStrip.width, cfg.ledStrip.length, cfg.ledStrip.depth));
+  // Recessed purple neon LED conduit along the outer crowned lateral armor face
+  const ledGeo = geoCache.get('Thigh_LedGeo_v2', () => new THREE.BoxGeometry(cfg.ledStrip.width, cfg.ledStrip.length, cfg.ledStrip.depth));
   const ledStrip = new THREE.Mesh(ledGeo, materials.purpleEmissive);
   ledStrip.name = side === -1 ? 'ThighLedStrip_L' : 'ThighLedStrip_R';
   ledStrip.position.set(
-    side * (cfg.frame.spineWidth * 0.5 + cfg.lateralArmor.thickness * 0.8),
-    -cfg.length * 0.48,
-    0.004
+    side * (cfg.lateralArmor.thickness * 0.5 + 0.001),
+    0,
+    0.002
   );
-  thighGroup.add(ledStrip);
+  lateralArmor.add(ledStrip);
   ledMeshes.push(ledStrip);
 
   // Subtle bloom glow
-  const bloomGeo = geoCache.get('Thigh_BloomGeo', () => new THREE.BoxGeometry(
+  const bloomGeo = geoCache.get('Thigh_BloomGeo_v2', () => new THREE.BoxGeometry(
     cfg.ledStrip.width * 2.0,
     cfg.ledStrip.length,
     cfg.ledStrip.depth * 1.5
   ));
   const bloomMesh = new THREE.Mesh(bloomGeo, materials.purpleBloom);
   bloomMesh.position.copy(ledStrip.position);
-  thighGroup.add(bloomMesh);
+  lateralArmor.add(bloomMesh);
 
   // =========================================================================
   // 7. MEDIAL PROTECTOR PLATE
   // Preserves inner leg clearance while shielding internal wiring
   // =========================================================================
-  const medGeo = geoCache.get('Thigh_MedialArmorGeo', () => createThighFlankArmorGeometry(
+  const medFacing: 1 | -1 = side === -1 ? 1 : -1;
+  const medGeo = geoCache.get(`Thigh_MedialArmorGeo_${side}`, () => createThighFlankArmorGeometry(
     cfg.medialArmor.cowlLength,
     cfg.medialArmor.width,
-    cfg.medialArmor.thickness
+    cfg.medialArmor.thickness,
+    medFacing
   ));
   const medialArmor = new THREE.Mesh(medGeo, materials.armor);
   medialArmor.name = side === -1 ? 'ThighMedialArmor_L' : 'ThighMedialArmor_R';
@@ -469,44 +507,34 @@ export function createThigh(
     0.002
   );
   medialArmor.rotation.set(0, 0, 0);
-  staticArmorGroup.add(medialArmor);
+  medialArmor.castShadow = true;
+  medialArmor.receiveShadow = true;
+  thighGroup.add(medialArmor);
 
   // =========================================================================
-  // 8. POSTERIOR HAMSTRING COVER PLATE
+  // 8. UNIFIED SCULPTED WHITE CERAMIC POSTERIOR HAMSTRING ARMOR
+  // Consolidates fragmented rear plates into a clean, cohesive rear armor shell
   // =========================================================================
-  const postGeo = geoCache.get('Thigh_PosteriorPlateGeo', () => {
-    const postShape = new THREE.Shape();
-    const postH = cfg.anteriorArmor.length * 0.38;
-    postShape.moveTo(-0.020, postH);
-    postShape.lineTo(0.020, postH);
-    postShape.lineTo(0.016, -postH);
-    postShape.lineTo(-0.016, -postH);
-    postShape.closePath();
+  const hamCfg = cfg.posteriorHamstring || { width: 0.030, length: 0.142, thickness: 0.012 };
+  const unifiedHamWidth = cfg.frame.spineWidth * 1.38;
+  const hamGeo = geoCache.get('Thigh_UnifiedHamstringGeo', () => createUnifiedHamstringArmorGeometry(
+    hamCfg.length,
+    unifiedHamWidth,
+    hamCfg.thickness
+  ));
 
-    const g = new THREE.ExtrudeGeometry(postShape, {
-      depth: 0.010,
-      bevelEnabled: true,
-      bevelThickness: 0.0025,
-      bevelSize: 0.0020,
-      bevelSegments: 2,
-    });
-    g.center();
-    return g;
-  });
-
-  const posteriorPlate = new THREE.Mesh(postGeo, materials.armor);
+  const posteriorPlate = new THREE.Mesh(hamGeo, materials.armor);
   posteriorPlate.name = side === -1 ? 'ThighPosteriorPlate_L' : 'ThighPosteriorPlate_R';
-  posteriorPlate.position.set(0, -cfg.length * 0.48, -cfg.frame.spineDepth * 0.5 - 0.005);
-  staticArmorGroup.add(posteriorPlate);
-
-  const mergedStaticArmor = mergeGroupMeshesByMaterial(
-    staticArmorGroup,
-    materials.armor,
-    side === -1 ? 'ThighStaticArmor_L' : 'ThighStaticArmor_R',
-    false,
-    true
-  ) || trochanterHood;
-  thighGroup.add(mergedStaticArmor);
+  posteriorPlate.position.set(
+    0,
+    -cfg.length * 0.48,
+    -cfg.frame.spineDepth * 0.5 - hamCfg.thickness * 0.40
+  );
+  // Face rearward so the sculpted midline panel seam and popliteal arch face the rear camera
+  posteriorPlate.rotation.y = Math.PI;
+  posteriorPlate.castShadow = true;
+  posteriorPlate.receiveShadow = true;
+  thighGroup.add(posteriorPlate);
 
   // =========================================================================
   // 9. DISTAL KNEE ARTICULATION PIVOT (Attached hierarchically at knee axis)
@@ -515,7 +543,7 @@ export function createThigh(
   // =========================================================================
   const kneePivot = new THREE.Group();
   kneePivot.name = side === -1 ? 'KneePivot_L' : 'KneePivot_R';
-  kneePivot.position.set(0, -0.2596, 0);
+  kneePivot.position.set(0, -0.2316, 0);
   thighGroup.add(kneePivot);
 
   return {

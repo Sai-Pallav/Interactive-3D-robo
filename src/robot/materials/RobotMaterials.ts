@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { ROBOT_ACCENT } from '../config';
+import { ROBOT_ACCENT } from '../config.ts';
 
 export interface RobotMaterialPalette {
   armor: THREE.MeshPhysicalMaterial;
@@ -12,6 +12,7 @@ export interface RobotMaterialPalette {
   whiteCoreEmissive: THREE.MeshBasicMaterial;
   purpleBloom: THREE.MeshBasicMaterial;
   metallic: THREE.MeshPhysicalMaterial;
+  metallicDoubleSide: THREE.MeshPhysicalMaterial;
   machinedLink: THREE.MeshPhysicalMaterial;
 }
 
@@ -104,6 +105,10 @@ export function createRobotMaterials(): RobotMaterialPalette {
     name: 'RobotMetallicMaterial',
   });
 
+  const metallicDoubleSide = metallic.clone();
+  metallicDoubleSide.side = THREE.DoubleSide;
+  metallicDoubleSide.name = 'RobotMetallicDoubleSideMaterial';
+
   const machinedLink = new THREE.MeshPhysicalMaterial({
     color: 0xdde6f5,
     metalness: 0.90,
@@ -125,6 +130,7 @@ export function createRobotMaterials(): RobotMaterialPalette {
     whiteCoreEmissive,
     purpleBloom,
     metallic,
+    metallicDoubleSide,
     machinedLink,
   };
 }

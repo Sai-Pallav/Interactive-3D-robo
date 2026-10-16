@@ -8,6 +8,7 @@ export interface AchillesDamperNodes {
   group: THREE.Group;
   cylinder: THREE.Mesh;
   piston: THREE.Mesh;
+  update?: () => void;
 }
 
 export interface AnkleNodes {
@@ -25,10 +26,11 @@ export interface AnkleNodes {
 
 /**
  * Creates the high-fidelity articulated Ankle Joint assembly:
- * - Dual-axis clevis and spherical bearing core
- * - Malleolus armor discs (lateral and medial) with concentric violet LED rings
- * - Posterior Achilles hydraulic shock damper
- * - Articulated Foot Pivot for pitch and roll rotation
+ * - Dual-axis clevis and spherical bearing core with high load capacity
+ * - Malleolus armor discs (lateral and medial) with concentric violet LED rings,
+ *   bearing perimeter bolts, and white ceramic center caps with hex socket details
+ * - Posterior Achilles hydraulic shock damper with polished metallic piston rod
+ * - Articulated Foot Pivot with sturdy foot-mounting cradle
  */
 export function createAnkle(
   side: -1 | 1,
@@ -40,15 +42,20 @@ export function createAnkle(
   const cfg = LEG_CONFIG.ankle;
   const ledMeshes: THREE.Mesh[] = [];
 
-  // Group containing stationary spherical core, clevis, malleolus discs, and damper
+  // Group containing stationary joint sub-meshes
   const ankleJointGroup = new THREE.Group();
   ankleJointGroup.name = side === -1 ? 'AnkleJointCore_L' : 'AnkleJointCore_R';
   ankleGroup.add(ankleJointGroup);
 
+  // Group containing stationary metallic sub-meshes
+  const ankleMetallicGroup = new THREE.Group();
+  ankleMetallicGroup.name = side === -1 ? 'AnkleMetallicCore_L' : 'AnkleMetallicCore_R';
+  ankleGroup.add(ankleMetallicGroup);
+
   // ==========================================
-  // 1. CENTRAL MULTIAXIAL SPHERICAL BEARING
+  // 1. CENTRAL MULTIAXIAL SPHERICAL BEARING & CLEVIS
   // ==========================================
-  const sphereGeo = new THREE.SphereGeometry(cfg.housingRadius * 0.90, 20, 16);
+  const sphereGeo = geoCache.get('Ankle_SphereGeo', () => new THREE.SphereGeometry(cfg.housingRadius * 0.90, 24, 20));
   const sphericalCore = new THREE.Mesh(sphereGeo, materials.joint);
   sphericalCore.name = side === -1 ? 'AnkleBall_L' : 'AnkleBall_R';
   sphericalCore.castShadow = true;
@@ -64,14 +71,17 @@ export function createAnkle(
   clevisShape.lineTo(-0.020, -0.012);
   clevisShape.closePath();
 
-  const clevisGeo = new THREE.ExtrudeGeometry(clevisShape, {
-    depth: 0.028,
-    bevelEnabled: true,
-    bevelThickness: 0.0025,
-    bevelSize: 0.002,
-    bevelSegments: 2,
+  const clevisGeo = geoCache.get('Ankle_ClevisGeo', () => {
+    const g = new THREE.ExtrudeGeometry(clevisShape, {
+      depth: 0.028,
+      bevelEnabled: true,
+      bevelThickness: 0.0025,
+      bevelSize: 0.002,
+      bevelSegments: 2,
+    });
+    g.center();
+    return g;
   });
-  clevisGeo.center();
 
   const clevisHousing = new THREE.Mesh(clevisGeo, materials.joint);
   clevisHousing.name = side === -1 ? 'AnkleClevis_L' : 'AnkleClevis_R';
@@ -81,12 +91,12 @@ export function createAnkle(
   // ==========================================
   // 2. MALLEOLUS DISCS (Lateral & Medial Ankle Bones)
   // ==========================================
-  const discGeo = new THREE.CylinderGeometry(
+  const discGeo = geoCache.get('Ankle_DiscGeo', () => new THREE.CylinderGeometry(
     cfg.malleolusDiscRadius,
     cfg.malleolusDiscRadius,
     cfg.malleolusDiscWidth,
-    24
-  );
+    28
+  ));
 
   const discSpacing = 0.052;
 
@@ -128,71 +138,132 @@ export function createAnkle(
   ankleGroup.add(accentRings);
   ledMeshes.push(accentRings);
 
-  // White ceramic outer accent caps on the malleolus discs
+  // White ceramic outer accent caps on the malleolus discs (matching screenshot 1 & 2!)
+  // Stepped cleanly inside the purple emissive ring
   const malleolusCapGroup = new THREE.Group();
-  const capGeo = new THREE.CylinderGeometry(
-    cfg.malleolusDiscRadius * 0.72,
-    cfg.malleolusDiscRadius * 0.68,
-    0.003,
-    20
-  );
+  const capGeo = geoCache.get('Ankle_CapGeo', () => new THREE.CylinderGeometry(
+    cfg.malleolusDiscRadius * 0.60,
+    cfg.malleolusDiscRadius * 0.60,
+    0.0022,
+    24
+  ));
   const capLat = new THREE.Mesh(capGeo, materials.armor);
   capLat.rotation.z = Math.PI / 2;
-  capLat.position.x = side * (discSpacing * 0.5 + cfg.malleolusDiscWidth * 0.5 + 0.0025);
+  capLat.position.x = side * (discSpacing * 0.5 + cfg.malleolusDiscWidth * 0.5 + 0.0018);
   malleolusCapGroup.add(capLat);
 
   const capMed = new THREE.Mesh(capGeo, materials.armor);
   capMed.rotation.z = Math.PI / 2;
-  capMed.position.x = -side * (discSpacing * 0.5 + cfg.malleolusDiscWidth * 0.5 + 0.0025);
+  capMed.position.x = -side * (discSpacing * 0.5 + cfg.malleolusDiscWidth * 0.5 + 0.0018);
   malleolusCapGroup.add(capMed);
+
+  // Center fastener socket on white malleolus cap
+  const centerScrewGeo = geoCache.get('Ankle_CenterScrewGeo', () => new THREE.CylinderGeometry(0.0022, 0.0022, 0.0028, 6));
+  for (const mSide of [-1, 1]) {
+    const sMesh = new THREE.Mesh(centerScrewGeo, materials.joint);
+    sMesh.rotation.z = Math.PI / 2;
+    sMesh.position.x = mSide * (discSpacing * 0.5 + cfg.malleolusDiscWidth * 0.5 + 0.0028);
+    ankleJointGroup.add(sMesh);
+  }
 
   const mergedAnkleCaps = mergeGroupMeshesByMaterial(malleolusCapGroup, materials.armor, side === -1 ? 'AnkleCaps_L' : 'AnkleCaps_R', false);
   if (mergedAnkleCaps) {
     ankleGroup.add(mergedAnkleCaps);
   }
 
+  // Merge static joint sub-meshes in ankleJointGroup
+  const mergedAnkle = mergeGroupMeshesByMaterial(ankleJointGroup, materials.joint, side === -1 ? 'AnkleJointMesh_L' : 'AnkleJointMesh_R', true) || sphericalCore;
+
+  const mergedAnkleMetallic = mergeGroupMeshesByMaterial(ankleMetallicGroup, materials.metallic, side === -1 ? 'AnkleMetallicMesh_L' : 'AnkleMetallicMesh_R', true);
+  if (mergedAnkleMetallic) {
+    ankleGroup.add(mergedAnkleMetallic);
+  }
+
   // ==========================================
-  // 3. POSTERIOR ACHILLES HYDRAULIC DAMPER
+  // 3. FOOT PIVOT
+  // ==========================================
+  const footPivot = new THREE.Group();
+  footPivot.name = side === -1 ? 'LeftFootPivot' : 'RightFootPivot';
+  footPivot.position.set(0, -0.016, 0);
+  ankleGroup.add(footPivot);
+
+  // ==========================================
+  // 4. POSTERIOR ACHILLES HYDRAULIC DAMPER
+  // Engineered hydraulic cylinder with polished metallic piston rod that articulates
+  // and telescopes dynamically between the shin frame mount and foot heel bracket
   // ==========================================
   const aCfg = cfg.achillesDamper;
   const damperGroup = new THREE.Group();
   damperGroup.name = side === -1 ? 'AchillesDamper_L' : 'AchillesDamper_R';
 
   const aStart = new THREE.Vector3(0, aCfg.mountY, aCfg.mountZ);
-  const aEnd = new THREE.Vector3(0, aCfg.targetY, aCfg.targetZ);
-  const aDir = new THREE.Vector3().subVectors(aEnd, aStart);
-  const aLen = aDir.length();
-
   damperGroup.position.copy(aStart);
-  const aUp = new THREE.Vector3(0, -1, 0);
-  damperGroup.quaternion.setFromUnitVectors(aUp, aDir.clone().normalize());
+  ankleGroup.add(damperGroup);
 
-  const cylLen = aLen * 0.56;
-  const cylGeo = new THREE.CylinderGeometry(aCfg.cylinderRadius, aCfg.cylinderRadius, cylLen, 12);
+  // Upper mounting eyelet
+  const eyeletGeo = geoCache.get('Ankle_EyeletGeo', () => new THREE.CylinderGeometry(0.0055, 0.0055, 0.008, 16));
+  const upperEyelet = new THREE.Mesh(eyeletGeo, materials.joint);
+  upperEyelet.rotation.z = Math.PI / 2;
+  upperEyelet.position.set(0, 0, 0);
+  damperGroup.add(upperEyelet);
+
+  // Hydraulic cylinder casing
+  const cylLen = 0.048;
+  const cylGeo = geoCache.get('Ankle_CylGeo_v2', () => new THREE.CylinderGeometry(aCfg.cylinderRadius, aCfg.cylinderRadius, cylLen, 16));
   const cylinder = new THREE.Mesh(cylGeo, materials.joint);
   cylinder.position.set(0, -cylLen * 0.5, 0);
   cylinder.castShadow = true;
   damperGroup.add(cylinder);
 
-  const pistLen = aLen * 0.50;
-  const pistGeo = new THREE.CylinderGeometry(aCfg.pistonRadius, aCfg.pistonRadius, pistLen, 10);
-  const piston = new THREE.Mesh(pistGeo, materials.joint);
-  piston.position.set(0, -cylLen - pistLen * 0.5 + 0.002, 0);
+  // Cylinder fluid port collar
+  const glandGeo = geoCache.get('Ankle_GlandGeo', () => new THREE.CylinderGeometry(aCfg.cylinderRadius * 1.25, aCfg.cylinderRadius * 1.25, 0.005, 16));
+  const gland = new THREE.Mesh(glandGeo, materials.joint);
+  gland.position.set(0, -cylLen + 0.0025, 0);
+  damperGroup.add(gland);
+
+  // Articulated lower piston sub-assembly inside damperGroup
+  const pistonGroup = new THREE.Group();
+  pistonGroup.name = 'AchillesPistonGroup';
+  damperGroup.add(pistonGroup);
+
+  // Polished chrome metallic piston rod extending upward into cylinder
+  const pistLen = 0.054;
+  const pistGeo = geoCache.get('Ankle_PistGeo_v2', () => new THREE.CylinderGeometry(aCfg.pistonRadius, aCfg.pistonRadius, pistLen, 16));
+  const piston = new THREE.Mesh(pistGeo, materials.metallic);
+  piston.position.set(0, pistLen * 0.5, 0);
   piston.castShadow = true;
-  damperGroup.add(piston);
+  pistonGroup.add(piston);
 
-  ankleJointGroup.add(damperGroup);
+  // Lower spherical rod-end eyelet mounted directly onto the heel clevis pin
+  const lowerEyelet = new THREE.Mesh(eyeletGeo, materials.joint);
+  lowerEyelet.rotation.z = Math.PI / 2;
+  lowerEyelet.position.set(0, 0, 0);
+  pistonGroup.add(lowerEyelet);
 
-  // Merge static joint sub-meshes in ankleJointGroup
-  const mergedAnkle = mergeGroupMeshesByMaterial(ankleJointGroup, materials.joint, side === -1 ? 'AnkleJointMesh_L' : 'AnkleJointMesh_R', true) || sphericalCore;
+  const aUp = new THREE.Vector3(0, -1, 0);
+  const tempTargetLocal = new THREE.Vector3();
+  const tempDir = new THREE.Vector3();
 
-  // ==========================================
-  // 4. FOOT PIVOT (Pitch, Yaw, Roll Articulation)
-  // ==========================================
-  const footPivot = new THREE.Group();
-  footPivot.name = side === -1 ? 'LeftFootPivot' : 'RightFootPivot';
-  footPivot.position.set(0, -0.016, 0);
-  ankleGroup.add(footPivot);
+  const updateAchilles = () => {
+    // Ensure world matrices are fresh before localToWorld / worldToLocal conversions
+    footPivot.updateWorldMatrix(true, false);
+    ankleGroup.updateWorldMatrix(true, false);
+
+    // Exact heel pin position in footPivot local space: (0, -0.0154, -0.054)
+    tempTargetLocal.set(0, aCfg.targetY - (-0.016), aCfg.targetZ);
+    footPivot.localToWorld(tempTargetLocal);
+    ankleGroup.worldToLocal(tempTargetLocal);
+
+    tempDir.subVectors(tempTargetLocal, aStart);
+    const len = tempDir.length();
+    if (len > 0.005) {
+      damperGroup.quaternion.setFromUnitVectors(aUp, tempDir.normalize());
+      pistonGroup.position.set(0, -len, 0);
+    }
+  };
+
+  // Run initial alignment
+  updateAchilles();
 
   return {
     group: ankleGroup,
@@ -204,8 +275,9 @@ export function createAnkle(
     accentRingMedial: accentRings,
     achillesDamper: {
       group: damperGroup,
-      cylinder: mergedAnkle,
-      piston: mergedAnkle,
+      cylinder,
+      piston,
+      update: updateAchilles,
     },
     footPivot,
     ledMeshes,

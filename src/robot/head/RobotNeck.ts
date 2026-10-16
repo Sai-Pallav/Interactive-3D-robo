@@ -64,8 +64,11 @@ export function createRobotNeck(materials: RobotMaterialPalette): NeckNodes {
   for (let i = 0; i < ringSpecs.length; i++) {
     const spec = ringSpecs[i];
 
-    // Main collar ring cylinder
-    const ringGeo = geoCache.get(`NeckRingGeo_${i}`, () => new THREE.CylinderGeometry(spec.radius, spec.radius * 1.02, spec.height, 36));
+    // Precision beveled collar ring cylinder (engineered single-piece telescoping sleeve)
+    const ringGeo = geoCache.get(`NeckRingGeo_v2_${i}`, () => {
+      const g = new THREE.CylinderGeometry(spec.radius * 0.98, spec.radius * 1.02, spec.height, 36);
+      return g;
+    });
     const ringMesh = new THREE.Mesh(ringGeo, materials.joint);
     ringMesh.name = `NeckRing0${i + 1}`;
     ringMesh.position.set(0, spec.y, 0);
@@ -74,18 +77,11 @@ export function createRobotNeck(materials: RobotMaterialPalette): NeckNodes {
     neckJointGroup.add(ringMesh);
     rings.push(ringMesh);
 
-    // Beveled highlight rim around the upper edge of each collar ring
-    const rimGeo = geoCache.get(`NeckRimGeo_${i}`, () => new THREE.TorusGeometry(spec.radius, 0.0032, 12, 36));
-    const rimMesh = new THREE.Mesh(rimGeo, materials.joint);
-    rimMesh.rotation.x = Math.PI / 2;
-    rimMesh.position.set(0, spec.y + spec.height * 0.44, 0);
-    neckJointGroup.add(rimMesh);
-
     // Dark recessed gasket spacer between rings
     if (i < ringSpecs.length - 1) {
-      const spacerGeo = geoCache.get(`NeckSpacerGeo_${i}`, () => new THREE.CylinderGeometry(spec.radius * 0.86, spec.radius * 0.86, 0.008, 28));
+      const spacerGeo = geoCache.get(`NeckSpacerGeo_v2_${i}`, () => new THREE.CylinderGeometry(spec.radius * 0.88, spec.radius * 0.88, 0.006, 28));
       const spacer = new THREE.Mesh(spacerGeo, materials.jointDoubleSide);
-      spacer.position.set(0, spec.y + spec.height * 0.5 + 0.004, 0);
+      spacer.position.set(0, spec.y + spec.height * 0.5 + 0.003, 0);
       neckSpacerGroup.add(spacer);
     }
   }

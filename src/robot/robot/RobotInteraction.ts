@@ -145,9 +145,16 @@ export class RobotInteraction {
     return this.state;
   }
 
+  public updateRect(): void {
+    if (this.container) {
+      this.cachedRect = this.container.getBoundingClientRect();
+    }
+  }
+
   public setFacePosition(relX: number, relY: number): void {
     this.faceRelX = Math.max(0.1, Math.min(0.9, relX));
     this.faceRelY = Math.max(0.05, Math.min(0.9, relY));
+    this.updateRect();
   }
 
   public setLookTarget(x: number, y: number): void {

@@ -121,21 +121,40 @@ export function createRobotJaw(materials: RobotMaterialPalette): JawNodes {
 
   const jawJointGroup = new THREE.Group();
 
-  // 2. Lower Dark Titanium Sub-Chin Undercut Chamfer Trim
-  const underBevelGeo = geoCache.get('ChinUnderBevelGeo', () => new THREE.BoxGeometry(0.038, 0.007, 0.020));
+  // 2. Lower Dark Titanium Sub-Chin Undercut Chamfer Trim (Integrated flush into jawline chamfer)
+  const underBevelGeo = geoCache.get('ChinUnderBevelGeo_v2', () => new THREE.BoxGeometry(0.036, 0.005, 0.018));
   const chinUnderBevel = new THREE.Mesh(underBevelGeo, materials.joint);
   chinUnderBevel.name = 'ChinUnderBevel';
-  chinUnderBevel.position.set(0, -0.116, 0.132);
-  chinUnderBevel.rotation.x = 0.32;
+  chinUnderBevel.position.set(0, -0.112, 0.125);
+  chinUnderBevel.rotation.x = 0.28;
   chinUnderBevel.castShadow = true;
   jawJointGroup.add(chinUnderBevel);
 
-  // 3. Dark Titanium Submental Intake Vent (Recessed neatly underneath chin)
-  const ventGeo = geoCache.get('SubmentalVentGeo', () => new THREE.CylinderGeometry(0.018, 0.024, 0.016, 24));
+  // 3. Dark Titanium Submental Intake Vent (Recessed flush within under-chin cowl, eliminating side-profile protrusion)
+  const ventGeo = geoCache.get('SubmentalVentGeo_v2', () => {
+    const shape = new THREE.Shape();
+    const w = 0.024 * 0.5;
+    const d = 0.014 * 0.5;
+    shape.moveTo(-w, -d);
+    shape.lineTo(w, -d);
+    shape.quadraticCurveTo(w * 1.1, 0, w, d);
+    shape.lineTo(-w, d);
+    shape.quadraticCurveTo(-w * 1.1, 0, -w, -d);
+    shape.closePath();
+    const g = new THREE.ExtrudeGeometry(shape, {
+      depth: 0.006,
+      bevelEnabled: true,
+      bevelThickness: 0.0012,
+      bevelSize: 0.001,
+      bevelSegments: 2,
+    });
+    g.center();
+    return g;
+  });
   const submentalVent = new THREE.Mesh(ventGeo, materials.joint);
   submentalVent.name = 'SubmentalVent';
-  submentalVent.position.set(0, -0.122, 0.096);
-  submentalVent.rotation.x = 0.20;
+  submentalVent.position.set(0, -0.110, 0.088);
+  submentalVent.rotation.x = 0.24;
   submentalVent.castShadow = true;
   jawJointGroup.add(submentalVent);
 

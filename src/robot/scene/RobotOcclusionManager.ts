@@ -50,6 +50,8 @@ export class RobotOcclusionManager {
 
   // Pre-allocated vectors for zero-allocation per-frame calculations
   private tempRobotWorldPos = new THREE.Vector3();
+  private tempRobotWorldQuat = new THREE.Quaternion();
+  private tempInvRobotQuat = new THREE.Quaternion();
   private tempCamRelativePos = new THREE.Vector3();
   private currentAzimuthDeg: number = 0;
 
@@ -152,15 +154,17 @@ export class RobotOcclusionManager {
       return this.isOccluding;
     }
 
-    // Calculate camera horizontal azimuth relative to robot root
+    // Calculate camera horizontal azimuth relative to robot root in local space
     this.robotRoot.getWorldPosition(this.tempRobotWorldPos);
-    this.tempCamRelativePos.subVectors(camera.position, this.tempRobotWorldPos);
+    this.robotRoot.getWorldQuaternion(this.tempRobotWorldQuat);
+    this.tempInvRobotQuat.copy(this.tempRobotWorldQuat).invert();
+    this.tempCamRelativePos.subVectors(camera.position, this.tempRobotWorldPos).applyQuaternion(this.tempInvRobotQuat);
 
-    // Azimuth in XZ plane relative to +Z (front)
+    // Azimuth in XZ plane relative to local +Z (front)
     const rad = Math.atan2(Math.abs(this.tempCamRelativePos.x), this.tempCamRelativePos.z);
     this.currentAzimuthDeg = (rad * 180) / Math.PI;
 
-    // Camera must also be in front of the robot (z > 0)
+    // Camera must also be in front of the robot in local coordinates (z > 0.5)
     const isFrontFacing = this.tempCamRelativePos.z > 0.5;
 
     let shouldOcclude = this.isOccluding;

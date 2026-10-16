@@ -22,7 +22,7 @@ export const LEG_CONFIG = {
 
   thigh: {
     // Upper leg length from hip joint to knee joint center
-    length: 0.320,
+    length: 0.285,
     frame: {
       spineWidth: 0.036,
       spineDepth: 0.038,
@@ -36,24 +36,30 @@ export const LEG_CONFIG = {
     anteriorArmor: {
       widthTop: 0.074,
       widthBottom: 0.054,
-      length: 0.198, // Leaves ~48mm clearance to knee and ~32mm clearance to hip!
+      length: 0.175, // Calibrated clearance to knee suprapatellar arch and hip
       thickness: 0.020,
       keelProtrusion: 0.010,
     },
     lateralArmor: {
       width: 0.042,
       thickness: 0.015,
-      cowlLength: 0.156, // Leaves crisp 5mm clearance above knee rotary condyle disc
+      cowlLength: 0.138, // Calibrated clearance above knee rotary condyle disc
     },
     medialArmor: {
       width: 0.034,
       thickness: 0.012,
-      cowlLength: 0.156,
+      cowlLength: 0.138,
+    },
+    posteriorHamstring: {
+      width: 0.050,
+      length: 0.142,
+      thickness: 0.012,
+      fastenerCount: 0,
     },
     ledStrip: {
       width: 0.0032,
       depth: 0.0025,
-      length: 0.150,
+      length: 0.132,
     },
   },
 
@@ -71,7 +77,7 @@ export const LEG_CONFIG = {
       width: 0.028,
       height: 0.046,
       thickness: 0.010,
-      offsetZ: 0.0358, // Aligned flush with frontal depth plane of thigh suprapatellar arch
+      offsetZ: 0.0245, // Aligned flush with rotary condyle disc housing and leg profile
       yOffset: 0.0010, // Creates calibrated 5.0mm dark mechanical gap to upper thigh arch
       rotX: 0.000,
     },
@@ -80,11 +86,17 @@ export const LEG_CONFIG = {
     upperStructureHeight: 0.022,
     lowerStructureHeight: 0.018,
     housingDepth: 0.024,
+    linkage: {
+      strutRadius: 0.0036,
+      pistonRadius: 0.0022,
+      length: 0.036,
+      offsetZ: -0.015,
+    },
   },
 
   shin: {
     // Lower leg length from knee joint to ankle joint center
-    length: 0.330,
+    length: 0.284,
     frame: {
       spineWidth: 0.032,
       spineDepth: 0.034,
@@ -93,17 +105,17 @@ export const LEG_CONFIG = {
       upperPlateauHeight: 0.018,
       lowerCollarRadius: 0.026,
     },
-    // Segmented armor: leaves ~45mm clearance under knee and exposes tibial collar
+    // Segmented white ceramic armor: flows cleanly from knee shelf down to distal ankle collar
     anteriorKeel: {
       widthTop: 0.056,
-      widthBottom: 0.036,
-      length: 0.208, // Segmented length leaves ~45mm clearance below knee!
+      widthBottom: 0.042,
+      length: 0.238, // Refined gauntlet extending continuously to meet distal ankle collar
       thickness: 0.020,
-      keelProtrusion: 0.015,
+      keelProtrusion: 0.014,
     },
     posteriorCalf: {
       width: 0.054,
-      height: 0.155,
+      height: 0.132,
       depth: 0.036,
       ventCount: 3,
       ventWidth: 0.030,
@@ -112,7 +124,7 @@ export const LEG_CONFIG = {
     ledStrip: {
       width: 0.0026,
       depth: 0.0022,
-      length: 0.180,
+      length: 0.175,
     },
   },
 
@@ -125,10 +137,10 @@ export const LEG_CONFIG = {
     achillesDamper: {
       cylinderRadius: 0.005,
       pistonRadius: 0.0032,
-      mountY: 0.060,
-      mountZ: -0.028,
-      targetY: -0.015,
-      targetZ: -0.048,
+      mountY: 0.056,
+      mountZ: -0.029,
+      targetY: -0.0314,
+      targetZ: -0.054,
     },
   },
 

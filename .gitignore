@@ -33,3 +33,6 @@ Thumbs.db
 # Markdown documentation (keep only README)
 *.md
 !README.md
+
+# Test and capture outputs
+capture_output/

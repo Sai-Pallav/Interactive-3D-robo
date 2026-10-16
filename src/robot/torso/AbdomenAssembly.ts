@@ -4,6 +4,8 @@ import { RobotMaterialPalette } from '../materials/RobotMaterials';
 import { TORSO_CONFIG } from './TorsoConfig';
 import { mergeGroupMeshesByMaterial, mergeAllGroupMeshesByMaterial } from '../utils/geometryMerger';
 import { geoCache } from '../utils/GeometryCache';
+import { createRearSpineAssembly, RearSpineAssemblyNodes } from './RearSpineAssembly';
+import { createRearLumbarAssembly, RearLumbarAssemblyNodes } from './RearLumbarAssembly';
 
 // ─── Public interfaces (strictly preserved for animation controller compatibility) ────
 
@@ -33,6 +35,8 @@ export interface StomachAssemblyNodes {
   internalSpine: THREE.Group;
   spineCore: THREE.Mesh;
   vertebraeDiscs: THREE.Mesh[];
+  rearSpine?: RearSpineAssemblyNodes;
+  rearLumbar?: RearLumbarAssemblyNodes;
   ledMeshes: THREE.Mesh[];
   armorPlates?: THREE.Mesh[];
 }
@@ -529,7 +533,8 @@ function createSingleActuatorPole(
   const rodRadius = pistonRadius;
   const barrelLen = totalLen * 0.48;
 
-  // 1. Upper Spherical Rod-End Bearing (Uniball)
+  // 1. Upper Spherical Rod-End Bearing (Uniball) & Gland Housing
+  // Seats cleanly into ChestAssembly lower frame clevis sockets
   const uniballGeo = geoCache.get(`ActuatorUniball_${barrelRadius.toFixed(4)}`, () => new THREE.SphereGeometry(barrelRadius * 1.08, 20, 16));
   const uniball = new THREE.Mesh(uniballGeo, materials.metallic);
   uniball.position.set(0, 0, 0);
@@ -541,6 +546,12 @@ function createSingleActuatorPole(
   uniballHousing.position.set(0, -0.006, 0);
   actGroup.add(uniballHousing);
 
+  // Dark protective collar around upper actuator end
+  const upperProtectiveCollarGeo = geoCache.get(`ActuatorUpperProtectiveCollar_${barrelRadius.toFixed(4)}`, () => new THREE.CylinderGeometry(barrelRadius * 1.22, barrelRadius * 1.12, 0.008, 28));
+  const upperProtectiveCollar = new THREE.Mesh(upperProtectiveCollarGeo, materials.joint);
+  upperProtectiveCollar.position.set(0, -0.010, 0);
+  actGroup.add(upperProtectiveCollar);
+
   // 2. Heavy-Duty Cylinder Barrel Body (Dark Titanium)
   const barrelGeo = geoCache.get(`ActuatorBarrel_${barrelRadius.toFixed(4)}_${barrelLen.toFixed(4)}`, () => new THREE.CylinderGeometry(barrelRadius, barrelRadius, barrelLen, 32));
   const barrel = new THREE.Mesh(barrelGeo, materials.joint);
@@ -549,30 +560,30 @@ function createSingleActuatorPole(
   barrel.receiveShadow = true;
   actGroup.add(barrel);
 
-  // Top and bottom machined lock rings
-  const ringGeo = geoCache.get(`ActuatorRing_${barrelRadius.toFixed(4)}`, () => new THREE.CylinderGeometry(barrelRadius * 1.08, barrelRadius * 1.08, 0.004, 32));
+  // Precision satin metallic top and bottom end caps
+  const endCapGeo = geoCache.get(`ActuatorEndCap_${barrelRadius.toFixed(4)}`, () => new THREE.CylinderGeometry(barrelRadius * 1.06, barrelRadius * 1.06, 0.004, 32));
   for (const pos of [-0.014, -0.010 - barrelLen]) {
-    const ring = new THREE.Mesh(ringGeo, materials.metallic);
-    ring.position.set(0, pos, 0);
-    actGroup.add(ring);
+    const endCap = new THREE.Mesh(endCapGeo, materials.metallic);
+    endCap.position.set(0, pos, 0);
+    actGroup.add(endCap);
   }
 
-  // 3. Illuminated Violet Power Core (Single, seamless cylindrical glowing band - no vertical dividing bars)
-  const coreLen = barrelLen * 0.44;
-  const coreGeo = geoCache.get(`ActuatorCore_${barrelRadius.toFixed(4)}_${coreLen.toFixed(4)}`, () => new THREE.CylinderGeometry(barrelRadius * 1.015, barrelRadius * 1.015, coreLen, 32));
-  const powerCore = new THREE.Mesh(coreGeo, materials.purpleEmissive);
+  // 3. Restrained Illuminated Violet Power Status Indicator (Subtle recessed band, not covering entire actuator)
+  const indicatorLen = Math.min(0.0036, barrelLen * 0.08);
+  const indicatorY = -0.012 - barrelLen * 0.32;
+
+  // Recessed metallic retaining bezel housing the indicator
+  const bezelGeo = geoCache.get(`ActuatorBezel_${barrelRadius.toFixed(4)}`, () => new THREE.CylinderGeometry(barrelRadius * 1.04, barrelRadius * 1.04, indicatorLen + 0.003, 32));
+  const bezel = new THREE.Mesh(bezelGeo, materials.metallic);
+  bezel.position.set(0, indicatorY, 0);
+  actGroup.add(bezel);
+
+  const indicatorGeo = geoCache.get(`ActuatorIndicator_${barrelRadius.toFixed(4)}`, () => new THREE.CylinderGeometry(barrelRadius * 1.048, barrelRadius * 1.048, indicatorLen, 32));
+  const powerCore = new THREE.Mesh(indicatorGeo, materials.purpleEmissive);
   powerCore.name = `${name}_PowerCore`;
-  powerCore.position.set(0, -0.012 - barrelLen * 0.5, 0);
+  powerCore.position.set(0, indicatorY, 0);
   actGroup.add(powerCore);
   ledMeshes.push(powerCore);
-
-  // Recessed metallic collar rings framing top and bottom of the single illuminated core
-  const collarGeo = geoCache.get(`ActuatorCollar_${barrelRadius.toFixed(4)}`, () => new THREE.CylinderGeometry(barrelRadius * 1.035, barrelRadius * 1.035, 0.0022, 32));
-  for (const cY of [-0.012 - barrelLen * 0.5 + coreLen * 0.5, -0.012 - barrelLen * 0.5 - coreLen * 0.5]) {
-    const collar = new THREE.Mesh(collarGeo, materials.metallic);
-    collar.position.set(0, cY, 0);
-    actGroup.add(collar);
-  }
 
   // High-pressure 90° hydraulic union elbow fitting
   const unionGeo = geoCache.get('ActuatorUnion', () => new THREE.BoxGeometry(0.0065, 0.0085, 0.0065));
@@ -590,14 +601,19 @@ function createSingleActuatorPole(
   hose.castShadow = true;
   group.add(hose);
 
-  // 4. Heavy Gland Seal Collar at barrel base
+  // 4. Heavy Gland Seal Collar & Dark Protective Collar at barrel base
   const sealGeo = geoCache.get(`ActuatorSeal_${barrelRadius.toFixed(4)}`, () => new THREE.CylinderGeometry(barrelRadius * 0.96, barrelRadius * 0.96, 0.006, 28));
   const seal = new THREE.Mesh(sealGeo, materials.joint);
   seal.position.set(0, -0.012 - barrelLen - 0.003, 0);
   actGroup.add(seal);
 
-  // 5. Mirror-Polished Chrome Telescoping Piston Rod (Fully connects upper barrel down to lower waist mount)
-  const rodStartY = -0.012 - barrelLen - 0.006;
+  const lowerProtectiveCollarGeo = geoCache.get(`ActuatorLowerProtectiveCollar_${barrelRadius.toFixed(4)}`, () => new THREE.CylinderGeometry(barrelRadius * 1.10, barrelRadius * 1.02, 0.008, 28));
+  const lowerProtectiveCollar = new THREE.Mesh(lowerProtectiveCollarGeo, materials.joint);
+  lowerProtectiveCollar.position.set(0, -0.012 - barrelLen - 0.005, 0);
+  actGroup.add(lowerProtectiveCollar);
+
+  // 5. Mirror-Polished Chrome Telescoping Piston Rod (Narrower realistic diameter)
+  const rodStartY = -0.012 - barrelLen - 0.008;
   const rodLen = Math.abs(-totalLen - rodStartY);
   const rodGeo = geoCache.get(`ActuatorRod_${rodRadius.toFixed(4)}_${rodLen.toFixed(4)}`, () => new THREE.CylinderGeometry(rodRadius, rodRadius, rodLen, 24));
   const rod = new THREE.Mesh(rodGeo, materials.metallic);
@@ -617,6 +633,7 @@ function createSingleActuatorPole(
   lowerCuff.position.set(0, -totalLen + 0.008, 0);
   actGroup.add(lowerCuff);
 
+  // Lower uniball and cuff seat flush into WaistTransitionDeck plinth clevis sockets
   group.add(actGroup);
 
   // 7. Optional Triangulated Stabilizing Torque Linkage (Tie-Rod) connecting mid-barrel to Vertebra 03
@@ -693,7 +710,7 @@ function createSideActuatorAssembly(
       lowerMount: cfg.actuator?.lowerMount || dual.outer.lowerMount,
       cylinderRadius: 0.0118,
       pistonRadius: 0.0064,
-      hasStabilizerLink: true,
+      hasStabilizerLink: false,
     },
     materials,
     ledMeshes
@@ -919,9 +936,20 @@ export function createStomachAssembly(materials: RobotMaterialPalette): StomachA
     armorPlates.push(v.armorMesh);
   }
 
+  // 2b. Articulated Rear Spine Assembly (parented to vertebraGroups for dynamic kinematics)
+  const rearSpine = createRearSpineAssembly(vertebraGroups, materials);
+  spineGroup.add(rearSpine.dampersGroup);
+  spineGroup.add(rearSpine.cableTrunksGroup);
+  ledMeshes.push(...rearSpine.ledMeshes);
+
   // 3. Waist Transition Slew-Bearing Deck Assembly
   const waistDeck = createWaistTransitionDeck(materials, ledMeshes);
   spineGroup.add(waistDeck);
+
+  // 3b. Rear Lumbar Load-Transfer Mechanism
+  const rearLumbar = createRearLumbarAssembly(materials);
+  spineGroup.add(rearLumbar.group);
+  ledMeshes.push(...rearLumbar.ledMeshes);
 
   abdomenGroup.add(spineGroup);
 
@@ -961,6 +989,8 @@ export function createStomachAssembly(materials: RobotMaterialPalette): StomachA
     internalSpine: spineGroup,
     spineCore: spineCoreMesh,
     vertebraeDiscs: primaryMeshes,
+    rearSpine,
+    rearLumbar,
     ledMeshes,
     armorPlates,
   };

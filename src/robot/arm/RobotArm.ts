@@ -43,6 +43,7 @@ import { createElbow, ElbowNodes } from './Elbow';
 import { createForearm, ForearmNodes } from './Forearm';
 import { createWrist, WristNodes } from './Wrist';
 import { createHand, HandNodes } from './Hand';
+import { createRearArmAssembly, RearArmAssemblyNodes } from './RearArmAssembly';
 
 export interface RobotArmNodes {
   root: THREE.Group;
@@ -51,6 +52,7 @@ export interface RobotArmNodes {
   forearm: ForearmNodes;
   wrist: WristNodes;
   hand: HandNodes;
+  rearArm?: RearArmAssemblyNodes;
   elbowPivot: THREE.Group;
   wristPivot: THREE.Group;
   ledMeshes: THREE.Mesh[];
@@ -136,6 +138,17 @@ export function createRobotArm(
   // Strict 1-DOF orthogonal transverse hinge — zero internal knuckle shearing
   elbow.setAngle(-0.26);
 
+  // ==========================================================================
+  // 7. POSTERIOR ARM MECHANICAL DETAILS
+  // Upper arm tricep spine and damper, forearm extensor spine and tendon conduits
+  // ==========================================================================
+  const rearArm = createRearArmAssembly(side, materials);
+  upperArm.group.add(rearArm.upperArmRear);
+  forearm.group.add(rearArm.forearmRear);
+  wrist.group.add(rearArm.wristRear);
+  hand.group.add(rearArm.handRear);
+  ledMeshes.push(...rearArm.ledMeshes);
+
   // Compatibility proxies for animation systems
   const shoulderCompat = {
     group: new THREE.Group(),
@@ -157,6 +170,7 @@ export function createRobotArm(
     forearm,
     wrist,
     hand,
+    rearArm,
     elbowPivot: elbow.forearmPivot,
     wristPivot: wrist.wristPivot,
     ledMeshes,

@@ -15,6 +15,7 @@ export interface KneeNodes {
   patellaLed?: THREE.Mesh;
   centralPin: THREE.Mesh;
   statorTeeth: THREE.Mesh[];
+  poplitealLinkage?: THREE.Group;
   ledMeshes: THREE.Mesh[];
 }
 
@@ -108,7 +109,7 @@ function createUpperKneeHousingGeometry(
 }
 
 /**
- * Creates the lower dark knee structural connection seating cleanly into
+ * Creates the lower dark knee structural clevis seating cleanly into
  * the shin tibial plateau.
  */
 function createLowerKneeStructureGeometry(
@@ -138,25 +139,24 @@ function createLowerKneeStructureGeometry(
 }
 
 /**
- * Creates the complete Knee Joint assembly matching the reference image:
+ * Creates the complete Knee Joint assembly matching the reference images:
  *
- *   WHITE THIGH ARMOR
- *          │
- *   angled lower edge (notch)
- *          │
- *   ┌──────┴──────┐
- *   │ UPPER DARK  │ (Compact load-bearing titanium frame)
- *   │  STRUCTURE  │
- *   ├─────────────┤
- *   │   WHITE     │ ──── [SIDE BEARINGS] (Integrated cylindrical
- *   │  CENTRAL    │                      bearings with purple rings)
- *   │   COVER     │
- *   ├─────────────┤
- *   │ LOWER DARK  │ (Substantial titanium clevis connection)
- *   │  STRUCTURE  │
- *   └──────┬──────┘
- *          │
- *   WHITE SHIN ARMOR
+ *   WHITE THIGH ARMOR & DISTAL FEMUR FORK
+ *                  │
+ *                  ▼
+ *   ┌─────────────────────────────┐
+ *   │ UPPER DARK MOUNTING BRACKET │ (Titanium Housing, Flange Bolts, Side Plates)
+ *   ├─────────────────────────────┤
+ *   │ TRANSVERSE ROTARY BEARING   │ ──── [ROTARY CONDYLE BEARINGS] (Concentric Purple Rings,
+ *   │ AXLE & HOUSING SLEEVE       │                                Perimeter Hex Bolts & Caps)
+ *   ├─────────────────────────────┤
+ *   │ WHITE PATELLAR SHIELD       │ ──── [REAR POPLITEAL LINKAGE] (Hydraulic Linkage & Bump Stop)
+ *   ├─────────────────────────────┤
+ *   │ ARTICULATED LOWER CLEVIS    │ (Dual-Shear Yoke, Thrust Washers, Receiver Collar)
+ *   └──────────────┬──────────────┘
+ *                  │
+ *                  ▼
+ *   SHIN TIBIAL PLATEAU
  */
 export function createKnee(
   side: -1 | 1,
@@ -174,6 +174,11 @@ export function createKnee(
   condyleCoreGroup.name = side === -1 ? 'KneeCore_L' : 'KneeCore_R';
   kneeGroup.add(condyleCoreGroup);
 
+  // Group containing stationary metallic accents
+  const metallicCoreGroup = new THREE.Group();
+  metallicCoreGroup.name = side === -1 ? 'KneeMetallic_L' : 'KneeMetallic_R';
+  kneeGroup.add(metallicCoreGroup);
+
   // =========================================================================
   // 1. TRANSVERSE HINGE AXLE PIN & CENTRAL FRAME (Mechanical Rotational Core)
   // =========================================================================
@@ -189,7 +194,34 @@ export function createKnee(
   centralPin.castShadow = true;
   condyleCoreGroup.add(centralPin);
 
-  // Hex end caps on central axle ends
+  // Central rotary bearing housing sleeve with oil seal grooves
+  const sleeveGeo = geoCache.get('KneeSleeveGeo', () => new THREE.CylinderGeometry(
+    cfg.centralAxleRadius * 1.75,
+    cfg.centralAxleRadius * 1.75,
+    cfg.centralAxleLength * 0.65,
+    28
+  ));
+  const sleeveMesh = new THREE.Mesh(sleeveGeo, materials.joint);
+  sleeveMesh.rotation.z = Math.PI / 2;
+  sleeveMesh.castShadow = true;
+  sleeveMesh.receiveShadow = true;
+  condyleCoreGroup.add(sleeveMesh);
+
+  // Oil seal rings on the bearing sleeve
+  const sealGeo = geoCache.get('KneeSealRingGeo', () => new THREE.CylinderGeometry(
+    cfg.centralAxleRadius * 1.85,
+    cfg.centralAxleRadius * 1.85,
+    0.0025,
+    28
+  ));
+  for (const sDir of [-1, 1]) {
+    const seal = new THREE.Mesh(sealGeo, materials.joint);
+    seal.rotation.z = Math.PI / 2;
+    seal.position.x = sDir * (cfg.centralAxleLength * 0.28);
+    condyleCoreGroup.add(seal);
+  }
+
+  // Hex end caps on central axle ends with center socket detail
   const capGeo = geoCache.get('KneeAxleCapGeo', () => new THREE.CylinderGeometry(
     cfg.centralAxleRadius * 1.30,
     cfg.centralAxleRadius * 1.30,
@@ -218,9 +250,9 @@ export function createKnee(
   upperHousing.receiveShadow = true;
   condyleCoreGroup.add(upperHousing);
 
-  // Beveled transition plate interfacing with thigh frame mount
+  // Beveled transition flange interfacing with thigh frame mount
   const upperFlangeGeo = geoCache.get('KneeUpperFlangeGeo', () => new THREE.BoxGeometry(
-    cfg.housingWidth * 0.75,
+    cfg.housingWidth * 0.85,
     0.006,
     cfg.housingDepth * 1.08
   ));
@@ -230,8 +262,9 @@ export function createKnee(
   condyleCoreGroup.add(upperFlange);
 
   // =========================================================================
-  // 3. INTEGRATED SIDE BEARING ASSEMBLIES (Flush with outer leg architecture)
-  // Compact cylindrical bearing housings with concentric purple glowing rings
+  // 3. INTEGRATED ROTARY CONDYLE BEARINGS (Flush with outer leg architecture)
+  // Clean, precision-engineered rotary condyle discs with concentric purple glowing rings
+  // and recessed metallic central axle hubs
   // =========================================================================
   const discGeo = geoCache.get('KneeDiscGeo', () => new THREE.CylinderGeometry(
     cfg.discRadius,
@@ -258,27 +291,16 @@ export function createKnee(
   medialDisc.receiveShadow = true;
   condyleCoreGroup.add(medialDisc);
 
-  // Beveled outer race collars, recessed dark caps, and central bosses
-  const flangeGeo = geoCache.get('KneeFlangeGeo', () => new THREE.CylinderGeometry(
-    cfg.discRadius * 1.04,
-    cfg.discRadius * 1.04,
-    0.0022,
-    32
-  ));
+  // Recessed dark caps and central metallic bosses
   const centerCapGeo = geoCache.get('KneeCenterCapGeo', () => new THREE.CylinderGeometry(
     cfg.centerCapRadius,
-    cfg.centerCapRadius * 0.94,
+    cfg.centerCapRadius,
     0.0024,
     24
   ));
   const bossGeo = geoCache.get('KneeBossGeo', () => new THREE.CylinderGeometry(0.0055, 0.0055, 0.0025, 16));
 
   for (const discX of [side * (cfg.outerDiscSpacing * 0.5), -side * (cfg.outerDiscSpacing * 0.5)]) {
-    const flange = new THREE.Mesh(flangeGeo, materials.joint);
-    flange.rotation.z = Math.PI / 2;
-    flange.position.x = discX;
-    condyleCoreGroup.add(flange);
-
     // Recessed dark metal center cap inside purple ring
     const cap = new THREE.Mesh(centerCapGeo, materials.joint);
     cap.rotation.z = Math.PI / 2;
@@ -287,27 +309,18 @@ export function createKnee(
     condyleCoreGroup.add(cap);
 
     // Central circular dark metallic axle boss
-    const boss = new THREE.Mesh(bossGeo, materials.joint);
+    const boss = new THREE.Mesh(bossGeo, materials.metallic);
     boss.rotation.z = Math.PI / 2;
     boss.position.x = discX + Math.sign(discX) * (cfg.discWidth * 0.5 + 0.0024);
-    condyleCoreGroup.add(boss);
+    metallicCoreGroup.add(boss);
   }
 
-  // 12 internal mechanical spline teeth on bearing collar for mechanical detail
-  const toothCount = 12;
-  const toothGeo = geoCache.get('KneeToothGeo', () => new THREE.BoxGeometry(0.0018, cfg.discWidth * 0.70, 0.0020));
-  for (let i = 0; i < toothCount; i++) {
-    const angle = (i / toothCount) * Math.PI * 2;
-    const tooth = new THREE.Mesh(toothGeo, materials.joint);
-    tooth.position.set(
-      side * (cfg.outerDiscSpacing * 0.5),
-      Math.cos(angle) * (cfg.discRadius * 0.72),
-      Math.sin(angle) * (cfg.discRadius * 0.72)
-    );
-    tooth.rotation.x = -angle;
-    condyleCoreGroup.add(tooth);
-    statorTeeth.push(tooth);
-  }
+  // Popliteal fossa rear mechanical knuckle & flexion limit stop (Images 4 & 5)
+  const rearKnuckleGeo = geoCache.get('KneeRearKnuckleGeo', () => new THREE.BoxGeometry(0.026, 0.016, 0.012));
+  const rearKnuckle = new THREE.Mesh(rearKnuckleGeo, materials.joint);
+  rearKnuckle.position.set(0, 0.004, -cfg.housingDepth * 0.48);
+  rearKnuckle.castShadow = true;
+  condyleCoreGroup.add(rearKnuckle);
 
   const mergedCondyle = mergeGroupMeshesByMaterial(
     condyleCoreGroup,
@@ -315,6 +328,16 @@ export function createKnee(
     side === -1 ? 'KneeCondyleMesh_L' : 'KneeCondyleMesh_R',
     true
   ) || centralPin;
+
+  const mergedMetallic = mergeGroupMeshesByMaterial(
+    metallicCoreGroup,
+    materials.metallic,
+    side === -1 ? 'KneeMetallic_Merged_L' : 'KneeMetallic_Merged_R',
+    true
+  );
+  if (mergedMetallic) {
+    kneeGroup.add(mergedMetallic);
+  }
 
   // =========================================================================
   // 4. CONCENTRIC PURPLE EMISSIVE ACCENT RINGS (Bilateral Rotary Face Indicators)
@@ -357,6 +380,17 @@ export function createKnee(
   kneeGroup.add(mergedKneeAccents);
   ledMeshes.push(mergedKneeAccents);
 
+  const mergedKneeBloom = mergeGroupMeshesByMaterial(
+    kneeAccentGroup,
+    materials.purpleBloom,
+    side === -1 ? 'KneeBloom_L' : 'KneeBloom_R',
+    false,
+    false
+  );
+  if (mergedKneeBloom) {
+    kneeGroup.add(mergedKneeBloom);
+  }
+
   // =========================================================================
   // 5. CENTRAL WHITE KNEE COVER (Primary Visual Feature from Reference)
   // Compact, faceted white ceramic cover centered on knee axis with purple LED slit
@@ -375,8 +409,16 @@ export function createKnee(
   patellaShield.receiveShadow = true;
   kneeGroup.add(patellaShield);
 
+  // Patella mounting standoffs connecting shield securely to knee axle housing
+  const patellaStandoffGeo = geoCache.get('KneePatellaStandoffGeo_v2', () => new THREE.CylinderGeometry(0.0035, 0.0035, 0.015, 8));
+  for (const pY of [0.010, -0.010]) {
+    const standoff = new THREE.Mesh(patellaStandoffGeo, materials.joint);
+    standoff.rotation.x = Math.PI / 2;
+    standoff.position.set(0, pY, -0.0075);
+    patellaShield.add(standoff);
+  }
+
   // Precision Horizontal Capsule / Pill Purple Glowing LED Slit in Dark Recessed Bezel
-  // Surface at y = -0.0065, x = 0 is at Z = (thickness * 0.5 + 0.0022 [bevel]) + 0.0040 [ridge] + 0.0020 [curve] ≈ 0.0127m
   const frontZ = cfg.patella.thickness * 0.5 + 0.0084; // 0.0129m
   const bezelGeo = geoCache.get('KneePatellaBezelGeo', () => new THREE.BoxGeometry(0.0130, 0.0034, 0.0022));
   const patellaBezel = new THREE.Mesh(bezelGeo, materials.joint);
@@ -385,7 +427,6 @@ export function createKnee(
   patellaShield.add(patellaBezel);
 
   // Capsule geometry with smooth hemispherical ends matching reference crop
-  // Width matching reference (~9.5mm total length, ~2mm height)
   const ledCapsuleGeo = geoCache.get('KneeLedCapsuleGeo', () => {
     const g = new THREE.CapsuleGeometry(0.0011, 0.0075, 8, 16);
     g.rotateZ(Math.PI / 2); // Orient horizontally
@@ -439,6 +480,15 @@ export function createKnee(
   lowerNeck.receiveShadow = true;
   clevisGroup.add(lowerNeck);
 
+  // Dual-shear clevis ears wrapping around the central axle housing
+  const clevisEarGeo = geoCache.get('KneeClevisEarGeo', () => new THREE.BoxGeometry(0.005, 0.024, 0.024));
+  for (const cSide of [-1, 1]) {
+    const cEar = new THREE.Mesh(clevisEarGeo, materials.joint);
+    cEar.position.set(cSide * (cfg.centralAxleLength * 0.22), -0.005, 0);
+    cEar.castShadow = true;
+    clevisGroup.add(cEar);
+  }
+
   // Lower mounting collar seating flush into shin tibial plateau
   const lowerCollarGeo = geoCache.get('KneeLowerCollarGeo', () => new THREE.CylinderGeometry(0.018, 0.022, 0.014, 20));
   const lowerCollar = new THREE.Mesh(lowerCollarGeo, materials.joint);
@@ -454,17 +504,48 @@ export function createKnee(
   ) || lowerNeck;
   shinPivot.add(mergedClevis);
 
+  // Popliteal fossa rear mechanical linkage strut & hydraulic assist
+  // Properly parented to shinPivot so it renders with high-spec PBR materials and moves with joint
+  const linkageGroup = new THREE.Group();
+  linkageGroup.name = side === -1 ? 'PoplitealLinkage_L' : 'PoplitealLinkage_R';
+
+  // Hydraulic cylinder casing mounted to lower clevis
+  const rearLinkGeo = geoCache.get('KneeRearLinkGeo', () => new THREE.CylinderGeometry(0.0036, 0.0036, 0.024, 16));
+  const rearLink = new THREE.Mesh(rearLinkGeo, materials.machinedLink);
+  rearLink.rotation.x = 0.22;
+  rearLink.position.set(0, -cfg.lowerStructureHeight * 0.55, -cfg.housingDepth * 0.42);
+  rearLink.castShadow = true;
+  linkageGroup.add(rearLink);
+
+  // Polished chrome metallic piston rod extending upward toward rearKnuckle
+  const rearPistonGeo = geoCache.get('KneeRearPistonGeo', () => new THREE.CylinderGeometry(0.0022, 0.0022, 0.020, 16));
+  const rearPiston = new THREE.Mesh(rearPistonGeo, materials.metallic);
+  rearPiston.rotation.x = 0.22;
+  rearPiston.position.set(0, -cfg.lowerStructureHeight * 0.20, -cfg.housingDepth * 0.44);
+  rearPiston.castShadow = true;
+  linkageGroup.add(rearPiston);
+
+  // Linkage pivot mounting pin
+  const linkPinGeo = geoCache.get('KneeLinkPinGeo', () => new THREE.CylinderGeometry(0.0018, 0.0018, 0.012, 12));
+  const linkPin = new THREE.Mesh(linkPinGeo, materials.joint);
+  linkPin.rotation.z = Math.PI / 2;
+  linkPin.position.set(0, -cfg.lowerStructureHeight * 0.70, -cfg.housingDepth * 0.40);
+  linkageGroup.add(linkPin);
+
+  shinPivot.add(linkageGroup);
+
   return {
     group: kneeGroup,
     shinPivot,
     lateralDisc: mergedCondyle,
     medialDisc: mergedCondyle,
-    accentRingLateral,
-    accentRingMedial,
+    accentRingLateral: mergedKneeAccents,
+    accentRingMedial: mergedKneeAccents,
     patellaShield,
     patellaLed,
     centralPin: mergedCondyle,
     statorTeeth,
+    poplitealLinkage: linkageGroup,
     ledMeshes,
   };
 }
