@@ -36,3 +36,5 @@ Thumbs.db
 
 # Test and capture outputs
 capture_output/
+capture_*/
+/*.png

@@ -101,24 +101,38 @@ async function main() {
   });
   await sleep(400);
 
+  // Disable camera manager auto-update & mouse tracking for precise, stable camera control
+  await send('Runtime.evaluate', {
+    expression: `
+      if (window.__robotScene) {
+        window.__robotScene.cameraManager.update = () => false;
+        if (window.__robotScene.setMouseTrackingEnabled) {
+          window.__robotScene.setMouseTrackingEnabled(false);
+        }
+      }
+      true;
+    `,
+    returnByValue: true
+  });
+
   const outDir = path.resolve('capture_output', 'side_audit');
   if (!fs.existsSync(outDir)) {
     fs.mkdirSync(outDir, { recursive: true });
   }
 
   const views = [
-    { name: '1_full_left_side', yaw: Math.PI * 0.5, zoom: 1.85, targetY: -0.10 },
-    { name: '2_full_right_side', yaw: -Math.PI * 0.5, zoom: 1.85, targetY: -0.10 },
-    { name: '3_head_neck_left', yaw: Math.PI * 0.5, zoom: 0.60, targetY: 0.52 },
-    { name: '4_head_neck_right', yaw: -Math.PI * 0.5, zoom: 0.60, targetY: 0.52 },
-    { name: '5_torso_arm_left', yaw: Math.PI * 0.5, zoom: 0.85, targetY: 0.15 },
-    { name: '6_torso_arm_right', yaw: -Math.PI * 0.5, zoom: 0.85, targetY: 0.15 },
-    { name: '7_waist_pelvis_left', yaw: Math.PI * 0.5, zoom: 0.65, targetY: -0.22 },
-    { name: '8_waist_pelvis_right', yaw: -Math.PI * 0.5, zoom: 0.65, targetY: -0.22 },
-    { name: '9_leg_foot_left', yaw: Math.PI * 0.5, zoom: 1.0, targetY: -0.58 },
-    { name: '10_leg_foot_right', yaw: -Math.PI * 0.5, zoom: 1.0, targetY: -0.58 },
-    { name: '11_full_front', yaw: 0, zoom: 1.85, targetY: -0.10 },
-    { name: '12_full_rear', yaw: Math.PI, zoom: 1.85, targetY: -0.10 }
+    { name: '1_full_left_side', yaw: Math.PI * 0.5, camY: -0.125, camZ: 4.2, targetY: -0.125 },
+    { name: '2_full_right_side', yaw: -Math.PI * 0.5, camY: -0.125, camZ: 4.2, targetY: -0.125 },
+    { name: '3_shoulder_arm_left', yaw: Math.PI * 0.5, camY: 0.22, camZ: 1.4, targetY: 0.22 },
+    { name: '4_shoulder_arm_right', yaw: -Math.PI * 0.5, camY: 0.22, camZ: 1.4, targetY: 0.22 },
+    { name: '5_torso_abdomen_left', yaw: Math.PI * 0.5, camY: 0.02, camZ: 1.25, targetY: 0.02 },
+    { name: '6_torso_rear_scapula_left', yaw: Math.PI * 0.68, camY: 0.14, camZ: 1.35, targetY: 0.14 },
+    { name: '7_waist_pelvis_hip_left', yaw: Math.PI * 0.5, camY: -0.22, camZ: 1.25, targetY: -0.22 },
+    { name: '8_thigh_knee_left', yaw: Math.PI * 0.5, camY: -0.42, camZ: 1.25, targetY: -0.42 },
+    { name: '9_ankle_foot_left', yaw: Math.PI * 0.5, camY: -0.68, camZ: 1.05, targetY: -0.68 },
+    { name: '10_foot_ground_left', yaw: Math.PI * 0.5, camY: -0.72, camZ: 0.75, targetY: -0.72 },
+    { name: '11_full_front', yaw: 0, camY: -0.125, camZ: 4.2, targetY: -0.125 },
+    { name: '12_full_rear', yaw: Math.PI, camY: -0.125, camZ: 4.2, targetY: -0.125 }
   ];
 
   for (const v of views) {
@@ -127,12 +141,8 @@ async function main() {
       expression: `
         const scene = window.__robotScene;
         scene.setRobotYaw(${v.yaw}, false);
-        scene.cameraManager.baseTargetY = ${v.targetY};
-        if (typeof scene.setZoom === 'function') {
-          scene.setZoom(${v.zoom});
-        }
-        scene.cameraManager.currentZoom = ${v.zoom};
-        scene.cameraManager.update(0.016);
+        scene.cameraManager.camera.position.set(0, ${v.camY}, ${v.camZ});
+        scene.cameraManager.camera.lookAt(0, ${v.targetY}, 0);
         true;
       `,
       returnByValue: true
