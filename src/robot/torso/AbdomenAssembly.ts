@@ -706,8 +706,8 @@ function createSideActuatorAssembly(
     {
       side,
       name: side === -1 ? 'OuterLeftActuatorPole' : 'OuterRightActuatorPole',
-      upperMount: cfg.actuator?.upperMount || dual.outer.upperMount,
-      lowerMount: cfg.actuator?.lowerMount || dual.outer.lowerMount,
+      upperMount: dual.outer.upperMount,
+      lowerMount: dual.outer.lowerMount,
       cylinderRadius: 0.0118,
       pistonRadius: 0.0064,
       hasStabilizerLink: false,
@@ -809,7 +809,7 @@ function createWaistTransitionDeck(
   const dualCfg = TORSO_CONFIG.stomach.dualActuators;
   
   const mountPositions = [
-    { x: cfgAct.lowerMount.x, z: cfgAct.lowerMount.z, isOuter: true },
+    { x: dualCfg?.outer.lowerMount.x || 0.076, z: dualCfg?.outer.lowerMount.z || 0.016, isOuter: true },
     { x: dualCfg?.inner.lowerMount.x || 0.052, z: dualCfg?.inner.lowerMount.z || 0.012, isOuter: false },
   ];
 
@@ -822,7 +822,7 @@ function createWaistTransitionDeck(
       const plinthGeo = geoCache.get(`Waist_Plinth_${pWidth}`, () => new THREE.BoxGeometry(pWidth, 0.020, 0.020));
       const plinth = new THREE.Mesh(plinthGeo, materials.joint);
       plinth.position.set(side * mount.x, deckY + 0.008, mount.z);
-      plinth.rotation.z = -side * (mount.isOuter ? 0.12 : 0.06);
+      plinth.rotation.z = -side * (mount.isOuter ? 0.158 : 0.06);
       deckGroup.add(plinth);
 
       const pin = new THREE.Mesh(pinGeo, materials.metallic);

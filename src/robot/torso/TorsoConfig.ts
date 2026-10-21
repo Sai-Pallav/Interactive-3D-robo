@@ -125,14 +125,14 @@ export const TORSO_CONFIG = {
 
     // Side Actuator Mounting Coordinates (Upper poles wider at chest bottom, bottom poles untouched)
     actuator: {
-      upperMount: { x: 0.118, y: -0.066, z: 0.024 },
-      lowerMount: { x: 0.076, y: -0.204, z: 0.026 },
-      upperX: 0.118,
+      upperMount: { x: 0.098, y: -0.066, z: 0.014 },
+      lowerMount: { x: 0.076, y: -0.204, z: 0.016 },
+      upperX: 0.098,
       upperY: -0.066,
-      upperZ: 0.024,
+      upperZ: 0.014,
       lowerX: 0.076,
       lowerY: -0.204,
-      lowerZ: 0.026,
+      lowerZ: 0.016,
       cylinderRadius: 0.0160,
       pistonRadius: 0.0072,
     },
