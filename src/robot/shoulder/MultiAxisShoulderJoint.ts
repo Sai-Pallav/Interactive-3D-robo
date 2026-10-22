@@ -769,11 +769,11 @@ export function createMultiAxisShoulderJoint(
 ): MultiAxisShoulderJointNodes {
   const linkMaterial = materials.machinedLink;
 
-  // 1. Stationary Shoulder Foundation (Grounds into Part 3 Housing at X = ±0.234, Y = 0.052, Z = 0.015)
-  // Perfectly calibrated to provide clear visibility of the dark mounting collar and purple glow
+  // 1. Stationary Shoulder Foundation (Grounds into Part 3 Housing at X = ±0.234, Y = 0.052, Z = -0.009)
+  // Perfectly calibrated to seat cleanly in the mounting socket with rear wishbone support
   const foundation = new THREE.Group();
   foundation.name = side === -1 ? 'LeftShoulderFoundation' : 'RightShoulderFoundation';
-  foundation.position.set(side * 0.234, 0.052, 0.015);
+  foundation.position.set(side * 0.234, 0.052, -0.009);
 
   // Stationary Mounting Collar & Anchor Clevises
   const { collarMesh, anchorGroup, upperAnchorPos, lowerAnchorPos } = createStationaryMountingCollar(side, materials, ledMeshes);

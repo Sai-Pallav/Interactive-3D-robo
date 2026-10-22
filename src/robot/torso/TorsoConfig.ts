@@ -49,7 +49,7 @@ export const TORSO_CONFIG = {
     collarZ: 0.004,
     shoulderMountX: 0.210, // Wider shoulder span matching expanded clavicle
     shoulderMountY: 0.052,
-    shoulderMountZ: 0.015,
+    shoulderMountZ: -0.009,
     shoulderMountRadius: 0.056,
     logoWidth: 0.050,
     logoHeight: 0.056,

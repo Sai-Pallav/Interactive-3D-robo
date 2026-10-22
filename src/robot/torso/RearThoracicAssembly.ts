@@ -515,8 +515,9 @@ export function createRearThoracicAssembly(materials: RobotMaterialPalette): Rea
   for (const side of [-1, 1] as const) {
     const armBraceGroup = new THREE.Group();
     armBraceGroup.name = `RearShoulderBrace_${side === -1 ? 'L' : 'R'}`;
-    armBraceGroup.position.set(side * 0.165, 0.052, -0.042);
-    armBraceGroup.rotation.y = side * -0.26;
+    // Anchors thoracic spine at side * 0.165 and extends forward-lateral to seat into shoulder mounting bulkhead
+    armBraceGroup.position.set(side * 0.165, 0.052, -0.034);
+    armBraceGroup.rotation.y = side * 0.10;
 
     const wishbone = new THREE.Mesh(bracketGeo, materials.jointDoubleSide);
     wishbone.scale.set(side, 1, 1);
@@ -524,11 +525,11 @@ export function createRearThoracicAssembly(materials: RobotMaterialPalette): Rea
     armBraceGroup.add(wishbone);
 
     const cap = new THREE.Mesh(shoulderBearingCapGeo, materials.jointDoubleSide);
-    cap.position.set(side * 0.020, 0, 0.010);
+    cap.position.set(side * 0.024, 0, 0.018);
     armBraceGroup.add(cap);
 
     const raceRing = new THREE.Mesh(shoulderRaceRingGeo, materials.metallicDoubleSide);
-    raceRing.position.set(side * 0.028, 0, 0.010);
+    raceRing.position.set(side * 0.029, 0, 0.018);
     armBraceGroup.add(raceRing);
 
     const boltGeo = geoCache.get('RearShoulderBoltGeo_v7', () => {
@@ -541,9 +542,9 @@ export function createRearThoracicAssembly(materials: RobotMaterialPalette): Rea
       const bAngle = (b / 6) * Math.PI * 2;
       const bolt = new THREE.Mesh(boltGeo, materials.metallic);
       bolt.position.set(
-        side * (0.020 + 0.008),
+        side * (0.024 + 0.006),
         Math.sin(bAngle) * 0.026,
-        0.010 + Math.cos(bAngle) * 0.026
+        0.018 + Math.cos(bAngle) * 0.026
       );
       armBraceGroup.add(bolt);
     }

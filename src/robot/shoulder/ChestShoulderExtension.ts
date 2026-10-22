@@ -53,7 +53,7 @@ export interface ShoulderExtensionNodes {
 
 // Shoulder Joint Axis Centerline (Model/Torso Space)
 const Y_CENTER = 0.052;
-const Z_CENTER = 0.015;
+const Z_CENTER = -0.009;
 
 /**
  * Returns seam coordinate on the chest socket aperture where the extension mates flush.
@@ -70,23 +70,23 @@ function getChestSeamPoint(sector: number, totalSectors: number, side: -1 | 1): 
   if (sinA >= 0 && cosA >= 0) {
     const t = cosA;
     py = 0.108 * (1 - t) + 0.052 * t;
-    pz = 0.018 * (1 - t) + 0.076 * t;
+    pz = (Z_CENTER + 0.003) * (1 - t) + 0.056 * t;
     xDepth = 0.155 * (1 - t) + 0.178 * t;
   } else if (sinA >= 0 && cosA < 0) {
     const t = -cosA;
     py = 0.108 * (1 - t) + 0.065 * t;
     const easeT = Math.pow(t, 0.45);
-    pz = 0.018 * (1 - easeT) - 0.082 * easeT;
+    pz = (Z_CENTER + 0.003) * (1 - easeT) - 0.076 * easeT;
     xDepth = 0.155 * (1 - easeT) + 0.130 * easeT;
   } else if (sinA < 0 && cosA < 0) {
     const t = -cosA;
     py = 0.065 * t + 0.012 * (1 - t);
-    pz = -0.082 * t + 0.015 * (1 - t);
+    pz = -0.076 * t + Z_CENTER * (1 - t);
     xDepth = 0.130 * t + 0.165 * (1 - t);
   } else {
     const t = cosA;
     py = 0.012 * (1 - t) + 0.052 * t;
-    pz = 0.015 * (1 - t) + 0.076 * t;
+    pz = Z_CENTER * (1 - t) + 0.056 * t;
     xDepth = 0.165 * (1 - t) + 0.178 * t;
   }
 
@@ -555,29 +555,117 @@ function createOuterShoulderShell(
 }
 
 /**
- * 1C. Rear Shoulder Shell (Internal structural rib)
+ * 1C. Rear Shoulder Shell & Structural Gusset.
+ * Encloses the rear gap between chest transition panel, rear thoracic frame, and mounting bulkhead.
  */
 function createRearShoulderShell(
   side: -1 | 1,
-  _materials: RobotMaterialPalette
+  materials: RobotMaterialPalette
 ): THREE.Group {
   const group = new THREE.Group();
   group.name = side === -1 ? 'LeftRearShoulderShell' : 'RightRearShoulderShell';
-  // Keep clean unobstructed view of mechanical joint from rear (Section 17 Back check)
+
+  // Dark titanium structural gusset bridging from rear chest contour to mounting bulkhead
+  const rearGussetGeo = geoCache.get(`RearShoulderGussetGeo_${side}`, () => {
+    const shape = new THREE.Shape();
+    shape.moveTo(-0.015, 0.038);
+    shape.lineTo(0.012, 0.035);
+    shape.lineTo(0.022, -0.015);
+    shape.lineTo(-0.008, -0.032);
+    shape.lineTo(-0.025, -0.010);
+    shape.closePath();
+
+    const g = new THREE.ExtrudeGeometry(shape, {
+      depth: 0.020,
+      bevelEnabled: true,
+      bevelThickness: 0.0015,
+      bevelSize: 0.0012,
+      bevelSegments: 2,
+    });
+    g.center();
+    return g;
+  });
+
+  const gussetMesh = new THREE.Mesh(rearGussetGeo, materials.joint);
+  gussetMesh.name = side === -1 ? 'LeftRearGusset' : 'RightRearGusset';
+  gussetMesh.rotation.y = Math.PI / 2;
+  gussetMesh.position.set(side * 0.185, Y_CENTER + 0.002, Z_CENTER - 0.026);
+  gussetMesh.castShadow = true;
+  gussetMesh.receiveShadow = true;
+  group.add(gussetMesh);
+
   return group;
 }
 
 /**
- * 1D. Lower Shoulder Bracket (Internal structural anchor)
+ * 1D. Lower Shoulder Bracket (Internal structural anchor).
+ * Bridges underside from chest socket to mounting collar.
  */
 function createLowerShoulderBracket(
   side: -1 | 1,
-  _materials: RobotMaterialPalette
+  materials: RobotMaterialPalette
 ): THREE.Group {
   const group = new THREE.Group();
   group.name = side === -1 ? 'LeftLowerShoulderShell' : 'RightLowerShoulderShell';
-  // Cleanly eliminated exterior cradle block to allow full visibility of layered connector
+
+  const cradleGeo = geoCache.get(`LowerShoulderCradleGeo_${side}`, () => {
+    const g = new THREE.CylinderGeometry(0.0465, 0.0475, 0.026, 24, 1, true, Math.PI * 0.65, Math.PI * 0.70);
+    g.rotateZ(Math.PI / 2);
+    return g;
+  });
+  const cradleMesh = new THREE.Mesh(cradleGeo, materials.jointDoubleSide);
+  cradleMesh.name = side === -1 ? 'LeftLowerShoulderCradle' : 'RightLowerShoulderCradle';
+  cradleMesh.position.set(side * 0.185, Y_CENTER, Z_CENTER);
+  cradleMesh.castShadow = true;
+  cradleMesh.receiveShadow = true;
+  group.add(cradleMesh);
+
   return group;
+}
+
+/**
+ * Creates the deep dark titanium mounting recess cavity cup (innerCavityWalls).
+ * Encloses the socket cavity behind the mounting frame so the shoulder joint
+ * cleanly seats inside a solid, continuous dark mechanical housing.
+ */
+function createMountingCavityRecess(
+  side: -1 | 1,
+  materials: RobotMaterialPalette
+): THREE.Mesh {
+  const plateRadius = 0.0450;
+  const cavityBarrelGeo = geoCache.get('MountingCavityBarrelGeo', () => {
+    const g = new THREE.CylinderGeometry(plateRadius * 1.02, plateRadius * 0.98, 0.034, 36, 1, false);
+    g.rotateZ(Math.PI / 2);
+    return g;
+  });
+  const cavityMesh = new THREE.Mesh(cavityBarrelGeo, materials.jointDoubleSide);
+  cavityMesh.name = side === -1 ? 'LeftInnerCavityWalls' : 'RightInnerCavityWalls';
+  cavityMesh.position.set(side * (0.198 - 0.016), Y_CENTER, Z_CENTER);
+  cavityMesh.castShadow = true;
+  cavityMesh.receiveShadow = true;
+
+  // Inboard backing bulkhead plate
+  const backplateGeo = geoCache.get('MountingCavityBackplateGeo', () => {
+    const g = new THREE.CylinderGeometry(plateRadius * 0.98, plateRadius * 0.98, 0.004, 32);
+    g.rotateZ(Math.PI / 2);
+    return g;
+  });
+  const backplate = new THREE.Mesh(backplateGeo, materials.joint);
+  backplate.name = side === -1 ? 'LeftCavityBackplate' : 'RightCavityBackplate';
+  backplate.position.set(-side * 0.017, 0, 0);
+  cavityMesh.add(backplate);
+
+  // Concentric metallic bearing race ring on backplate
+  const backRaceGeo = geoCache.get('MountingCavityBackRaceGeo', () => {
+    const g = new THREE.TorusGeometry(plateRadius * 0.72, 0.0016, 8, 32);
+    g.rotateY(Math.PI / 2);
+    return g;
+  });
+  const backRace = new THREE.Mesh(backRaceGeo, materials.metallic);
+  backRace.position.set(-side * 0.015, 0, 0);
+  cavityMesh.add(backRace);
+
+  return cavityMesh;
 }
 
 /**
@@ -680,11 +768,13 @@ export function createChestShoulderExtension(
   whiteStructuralAssembly.add(mountingFrame);
   const recessHousing = mountingFrame;
 
+  // 2B. Deep Dark Titanium Mounting Cavity Recess Housing
+  const innerCavityWalls = createMountingCavityRecess(side, materials);
+  whiteStructuralAssembly.add(innerCavityWalls);
+
   // 3. Arched White Shoulder Pauldron Cowl (Mantle arching over joint)
   const upperShoulderShell = createUpperShoulderShell(side, materials, ledMeshes);
   whiteStructuralAssembly.add(upperShoulderShell);
-
-  const innerCavityWalls = new THREE.Mesh(); // stub for interface compatibility
 
   // 4. Multi-piece Shoulder Armor Panels (Pieces B, C, E)
   const outerShoulderShell = createOuterShoulderShell(side, materials);
