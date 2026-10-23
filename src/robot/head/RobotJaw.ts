@@ -74,11 +74,12 @@ export function createRobotJaw(materials: RobotMaterialPalette): JawNodes {
           }
         } else {
           // Continuous enclosed under-chin submental cowl
-          // Smoothly sweeps inward and down to enclose the neck junction
+          // Smoothly sweeps inward and upward to seat seamlessly onto the upper neck assembly
           const tShelf = (v - 0.72) / 0.28;
-          const socketRadius = 0.052;
+          const socketRadius = 0.050;
           const xSocket = socketRadius * sinA;
-          const ySocket = jawlineY - 0.010 * tShelf;
+          const targetSocketY = -0.052; // Aligns flush with upper cervical collar sleeve
+          const ySocket = jawlineY + (targetSocketY - jawlineY) * Math.pow(tShelf, 0.75);
           const zSocket = -0.008 + socketRadius * cosA;
 
           // Smooth hermite-style easing to eliminate sharp triangular creases
@@ -159,10 +160,10 @@ export function createRobotJaw(materials: RobotMaterialPalette): JawNodes {
   jawJointGroup.add(submentalVent);
 
   // 4. Dark Titanium Neck Socket Gorget Collar (Underneath the jaw)
-  const socketGeo = geoCache.get('JawNeckSocketGeo', () => new THREE.CylinderGeometry(0.054, 0.050, 0.020, 32));
+  const socketGeo = geoCache.get('JawNeckSocketGeo_v5', () => new THREE.CylinderGeometry(0.050, 0.047, 0.032, 36));
   const neckSocket = new THREE.Mesh(socketGeo, materials.joint);
   neckSocket.name = 'JawNeckSocketGorget';
-  neckSocket.position.set(0, -0.124, 0.010);
+  neckSocket.position.set(0, -0.054, -0.008);
   neckSocket.castShadow = true;
   neckSocket.receiveShadow = true;
   jawJointGroup.add(neckSocket);

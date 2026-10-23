@@ -55,7 +55,7 @@ export function createAnkle(
   // ==========================================
   // 1. CENTRAL MULTIAXIAL SPHERICAL BEARING & CLEVIS
   // ==========================================
-  const sphereGeo = geoCache.get('Ankle_SphereGeo', () => new THREE.SphereGeometry(cfg.housingRadius * 0.90, 24, 20));
+  const sphereGeo = geoCache.get('Ankle_SphereGeo_v3', () => new THREE.SphereGeometry(cfg.housingRadius * 0.92, 24, 20));
   const sphericalCore = new THREE.Mesh(sphereGeo, materials.joint);
   sphericalCore.name = side === -1 ? 'AnkleBall_L' : 'AnkleBall_R';
   sphericalCore.castShadow = true;
@@ -71,7 +71,7 @@ export function createAnkle(
   clevisShape.lineTo(-0.020, -0.012);
   clevisShape.closePath();
 
-  const clevisGeo = geoCache.get('Ankle_ClevisGeo', () => {
+  const clevisGeo = geoCache.get('Ankle_ClevisGeo_v3', () => {
     const g = new THREE.ExtrudeGeometry(clevisShape, {
       depth: 0.028,
       bevelEnabled: true,
@@ -91,7 +91,7 @@ export function createAnkle(
   // ==========================================
   // 2. MALLEOLUS DISCS (Lateral & Medial Ankle Bones)
   // ==========================================
-  const discGeo = geoCache.get('Ankle_DiscGeo', () => new THREE.CylinderGeometry(
+  const discGeo = geoCache.get('Ankle_DiscGeo_v3', () => new THREE.CylinderGeometry(
     cfg.malleolusDiscRadius,
     cfg.malleolusDiscRadius,
     cfg.malleolusDiscWidth,
@@ -116,7 +116,7 @@ export function createAnkle(
   malleolusMedial.castShadow = true;
   ankleJointGroup.add(malleolusMedial);
 
-  // Concentric purple emissive rings on lateral and medial malleolus (InstancedMesh)
+  // Concentric purple emissive rings on lateral and medial malleolus
   const ringGeo = geoCache.getTorus(cfg.accentRingRadius, 0.0016, 8, 24);
   const accentRings = new THREE.InstancedMesh(ringGeo, materials.purpleEmissive, 2);
   accentRings.name = side === -1 ? 'AnkleAccents_L' : 'AnkleAccents_R';
@@ -138,10 +138,9 @@ export function createAnkle(
   ankleGroup.add(accentRings);
   ledMeshes.push(accentRings);
 
-  // White ceramic outer accent caps on the malleolus discs (matching screenshot 1 & 2!)
-  // Stepped cleanly inside the purple emissive ring
+  // White ceramic outer accent caps on the malleolus discs
   const malleolusCapGroup = new THREE.Group();
-  const capGeo = geoCache.get('Ankle_CapGeo', () => new THREE.CylinderGeometry(
+  const capGeo = geoCache.get('Ankle_CapGeo_v3', () => new THREE.CylinderGeometry(
     cfg.malleolusDiscRadius * 0.60,
     cfg.malleolusDiscRadius * 0.60,
     0.0022,
@@ -158,7 +157,7 @@ export function createAnkle(
   malleolusCapGroup.add(capMed);
 
   // Center fastener socket on white malleolus cap
-  const centerScrewGeo = geoCache.get('Ankle_CenterScrewGeo', () => new THREE.CylinderGeometry(0.0022, 0.0022, 0.0028, 6));
+  const centerScrewGeo = geoCache.get('Ankle_CenterScrewGeo_v3', () => new THREE.CylinderGeometry(0.0022, 0.0022, 0.0028, 6));
   for (const mSide of [-1, 1]) {
     const sMesh = new THREE.Mesh(centerScrewGeo, materials.joint);
     sMesh.rotation.z = Math.PI / 2;
@@ -171,7 +170,6 @@ export function createAnkle(
     ankleGroup.add(mergedAnkleCaps);
   }
 
-  // Merge static joint sub-meshes in ankleJointGroup
   const mergedAnkle = mergeGroupMeshesByMaterial(ankleJointGroup, materials.joint, side === -1 ? 'AnkleJointMesh_L' : 'AnkleJointMesh_R', true) || sphericalCore;
 
   const mergedAnkleMetallic = mergeGroupMeshesByMaterial(ankleMetallicGroup, materials.metallic, side === -1 ? 'AnkleMetallicMesh_L' : 'AnkleMetallicMesh_R', true);
@@ -189,8 +187,6 @@ export function createAnkle(
 
   // ==========================================
   // 4. POSTERIOR ACHILLES HYDRAULIC DAMPER
-  // Engineered hydraulic cylinder with polished metallic piston rod that articulates
-  // and telescopes dynamically between the shin frame mount and foot heel bracket
   // ==========================================
   const aCfg = cfg.achillesDamper;
   const damperGroup = new THREE.Group();
@@ -201,22 +197,23 @@ export function createAnkle(
   ankleGroup.add(damperGroup);
 
   // Upper mounting eyelet
-  const eyeletGeo = geoCache.get('Ankle_EyeletGeo', () => new THREE.CylinderGeometry(0.0055, 0.0055, 0.008, 16));
+  const eyeletGeo = geoCache.get('Ankle_EyeletGeo_v3', () => new THREE.CylinderGeometry(0.0055, 0.0055, 0.008, 16));
   const upperEyelet = new THREE.Mesh(eyeletGeo, materials.joint);
   upperEyelet.rotation.z = Math.PI / 2;
   upperEyelet.position.set(0, 0, 0);
   damperGroup.add(upperEyelet);
 
   // Hydraulic cylinder casing
-  const cylLen = 0.058;
-  const cylGeo = geoCache.get('Ankle_CylGeo_v3', () => new THREE.CylinderGeometry(aCfg.cylinderRadius, aCfg.cylinderRadius, cylLen, 16));
+  // Calibrated: 0.056m ensures zero bottom-out warning at full plantarflexion (+0.60 rad)
+  const cylLen = 0.056;
+  const cylGeo = geoCache.get('Ankle_CylGeo_v4', () => new THREE.CylinderGeometry(aCfg.cylinderRadius, aCfg.cylinderRadius, cylLen, 16));
   const cylinder = new THREE.Mesh(cylGeo, materials.joint);
   cylinder.position.set(0, -cylLen * 0.5, 0);
   cylinder.castShadow = true;
   damperGroup.add(cylinder);
 
   // Cylinder fluid port collar
-  const glandGeo = geoCache.get('Ankle_GlandGeo', () => new THREE.CylinderGeometry(aCfg.cylinderRadius * 1.25, aCfg.cylinderRadius * 1.25, 0.005, 16));
+  const glandGeo = geoCache.get('Ankle_GlandGeo_v3', () => new THREE.CylinderGeometry(aCfg.cylinderRadius * 1.25, aCfg.cylinderRadius * 1.25, 0.005, 16));
   const gland = new THREE.Mesh(glandGeo, materials.joint);
   gland.position.set(0, -cylLen + 0.0025, 0);
   damperGroup.add(gland);
@@ -227,8 +224,9 @@ export function createAnkle(
   damperGroup.add(pistonGroup);
 
   // Polished chrome metallic piston rod extending upward into cylinder
-  const pistLen = 0.060;
-  const pistGeo = geoCache.get('Ankle_PistGeo_v3', () => new THREE.CylinderGeometry(aCfg.pistonRadius, aCfg.pistonRadius, pistLen, 16));
+  // Calibrated: 0.062m ensures plenty of overlap (>10mm) at full dorsiflexion (-0.45 rad)
+  const pistLen = 0.062;
+  const pistGeo = geoCache.get('Ankle_PistGeo_v4', () => new THREE.CylinderGeometry(aCfg.pistonRadius, aCfg.pistonRadius, pistLen, 16));
   const piston = new THREE.Mesh(pistGeo, materials.metallic);
   piston.position.set(0, pistLen * 0.5, 0);
   piston.castShadow = true;

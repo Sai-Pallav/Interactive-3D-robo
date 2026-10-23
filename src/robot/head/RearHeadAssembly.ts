@@ -583,17 +583,17 @@ export function createRearHeadAssembly(materials: RobotMaterialPalette): RearHea
   // Engineered dark titanium cervical mount collar closing skull-to-neck gap
   // =========================================================================
   const cradleShape = new THREE.Shape();
-  cradleShape.absarc(0, 0, 0.062, 0, Math.PI, false);
-  cradleShape.lineTo(-0.062, -0.024);
-  cradleShape.lineTo(0.062, -0.024);
+  cradleShape.absarc(0, 0, 0.050, 0, Math.PI, false);
+  cradleShape.lineTo(-0.050, -0.018);
+  cradleShape.lineTo(0.050, -0.018);
   cradleShape.closePath();
 
-  const cradleGeo = geoCache.get('OccipitalNeckCradleGeo_v4', () => {
+  const cradleGeo = geoCache.get('OccipitalNeckCradleGeo_v5', () => {
     const g = new THREE.ExtrudeGeometry(cradleShape, {
-      depth: 0.028,
+      depth: 0.024,
       bevelEnabled: true,
-      bevelThickness: 0.0035,
-      bevelSize: 0.0028,
+      bevelThickness: 0.0030,
+      bevelSize: 0.0022,
       bevelSegments: 2,
     });
     g.center();
@@ -602,17 +602,17 @@ export function createRearHeadAssembly(materials: RobotMaterialPalette): RearHea
 
   const neckTransitionCradle = new THREE.Mesh(cradleGeo, materials.joint);
   neckTransitionCradle.name = 'OccipitalNeckTransitionCradle';
-  neckTransitionCradle.position.set(0, -0.038, -0.068);
-  neckTransitionCradle.rotation.x = 0.28;
+  neckTransitionCradle.position.set(0, -0.034, -0.014);
+  neckTransitionCradle.rotation.x = 0.08;
   neckTransitionCradle.castShadow = true;
   neckTransitionCradle.receiveShadow = true;
   group.add(neckTransitionCradle);
 
   // Stepped metallic bearing rim at the cradle transition
-  const cradleRimGeo = geoCache.get('OccipitalCradleRimGeo_v4', () => new THREE.TorusGeometry(0.058, 0.0024, 8, 32));
+  const cradleRimGeo = geoCache.get('OccipitalCradleRimGeo_v5', () => new THREE.TorusGeometry(0.048, 0.0022, 8, 32));
   const cradleRim = new THREE.Mesh(cradleRimGeo, materials.metallic);
-  cradleRim.position.set(0, -0.046, -0.062);
-  cradleRim.rotation.x = Math.PI / 2 + 0.28;
+  cradleRim.position.set(0, -0.040, -0.014);
+  cradleRim.rotation.x = Math.PI / 2 + 0.08;
   group.add(cradleRim);
 
   return {

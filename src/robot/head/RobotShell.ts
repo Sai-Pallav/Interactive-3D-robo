@@ -141,17 +141,17 @@ export function createRobotShell(materials: RobotMaterialPalette): ShellNodes {
   let rightTemple!: THREE.Mesh;
 
   for (const side of [-1, 1]) {
-    const templeGeo = geoCache.get(`HelmetTempleGeo_${side}`, () => {
+    const templeGeo = geoCache.get(`HelmetTempleGeo_v5_${side}`, () => {
       const templeShape = new THREE.Shape();
       // Above ear module
       templeShape.moveTo(0.006, 0.062);
       // Sweeps towards occipital rear
       templeShape.quadraticCurveTo(-0.035, 0.055, -0.062, 0.044);
       // Down towards nape
-      templeShape.lineTo(-0.062, -0.040);
+      templeShape.lineTo(-0.062, -0.050);
       // Under ear towards jawline
-      templeShape.quadraticCurveTo(-0.025, -0.040, -0.012, -0.038);
-      templeShape.lineTo(0.006, -0.022);
+      templeShape.quadraticCurveTo(-0.025, -0.065, -0.010, -0.060);
+      templeShape.lineTo(0.006, -0.030);
       // Smooth circular arch cutout framing ear module (radius = 0.045)
       templeShape.absarc(0.0, 0.020, 0.045, -Math.PI * 0.44, Math.PI * 0.54, false);
       templeShape.closePath();
@@ -240,7 +240,7 @@ export function createRobotShell(materials: RobotMaterialPalette): ShellNodes {
   armorShellGroup.add(leftRearShell);
 
   // Merge outer helmet ceramic armor pieces
-  const cachedMergedHelmetArmorGeo = geoCache.get('HelmetArmorMergedGeo', () => {
+  const cachedMergedHelmetArmorGeo = geoCache.get('HelmetArmorMergedGeo_v5', () => {
     const merged = mergeGroupMeshesByMaterial(armorShellGroup, materials.armorDoubleSide, 'HelmetArmor_Merged', false);
     return merged ? merged.geometry : null;
   });

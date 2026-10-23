@@ -29,10 +29,10 @@ export function createRobotNeck(materials: RobotMaterialPalette): NeckNodes {
   const neckSpacerGroup = new THREE.Group();
 
   // 1. Central Dark Structural Shaft (Part 10)
-  const shaftGeo = geoCache.get('NeckShaftGeo', () => new THREE.CylinderGeometry(0.040, 0.044, 0.22, 32));
+  const shaftGeo = geoCache.get('NeckShaftGeo', () => new THREE.CylinderGeometry(0.040, 0.044, 0.15, 32));
   const centralShaft = new THREE.Mesh(shaftGeo, materials.joint);
   centralShaft.name = 'NeckCentralShaft';
-  centralShaft.position.set(0, 0.095, 0);
+  centralShaft.position.set(0, 0.075, 0);
   centralShaft.castShadow = true;
   neckJointGroup.add(centralShaft);
 

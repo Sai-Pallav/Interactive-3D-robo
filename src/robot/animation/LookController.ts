@@ -180,8 +180,9 @@ export class LookController {
         this.tempTargetPt.set(ndcX, ndcY, 0.5).unproject(this.camera);
         this.tempRayDir.copy(this.tempTargetPt).sub(this.tempRayOrigin).normalize();
 
-        // Intersect ray with target depth plane
-        const t = (this.targetPlaneZ - this.tempRayOrigin.z) / this.tempRayDir.z;
+        // Intersect ray with target depth plane (adapts when camera is zoomed in closer than targetPlaneZ)
+        const planeZ = Math.min(this.targetPlaneZ, this.tempRayOrigin.z - 0.25);
+        const t = (planeZ - this.tempRayOrigin.z) / (Math.abs(this.tempRayDir.z) > 1e-5 ? this.tempRayDir.z : -1);
         this.tempTargetPt.copy(this.tempRayOrigin).addScaledVector(this.tempRayDir, t);
 
         // Compute gaze direction in local joint space

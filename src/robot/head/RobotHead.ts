@@ -37,13 +37,19 @@ export interface HeadAssemblyNodes {
  */
 export function createRobotHead(materials: RobotMaterialPalette): HeadAssemblyNodes {
   // Head Root Group (Independently rotated by kinematic controller per Part 20)
+  // Rotational pivot is placed at the anatomical & mechanical cervical articulation center
+  // at the top of the neck column
   const head = new THREE.Group();
   head.name = 'RobotHead';
-  // Calibrated mounting transform: centers rotational pivot over neck column centerline
-  // and seats upper cervical connector firmly into skull mounting socket
-  head.position.set(0, 0.172, -0.014);
-  // Calibrated head scale for consistent humanoid head-to-torso and head-to-shoulder proportions
+  head.position.set(0, 0.147, -0.010);
   head.scale.setScalar(0.88);
+
+  // Cranial sub-group: preserves exact neutral-pose world coordinates for all facial & cranium armor
+  // (0.172 - 0.147) / 0.88 = +0.02841, (-0.014 - (-0.010)) / 0.88 = -0.00455
+  const headCranialGroup = new THREE.Group();
+  headCranialGroup.name = 'HeadCranialGroup';
+  headCranialGroup.position.set(0, 0.02841, -0.00455);
+  head.add(headCranialGroup);
 
   const ledMeshes: THREE.Mesh[] = [];
 
@@ -54,21 +60,21 @@ export function createRobotHead(materials: RobotMaterialPalette): HeadAssemblyNo
   innerSkull.name = 'InnerSkullCore';
   innerSkull.position.set(0, 0.020, -0.012);
   innerSkull.scale.set(0.92, 0.96, 0.96);
-  head.add(innerSkull);
+  headCranialGroup.add(innerSkull);
 
   // 2. Outer White Ceramic Armor Shell (Part 2 & 3)
   const shell = createRobotShell(materials);
-  head.add(shell.group);
+  headCranialGroup.add(shell.group);
   ledMeshes.push(shell.rearNapeLED);
 
   // 2b. Sculpted Rear Cranial Armor Shell & Occipital Mechanism
   const rearHead = createRearHeadAssembly(materials);
-  head.add(rearHead.group);
+  headCranialGroup.add(rearHead.group);
   ledMeshes.push(...rearHead.ledMeshes);
 
   // 3. Glossy Obsidian Face Visor Assembly (Part 4 & 5)
   const visorAssembly = createRobotVisor(materials);
-  head.add(visorAssembly.group);
+  headCranialGroup.add(visorAssembly.group);
 
   // 4. Purple Visor LED Blade (Part 6)
   const visorLight = createRobotVisorLight(materials);
@@ -78,18 +84,18 @@ export function createRobotHead(materials: RobotMaterialPalette): HeadAssemblyNo
 
   // 5. Circular Side Modules / Ear Hardware (Part 7 & 8)
   const leftSideModule = createRobotSideModule(-1, materials);
-  head.add(leftSideModule.group);
+  headCranialGroup.add(leftSideModule.group);
   ledMeshes.push(leftSideModule.emissiveRing);
   ledMeshes.push(leftSideModule.coreRingWhite);
 
   const rightSideModule = createRobotSideModule(1, materials);
-  head.add(rightSideModule.group);
+  headCranialGroup.add(rightSideModule.group);
   ledMeshes.push(rightSideModule.emissiveRing);
   ledMeshes.push(rightSideModule.coreRingWhite);
 
   // 6. Mechanical Jaw & Chin Prow (Part 9)
   const jaw = createRobotJaw(materials);
-  head.add(jaw.group);
+  headCranialGroup.add(jaw.group);
 
   // 7. Stacked Telescoping Mechanical Neck & Posterior Cervical Mechanism
   const neckAssembly = createRobotNeck(materials);

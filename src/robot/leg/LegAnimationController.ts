@@ -166,8 +166,12 @@ export class LegAnimationController {
       leg.foot.dorsalArmor.position.y = rest.footDorsalY + p * 0.030;
       // Toe armor slides forward
       leg.foot.toeArmor.position.z = rest.footToeZ + p * 0.035;
-      // Heel armor slides backward
-      leg.foot.heelArmor.position.z = rest.footHeelZ - p * 0.030;
+      // Heel armor and integrated thruster/clevis assembly slides backward
+      if (leg.foot.heelArmor.parent && leg.foot.heelArmor.parent !== leg.foot.group) {
+        leg.foot.heelArmor.parent.position.z = -p * 0.030;
+      } else {
+        leg.foot.heelArmor.position.z = rest.footHeelZ - p * 0.030;
+      }
 
       // Dynamically track Achilles hydraulic damper
       leg.ankle.achillesDamper?.update?.();
