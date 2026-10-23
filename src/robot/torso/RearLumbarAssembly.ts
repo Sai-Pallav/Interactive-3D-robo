@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { RobotMaterialPalette } from '../materials/RobotMaterials';
 import { geoCache } from '../utils/GeometryCache';
+import { TORSO_CONFIG } from './TorsoConfig';
 
 export interface RearLumbarAssemblyNodes {
   group: THREE.Group;
@@ -147,17 +148,25 @@ export function createRearLumbarAssembly(materials: RobotMaterialPalette): RearL
   bilateralStabilizers.name = 'RearLumbarStabilizerBosses';
 
   // Dedicated structural lower clevis mounting bosses integrated on the lumbar wings
-  const actuatorMountBossGeo = geoCache.get('LumbarActuatorMountBossGeo_v5', () => new THREE.BoxGeometry(0.016, 0.014, 0.016));
+  const bossWidth = TORSO_CONFIG.stomach.poleDimensions?.lowerPlinthWidth ?? 0.014;
+  const actuatorMountBossGeo = geoCache.get(`LumbarActuatorMountBossGeo_${bossWidth}`, () => new THREE.BoxGeometry(bossWidth, 0.014, 0.016));
+  const rearCfg = TORSO_CONFIG.stomach.rearActuators;
+  const rearUpper = rearCfg?.upperMount ?? { x: 0.080, y: -0.048, z: -0.056 };
+  const rearLower = rearCfg?.lowerMount ?? { x: 0.056, y: -0.198, z: -0.040 };
+  const rearAngleZ = Math.atan2(rearUpper.x - rearLower.x, rearUpper.y - rearLower.y);
+
   for (const side of [-1, 1] as const) {
     const boss = new THREE.Mesh(actuatorMountBossGeo, materials.joint);
-    boss.position.set(side * 0.056, -0.198, -0.040);
-    boss.rotation.z = -side * 0.10;
+    // Plinth receiver boss integrated on lumbar frame wing directly seating lowerClevis (botPt y=-0.198, z=-0.040)
+    boss.position.set(side * rearLower.x, -0.201, rearLower.z + 0.003);
+    boss.rotation.z = -side * rearAngleZ;
+    boss.rotation.x = -0.05;
     bilateralStabilizers.add(boss);
 
     // Structural vertical tie-bolt securing lumbar frame into waist deck
     const tieBoltGeo = geoCache.get('LumbarWaistTieBoltGeo_v5', () => new THREE.CylinderGeometry(0.0018, 0.0018, 0.014, 8));
     const tieBolt = new THREE.Mesh(tieBoltGeo, materials.metallic);
-    tieBolt.position.set(side * 0.048, -0.206, -0.034);
+    tieBolt.position.set(side * (rearLower.x - 0.008), -0.206, rearLower.z + 0.006);
     bilateralStabilizers.add(tieBolt);
   }
   group.add(bilateralStabilizers);

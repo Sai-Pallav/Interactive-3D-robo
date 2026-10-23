@@ -208,8 +208,8 @@ export function createAnkle(
   damperGroup.add(upperEyelet);
 
   // Hydraulic cylinder casing
-  const cylLen = 0.048;
-  const cylGeo = geoCache.get('Ankle_CylGeo_v2', () => new THREE.CylinderGeometry(aCfg.cylinderRadius, aCfg.cylinderRadius, cylLen, 16));
+  const cylLen = 0.058;
+  const cylGeo = geoCache.get('Ankle_CylGeo_v3', () => new THREE.CylinderGeometry(aCfg.cylinderRadius, aCfg.cylinderRadius, cylLen, 16));
   const cylinder = new THREE.Mesh(cylGeo, materials.joint);
   cylinder.position.set(0, -cylLen * 0.5, 0);
   cylinder.castShadow = true;
@@ -227,8 +227,8 @@ export function createAnkle(
   damperGroup.add(pistonGroup);
 
   // Polished chrome metallic piston rod extending upward into cylinder
-  const pistLen = 0.054;
-  const pistGeo = geoCache.get('Ankle_PistGeo_v2', () => new THREE.CylinderGeometry(aCfg.pistonRadius, aCfg.pistonRadius, pistLen, 16));
+  const pistLen = 0.060;
+  const pistGeo = geoCache.get('Ankle_PistGeo_v3', () => new THREE.CylinderGeometry(aCfg.pistonRadius, aCfg.pistonRadius, pistLen, 16));
   const piston = new THREE.Mesh(pistGeo, materials.metallic);
   piston.position.set(0, pistLen * 0.5, 0);
   piston.castShadow = true;

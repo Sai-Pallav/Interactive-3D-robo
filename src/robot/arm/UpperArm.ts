@@ -275,7 +275,7 @@ function createUpperArmCoherentArmor(
   shellType: 'primaryOuter' | 'secondaryInner',
   side: -1 | 1
 ): THREE.BufferGeometry {
-  const cacheKey = `UpperArm_Armor_${shellType}_${side}`;
+  const cacheKey = `UpperArm_Armor_${shellType}_${side}_v4`;
   return geoCache.get(cacheKey, () => {
     const radialSegs = 36;
     const heightSegs = 32;
@@ -323,10 +323,6 @@ function createUpperArmCoherentArmor(
       // Inward chamfer at top collar (/----\ )
       const tTop = (0.10 - v) / 0.10;
       radius -= tTop * 0.0008;
-    } else if (v > 0.88) {
-      // Inward chamfer at bottom termination (\----/ )
-      const tBot = (v - 0.88) / 0.12;
-      radius -= tBot * 0.0012;
     }
 
     const angle = startAngle + u * (endAngle - startAngle);
@@ -336,23 +332,33 @@ function createUpperArmCoherentArmor(
     let rx = radius * 0.98; // Slightly increased width multiplier (was 0.95, original was 1.0)
     let rz = radius * 0.98;
 
+    // Smooth distal transition into the cylindrical elbow cuff interface (v > 0.82)
+    // Seamlessly blends corner chamfers and crowns into a clean circular socket rim (R=0.0340m)
+    // Eliminates any artificial outward step, ledge, or bulbous collar.
+    const chamferBlend = v > 0.82 ? Math.max(0, 1.0 - (v - 0.82) / 0.18) : 1.0;
+    if (v > 0.82) {
+      const tDistal = (v - 0.82) / 0.18;
+      rx = THREE.MathUtils.lerp(rx, 0.0340, tDistal);
+      rz = THREE.MathUtils.lerp(rz, 0.0340, tDistal);
+    }
+
     // Anterior Facet Crowning & 45° Corner Chamfers
     if (shellType === 'primaryOuter') {
       if (cosA > 0.50) {
         // Central anterior facet: crowned curvature
         const tCenter = (cosA - 0.50) / 0.50;
-        rz -= (1.0 - Math.pow(tCenter, 1.4) * 0.35) * 0.0020;
+        rz -= (1.0 - Math.pow(tCenter, 1.4) * 0.35) * 0.0020 * chamferBlend;
 
         // Distinct recessed vertical panel line / seam down the front
         if (cosA > 0.95 && Math.abs(sinA) < 0.10) {
           const tSeam = 1.0 - Math.abs(sinA) / 0.10;
-          rz -= tSeam * 0.0014;
+          rz -= tSeam * 0.0014 * chamferBlend;
         }
       } else if (cosA > 0.12) {
         // Crisp 45° chamfered corner bevel connecting front and lateral faces
         const tChamfer = (cosA - 0.12) / 0.38;
-        rx -= Math.sin(tChamfer * Math.PI) * 0.0020;
-        rz -= (1.0 - tChamfer) * 0.0020;
+        rx -= Math.sin(tChamfer * Math.PI) * 0.0020 * chamferBlend;
+        rz -= (1.0 - tChamfer) * 0.0020 * chamferBlend;
       }
     }
 
@@ -360,21 +366,16 @@ function createUpperArmCoherentArmor(
     if (shellType === 'secondaryInner') {
       if (cosA < -0.42) {
         const tPost = (-cosA - 0.42) / 0.58;
-        rz += Math.pow(tPost, 1.3) * 0.0024 * Math.sin(v * Math.PI * 0.85);
+        rz += Math.pow(tPost, 1.3) * 0.0024 * Math.sin(v * Math.PI * 0.85) * chamferBlend;
       } else if (cosA < 0) {
         const tChamfer = (-cosA) / 0.42;
-        rx -= Math.sin(tChamfer * Math.PI) * 0.0014;
+        rx -= Math.sin(tChamfer * Math.PI) * 0.0014 * chamferBlend;
       }
     }
 
-    // Distal Upper Elbow Transition (sleek inward funnel into the elbow joint: ╲│╱)
-    if (v > 0.75) {
-      const tDist = (v - 0.75) / 0.25;
-      const sideBias = 1.0 - Math.max(0, (cosA - 0.20) / 0.80);
-      rx -= sideBias * 0.0014 * Math.pow(tDist, 1.2);
-    }
-
-    const rFactor = layer === 0 ? 1.0 : (1.0 - thickness / Math.max(rx, rz));
+    // Distal internal seating rebate: maintains clean clearance over internal elbow spigot/spar
+    const effectiveThickness = v > 0.85 ? THREE.MathUtils.lerp(thickness, 0.0012, (v - 0.85) / 0.15) : thickness;
+    const rFactor = layer === 0 ? 1.0 : (1.0 - effectiveThickness / Math.max(rx, rz));
 
     return new THREE.Vector3(
       rFactor * rx * sinA,
@@ -646,41 +647,41 @@ export function createUpperArm(
   distalElbowMount.position.set(0, -0.2140, 0);
   mechanicalCore.add(distalElbowMount);
 
-  // Mating CNC docking cuff extending from Y = +0.0220m down to +0.0060m (meeting white armor at Y = -0.1920m)
-  const clevisCuffGeo = geoCache.get('UpperArm_ClevisCuffGeo', () => new THREE.CylinderGeometry(0.0342, 0.0328, 0.016, 32));
+  // Mating CNC docking cuff extending from Y = +0.0215m down to +0.0055m (meeting white armor at Y = -0.1920m)
+  const clevisCuffGeo = geoCache.get('UpperArm_ClevisCuffGeo_v4', () => new THREE.CylinderGeometry(0.0338, 0.0328, 0.016, 32));
   const elbowSocketCuff = new THREE.Mesh(clevisCuffGeo, materials.joint);
   elbowSocketCuff.name = 'UpperArmElbowSocketCuff';
-  elbowSocketCuff.position.set(0, 0.0140, 0);
+  elbowSocketCuff.position.set(0, 0.0135, 0);
   elbowSocketCuff.castShadow = true;
   elbowSocketCuff.receiveShadow = true;
   distalElbowMount.add(elbowSocketCuff);
 
-  // Compression gasket seal at Y = +0.0220m meeting the white ceramic armor with 0.000mm air gap
-  const cuffGasketGeo = geoCache.get('UpperArm_CuffGasketGeo', () => {
-    const g = new THREE.TorusGeometry(0.0341, 0.0008, 6, 36);
+  // Compression gasket seal seated flush with the white ceramic armor rim (top reaches Y = +0.0220m)
+  const cuffGasketGeo = geoCache.get('UpperArm_CuffGasketGeo_v4', () => {
+    const g = new THREE.TorusGeometry(0.0337, 0.0007, 6, 36);
     g.rotateX(Math.PI / 2);
     return g;
   });
   const cuffGasket = new THREE.Mesh(cuffGasketGeo, materials.joint);
-  cuffGasket.position.set(0, 0.0220, 0);
+  cuffGasket.position.set(0, 0.0213, 0);
   distalElbowMount.add(cuffGasket);
 
   // Metallic reveal accent ring
-  const cuffBezelGeo = geoCache.get('UpperArm_CuffBezelGeo', () => {
-    const g = new THREE.TorusGeometry(0.0338, 0.0006, 6, 36);
+  const cuffBezelGeo = geoCache.get('UpperArm_CuffBezelGeo_v4', () => {
+    const g = new THREE.TorusGeometry(0.0335, 0.0005, 6, 36);
     g.rotateX(Math.PI / 2);
     return g;
   });
   const cuffBezel = new THREE.Mesh(cuffBezelGeo, materials.metallic);
-  cuffBezel.position.set(0, 0.0210, 0);
+  cuffBezel.position.set(0, 0.0204, 0);
   distalElbowMount.add(cuffBezel);
 
   // 8 radial fasteners on the cuff face
-  const cuffBoltGeo = geoCache.get('UpperArm_CuffBoltGeo', () => new THREE.CylinderGeometry(0.0008, 0.0008, 0.0016, 8));
+  const cuffBoltGeo = geoCache.get('UpperArm_CuffBoltGeo_v4', () => new THREE.CylinderGeometry(0.0008, 0.0008, 0.0016, 8));
   for (let b = 0; b < 8; b++) {
     const angle = (b / 8) * Math.PI * 2;
     const bolt = new THREE.Mesh(cuffBoltGeo, materials.metallic);
-    bolt.position.set(Math.sin(angle) * 0.0318, 0.0140, Math.cos(angle) * 0.0318);
+    bolt.position.set(Math.sin(angle) * 0.0315, 0.0135, Math.cos(angle) * 0.0315);
     distalElbowMount.add(bolt);
   }
 
@@ -797,12 +798,14 @@ export function createUpperArm(
     if (v < 0.10) {
       const tTop = (0.10 - v) / 0.10;
       radius -= tTop * 0.0008;
-    } else if (v > 0.88) {
-      const tBot = (v - 0.88) / 0.12;
-      radius -= tBot * 0.0012;
     }
     let rz = radius * 0.98;
-    rz -= (1.0 - 0.35) * 0.0020;
+    if (v > 0.82) {
+      const tDistal = (v - 0.82) / 0.18;
+      rz = THREE.MathUtils.lerp(rz, 0.0340, tDistal);
+    }
+    const chamferBlend = v > 0.82 ? Math.max(0, 1.0 - (v - 0.82) / 0.18) : 1.0;
+    rz -= (1.0 - 0.35) * 0.0020 * chamferBlend;
     return rz;
   }
 
@@ -865,7 +868,7 @@ export function createUpperArm(
 
   // Lower segment: bridges from bottom of tech bay bezel down to the distal clevis cuff
   // Conforms 100% to 3D bicep taper curvature, terminating cleanly with 1.0mm bezel margin and 1.5mm cuff gasket margin
-  const antSeamLowerGeo = geoCache.get('UpperArm_AntSeamLowerGeo', () => createConformingSeamGeo(-0.1375, -0.1905, 10));
+  const antSeamLowerGeo = geoCache.get('UpperArm_AntSeamLowerGeo_v4', () => createConformingSeamGeo(-0.1375, -0.1905, 10));
   const antSeamLower = new THREE.Mesh(antSeamLowerGeo, materials.joint);
   antSeamLower.name = 'UpperArmAnteriorCenterSeamLower';
   antSeamLower.castShadow = true;

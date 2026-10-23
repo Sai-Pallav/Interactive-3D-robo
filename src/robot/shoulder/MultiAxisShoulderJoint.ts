@@ -652,12 +652,11 @@ function positionLinkBetweenPoints(
   const midpoint = new THREE.Vector3().addVectors(start, end).multiplyScalar(0.5);
   link.position.copy(midpoint);
 
-  const dir = new THREE.Vector3().subVectors(end, start).normalize();
-  const up = new THREE.Vector3(side, 0, 0);
-  const matrix = new THREE.Matrix4();
-  const right = new THREE.Vector3().crossVectors(dir, up).normalize();
-  const recomputedUp = new THREE.Vector3().crossVectors(right, dir).normalize();
-  matrix.makeBasis(dir, right, recomputedUp);
+  const localY = new THREE.Vector3().subVectors(end, start).normalize();
+  const lateral = new THREE.Vector3(side, 0, 0);
+  const localZ = new THREE.Vector3().crossVectors(lateral, localY).normalize();
+  const localX = new THREE.Vector3().crossVectors(localY, localZ).normalize();
+  const matrix = new THREE.Matrix4().makeBasis(localX, localY, localZ);
   link.quaternion.setFromRotationMatrix(matrix);
 }
 
@@ -807,15 +806,19 @@ export function createMultiAxisShoulderJoint(
   const { carrierGroup, upperTargetPos, lowerTargetPos } = createSecondaryAxisCarrier(side, materials);
 
   // 5. Dual Precision Machined Structural Links
-  const upperSpan = upperAnchorPos.distanceTo(upperTargetPos);
+  const jointRotInv = new THREE.Quaternion().setFromEuler(shoulderJoint.rotation).invert();
+  const localUpperAnchor = upperAnchorPos.clone().applyQuaternion(jointRotInv);
+  const localLowerAnchor = lowerAnchorPos.clone().applyQuaternion(jointRotInv);
+
+  const upperSpan = localUpperAnchor.distanceTo(upperTargetPos);
   const upperLink = createMachinedStructuralLink(upperSpan, 0.0140, 0.0060, materials, linkMaterial);
   upperLink.name = side === -1 ? 'LeftShoulderUpperLink' : 'RightShoulderUpperLink';
-  positionLinkBetweenPoints(upperLink, upperAnchorPos, upperTargetPos, side);
+  positionLinkBetweenPoints(upperLink, localUpperAnchor, upperTargetPos, side);
 
-  const lowerSpan = lowerAnchorPos.distanceTo(lowerTargetPos);
+  const lowerSpan = localLowerAnchor.distanceTo(lowerTargetPos);
   const lowerLink = createMachinedStructuralLink(lowerSpan, 0.0135, 0.0060, materials, linkMaterial);
   lowerLink.name = side === -1 ? 'LeftShoulderLowerLink' : 'RightShoulderLowerLink';
-  positionLinkBetweenPoints(lowerLink, lowerAnchorPos, lowerTargetPos, side);
+  positionLinkBetweenPoints(lowerLink, localLowerAnchor, lowerTargetPos, side);
 
   // High-performance static batching: merge carrierGroup + upperLink + lowerLink by material
   const linkGroupContainer = new THREE.Group();

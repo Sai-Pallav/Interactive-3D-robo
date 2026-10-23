@@ -707,7 +707,7 @@ function createMountingBulkhead(
 
   const boltGeo = geoCache.get('MountingBulkheadBoltGeo', () => {
     const g = new THREE.CylinderGeometry(0.0013, 0.0013, 0.0035, 6);
-    g.rotateZ(Math.PI / 2);
+    g.rotateX(Math.PI / 2);
     return g;
   });
 
@@ -716,9 +716,9 @@ function createMountingBulkhead(
     for (let b = 0; b < 12; b++) {
       const angle = (b / 12) * Math.PI * 2;
       const m = new THREE.Matrix4().makeTranslation(
-        side * 0.0020,
+        Math.cos(angle) * 0.0410,
         Math.sin(angle) * 0.0410,
-        Math.cos(angle) * 0.0410
+        side * 0.0018
       );
       boltItems.push({ geometry: boltGeo, matrix: m });
     }

@@ -287,50 +287,75 @@ export function createRearSpineAssembly(
   const dampersGroup = new THREE.Group();
   dampersGroup.name = 'BilateralRearActuators';
 
-  const barrelRadius = 0.0068;
-  const rodRadius = 0.0036;
+  const rearCfg = TORSO_CONFIG.stomach.rearActuators;
+  const commonDims = TORSO_CONFIG.stomach.poleDimensions;
+  const barrelRadius = rearCfg?.cylinderRadius ?? commonDims?.cylinderRadius ?? 0.0068;
+  const rodRadius = rearCfg?.pistonRadius ?? commonDims?.pistonRadius ?? 0.0036;
+  const clevisWidth = commonDims?.upperClevisWidth ?? 0.016;
+  const lowerPlinthWidth = commonDims?.lowerPlinthWidth ?? 0.014;
+  const pinRadius = commonDims?.pinRadius ?? 0.0032;
 
   const rearDamperBarrelGeo = geoCache.get('RearActuatorBarrelGeo_v5', () => new THREE.CylinderGeometry(barrelRadius, barrelRadius, 0.066, 24));
-  const rearDamperRodGeo = geoCache.get('RearActuatorRodGeo_v5', () => new THREE.CylinderGeometry(rodRadius, rodRadius, 0.062, 20));
-  const uniballGeo = geoCache.get('RearActuatorUniballGeo_v5', () => new THREE.SphereGeometry(0.0055, 16, 14));
-  const clevisBracketGeo = geoCache.get('RearActuatorClevisGeo_v5', () => new THREE.BoxGeometry(0.015, 0.014, 0.014));
-  const clevisPinGeo = geoCache.get('RearActuatorPinGeo_v5', () => {
-    const g = new THREE.CylinderGeometry(0.0020, 0.0020, 0.018, 12);
+  const uniballGeo = geoCache.get(`RearActuatorUniballGeo_${rodRadius.toFixed(4)}`, () => new THREE.SphereGeometry(0.0055, 18, 14));
+
+  const upperClevisBracketGeo = geoCache.get(`RearActuatorUpperClevis_${clevisWidth}`, () => new THREE.BoxGeometry(clevisWidth, 0.016, 0.018));
+  const upperClevisPinGeo = geoCache.get(`RearActuatorUpperPin_${pinRadius}_${clevisWidth}`, () => {
+    const g = new THREE.CylinderGeometry(pinRadius, pinRadius, clevisWidth + 0.004, 16);
     g.rotateZ(Math.PI / 2);
     return g;
   });
-  const collarGeo = geoCache.get('RearActuatorCollarGeo_v5', () => new THREE.CylinderGeometry(barrelRadius * 1.15, barrelRadius * 1.05, 0.005, 24));
-  const endCapGeo = geoCache.get('RearActuatorEndCapGeo_v5', () => new THREE.CylinderGeometry(barrelRadius * 1.05, barrelRadius * 1.05, 0.0025, 24));
-  const indicatorGeo = geoCache.get('RearActuatorLedGeo_v5', () => new THREE.CylinderGeometry(barrelRadius * 1.035, barrelRadius * 1.035, 0.0024, 24));
-  const bezelGeo = geoCache.get('RearActuatorBezelGeo_v5', () => new THREE.CylinderGeometry(barrelRadius * 1.025, barrelRadius * 1.025, 0.0050, 24));
-  const fluidPortGeo = geoCache.get('RearActuatorPortGeo_v5', () => new THREE.BoxGeometry(0.0035, 0.0045, 0.0035));
+
+  const lowerClevisBracketGeo = geoCache.get(`RearActuatorLowerClevis_${lowerPlinthWidth}`, () => new THREE.BoxGeometry(lowerPlinthWidth, 0.016, 0.018));
+  const lowerClevisPinGeo = geoCache.get(`RearActuatorLowerPin_${pinRadius}_${lowerPlinthWidth}`, () => {
+    const g = new THREE.CylinderGeometry(pinRadius, pinRadius, lowerPlinthWidth + 0.004, 16);
+    g.rotateZ(Math.PI / 2);
+    return g;
+  });
+
+  const collarGeo = geoCache.get(`RearActuatorCollar_${barrelRadius.toFixed(4)}`, () => new THREE.CylinderGeometry(barrelRadius * 1.10, barrelRadius * 1.02, 0.006, 24));
+  const endCapGeo = geoCache.get(`RearActuatorEndCap_${barrelRadius.toFixed(4)}`, () => new THREE.CylinderGeometry(barrelRadius * 1.06, barrelRadius * 1.06, 0.0035, 24));
+  const indicatorGeo = geoCache.get(`RearActuatorLed_${barrelRadius.toFixed(4)}`, () => new THREE.CylinderGeometry(barrelRadius * 1.048, barrelRadius * 1.048, 0.0032, 24));
+  const bezelGeo = geoCache.get(`RearActuatorBezel_${barrelRadius.toFixed(4)}`, () => new THREE.CylinderGeometry(barrelRadius * 1.04, barrelRadius * 1.04, 0.0060, 24));
+  const fluidPortGeo = geoCache.get('RearActuatorPortGeo_v6', () => new THREE.BoxGeometry(0.0050, 0.0065, 0.0050));
+
+  const rearUpper = rearCfg?.upperMount ?? { x: 0.080, y: -0.048, z: -0.056 };
+  const rearLower = rearCfg?.lowerMount ?? { x: 0.056, y: -0.198, z: -0.040 };
+  const rearAngleZ = Math.atan2(rearUpper.x - rearLower.x, rearUpper.y - rearLower.y);
 
   for (const side of [-1, 1] as const) {
     const actGroup = new THREE.Group();
     actGroup.name = `RearActuator_${side === -1 ? 'L' : 'R'}`;
 
     // Structural coordinates: from thoracic lower frame bulkhead lugs down to lumbar chassis
-    // Symmetrical, clear line of action with ~0.035 lateral clearance from the central spine
-    const topPt = new THREE.Vector3(side * 0.062, -0.048, -0.056);
-    const botPt = new THREE.Vector3(side * 0.056, -0.198, -0.040);
+    // Symmetrical, clear line of action with balanced outward divergence matching front/side poles
+    const topPt = new THREE.Vector3(side * rearUpper.x, rearUpper.y, rearUpper.z);
+    const botPt = new THREE.Vector3(side * rearLower.x, rearLower.y, rearLower.z);
     const dist = topPt.distanceTo(botPt);
 
     // 7.1 Upper Mounting Bracket (mating seamlessly with thoracic bulkhead lug)
-    const upperClevis = new THREE.Mesh(clevisBracketGeo, materials.jointDoubleSide);
+    const upperClevis = new THREE.Mesh(upperClevisBracketGeo, materials.jointDoubleSide);
     upperClevis.position.copy(topPt);
+    upperClevis.rotation.z = -side * rearAngleZ;
+    upperClevis.rotation.x = 0.04;
     dampersGroup.add(upperClevis);
 
-    const upperPin = new THREE.Mesh(clevisPinGeo, materials.metallicDoubleSide);
+    const upperPin = new THREE.Mesh(upperClevisPinGeo, materials.metallicDoubleSide);
     upperPin.position.copy(topPt);
+    upperPin.rotation.z = -side * rearAngleZ;
+    upperPin.rotation.x = 0.04;
     dampersGroup.add(upperPin);
 
     // 7.2 Lower Mounting Bracket (anchoring firmly into lumbar chassis lateral receiver boss)
-    const lowerClevis = new THREE.Mesh(clevisBracketGeo, materials.jointDoubleSide);
+    const lowerClevis = new THREE.Mesh(lowerClevisBracketGeo, materials.jointDoubleSide);
     lowerClevis.position.copy(botPt);
+    lowerClevis.rotation.z = -side * rearAngleZ;
+    lowerClevis.rotation.x = -0.05;
     dampersGroup.add(lowerClevis);
 
-    const lowerPin = new THREE.Mesh(clevisPinGeo, materials.metallicDoubleSide);
+    const lowerPin = new THREE.Mesh(lowerClevisPinGeo, materials.metallicDoubleSide);
     lowerPin.position.copy(botPt);
+    lowerPin.rotation.z = -side * rearAngleZ;
+    lowerPin.rotation.x = -0.05;
     dampersGroup.add(lowerPin);
 
     // 7.3 Actuator Body along line of action
@@ -344,42 +369,50 @@ export function createRearSpineAssembly(
     actGroup.add(topBall);
 
     // Dark titanium cylinder barrel
+    const barrelLen = 0.066;
+    const barrelCenterY = -dist * 0.30;
     const barrel = new THREE.Mesh(rearDamperBarrelGeo, materials.jointDoubleSide);
-    barrel.position.set(0, -dist * 0.30, 0);
+    barrel.position.set(0, barrelCenterY, 0);
     barrel.castShadow = true;
     actGroup.add(barrel);
 
     // Stepped end caps
-    for (const cY of [-dist * 0.30 + 0.033, -dist * 0.30 - 0.033]) {
+    for (const cY of [barrelCenterY + barrelLen * 0.5, barrelCenterY - barrelLen * 0.5]) {
       const cap = new THREE.Mesh(endCapGeo, materials.metallicDoubleSide);
       cap.position.set(0, cY, 0);
       actGroup.add(cap);
     }
 
-    // Hydraulic 90° fluid port fitting on barrel upper end
+    // Hydraulic fluid port fitting on barrel upper end
     const fluidPort = new THREE.Mesh(fluidPortGeo, materials.metallicDoubleSide);
-    fluidPort.position.set(0, -dist * 0.30 + 0.024, barrelRadius + 0.001);
+    fluidPort.position.set(0, barrelCenterY + barrelLen * 0.36, barrelRadius + 0.001);
     actGroup.add(fluidPort);
 
     // Restrained purple optical status indicator band in flush metallic bezel
     const bezel = new THREE.Mesh(bezelGeo, materials.metallicDoubleSide);
-    bezel.position.set(0, -dist * 0.30 + 0.012, 0);
+    bezel.position.set(0, barrelCenterY + barrelLen * 0.18, 0);
     actGroup.add(bezel);
 
     const indicator = new THREE.Mesh(indicatorGeo, materials.purpleEmissive);
     indicator.name = `RearActuator_StatusLed_${side === -1 ? 'L' : 'R'}`;
-    indicator.position.set(0, -dist * 0.30 + 0.012, 0);
+    indicator.position.set(0, barrelCenterY + barrelLen * 0.18, 0);
     actGroup.add(indicator);
     ledMeshes.push(indicator);
 
     // Gland seal collar at barrel lower base
     const collar = new THREE.Mesh(collarGeo, materials.jointDoubleSide);
-    collar.position.set(0, -dist * 0.30 - 0.034, 0);
+    collar.position.set(0, barrelCenterY - barrelLen * 0.5 - 0.003, 0);
     actGroup.add(collar);
 
-    // Mirror-polished chrome telescoping rod
+    // Mirror-polished chrome telescoping rod extending continuously to lower uniball
+    const rodStartY = barrelCenterY - barrelLen * 0.5 + 0.006;
+    const rodEndY = -dist;
+    const rodLen = Math.abs(rodEndY - rodStartY);
+    const rodCenterY = (rodStartY + rodEndY) * 0.5;
+
+    const rearDamperRodGeo = geoCache.get('RearActuatorRodGeo_v5', () => new THREE.CylinderGeometry(rodRadius, rodRadius, rodLen, 24));
     const rod = new THREE.Mesh(rearDamperRodGeo, materials.metallicDoubleSide);
-    rod.position.set(0, -dist * 0.70, 0);
+    rod.position.set(0, rodCenterY, 0);
     rod.castShadow = true;
     actGroup.add(rod);
 

@@ -41,96 +41,21 @@ export function createRearArmAssembly(
   // =========================================================================
   // 1. REAR UPPER ARM (TRICEP) ASSEMBLY
   // Parented to upperArm.group
+  // Note: All rear upper-arm mechanics are housed internally within UpperArm.ts
+  // mechanicalCore (tricep actuators & pistons <= 18mm radius). The white
+  // ceramic armor shell provides a clean, continuous posterior surface.
+  // Unintended protruding tubes, dampers, service plates, hex bolts, and
+  // duplicate cuffs that caused clipping, streaks, and specks have been removed.
   // =========================================================================
   const upperArmRear = new THREE.Group();
   upperArmRear.name = side === -1 ? 'LeftUpperArmRearAssembly' : 'RightUpperArmRearAssembly';
 
-  // Longitudinal Tricep Structural Spine Rib (Dark Titanium)
-  // Sits along the posterior meridian (z ≈ -0.035, y = -0.050 to -0.180)
-  const tricepSpineGeo = geoCache.get('UpperArm_TricepSpineGeo_v2', () => {
-    const pts = [
-      new THREE.Vector3(0, -0.048, -0.034),
-      new THREE.Vector3(0, -0.095, -0.037),
-      new THREE.Vector3(0, -0.145, -0.036),
-      new THREE.Vector3(0, -0.185, -0.032),
-    ];
-    const curve = new THREE.CatmullRomCurve3(pts);
-    return new THREE.TubeGeometry(curve, 18, 0.0028, 8, false);
-  });
-
-  const tricepSpine = new THREE.Mesh(tricepSpineGeo, materials.joint);
-  tricepSpine.name = 'TricepStructuralSpine';
-  tricepSpine.castShadow = true;
-  upperArmRear.add(tricepSpine);
-
-  // Recessed Anatomical Tricep Seam Plate
-  const tricepSeamGeo = geoCache.get('UpperArm_TricepSeamGeo', () => new THREE.BoxGeometry(0.003, 0.120, 0.002));
-  const tricepSeam = new THREE.Mesh(tricepSeamGeo, materials.joint);
-  tricepSeam.position.set(-side * 0.016, -0.115, -0.035);
-  upperArmRear.add(tricepSeam);
-
-  // Secondary Linear Tricep Actuator Damper
-  const tricepDamperGroup = new THREE.Group();
-  tricepDamperGroup.name = 'TricepLinearDamper';
-  tricepDamperGroup.position.set(side * 0.012, -0.118, -0.035);
-
-  const damperBarrelGeo = geoCache.get('TricepDamperBarrelGeo_v2', () => new THREE.CylinderGeometry(0.0036, 0.0038, 0.046, 16));
-  const damperBarrel = new THREE.Mesh(damperBarrelGeo, materials.joint);
-  damperBarrel.position.set(0, 0.010, 0);
-  damperBarrel.castShadow = true;
-  tricepDamperGroup.add(damperBarrel);
-
-  const damperRodGeo = geoCache.get('TricepDamperRodGeo_v2', () => new THREE.CylinderGeometry(0.0020, 0.0020, 0.042, 14));
-  const damperRod = new THREE.Mesh(damperRodGeo, materials.metallic);
-  damperRod.position.set(0, -0.016, 0);
-  damperRod.castShadow = true;
-  tricepDamperGroup.add(damperRod);
-
-  // Upper and lower rod-end uniballs
-  const uniballGeo = geoCache.get('TricepUniballGeo_v2', () => new THREE.SphereGeometry(0.0042, 12, 10));
-  const topBall = new THREE.Mesh(uniballGeo, materials.metallic);
-  topBall.position.set(0, 0.033, 0);
-  tricepDamperGroup.add(topBall);
-
-  const botBall = new THREE.Mesh(uniballGeo, materials.metallic);
-  botBall.position.set(0, -0.033, 0);
-  tricepDamperGroup.add(botBall);
-
-  // Fluid union fitting on damper
-  const fluidUnionGeo = geoCache.get('TricepFluidUnionGeo', () => new THREE.BoxGeometry(0.003, 0.004, 0.003));
-  const fluidUnion = new THREE.Mesh(fluidUnionGeo, materials.metallic);
-  fluidUnion.position.set(0, 0.024, -0.003);
-  tricepDamperGroup.add(fluidUnion);
-
-  upperArmRear.add(tricepDamperGroup);
-
-  // Posterior Tricep Service Maintenance Panel with 4 Hex Bolts
-  const servicePanelGeo = geoCache.get('TricepServicePanelGeo_v2', () => new THREE.BoxGeometry(0.014, 0.036, 0.0024));
-  const servicePanel = new THREE.Mesh(servicePanelGeo, materials.joint);
-  servicePanel.name = 'TricepServicePanel';
-  servicePanel.position.set(-side * 0.010, -0.118, -0.035);
-  upperArmRear.add(servicePanel);
-
+  // Shared micro-fastener bolt geometry used across forearm, wrist, and hand details
   const boltGeo = geoCache.get('ArmRearBoltGeo_v2', () => {
     const g = new THREE.CylinderGeometry(0.0009, 0.0009, 0.0016, 6);
     g.rotateX(Math.PI / 2);
     return g;
   });
-
-  for (const bx of [-side * 0.014, -side * 0.006]) {
-    for (const by of [-0.130, -0.106]) {
-      const bolt = new THREE.Mesh(boltGeo, materials.metallic);
-      bolt.position.set(bx, by, -0.0365);
-      upperArmRear.add(bolt);
-    }
-  }
-
-  // Distal Elbow-Facing Transition Cuff (Dark Titanium)
-  const elbowCuffGeo = geoCache.get('TricepElbowCuffGeo_v2', () => new THREE.CylinderGeometry(0.033, 0.034, 0.010, 24));
-  const elbowCuff = new THREE.Mesh(elbowCuffGeo, materials.joint);
-  elbowCuff.position.set(0, -0.190, 0);
-  elbowCuff.scale.set(1.0, 1.0, 0.92);
-  upperArmRear.add(elbowCuff);
 
   // =========================================================================
   // 2. REAR FOREARM (EXTENSOR) & POSTERIOR ELBOW ASSEMBLY

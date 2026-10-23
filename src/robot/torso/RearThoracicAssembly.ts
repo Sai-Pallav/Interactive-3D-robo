@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { RobotMaterialPalette } from '../materials/RobotMaterials';
 import { geoCache } from '../utils/GeometryCache';
+import { TORSO_CONFIG } from './TorsoConfig';
 
 export interface RearThoracicAssemblyNodes {
   group: THREE.Group;
@@ -117,19 +118,28 @@ export function createRearThoracicAssembly(materials: RobotMaterialPalette): Rea
 
   // 1c. Structural Upper Actuator Mounting Bulkhead Lugs (Anchoring paired diagonal actuators)
   const actuatorMountLugGeo = geoCache.get('ThoracicActuatorMountLugGeo_v7', () => new THREE.BoxGeometry(0.016, 0.016, 0.020));
-  const actuatorGussetGeo = geoCache.get('ThoracicActuatorGussetGeo_v7', () => new THREE.BoxGeometry(0.020, 0.007, 0.014));
+  // Continuous medial reinforcement gusset bridging from central backbone chassis (x ≈ ±0.026) to actuator lug (x = ±0.080)
+  const actuatorGussetGeo = geoCache.get('ThoracicActuatorGussetGeo_v8', () => new THREE.BoxGeometry(0.048, 0.008, 0.014));
+
+  const rearCfg = TORSO_CONFIG.stomach.rearActuators;
+  const rearUpper = rearCfg?.upperMount ?? { x: 0.080, y: -0.048, z: -0.056 };
+  const rearLower = rearCfg?.lowerMount ?? { x: 0.056, y: -0.198, z: -0.040 };
+  const rearAngleZ = Math.atan2(rearUpper.x - rearLower.x, rearUpper.y - rearLower.y);
 
   for (const side of [-1, 1] as const) {
     const lug = new THREE.Mesh(actuatorMountLugGeo, materials.joint);
     lug.name = `ThoracicActuatorLug_${side === -1 ? 'L' : 'R'}`;
-    lug.position.set(side * 0.062, -0.045, -0.058);
+    // Anchor directly on thoracic chassis frame bulkhead above and behind the clevis pin (y = -0.048, z = -0.056)
+    lug.position.set(side * rearUpper.x, -0.045, -0.058);
+    lug.rotation.z = -side * rearAngleZ;
     lug.rotation.x = 0.04;
     lug.castShadow = true;
     group.add(lug);
 
     const gusset = new THREE.Mesh(actuatorGussetGeo, materials.joint);
-    gusset.position.set(side * 0.044, -0.045, -0.060);
-    gusset.rotation.z = -side * 0.16;
+    // Centered at x = ±0.050 with width 0.048, solidly bridging from x = ±0.026 (backbone) to x = ±0.074 (lug inner flank)
+    gusset.position.set(side * 0.050, -0.045, -0.060);
+    gusset.rotation.z = -side * (rearAngleZ * 0.5);
     gusset.rotation.x = 0.04;
     group.add(gusset);
   }
@@ -182,7 +192,7 @@ export function createRearThoracicAssembly(materials: RobotMaterialPalette): Rea
   const finGeo = geoCache.get('RadiatorFinGeo_v8', () => new THREE.BoxGeometry(0.0010, 0.022, 0.003));
 
   // Access Panel Geometry definitions
-  const accessSeamGeo = geoCache.get('AccessSeamGeo_v8', () => new THREE.BoxGeometry(0.047, 0.023, 0.0024));
+  const accessSeamGeo = geoCache.get('AccessSeamGeo_v8', () => new THREE.BoxGeometry(0.0432, 0.0192, 0.0008));
   const accessPanelGeo = geoCache.get('AccessPanelGeo_v8', () => {
     const shape = new THREE.Shape();
     const W = 0.042 * 0.5;
@@ -302,12 +312,12 @@ export function createRearThoracicAssembly(materials: RobotMaterialPalette): Rea
 
     // Dark perimeter seam channel
     const seam = new THREE.Mesh(accessSeamGeo, materials.jointDoubleSide);
-    seam.position.set(0, 0, -0.0006);
+    seam.position.set(0, 0, -0.0003);
     accessGroup.add(seam);
 
     // Flush ceramic access cover plate
     const cover = new THREE.Mesh(accessPanelGeo, materials.armorDoubleSide);
-    cover.position.set(0, 0, -0.0010);
+    cover.position.set(0, 0, -0.0008);
     cover.castShadow = true;
     accessGroup.add(cover);
 
@@ -315,7 +325,7 @@ export function createRearThoracicAssembly(materials: RobotMaterialPalette): Rea
     for (const hx of [-0.015, 0.015]) {
       for (const hy of [-0.0055, 0.0055]) {
         const screw = new THREE.Mesh(hexScrewGeo, materials.metallicDoubleSide);
-        screw.position.set(hx, hy, -0.0020);
+        screw.position.set(hx, hy, -0.0016);
         accessGroup.add(screw);
       }
     }

@@ -385,7 +385,7 @@ export function createShin(
   anteriorKeelArmor.name = side === -1 ? 'ShinAnteriorKeel_L' : 'ShinAnteriorKeel_R';
   anteriorKeelArmor.position.set(
     0,
-    -0.125,
+    -0.135,
     cfg.frame.spineDepth * 0.5 + cfg.anteriorKeel.thickness * 0.4
   );
   anteriorKeelArmor.castShadow = true;

@@ -760,41 +760,58 @@ export function createUpperTorsoFrame(materials: RobotMaterialPalette): UpperTor
   tempMetallic.add(bearingRace);
 
   // 6. Bilateral Actuator Clevis Housings (Outer & Inner upper mounts for all 4 abdominal poles)
+  const dualCfg = TORSO_CONFIG.stomach.dualActuators;
+  const outerMount = dualCfg?.outer.upperMount || { x: 0.098, y: -0.066, z: 0.014 };
+  const innerMount = dualCfg?.inner.upperMount || { x: 0.076, y: -0.070, z: 0.006 };
+  const outerLower = dualCfg?.outer.lowerMount || { x: 0.076, y: -0.204, z: 0.016 };
+  const innerLower = dualCfg?.inner.lowerMount || { x: 0.054, y: -0.204, z: 0.012 };
+
+  const outerAngleZ = Math.atan2(outerMount.x - outerLower.x, outerMount.y - outerLower.y);
+  const innerAngleZ = Math.atan2(innerMount.x - innerLower.x, innerMount.y - innerLower.y);
+
   const upperMounts = [
-    { x: 0.118, y: -0.066, z: 0.024, isOuter: true },
-    { x: 0.068, y: -0.070, z: 0.006, isOuter: false },
+    { x: outerMount.x, y: outerMount.y, z: outerMount.z, isOuter: true, angleZ: outerAngleZ },
+    { x: innerMount.x, y: innerMount.y, z: innerMount.z, isOuter: false, angleZ: innerAngleZ },
   ];
 
   for (const side of [-1, 1] as const) {
     for (const mount of upperMounts) {
-      const cWidth = mount.isOuter ? 0.022 : 0.016;
-      const clevisGeo = new THREE.BoxGeometry(cWidth, 0.022, 0.022);
+      const cWidth = TORSO_CONFIG.stomach.poleDimensions?.upperClevisWidth ?? (mount.isOuter ? 0.016 : 0.016);
+      const clevisGeo = geoCache.get(`Chest_Clevis_${cWidth}`, () => new THREE.BoxGeometry(cWidth, 0.022, 0.022));
       const clevis = new THREE.Mesh(clevisGeo, materials.joint);
       clevis.position.set(side * mount.x, mount.y, mount.z);
-      clevis.rotation.z = side * (mount.isOuter ? 0.28 : 0.14);
+      clevis.rotation.z = -side * mount.angleZ;
       tempLower.add(clevis);
 
       // Hardened pivot pin with hex fastener head
-      const pinGeo = new THREE.CylinderGeometry(0.0036, 0.0036, cWidth + 0.006, 16);
+      const pinRadius = TORSO_CONFIG.stomach.poleDimensions?.pinRadius ?? 0.0032;
+      const pinGeo = geoCache.get(`Chest_ClevisPin_${pinRadius}_${cWidth}`, () => new THREE.CylinderGeometry(pinRadius, pinRadius, cWidth + 0.006, 16));
       const pin = new THREE.Mesh(pinGeo, materials.metallic);
-      pin.rotation.z = Math.PI / 2;
+      pin.rotation.z = Math.PI / 2 - side * mount.angleZ;
       pin.position.set(side * mount.x, mount.y, mount.z);
       tempMetallic.add(pin);
 
+      const headGeo = geoCache.get('Chest_ClevisPinHead', () => new THREE.CylinderGeometry(0.0048, 0.0048, 0.0024, 6));
       for (const pHeadSide of [-1, 1] as const) {
-        const headGeo = new THREE.CylinderGeometry(0.0048, 0.0048, 0.0024, 6);
         const pinHead = new THREE.Mesh(headGeo, materials.joint);
-        pinHead.rotation.z = Math.PI / 2;
-        pinHead.position.set(side * mount.x + pHeadSide * (cWidth * 0.5 + 0.002), mount.y, mount.z);
+        pinHead.rotation.z = Math.PI / 2 - side * mount.angleZ;
+        const headOffset = pHeadSide * (cWidth * 0.5 + 0.002);
+        const cosA = Math.cos(-side * mount.angleZ);
+        const sinA = Math.sin(-side * mount.angleZ);
+        pinHead.position.set(
+          side * mount.x + headOffset * cosA,
+          mount.y + headOffset * sinA,
+          mount.z
+        );
         tempLower.add(pinHead);
       }
 
       // Angled sub-costal reinforcement truss spar linking clevis upward into chest frame
       if (mount.isOuter) {
-        const sparGeo = new THREE.BoxGeometry(0.036, 0.012, 0.016);
+        const sparGeo = geoCache.get('Chest_ClevisSpar', () => new THREE.BoxGeometry(0.036, 0.012, 0.016));
         const spar = new THREE.Mesh(sparGeo, materials.joint);
-        spar.position.set(side * 0.088, -0.058, 0.020);
-        spar.rotation.z = -side * 0.20;
+        spar.position.set(side * (mount.x - 0.010), mount.y + 0.008, mount.z - 0.004);
+        spar.rotation.z = -side * (mount.angleZ + 0.05);
         tempLower.add(spar);
       }
     }

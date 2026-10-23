@@ -231,16 +231,16 @@ function createVertebraModule(
 
     // Bilateral thoracic transition mounting lugs tying Vertebra 01 into chest load path
     for (const side of [-1, 1] as const) {
-      const lugGeo = new THREE.BoxGeometry(0.014, 0.014, 0.018);
+      const lugGeo = new THREE.BoxGeometry(0.014, 0.014, 0.014);
       const lug = new THREE.Mesh(lugGeo, materials.joint);
-      lug.position.set(side * (halfW * 0.84), halfH * 0.45, 0.016);
+      lug.position.set(side * (halfW * 0.70), halfH * 0.45, 0.030);
       lug.rotation.y = -side * 0.15;
       group.add(lug);
 
       const pinGeo = new THREE.CylinderGeometry(0.0022, 0.0022, 0.018, 12);
       const pin = new THREE.Mesh(pinGeo, materials.metallic);
       pin.rotation.z = Math.PI / 2;
-      pin.position.set(side * (halfW * 0.84), halfH * 0.45, 0.016);
+      pin.position.set(side * (halfW * 0.70), halfH * 0.45, 0.030);
       group.add(pin);
     }
 
@@ -310,7 +310,7 @@ function createVertebraModule(
   const zFace = pCfg.z;
   const zRidge = zFace + 0.007;
   const zSide = zFace - 0.008;
-  const zBack = -0.010;
+  const zBack = zFace - 0.020;
 
   const positions: number[] = [];
 
@@ -352,10 +352,10 @@ function createVertebraModule(
   const pWingBotL: [number, number, number] = [-botW, -halfH + 0.002, zSide];
   const pWingBotR: [number, number, number] = [botW, -halfH + 0.002, zSide];
 
-  const pBackTopL: [number, number, number] = [-topW * 0.9, halfH, zBack];
-  const pBackTopR: [number, number, number] = [topW * 0.9, halfH, zBack];
-  const pBackBotL: [number, number, number] = [-botW * 0.9, -halfH, zBack];
-  const pBackBotR: [number, number, number] = [botW * 0.9, -halfH, zBack];
+  const pBackTopL: [number, number, number] = [-topW * 0.82, halfH, zBack];
+  const pBackTopR: [number, number, number] = [topW * 0.82, halfH, zBack];
+  const pBackBotL: [number, number, number] = [-botW * 0.82, -halfH, zBack];
+  const pBackBotR: [number, number, number] = [botW * 0.82, -halfH, zBack];
 
   // Front center panels (meeting at central horizontal ridge)
   addQuad(pMidL, pMidM, pTopM, pTopL);
@@ -412,59 +412,35 @@ function createVertebraModule(
   group.add(creviceLed);
   ledMeshes.push(creviceLed);
   
-  // CRITICAL FIX: Prominent horizontal dark separator bands on outer armor surface
-  // These create the visible segmented ring appearance matching the reference image
+  // Prominent horizontal dark structural inter-vertebral brace
+  // Connects adjacent spine segments within the inter-segment gap without colliding with actuators or hanging in mid-air
   if (index < cfg.vertebraCount - 1) {
-    // Bottom dark separator band (visible horizontal black line between segments)
-    const separatorHeight = 0.006;
-    const separatorW = w * 1.02;
-    
-    // Create rounded separator band using ExtrudeGeometry with bevel
-    const separatorShape = new THREE.Shape();
-    separatorShape.moveTo(-separatorW * 0.5, -separatorHeight * 0.5);
-    separatorShape.lineTo(separatorW * 0.5, -separatorHeight * 0.5);
-    separatorShape.lineTo(separatorW * 0.5, separatorHeight * 0.5);
-    separatorShape.lineTo(-separatorW * 0.5, separatorHeight * 0.5);
-    separatorShape.closePath();
-    
-    const separatorGeo = new THREE.ExtrudeGeometry(separatorShape, {
-      depth: 0.002,
-      bevelEnabled: true,
-      bevelThickness: 0.0008,
-      bevelSize: 0.0008,
-      bevelSegments: 3,
-    });
-    separatorGeo.center();
-    
-    const separatorMesh = new THREE.Mesh(separatorGeo, materials.joint);
-    separatorMesh.position.set(0, -halfH - separatorHeight * 0.5, zFace + 0.002);
-    separatorMesh.castShadow = true;
-    separatorMesh.receiveShadow = true;
-    group.add(separatorMesh);
+    const nextCfg = cfg.armorPlates[index + 1];
+    const currentBackingHalfW = halfW * 0.82;
+    const nextBackingHalfW = (nextCfg.width * 0.5) * 0.82;
+    const maxHalfW = Math.min(currentBackingHalfW, nextBackingHalfW) * 0.94;
+    const braceW = maxHalfW * 2;
+
+    const nextTopY = (nextCfg.y - pCfg.y) + (nextCfg.height * 0.5);
+    const gapHeight = Math.abs(-halfH - nextTopY);
+    const braceH = Math.min(gapHeight - 0.0008, 0.0044);
+    const braceY = (-halfH + nextTopY) * 0.5;
+
+    const avgZFace = (zFace + nextCfg.z) * 0.5;
+    const braceDepth = 0.014;
+    const braceZ = avgZFace - 0.002 - braceDepth * 0.5;
+
+    const braceGeo = geoCache.get(
+      `VertebraBrace_${braceW.toFixed(4)}_${braceH.toFixed(4)}`,
+      () => new THREE.BoxGeometry(braceW, braceH, braceDepth)
+    );
+    const braceMesh = new THREE.Mesh(braceGeo, materials.joint);
+    braceMesh.name = `VertebraBrace_${index + 1}_${index + 2}`;
+    braceMesh.position.set(0, braceY, braceZ);
+    braceMesh.castShadow = true;
+    braceMesh.receiveShadow = true;
+    group.add(braceMesh);
   }
-  
-  // Top dark border line for enhanced definition with smooth edges
-  const topBorderShape = new THREE.Shape();
-  const topBW = w * 0.98;
-  const topBH = 0.0018;
-  topBorderShape.moveTo(-topBW * 0.5, -topBH * 0.5);
-  topBorderShape.lineTo(topBW * 0.5, -topBH * 0.5);
-  topBorderShape.lineTo(topBW * 0.5, topBH * 0.5);
-  topBorderShape.lineTo(-topBW * 0.5, topBH * 0.5);
-  topBorderShape.closePath();
-  
-  const topBorderGeo = new THREE.ExtrudeGeometry(topBorderShape, {
-    depth: 0.001,
-    bevelEnabled: true,
-    bevelThickness: 0.0004,
-    bevelSize: 0.0004,
-    bevelSegments: 2,
-  });
-  topBorderGeo.center();
-  
-  const topBorder = new THREE.Mesh(topBorderGeo, materials.joint);
-  topBorder.position.set(0, halfH - 0.001, zFace + 0.002);
-  group.add(topBorder);
 
   // 3. Posterior power core lens on mid-thoracic vertebra (Vertebra 03)
   if (index === 2) {
@@ -614,11 +590,12 @@ function createSingleActuatorPole(
 
   // 5. Mirror-Polished Chrome Telescoping Piston Rod (Narrower realistic diameter)
   const rodStartY = -0.012 - barrelLen - 0.008;
-  const rodLen = Math.abs(-totalLen - rodStartY);
+  const rodEndY = -totalLen + 0.008;
+  const rodLen = Math.abs(rodEndY - rodStartY);
   const rodGeo = geoCache.get(`ActuatorRod_${rodRadius.toFixed(4)}_${rodLen.toFixed(4)}`, () => new THREE.CylinderGeometry(rodRadius, rodRadius, rodLen, 24));
   const rod = new THREE.Mesh(rodGeo, materials.metallic);
   rod.name = `${name}_PistonRod`;
-  rod.position.set(0, rodStartY - rodLen * 0.5, 0);
+  rod.position.set(0, (rodStartY + rodEndY) * 0.5, 0);
   rod.castShadow = true;
   actGroup.add(rod);
 
@@ -630,7 +607,7 @@ function createSingleActuatorPole(
 
   const lowerCuffGeo = geoCache.get(`ActuatorLowerCuff_${rodRadius.toFixed(4)}`, () => new THREE.CylinderGeometry(rodRadius * 1.55, rodRadius * 1.55, 0.004, 20));
   const lowerCuff = new THREE.Mesh(lowerCuffGeo, materials.joint);
-  lowerCuff.position.set(0, -totalLen + 0.008, 0);
+  lowerCuff.position.set(0, -totalLen + 0.008 + rodRadius * 1.5 + 0.002, 0);
   actGroup.add(lowerCuff);
 
   // Lower uniball and cuff seat flush into WaistTransitionDeck plinth clevis sockets
@@ -686,30 +663,31 @@ function createSideActuatorAssembly(
   clusterGroup.name = side === -1 ? 'LeftActuatorClusterAssembly' : 'RightActuatorClusterAssembly';
 
   const cfg = TORSO_CONFIG.stomach;
+  const commonDims = cfg.poleDimensions || { cylinderRadius: 0.0068, pistonRadius: 0.0036 };
   const dual = cfg.dualActuators || {
     outer: {
       upperMount: { x: 0.098, y: -0.066, z: 0.014 },
       lowerMount: { x: 0.076, y: -0.204, z: 0.016 },
-      cylinderRadius: 0.0125,
-      pistonRadius: 0.0068,
+      cylinderRadius: commonDims.cylinderRadius,
+      pistonRadius: commonDims.pistonRadius,
     },
     inner: {
-      upperMount: { x: 0.068, y: -0.070, z: 0.006 },
-      lowerMount: { x: 0.052, y: -0.204, z: 0.012 },
-      cylinderRadius: 0.0090,
-      pistonRadius: 0.0052,
+      upperMount: { x: 0.076, y: -0.070, z: 0.006 },
+      lowerMount: { x: 0.054, y: -0.204, z: 0.012 },
+      cylinderRadius: commonDims.cylinderRadius,
+      pistonRadius: commonDims.pistonRadius,
     },
   };
 
-  // Outer Actuator Pole (Single unified cylinder pole with tie-rod link)
+  // Outer Actuator Pole (Single unified cylinder pole with common slim dimensions)
   const outerPole = createSingleActuatorPole(
     {
       side,
       name: side === -1 ? 'OuterLeftActuatorPole' : 'OuterRightActuatorPole',
       upperMount: dual.outer.upperMount,
       lowerMount: dual.outer.lowerMount,
-      cylinderRadius: 0.0118,
-      pistonRadius: 0.0064,
+      cylinderRadius: dual.outer.cylinderRadius || commonDims.cylinderRadius,
+      pistonRadius: dual.outer.pistonRadius || commonDims.pistonRadius,
       hasStabilizerLink: false,
     },
     materials,
@@ -717,15 +695,15 @@ function createSideActuatorAssembly(
   );
   clusterGroup.add(outerPole.group);
 
-  // Inner Actuator Pole (Single unified cylinder pole - completing all 4 single poles)
+  // Inner Actuator Pole (Single unified cylinder pole with common slim dimensions)
   const innerPole = createSingleActuatorPole(
     {
       side,
       name: side === -1 ? 'InnerLeftActuatorPole' : 'InnerRightActuatorPole',
       upperMount: dual.inner.upperMount,
       lowerMount: dual.inner.lowerMount,
-      cylinderRadius: 0.0095,
-      pistonRadius: 0.0052,
+      cylinderRadius: dual.inner.cylinderRadius || commonDims.cylinderRadius,
+      pistonRadius: dual.inner.pistonRadius || commonDims.pistonRadius,
       hasStabilizerLink: false,
     },
     materials,
@@ -805,30 +783,38 @@ function createWaistTransitionDeck(
   group.add(socketRim);
 
   // 3. Quadruple Reinforced Actuator Anchor Plinths (Outer & Inner mounts for all 4 abdominal poles)
-  const cfgAct = TORSO_CONFIG.stomach.actuator;
   const dualCfg = TORSO_CONFIG.stomach.dualActuators;
-  
+  const outerMount = dualCfg?.outer.upperMount || { x: 0.098, y: -0.066, z: 0.014 };
+  const innerMount = dualCfg?.inner.upperMount || { x: 0.076, y: -0.070, z: 0.006 };
+  const outerLower = dualCfg?.outer.lowerMount || { x: 0.076, y: -0.204, z: 0.016 };
+  const innerLower = dualCfg?.inner.lowerMount || { x: 0.054, y: -0.204, z: 0.012 };
+
+  const outerAngleZ = Math.atan2(outerMount.x - outerLower.x, outerMount.y - outerLower.y);
+  const innerAngleZ = Math.atan2(innerMount.x - innerLower.x, innerMount.y - innerLower.y);
+
   const mountPositions = [
-    { x: dualCfg?.outer.lowerMount.x || 0.076, z: dualCfg?.outer.lowerMount.z || 0.016, isOuter: true },
-    { x: dualCfg?.inner.lowerMount.x || 0.052, z: dualCfg?.inner.lowerMount.z || 0.012, isOuter: false },
+    { x: outerLower.x, z: outerLower.z, isOuter: true, angleZ: outerAngleZ },
+    { x: innerLower.x, z: innerLower.z, isOuter: false, angleZ: innerAngleZ },
   ];
 
-  const pinGeo = geoCache.get('Waist_PlinthPin', () => new THREE.CylinderGeometry(0.0032, 0.0032, 0.022, 16));
   const ribGeo = geoCache.get('Waist_PlinthRib', () => new THREE.BoxGeometry(0.020, 0.010, 0.007));
 
   for (const side of [-1, 1] as const) {
     for (const mount of mountPositions) {
-      const pWidth = mount.isOuter ? 0.018 : 0.014;
+      const pWidth = TORSO_CONFIG.stomach.poleDimensions?.lowerPlinthWidth ?? (mount.isOuter ? 0.014 : 0.014);
       const plinthGeo = geoCache.get(`Waist_Plinth_${pWidth}`, () => new THREE.BoxGeometry(pWidth, 0.020, 0.020));
       const plinth = new THREE.Mesh(plinthGeo, materials.joint);
       plinth.position.set(side * mount.x, deckY + 0.008, mount.z);
-      plinth.rotation.z = -side * (mount.isOuter ? 0.158 : 0.06);
+      plinth.rotation.z = -side * mount.angleZ;
       deckGroup.add(plinth);
 
+      const pinLength = pWidth + 0.004;
+      const pinRadius = TORSO_CONFIG.stomach.poleDimensions?.pinRadius ?? 0.0032;
+      const pinGeo = geoCache.get(`Waist_PlinthPin_${pinRadius}_${pinLength}`, () => new THREE.CylinderGeometry(pinRadius, pinRadius, pinLength, 16));
       const pin = new THREE.Mesh(pinGeo, materials.metallic);
-      pin.rotation.z = Math.PI / 2;
+      pin.rotation.z = Math.PI / 2 - side * mount.angleZ;
       pin.position.set(side * mount.x, deckY + 0.008, mount.z);
-      deckGroup.add(pin);
+      group.add(pin);
 
       // Gusset rib anchoring plinth to central lumbar hub
       const rib = new THREE.Mesh(ribGeo, materials.joint);

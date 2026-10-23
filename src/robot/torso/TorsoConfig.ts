@@ -123,7 +123,16 @@ export const TORSO_CONFIG = {
       yOffset: -0.204,
     },
 
-    // Side Actuator Mounting Coordinates (Upper poles wider at chest bottom, bottom poles untouched)
+    // Common Standard Support-Pole Assembly Dimensions (All 6 abdominal poles: Outer, Inner, Rear)
+    poleDimensions: {
+      cylinderRadius: 0.0068,  // Standard outer housing radius: 6.8 mm (13.6 mm diameter)
+      pistonRadius: 0.0036,    // Standard telescoping rod radius: 3.6 mm (7.2 mm diameter)
+      upperClevisWidth: 0.016, // Matching chest lower clevises and rear thoracic bulkhead lugs
+      lowerPlinthWidth: 0.014, // Matching waist transition plinths and rear lumbar bosses
+      pinRadius: 0.0032,       // Standard pivot pin radius: 3.2 mm (6.4 mm diameter)
+    },
+
+    // Side Actuator Mounting Coordinates (Coordinated dual actuator pairs nested under chest frame arch)
     actuator: {
       upperMount: { x: 0.098, y: -0.066, z: 0.014 },
       lowerMount: { x: 0.076, y: -0.204, z: 0.016 },
@@ -133,8 +142,8 @@ export const TORSO_CONFIG = {
       lowerX: 0.076,
       lowerY: -0.204,
       lowerZ: 0.016,
-      cylinderRadius: 0.0160,
-      pistonRadius: 0.0072,
+      cylinderRadius: 0.0068,
+      pistonRadius: 0.0036,
     },
 
     // Dual Side Actuators per side
@@ -142,15 +151,23 @@ export const TORSO_CONFIG = {
       outer: {
         upperMount: { x: 0.098, y: -0.066, z: 0.014 },
         lowerMount: { x: 0.076, y: -0.204, z: 0.016 },
-        cylinderRadius: 0.0125,
-        pistonRadius: 0.0068,
+        cylinderRadius: 0.0068,
+        pistonRadius: 0.0036,
       },
       inner: {
         upperMount: { x: 0.076, y: -0.070, z: 0.006 },
         lowerMount: { x: 0.054, y: -0.204, z: 0.012 },
-        cylinderRadius: 0.0090,
-        pistonRadius: 0.0052,
+        cylinderRadius: 0.0068,
+        pistonRadius: 0.0036,
       },
+    },
+
+    // Paired Bilateral Rear Actuators (Outward-diverging rear pole support pair)
+    rearActuators: {
+      upperMount: { x: 0.080, y: -0.048, z: -0.056 },
+      lowerMount: { x: 0.056, y: -0.198, z: -0.040 },
+      cylinderRadius: 0.0068,
+      pistonRadius: 0.0036,
     },
 
     // Multi-Column Kinematic Actuator & Stabilizer Array
@@ -158,21 +175,21 @@ export const TORSO_CONFIG = {
       frontLinear: {
         upperMount: { x: 0.098, y: -0.066, z: 0.014 },
         lowerMount: { x: 0.076, y: -0.204, z: 0.016 },
-        cylinderRadius: 0.0125,
-        pistonRadius: 0.0068,
+        cylinderRadius: 0.0068,
+        pistonRadius: 0.0036,
         powerCoreLength: 0.034,
       },
       midStabilizer: {
         upperMount: { x: 0.076, y: -0.090, z: 0.002 },
         lowerMount: { x: 0.062, y: -0.205, z: 0.000 },
-        columnRadius: 0.0075,
-        collarRadius: 0.0105,
+        columnRadius: 0.0068,
+        collarRadius: 0.0095,
       },
       rearLinear: {
         upperMount: { x: 0.076, y: -0.070, z: 0.006 },
         lowerMount: { x: 0.054, y: -0.204, z: 0.012 },
-        cylinderRadius: 0.0090,
-        pistonRadius: 0.0052,
+        cylinderRadius: 0.0068,
+        pistonRadius: 0.0036,
         powerCoreLength: 0.032,
       },
     },

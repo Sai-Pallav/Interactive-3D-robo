@@ -38,3 +38,8 @@ Thumbs.db
 capture_output/
 capture_*/
 /*.png
+/*.jpg
+/*.html
+!index.html
+test_*/
+arm_shoulder_diag/

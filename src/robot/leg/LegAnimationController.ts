@@ -198,29 +198,29 @@ export class LegAnimationController {
 
     // Update Left Leg
     const lHip = this.leftLeg.hip.group;
-    lHip.rotation.x = this.baseLeftHipRot.x + (this.leftOverrides.hipPitch ?? breathKnee * 0.3);
-    lHip.rotation.y = this.baseLeftHipRot.y + (this.leftOverrides.hipYaw ?? 0);
-    lHip.rotation.z = this.baseLeftHipRot.z + (this.leftOverrides.hipRoll ?? -weightShift);
+    lHip.rotation.x = this.leftOverrides.hipPitch !== undefined ? this.leftOverrides.hipPitch : (this.baseLeftHipRot.x + breathKnee * 0.3);
+    lHip.rotation.y = this.leftOverrides.hipYaw !== undefined ? this.leftOverrides.hipYaw : this.baseLeftHipRot.y;
+    lHip.rotation.z = this.leftOverrides.hipRoll !== undefined ? this.leftOverrides.hipRoll : (this.baseLeftHipRot.z - weightShift);
 
     const lKnee = this.leftLeg.knee.shinPivot;
-    lKnee.rotation.x = this.baseLeftKneeRot.x + (this.leftOverrides.kneePitch ?? breathKnee);
+    lKnee.rotation.x = this.leftOverrides.kneePitch !== undefined ? this.leftOverrides.kneePitch : (this.baseLeftKneeRot.x + breathKnee);
 
     const lAnkle = this.leftLeg.ankle.footPivot;
-    lAnkle.rotation.x = this.baseLeftAnkleRot.x + (this.leftOverrides.anklePitch ?? breathAnkle);
-    lAnkle.rotation.z = this.baseLeftAnkleRot.z + (this.leftOverrides.ankleRoll ?? weightShift * 0.7);
+    lAnkle.rotation.x = this.leftOverrides.anklePitch !== undefined ? this.leftOverrides.anklePitch : (this.baseLeftAnkleRot.x + breathAnkle);
+    lAnkle.rotation.z = this.leftOverrides.ankleRoll !== undefined ? this.leftOverrides.ankleRoll : (this.baseLeftAnkleRot.z + weightShift * 0.7);
 
     // Update Right Leg
     const rHip = this.rightLeg.hip.group;
-    rHip.rotation.x = this.baseRightHipRot.x + (this.rightOverrides.hipPitch ?? breathKnee * 0.3);
-    rHip.rotation.y = this.baseRightHipRot.y + (this.rightOverrides.hipYaw ?? 0);
-    rHip.rotation.z = this.baseRightHipRot.z + (this.rightOverrides.hipRoll ?? weightShift);
+    rHip.rotation.x = this.rightOverrides.hipPitch !== undefined ? this.rightOverrides.hipPitch : (this.baseRightHipRot.x + breathKnee * 0.3);
+    rHip.rotation.y = this.rightOverrides.hipYaw !== undefined ? this.rightOverrides.hipYaw : this.baseRightHipRot.y;
+    rHip.rotation.z = this.rightOverrides.hipRoll !== undefined ? this.rightOverrides.hipRoll : (this.baseRightHipRot.z + weightShift);
 
     const rKnee = this.rightLeg.knee.shinPivot;
-    rKnee.rotation.x = this.baseRightKneeRot.x + (this.rightOverrides.kneePitch ?? breathKnee);
+    rKnee.rotation.x = this.rightOverrides.kneePitch !== undefined ? this.rightOverrides.kneePitch : (this.baseRightKneeRot.x + breathKnee);
 
     const rAnkle = this.rightLeg.ankle.footPivot;
-    rAnkle.rotation.x = this.baseRightAnkleRot.x + (this.rightOverrides.anklePitch ?? breathAnkle);
-    rAnkle.rotation.z = this.baseRightAnkleRot.z + (this.rightOverrides.ankleRoll ?? -weightShift * 0.7);
+    rAnkle.rotation.x = this.rightOverrides.anklePitch !== undefined ? this.rightOverrides.anklePitch : (this.baseRightAnkleRot.x + breathAnkle);
+    rAnkle.rotation.z = this.rightOverrides.ankleRoll !== undefined ? this.rightOverrides.ankleRoll : (this.baseRightAnkleRot.z - weightShift * 0.7);
 
     // 3. Dynamic telescoping compliance for Achilles dampers
     this.leftLeg.ankle.achillesDamper?.update?.();
