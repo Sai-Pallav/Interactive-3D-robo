@@ -57,9 +57,9 @@ function createSegmentedAnteriorArmorGeometry(
   const geo = new THREE.ExtrudeGeometry(shape, {
     depth: thickness,
     bevelEnabled: true,
-    bevelThickness: 0.0038,
-    bevelSize: 0.0030,
-    bevelSegments: 4,
+    bevelThickness: 0.0024,
+    bevelSize: 0.0018,
+    bevelSegments: 3,
     curveSegments: 28,
   });
   geo.center();
@@ -79,8 +79,8 @@ function createSegmentedAnteriorArmorGeometry(
       const nx = Math.min(1.0, Math.abs(x) / halfWT);
       const keel = (1.0 - Math.pow(nx, 1.35)) * keelProtrusion;
       const yNorm = (y + halfL) / length;
-      const muscleBulge = Math.sin(yNorm * Math.PI * 0.92) * 0.0055;
-      const flankWrap = -Math.pow(nx, 1.8) * 0.007;
+      const muscleBulge = Math.sin(yNorm * Math.PI * 0.92) * 0.0040;
+      const flankWrap = -Math.pow(nx, 1.8) * 0.005;
 
       // Recessed panel seam lines along longitudinal facet boundaries and mid-height service groove
       const isFacetSeam = Math.abs(Math.abs(x) - halfWT * 0.48) < 0.0016 && Math.abs(y) < halfL * 0.85;
@@ -116,39 +116,41 @@ function createThighFlankArmorGeometry(
   const halfL = length * 0.5;
 
   const antDir = facingSign === -1 ? 1 : -1;
-  const antZ = antDir * halfW * 0.72;
-  const postZ = -antDir * halfW * 0.68;
+  const antZ = antDir * halfW * 0.82;
+  const postZ = -antDir * halfW * 0.80;
 
   shape.moveTo(antZ, halfL); // Anterior upper corner
   shape.lineTo(postZ, halfL * 0.88); // Posterior upper slope
-  shape.quadraticCurveTo(-antDir * halfW * 1.02, 0, -antDir * halfW * 0.65, -halfL * 0.85);
-  shape.lineTo(-antDir * halfW * 0.50, -halfL);
-  // Supracondylar relief arch — curves upward to cleanly frame the rotary condyle bearing
-  shape.quadraticCurveTo(0, -halfL + 0.012, antDir * halfW * 0.50, -halfL);
-  shape.lineTo(antDir * halfW * 0.65, -halfL * 0.85);
+  shape.quadraticCurveTo(-antDir * halfW * 1.02, 0, -antDir * halfW * 0.74, -halfL * 0.82);
+  shape.lineTo(-antDir * 0.024, -halfL);
+  // Precision supracondylar relief arch cleanly framing the rotary condyle bearing
+  shape.quadraticCurveTo(0, -halfL + 0.0055, antDir * 0.024, -halfL);
+  shape.lineTo(antDir * halfW * 0.74, -halfL * 0.82);
   shape.quadraticCurveTo(antDir * halfW * 1.02, 0, antZ, halfL);
   shape.closePath();
 
   const geo = new THREE.ExtrudeGeometry(shape, {
     depth: thickness,
     bevelEnabled: true,
-    bevelThickness: 0.0030,
-    bevelSize: 0.0024,
+    bevelThickness: 0.0022,
+    bevelSize: 0.0018,
     bevelSegments: 3,
-    curveSegments: 24,
+    curveSegments: 28,
   });
   geo.center();
 
-  // Subtle curved hard-surface flank contour with recessed horizontal divide seam
+  // Subtle curved hard-surface flank contour with recessed diagonal seam matching reference
   const pos = geo.attributes.position;
   for (let i = 0; i < pos.count; i++) {
+    const x = pos.getX(i);
     const y = pos.getY(i);
     const z = pos.getZ(i);
 
     if (z > 0) {
-      const isSeam = Math.abs(y - halfL * 0.05) < 0.0015;
-      const seamIndent = isSeam ? -0.0014 : 0;
-      const flankCrown = Math.cos((y / halfL) * Math.PI * 0.45) * 0.0024;
+      const seamCenter = (y / halfL) * (halfW * 0.22) * antDir;
+      const isSeam = Math.abs(x - seamCenter) < 0.0020;
+      const seamIndent = isSeam ? -0.0018 : 0;
+      const flankCrown = Math.cos((y / halfL) * Math.PI * 0.45) * 0.0028;
       pos.setZ(i, z + flankCrown + seamIndent);
     }
   }
@@ -434,7 +436,7 @@ export function createThigh(
   // 5. SEGMENTED SCULPTED WHITE CERAMIC ANTERIOR QUAD ARMOR
   // Segmented length: leaves visible frame & calibrated 5mm clearance above knee
   // =========================================================================
-  const antGeo = geoCache.get('Thigh_AnteriorArmorGeo_v4', () => createSegmentedAnteriorArmorGeometry(
+  const antGeo = geoCache.get('Thigh_AnteriorArmorGeo_v6', () => createSegmentedAnteriorArmorGeometry(
     cfg.anteriorArmor.widthTop,
     cfg.anteriorArmor.widthBottom,
     cfg.anteriorArmor.length,
@@ -457,7 +459,7 @@ export function createThigh(
   // 6. SCULPTED LATERAL ARMOR COWL (Vastus Lateralis) WITH PURPLE LED CONDUIT
   // =========================================================================
   const latFacing: 1 | -1 = side === -1 ? -1 : 1;
-  const latGeo = geoCache.get(`Thigh_LateralArmorGeo_v4_${side}`, () => createThighFlankArmorGeometry(
+  const latGeo = geoCache.get(`Thigh_LateralArmorGeo_v7_${side}`, () => createThighFlankArmorGeometry(
     cfg.lateralArmor.cowlLength,
     cfg.lateralArmor.width,
     cfg.lateralArmor.thickness,
@@ -467,7 +469,7 @@ export function createThigh(
   lateralArmor.name = side === -1 ? 'ThighLateralArmor_L' : 'ThighLateralArmor_R';
   lateralArmor.position.set(
     side * (cfg.frame.spineWidth * 0.5 + cfg.lateralArmor.thickness * 0.5),
-    -0.130,
+    -0.132,
     0.002
   );
   lateralArmor.rotation.set(0, 0, 0);
@@ -475,12 +477,27 @@ export function createThigh(
   lateralArmor.receiveShadow = true;
   thighGroup.add(lateralArmor);
 
-  // Recessed purple neon LED conduit along the outer crowned lateral armor face
-  const ledGeo = geoCache.get('Thigh_LedGeo_v4', () => new THREE.BoxGeometry(cfg.ledStrip.width, cfg.ledStrip.length, cfg.ledStrip.depth));
+  // Recessed dark titanium bezel channel and purple neon LED conduit
+  const ledBezelGeo = geoCache.get('Thigh_LedBezelGeo_v6', () => new THREE.BoxGeometry(
+    cfg.ledStrip.width * 1.8,
+    cfg.ledStrip.length * 1.04,
+    cfg.ledStrip.depth * 1.4
+  ));
+  const ledBezel = new THREE.Mesh(ledBezelGeo, materials.joint);
+  ledBezel.rotation.x = 0.18;
+  ledBezel.position.set(
+    side * (cfg.lateralArmor.thickness * 0.5 + 0.0004),
+    0,
+    0.002
+  );
+  lateralArmor.add(ledBezel);
+
+  const ledGeo = geoCache.get('Thigh_LedGeo_v6', () => new THREE.BoxGeometry(cfg.ledStrip.width, cfg.ledStrip.length, cfg.ledStrip.depth));
   const ledStrip = new THREE.Mesh(ledGeo, materials.purpleEmissive);
   ledStrip.name = side === -1 ? 'ThighLedStrip_L' : 'ThighLedStrip_R';
+  ledStrip.rotation.x = 0.18;
   ledStrip.position.set(
-    side * (cfg.lateralArmor.thickness * 0.5 + 0.001),
+    side * (cfg.lateralArmor.thickness * 0.5 + 0.0012),
     0,
     0.002
   );
@@ -488,12 +505,13 @@ export function createThigh(
   ledMeshes.push(ledStrip);
 
   // Subtle bloom glow
-  const bloomGeo = geoCache.get('Thigh_BloomGeo_v4', () => new THREE.BoxGeometry(
+  const bloomGeo = geoCache.get('Thigh_BloomGeo_v6', () => new THREE.BoxGeometry(
     cfg.ledStrip.width * 2.0,
     cfg.ledStrip.length,
     cfg.ledStrip.depth * 1.5
   ));
   const bloomMesh = new THREE.Mesh(bloomGeo, materials.purpleBloom);
+  bloomMesh.rotation.x = 0.18;
   bloomMesh.position.copy(ledStrip.position);
   lateralArmor.add(bloomMesh);
 
@@ -502,7 +520,7 @@ export function createThigh(
   // Preserves inner leg clearance while shielding internal wiring
   // =========================================================================
   const medFacing: 1 | -1 = side === -1 ? 1 : -1;
-  const medGeo = geoCache.get(`Thigh_MedialArmorGeo_v4_${side}`, () => createThighFlankArmorGeometry(
+  const medGeo = geoCache.get(`Thigh_MedialArmorGeo_v8_${side}`, () => createThighFlankArmorGeometry(
     cfg.medialArmor.cowlLength,
     cfg.medialArmor.width,
     cfg.medialArmor.thickness,
@@ -512,7 +530,7 @@ export function createThigh(
   medialArmor.name = side === -1 ? 'ThighMedialArmor_L' : 'ThighMedialArmor_R';
   medialArmor.position.set(
     -side * (cfg.frame.spineWidth * 0.5 + cfg.medialArmor.thickness * 0.5),
-    -0.130,
+    -0.132,
     0.002
   );
   medialArmor.rotation.set(0, 0, 0);
@@ -526,7 +544,7 @@ export function createThigh(
   // =========================================================================
   const hamCfg = cfg.posteriorHamstring || { width: 0.052, length: 0.122, thickness: 0.014 };
   const unifiedHamWidth = cfg.frame.spineWidth * 1.38;
-  const hamGeo = geoCache.get('Thigh_UnifiedHamstringGeo_v5', () => createUnifiedHamstringArmorGeometry(
+  const hamGeo = geoCache.get('Thigh_UnifiedHamstringGeo_v6', () => createUnifiedHamstringArmorGeometry(
     hamCfg.length,
     unifiedHamWidth,
     hamCfg.thickness

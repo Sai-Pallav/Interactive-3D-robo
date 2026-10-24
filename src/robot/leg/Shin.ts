@@ -70,9 +70,9 @@ function createSegmentedKeelGeometry(
   const geo = new THREE.ExtrudeGeometry(shape, {
     depth: thickness,
     bevelEnabled: true,
-    bevelThickness: 0.0032,
-    bevelSize: 0.0026,
-    bevelSegments: 4,
+    bevelThickness: 0.0020,
+    bevelSize: 0.0016,
+    bevelSegments: 3,
     curveSegments: 28,
   });
   geo.center();
@@ -89,7 +89,7 @@ function createSegmentedKeelGeometry(
       const keelFactor = Math.pow(1.0 - nx, 1.30);
       const yNorm = (y + halfL) / length;
       const keelCurve = keelFactor * keelProtrusion * (0.50 + 0.50 * Math.sin(yNorm * Math.PI * 0.90));
-      const flankSlope = -Math.pow(nx, 1.8) * 0.006;
+      const flankSlope = -Math.pow(nx, 1.8) * 0.004;
 
       // Recessed maintenance seams along facet transitions
       const isFacetSeam = Math.abs(Math.abs(x) - halfWT * 0.42) < 0.0015;
@@ -98,7 +98,7 @@ function createSegmentedKeelGeometry(
       pos.setZ(i, z + keelCurve + flankSlope + seamIndent);
     } else {
       const nx = Math.min(1.0, Math.abs(x) / halfWT);
-      pos.setZ(i, z - Math.pow(nx, 2.0) * 0.008);
+      pos.setZ(i, z - Math.pow(nx, 2.0) * 0.005);
     }
   }
   geo.computeVertexNormals();
@@ -107,6 +107,11 @@ function createSegmentedKeelGeometry(
 
 /**
  * Creates the posterior calf muscle armor cowl with anatomical volume.
+ * Features:
+ * - Smooth sagittal curvature: muscular gastrocnemius swell peaking in the upper third,
+ *   tapering smoothly toward the Achilles collar
+ * - Chamfered lateral flanks wrapping cleanly around the central tibia spine
+ * - Recessed central vertical channel housing the purple illuminated conduit
  */
 function createPosteriorCalfGeometry(
   width: number,
@@ -117,33 +122,59 @@ function createPosteriorCalfGeometry(
   const halfW = width * 0.5;
   const halfH = height * 0.5;
 
+  // Athletic calf contour: wide at upper gastroc, tapering gracefully toward ankle
   shape.moveTo(-halfW * 0.72, halfH);
   shape.lineTo(halfW * 0.72, halfH);
-  shape.quadraticCurveTo(halfW * 1.02, halfH * 0.50, halfW * 0.94, 0);
-  shape.quadraticCurveTo(halfW * 0.72, -halfH * 0.60, halfW * 0.45, -halfH);
-  shape.lineTo(-halfW * 0.45, -halfH);
-  shape.quadraticCurveTo(-halfW * 0.72, -halfH * 0.60, -halfW * 0.94, 0);
-  shape.quadraticCurveTo(-halfW * 1.02, halfH * 0.50, -halfW * 0.72, halfH);
+  shape.quadraticCurveTo(halfW * 1.05, halfH * 0.55, halfW * 0.95, halfH * 0.15);
+  shape.quadraticCurveTo(halfW * 0.75, -halfH * 0.45, halfW * 0.44, -halfH);
+  shape.lineTo(-halfW * 0.44, -halfH);
+  shape.quadraticCurveTo(-halfW * 0.75, -halfH * 0.45, -halfW * 0.95, halfH * 0.15);
+  shape.quadraticCurveTo(-halfW * 1.05, halfH * 0.55, -halfW * 0.72, halfH);
   shape.closePath();
 
   const geo = new THREE.ExtrudeGeometry(shape, {
     depth: depth,
     bevelEnabled: true,
-    bevelThickness: 0.0034,
-    bevelSize: 0.0026,
+    bevelThickness: 0.0022,
+    bevelSize: 0.0018,
     bevelSegments: 3,
-    curveSegments: 20,
+    curveSegments: 28,
   });
   geo.center();
 
+  // Multi-faceted athletic 3D sculpting:
+  // 1. Anatomical sagittal depth curve: muscular bulge peaking in upper third (yNorm ~ 0.68),
+  //    tapering down smoothly toward Achilles collar
+  // 2. Lateral flank wrapping smoothly around the titanium tibia spine
+  // 3. Central longitudinal groove along x = 0 for the vertical violet illuminated conduit
   const pos = geo.attributes.position;
   for (let i = 0; i < pos.count; i++) {
+    const x = pos.getX(i);
     const y = pos.getY(i);
     const z = pos.getZ(i);
+
+    const yNorm = Math.max(0.0, Math.min(1.0, (y + halfH) / height));
+    const nx = Math.min(1.0, Math.abs(x) / halfW);
+
+    const swellCurve = Math.sin(Math.pow(yNorm, 0.78) * Math.PI);
+    const depthProfile = 0.58 + 0.42 * swellCurve;
+
+    let newZ = z * depthProfile;
+
     if (z > 0) {
-      const calfBulge = Math.sin(((y + halfH) / height) * Math.PI) * 0.008;
-      pos.setZ(i, z + calfBulge);
+      // Rear crowned face
+      const rearBulge = swellCurve * 0.010;
+      const lateralWrap = -Math.pow(nx, 1.6) * 0.0065;
+      const isCenterChannel = Math.abs(x) < 0.0035;
+      const channelIndent = isCenterChannel ? -0.0022 : 0;
+      newZ += rearBulge + lateralWrap + channelIndent;
+    } else {
+      // Front face meeting tibia spine
+      const frontWrap = -Math.pow(nx, 1.8) * 0.0035;
+      newZ += frontWrap;
     }
+
+    pos.setZ(i, newZ);
   }
   geo.computeVertexNormals();
   return geo;
@@ -335,16 +366,16 @@ export function createShin(
   }
 
   // Achilles damper upper mounting bracket (on rear of lower shin frame)
-  const achillesBracketGeo = geoCache.get('Shin_AchillesBracketGeo_v3', () => new THREE.BoxGeometry(0.014, 0.018, 0.016));
+  const achillesBracketGeo = geoCache.get('Shin_AchillesBracketGeo_v4', () => new THREE.BoxGeometry(0.014, 0.018, 0.016));
   const achillesBracket = new THREE.Mesh(achillesBracketGeo, materials.joint);
-  achillesBracket.position.set(0, -0.210, -cfg.frame.spineDepth * 0.5 - 0.008);
+  achillesBracket.position.set(0, -0.250, -0.021);
   achillesBracket.castShadow = true;
   frameGroup.add(achillesBracket);
 
-  const achillesPinGeo = geoCache.get('Shin_AchillesPinGeo_v3', () => new THREE.CylinderGeometry(0.0022, 0.0022, 0.018, 12));
+  const achillesPinGeo = geoCache.get('Shin_AchillesPinGeo_v4', () => new THREE.CylinderGeometry(0.0022, 0.0022, 0.018, 12));
   const achillesPin = new THREE.Mesh(achillesPinGeo, materials.metallic);
   achillesPin.rotation.z = Math.PI / 2;
-  achillesPin.position.set(0, -0.210, -cfg.frame.spineDepth * 0.5 - 0.012);
+  achillesPin.position.set(0, -0.250, -0.027);
   metallicGroup.add(achillesPin);
 
   const mergedFrame = mergeGroupMeshesByMaterial(
@@ -368,7 +399,7 @@ export function createShin(
   // 3. SEGMENTED SCULPTED ANTERIOR SHIN KEEL ARMOR
   // Mounted directly under the knee with calibrated mechanical clearance
   // =========================================================================
-  const keelGeo = geoCache.get('Shin_KeelGeo_v4', () => createSegmentedKeelGeometry(
+  const keelGeo = geoCache.get('Shin_KeelGeo_v8', () => createSegmentedKeelGeometry(
     cfg.anteriorKeel.widthTop,
     cfg.anteriorKeel.widthBottom,
     cfg.anteriorKeel.length,
@@ -379,8 +410,8 @@ export function createShin(
   anteriorKeelArmor.name = side === -1 ? 'ShinAnteriorKeel_L' : 'ShinAnteriorKeel_R';
   anteriorKeelArmor.position.set(
     0,
-    -0.130,
-    cfg.frame.spineDepth * 0.5 + cfg.anteriorKeel.thickness * 0.4
+    -0.115,
+    cfg.frame.spineDepth * 0.5 + cfg.anteriorKeel.thickness * 0.28
   );
   anteriorKeelArmor.castShadow = true;
   anteriorKeelArmor.receiveShadow = true;
@@ -388,25 +419,25 @@ export function createShin(
 
   // Longitudinal purple neon LED strip along the front keel crest with metallic bezel
   const keelFrontZ = cfg.anteriorKeel.thickness * 0.5;
-  const ledY = 0.012;
-  const ledBezelGeo = geoCache.get('Shin_LedBezelGeo_v4', () => new THREE.BoxGeometry(cfg.ledStrip.width * 1.8, cfg.ledStrip.length, cfg.ledStrip.depth * 1.4));
+  const ledY = 0.008;
+  const ledBezelGeo = geoCache.get('Shin_LedBezelGeo_v7', () => new THREE.BoxGeometry(cfg.ledStrip.width * 1.8, cfg.ledStrip.length, cfg.ledStrip.depth * 1.4));
   const ledBezel = new THREE.Mesh(ledBezelGeo, materials.joint);
   ledBezel.position.set(0, ledY, keelFrontZ + 0.0010);
   anteriorKeelArmor.add(ledBezel);
 
-  const ledGeo = geoCache.get('Shin_LedGeo_v4', () => new THREE.BoxGeometry(cfg.ledStrip.width, cfg.ledStrip.length, cfg.ledStrip.depth));
+  const ledGeo = geoCache.get('Shin_LedGeo_v7', () => new THREE.BoxGeometry(cfg.ledStrip.width, cfg.ledStrip.length, cfg.ledStrip.depth));
   const ledStrip = new THREE.Mesh(ledGeo, materials.purpleEmissive);
   ledStrip.name = side === -1 ? 'ShinLedStrip_L' : 'ShinLedStrip_R';
   ledStrip.position.set(0, ledY, keelFrontZ + 0.0022);
   anteriorKeelArmor.add(ledStrip);
   ledMeshes.push(ledStrip);
 
-  const coreGeo = geoCache.get('Shin_CoreGeo_v4', () => new THREE.BoxGeometry(cfg.ledStrip.width * 0.5, cfg.ledStrip.length * 0.96, cfg.ledStrip.depth * 0.6));
+  const coreGeo = geoCache.get('Shin_CoreGeo_v7', () => new THREE.BoxGeometry(cfg.ledStrip.width * 0.5, cfg.ledStrip.length * 0.96, cfg.ledStrip.depth * 0.6));
   const coreMesh = new THREE.Mesh(coreGeo, materials.whiteCoreEmissive);
   coreMesh.position.set(0, ledY, keelFrontZ + 0.0028);
   anteriorKeelArmor.add(coreMesh);
 
-  const bloomGeo = geoCache.get('Shin_BloomGeo_v4', () => new THREE.BoxGeometry(
+  const bloomGeo = geoCache.get('Shin_BloomGeo_v7', () => new THREE.BoxGeometry(
     cfg.ledStrip.width * 2.0,
     cfg.ledStrip.length,
     cfg.ledStrip.depth * 1.5
@@ -416,63 +447,63 @@ export function createShin(
   anteriorKeelArmor.add(bloomMesh);
 
   // =========================================================================
-  // 4. POSTERIOR CALF MUSCLE ARMOR FAIRING & COOLING LOUVERS
+  // 4. POSTERIOR CALF MUSCLE ARMOR FAIRING & VERTICAL SPINAL ILLUMINATION
   // =========================================================================
-  const calfGeo = geoCache.get('Shin_CalfGeo_v3', () => createPosteriorCalfGeometry(
+  const calfGeo = geoCache.get('Shin_CalfGeo_v9', () => createPosteriorCalfGeometry(
     cfg.posteriorCalf.width,
     cfg.posteriorCalf.height,
     cfg.posteriorCalf.depth
   ));
   const posteriorCalfArmor = new THREE.Mesh(calfGeo, materials.armor);
   posteriorCalfArmor.name = side === -1 ? 'CalfArmor_L' : 'CalfArmor_R';
-  posteriorCalfArmor.position.set(0, -0.096, -cfg.frame.spineDepth * 0.5 - 0.008);
+  posteriorCalfArmor.position.set(0, -0.113, -cfg.frame.spineDepth * 0.5 - 0.005);
   posteriorCalfArmor.rotation.y = Math.PI;
   posteriorCalfArmor.castShadow = true;
   posteriorCalfArmor.receiveShadow = true;
   shinGroup.add(posteriorCalfArmor);
 
-  // Calf cooling vents
-  const ventCount = cfg.posteriorCalf.ventCount;
-  const ventGroup = new THREE.Group();
-  const ventGlowGroup = new THREE.Group();
+  // Vertical dark spine channel bezel and purple illuminated conduit matching reference
+  const calfSpineLedWidth = (cfg.posteriorCalf as any).spineLedWidth ?? 0.0030;
+  const calfSpineLedLength = (cfg.posteriorCalf as any).spineLedLength ?? 0.108;
+  const calfRearZ = cfg.posteriorCalf.depth * 0.5 + 0.004;
 
-  const louverGeo = geoCache.get('Shin_LouverGeo_v3', () => new THREE.BoxGeometry(cfg.posteriorCalf.ventWidth, cfg.posteriorCalf.ventHeight, 0.006));
-  const glowGeo = geoCache.get('Shin_GlowGeo_v3', () => new THREE.BoxGeometry(cfg.posteriorCalf.ventWidth * 0.75, 0.0014, 0.002));
-  for (let i = 0; i < ventCount; i++) {
-    const localY = 0.020 - i * 0.016;
+  const spineBezelGeo = geoCache.get('Shin_CalfSpineBezelGeo_v7', () => new THREE.BoxGeometry(
+    calfSpineLedWidth * 1.8,
+    calfSpineLedLength * 1.05,
+    0.0024
+  ));
+  const spineBezel = new THREE.Mesh(spineBezelGeo, materials.joint);
+  spineBezel.position.set(0, 0.004, calfRearZ - 0.0016);
+  posteriorCalfArmor.add(spineBezel);
 
-    const louver = new THREE.Mesh(louverGeo, materials.joint);
-    louver.position.set(0, localY, cfg.posteriorCalf.depth * 0.5 + 0.004);
-    louver.rotation.x = 0.28;
-    louver.castShadow = true;
-    ventGroup.add(louver);
-    calfVents.push(louver);
+  const spineLedGeo = geoCache.get('Shin_CalfSpineLedGeo_v7', () => new THREE.BoxGeometry(
+    calfSpineLedWidth,
+    calfSpineLedLength,
+    0.0022
+  ));
+  const spineLed = new THREE.Mesh(spineLedGeo, materials.purpleEmissive);
+  spineLed.name = side === -1 ? 'CalfSpineLed_L' : 'CalfSpineLed_R';
+  spineLed.position.set(0, 0.004, calfRearZ - 0.0006);
+  posteriorCalfArmor.add(spineLed);
+  ledMeshes.push(spineLed);
 
-    const glowMesh = new THREE.Mesh(glowGeo, materials.purpleEmissive);
-    glowMesh.position.set(0, localY - 0.001, cfg.posteriorCalf.depth * 0.5 + 0.003);
-    ventGlowGroup.add(glowMesh);
-  }
+  const spineCoreGeo = geoCache.get('Shin_CalfSpineCoreGeo_v6', () => new THREE.BoxGeometry(
+    calfSpineLedWidth * 0.5,
+    calfSpineLedLength * 0.95,
+    0.0016
+  ));
+  const spineCore = new THREE.Mesh(spineCoreGeo, materials.whiteCoreEmissive);
+  spineCore.position.set(0, 0.004, calfRearZ - 0.0004);
+  posteriorCalfArmor.add(spineCore);
 
-  const mergedVents = mergeGroupMeshesByMaterial(
-    ventGroup,
-    materials.joint,
-    side === -1 ? 'CalfVents_L' : 'CalfVents_R',
-    true
-  );
-  if (mergedVents) {
-    posteriorCalfArmor.add(mergedVents);
-  }
-
-  const mergedGlow = mergeGroupMeshesByMaterial(
-    ventGlowGroup,
-    materials.purpleEmissive,
-    side === -1 ? 'CalfGlows_L' : 'CalfGlows_R',
-    false
-  );
-  if (mergedGlow) {
-    posteriorCalfArmor.add(mergedGlow);
-    ledMeshes.push(mergedGlow);
-  }
+  const spineBloomGeo = geoCache.get('Shin_CalfSpineBloomGeo_v6', () => new THREE.BoxGeometry(
+    calfSpineLedWidth * 2.2,
+    calfSpineLedLength,
+    0.0030
+  ));
+  const spineBloom = new THREE.Mesh(spineBloomGeo, materials.purpleBloom);
+  spineBloom.position.copy(spineLed.position);
+  posteriorCalfArmor.add(spineBloom);
 
   // =========================================================================
   // 5. ANKLE ARTICULATION PIVOT (At distal end of shin)

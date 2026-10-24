@@ -18,61 +18,90 @@ export interface FootNodes {
 }
 
 /**
- * Creates the aerodynamic sculpted white ceramic dorsal (top-of-foot) armor shield.
+ * Creates the aerodynamic sculpted white ceramic foot armor body shell.
  * Features:
- * - Ergonomic bridge contour wider at metatarsal ball, tapering gracefully at ankle
- * - Longitudinal deflector crest with chamfered lateral facets
- * - Recessed maintenance panel seams catching specular highlights
- * - Beveled outer perimeter
+ * - Solid 3D casing extending all the way down to the sole chassis
+ * - Continuous lateral and medial flank walls with recessed runner light grooves
+ * - Ergonomic dorsal bridge with central deflector crest and forward slope
+ * - Semicircular cradle framing the ankle gimbal collar
+ * - Precision rear heel deck supporting the Achilles damper clevis mount
  */
 function createDorsalArmorGeometry(
   width: number,
-  length: number,
-  thickness: number
+  heelOffset: number,
+  toeJunctionZ: number,
+  deckHeight: number
 ): THREE.BufferGeometry {
   const shape = new THREE.Shape();
-  const halfW = width * 0.5;
+  const hw = width * 0.5;
 
-  // Ergonomic foot bridge contour: wider at metatarsal ball, tapered at ankle
-  shape.moveTo(-halfW * 0.75, -length * 0.45);
-  shape.lineTo(halfW * 0.75, -length * 0.45);
-  shape.quadraticCurveTo(halfW, -length * 0.10, halfW * 0.98, length * 0.15);
-  shape.lineTo(halfW * 0.88, length * 0.48);
-  shape.lineTo(-halfW * 0.88, length * 0.48);
-  shape.lineTo(-halfW * 0.98, length * 0.15);
-  shape.quadraticCurveTo(-halfW, -length * 0.10, -halfW * 0.75, -length * 0.45);
+  // 2D footprint profile in XZ plane
+  shape.moveTo(-hw * 0.72, heelOffset);
+  shape.lineTo(hw * 0.72, heelOffset);
+  shape.quadraticCurveTo(hw * 0.85, 0.0, hw * 0.95, 0.042);
+  shape.quadraticCurveTo(hw * 0.98, 0.060, hw * 0.78, toeJunctionZ);
+  shape.lineTo(-hw * 0.78, toeJunctionZ);
+  shape.quadraticCurveTo(-hw * 0.98, 0.060, -hw * 0.95, 0.042);
+  shape.quadraticCurveTo(-hw * 0.85, 0.0, -hw * 0.72, heelOffset);
   shape.closePath();
 
   const geo = new THREE.ExtrudeGeometry(shape, {
-    depth: thickness,
+    depth: deckHeight,
     bevelEnabled: true,
-    bevelThickness: 0.0030,
-    bevelSize: 0.0025,
+    bevelThickness: 0.0022,
+    bevelSize: 0.0018,
     bevelSegments: 3,
-    curveSegments: 24,
+    curveSegments: 28,
   });
-  geo.center();
 
-  // Dorsal arch curve: peaks over middle bridge and slopes forward toward toes
+  // Rotate so 2D (x, y) becomes 3D (x, z), and extrusion depth becomes Y (upward)
+  geo.rotateX(Math.PI / 2);
+  geo.translate(0, deckHeight, 0);
+
+  // Sculpt vertices
   const pos = geo.attributes.position;
+  const topY = deckHeight;
+
   for (let i = 0; i < pos.count; i++) {
     const x = pos.getX(i);
     const y = pos.getY(i);
     const z = pos.getZ(i);
-    if (z > 0) {
-      const arch = Math.sin(((y + length * 0.45) / length) * Math.PI) * 0.0065;
-      const crown = Math.cos((x / halfW) * Math.PI * 0.45) * 0.0025;
-      const isSeam = Math.abs(y - length * 0.10) < 0.0014;
-      const seamIndent = isSeam ? -0.0015 : 0;
-      pos.setZ(i, z + arch + crown + seamIndent);
+
+    if (y > topY * 0.4) {
+      // Upper deck
+      let newY = topY;
+      const nx = Math.min(1.0, Math.abs(x) / hw);
+
+      if (z > 0.016) {
+        // Forward bridge sloping down toward toe
+        const zNorm = Math.min(1.0, (z - 0.016) / (toeJunctionZ - 0.016));
+        newY = topY - zNorm * 0.0080;
+        // Central deflector crest
+        const crest = Math.pow(1.0 - nx, 1.3) * 0.0035;
+        // Chamfered flank drop
+        const flankDrop = -Math.pow(nx, 1.8) * 0.0025;
+        newY += crest + flankDrop;
+      } else if (z < -0.016) {
+        // Rear heel deck
+        const zNorm = Math.min(1.0, (-0.016 - z) / (-0.016 - (heelOffset + 0.004)));
+        newY = topY - 0.0030 - zNorm * 0.0020;
+        const flankDrop = -Math.pow(nx, 1.8) * 0.0020;
+        newY += flankDrop;
+      } else {
+        // Ankle cradle region
+        const saddleDish = -Math.cos((z / 0.016) * Math.PI * 0.5) * 0.0022;
+        newY += saddleDish;
+      }
+      pos.setY(i, newY);
     }
   }
+
   geo.computeVertexNormals();
   return geo;
 }
 
 /**
- * Creates the sculpted white ceramic toe cap armor shield.
+ * Creates the sculpted white ceramic toe cap armor shield with beveled facets.
  */
 function createToeCapGeometry(
   width: number,
@@ -82,11 +111,15 @@ function createToeCapGeometry(
   const shape = new THREE.Shape();
   const halfW = width * 0.5;
 
-  shape.moveTo(-halfW * 0.90, -length * 0.5);
-  shape.lineTo(halfW * 0.90, -length * 0.5);
-  shape.quadraticCurveTo(halfW, 0, halfW * 0.75, length * 0.35);
-  shape.quadraticCurveTo(0, length * 0.55, -halfW * 0.75, length * 0.35);
-  shape.quadraticCurveTo(-halfW, 0, -halfW * 0.90, -length * 0.5);
+  // Angular, beveled mecha toe silhouette matching technical wireframe
+  shape.moveTo(-halfW * 0.88, -length * 0.5);
+  shape.lineTo(halfW * 0.88, -length * 0.5);
+  shape.lineTo(halfW * 0.95, -length * 0.10);
+  shape.lineTo(halfW * 0.72, length * 0.38);
+  shape.lineTo(halfW * 0.45, length * 0.50);
+  shape.lineTo(-halfW * 0.45, length * 0.50);
+  shape.lineTo(-halfW * 0.72, length * 0.38);
+  shape.lineTo(-halfW * 0.95, -length * 0.10);
   shape.closePath();
 
   const geo = new THREE.ExtrudeGeometry(shape, {
@@ -277,55 +310,100 @@ export function createFoot(
   footGroup.add(ugBloom);
 
   // ==========================================
-  // 5. LAYER 4: SCULPTED WHITE CERAMIC DORSAL ARMOR SHIELD
+  // 5. LAYER 4: SCULPTED WHITE CERAMIC FOOT ARMOR BODY
   // ==========================================
-  const dorsalGeo = geoCache.get('Foot_DorsalGeo_v3', () => createDorsalArmorGeometry(
-    cfg.dorsalPlate.width,
-    cfg.dorsalPlate.length,
-    cfg.dorsalPlate.thickness
+  const deckHeight = 0.021;
+  const dorsalGeo = geoCache.get('Foot_DorsalGeo_v7', () => createDorsalArmorGeometry(
+    cfg.width,
+    cfg.heelOffset,
+    cfg.toeOffset * 0.65,
+    deckHeight
   ));
   const dorsalArmor = new THREE.Mesh(dorsalGeo, materials.armor);
   dorsalArmor.name = side === -1 ? 'FootDorsalArmor_L' : 'FootDorsalArmor_R';
-  dorsalArmor.rotation.x = Math.PI / 2 + 0.18; // Angled forward over the foot bridge
-  dorsalArmor.position.set(0, -cfg.height * 0.38, 0.022);
+  // Base sits flush on top of the sole chassis (-cfg.height + cfg.soleThickness)
+  dorsalArmor.position.set(0, -cfg.height + cfg.soleThickness, 0);
   dorsalArmor.castShadow = true;
   dorsalArmor.receiveShadow = true;
   footGroup.add(dorsalArmor);
 
   // Tech groove with purple LED strip across dorsal armor with metallic bezel
-  const dorsalFrontZ = cfg.dorsalPlate.thickness * 0.5;
-  const dLedBezelGeo = geoCache.get('Foot_DLedBezelGeo_v3', () => new THREE.BoxGeometry(0.0042, 0.054, 0.0022));
+  const dLedY = deckHeight - 0.004;
+  const dLedZ = 0.046;
+  const dLedBezelGeo = geoCache.get('Foot_DLedBezelGeo_v6', () => new THREE.BoxGeometry(0.0042, 0.0022, 0.046));
   const dLedBezel = new THREE.Mesh(dLedBezelGeo, materials.joint);
-  dLedBezel.position.set(0, 0.005, dorsalFrontZ + 0.0010);
+  dLedBezel.position.set(0, dLedY, dLedZ);
+  dLedBezel.rotation.x = -0.14; // Matches forward deck slope
   dorsalArmor.add(dLedBezel);
 
-  const dorsalLedGeo = geoCache.get('Foot_DorsalLedGeo_v3', () => new THREE.BoxGeometry(0.0028, 0.052, 0.002));
+  const dorsalLedGeo = geoCache.get('Foot_DorsalLedGeo_v6', () => new THREE.BoxGeometry(0.0028, 0.0020, 0.044));
   const dorsalLed = new THREE.Mesh(dorsalLedGeo, materials.purpleEmissive);
-  dorsalLed.position.set(0, 0.005, dorsalFrontZ + 0.0018);
+  dorsalLed.position.set(0, dLedY + 0.0006, dLedZ);
+  dorsalLed.rotation.x = -0.14;
   dorsalArmor.add(dorsalLed);
   ledMeshes.push(dorsalLed);
 
-  const dorsalCoreGeo = geoCache.get('Foot_DorsalCoreGeo_v3', () => new THREE.BoxGeometry(0.0014, 0.048, 0.0015));
+  const dorsalCoreGeo = geoCache.get('Foot_DorsalCoreGeo_v6', () => new THREE.BoxGeometry(0.0014, 0.0015, 0.040));
   const dorsalCore = new THREE.Mesh(dorsalCoreGeo, materials.whiteCoreEmissive);
-  dorsalCore.position.set(0, 0.005, dorsalFrontZ + 0.0024);
+  dorsalCore.position.set(0, dLedY + 0.0012, dLedZ);
+  dorsalCore.rotation.x = -0.14;
   dorsalArmor.add(dorsalCore);
+
+  // Lateral and Medial Ground-Effect Violet Neon Runner Strips embedded along lower foot armor
+  const latAccentCfg = (cfg as any).lateralAccent ?? { width: 0.0024, length: 0.088, depth: 0.0022 };
+  const latAccentGeo = geoCache.get('Foot_LatAccentGeo_v7', () => new THREE.BoxGeometry(
+    latAccentCfg.depth,
+    latAccentCfg.width,
+    latAccentCfg.length
+  ));
+  const latBezelGeo = geoCache.get('Foot_LatBezelGeo_v7', () => new THREE.BoxGeometry(
+    latAccentCfg.depth * 1.5,
+    latAccentCfg.width * 1.7,
+    latAccentCfg.length * 1.04
+  ));
+
+  for (const fSide of [-1, 1]) {
+    const latX = fSide * (halfW * 0.92);
+    const latBezel = new THREE.Mesh(latBezelGeo, materials.joint);
+    latBezel.position.set(
+      latX,
+      -cfg.height + cfg.soleThickness + 0.0060,
+      cfg.heelOffset + latAccentCfg.length * 0.58
+    );
+    footGroup.add(latBezel);
+
+    const latAccentMesh = new THREE.Mesh(latAccentGeo, materials.purpleEmissive);
+    latAccentMesh.name = fSide === -1 ? 'FootLatAccent_L' : 'FootLatAccent_R';
+    latAccentMesh.position.set(
+      latX + fSide * 0.0014,
+      -cfg.height + cfg.soleThickness + 0.0060,
+      cfg.heelOffset + latAccentCfg.length * 0.58
+    );
+    footGroup.add(latAccentMesh);
+    ledMeshes.push(latAccentMesh);
+
+    const latBloom = new THREE.Mesh(latAccentGeo, materials.purpleBloom);
+    latBloom.position.copy(latAccentMesh.position);
+    latBloom.scale.set(1.4, 1.6, 1.0);
+    footGroup.add(latBloom);
+  }
 
   // ==========================================
   // 6. LAYER 5: ARTICULATED TOE CAP ARMOR & PIVOT
   // ==========================================
   const toePivot = new THREE.Group();
   toePivot.name = side === -1 ? 'LeftToePivot' : 'RightToePivot';
-  toePivot.position.set(0, -cfg.height + 0.016, cfg.toeOffset * 0.65);
+  toePivot.position.set(0, -cfg.height + 0.010, cfg.toeOffset * 0.65);
   footGroup.add(toePivot);
 
   // Toe hinge knuckle connecting to foot chassis
-  const toeHingeGeo = geoCache.get('Foot_ToeHingeGeo_v3', () => new THREE.CylinderGeometry(0.0042, 0.0042, cfg.toeCap.width * 0.75, 16));
+  const toeHingeGeo = geoCache.get('Foot_ToeHingeGeo_v5', () => new THREE.CylinderGeometry(0.0042, 0.0042, cfg.toeCap.width * 0.75, 16));
   const toeHinge = new THREE.Mesh(toeHingeGeo, materials.joint);
   toeHinge.rotation.z = Math.PI / 2;
   toeHinge.position.set(0, 0, 0);
   toePivot.add(toeHinge);
 
-  const toeGeo = geoCache.get('Foot_ToeGeo_v3', () => createToeCapGeometry(
+  const toeGeo = geoCache.get('Foot_ToeGeo_v6', () => createToeCapGeometry(
     cfg.toeCap.width,
     cfg.toeCap.length,
     cfg.toeCap.height
@@ -338,6 +416,32 @@ export function createFoot(
   toeArmor.receiveShadow = true;
   toePivot.add(toeArmor);
 
+  // Front Toe Bumper with Horizontal Recessed Purple Slot LED
+  const toeBumperGeo = geoCache.get('Foot_ToeBumperGeo_v6', () => new THREE.BoxGeometry(
+    cfg.toeCap.width * 0.62,
+    0.006,
+    0.004
+  ));
+  const toeBumper = new THREE.Mesh(toeBumperGeo, materials.joint);
+  toeBumper.position.set(0, 0.002, cfg.toeCap.length * 0.65);
+  toePivot.add(toeBumper);
+
+  const toeSlotGeo = geoCache.get('Foot_ToeSlotGeo_v5', () => new THREE.BoxGeometry(
+    0.022,
+    0.0022,
+    0.0025
+  ));
+  const toeLed = new THREE.Mesh(toeSlotGeo, materials.purpleEmissive);
+  toeLed.name = side === -1 ? 'FootToeLed_L' : 'FootToeLed_R';
+  toeLed.position.set(0, 0.002, cfg.toeCap.length * 0.65 + 0.002);
+  toePivot.add(toeLed);
+  ledMeshes.push(toeLed);
+
+  const toeBloom = new THREE.Mesh(toeSlotGeo, materials.purpleBloom);
+  toeBloom.scale.set(1.4, 1.8, 1.2);
+  toeBloom.position.copy(toeLed.position);
+  toePivot.add(toeBloom);
+
   // ==========================================
   // 7. LAYER 6: REAR HEEL COUNTER & MICRO-THRUSTER NOZZLE
   // ==========================================
@@ -345,7 +449,7 @@ export function createFoot(
   heelAssemblyGroup.name = side === -1 ? 'HeelAssembly_L' : 'HeelAssembly_R';
   footGroup.add(heelAssemblyGroup);
 
-  const heelGeo = geoCache.get('Foot_HeelGeo_v5', () => {
+  const heelGeo = geoCache.get('Foot_HeelGeo_v6', () => {
     const heelShape = new THREE.Shape();
     heelShape.moveTo(-halfW * 0.72, 0);
     heelShape.lineTo(halfW * 0.72, 0);
@@ -364,23 +468,26 @@ export function createFoot(
     return g;
   });
 
-  const heelArmor = new THREE.Mesh(heelGeo, materials.armor);
+  // Dark structural heel counter matching technical wireframe FOOT CONNECTOR & ANKLE HOUSING
+  const footTargetY = LEG_CONFIG.ankle.achillesDamper.targetY - (-0.016);
+  const heelArmor = new THREE.Mesh(heelGeo, materials.joint);
   heelArmor.name = side === -1 ? 'HeelArmor_L' : 'HeelArmor_R';
-  heelArmor.position.set(0, -cfg.height * 0.48, cfg.heelOffset + 0.002);
+  heelArmor.position.set(0, footTargetY - 0.004, cfg.heelOffset + 0.004);
   heelArmor.castShadow = true;
   heelAssemblyGroup.add(heelArmor);
 
   // Achilles damper lower clevis bracket seated neatly atop rear heel platform
-  const heelClevisGeo = geoCache.get('Foot_HeelClevisGeo_v5', () => new THREE.BoxGeometry(0.011, 0.014, 0.012));
+  // Aligned precisely with damper piston eyelet in foot local coordinates
+  const heelClevisGeo = geoCache.get('Foot_HeelClevisGeo_v7', () => new THREE.BoxGeometry(0.012, 0.016, 0.014));
   const heelClevis = new THREE.Mesh(heelClevisGeo, materials.joint);
-  heelClevis.position.set(0, -cfg.height * 0.22, cfg.heelOffset + 0.002);
+  heelClevis.position.set(0, footTargetY, LEG_CONFIG.ankle.achillesDamper.targetZ);
   heelClevis.castShadow = true;
   heelAssemblyGroup.add(heelClevis);
 
-  const heelPinGeo = geoCache.get('Foot_HeelPinGeo_v5', () => new THREE.CylinderGeometry(0.0020, 0.0020, 0.014, 12));
+  const heelPinGeo = geoCache.get('Foot_HeelPinGeo_v7', () => new THREE.CylinderGeometry(0.0020, 0.0020, 0.015, 12));
   const heelPin = new THREE.Mesh(heelPinGeo, materials.metallic);
   heelPin.rotation.z = Math.PI / 2;
-  heelPin.position.set(0, -cfg.height * 0.22, cfg.heelOffset + 0.002);
+  heelPin.position.set(0, footTargetY, LEG_CONFIG.ankle.achillesDamper.targetZ);
   heelAssemblyGroup.add(heelPin);
 
   // Micro-thruster exhaust nozzle at rear heel base

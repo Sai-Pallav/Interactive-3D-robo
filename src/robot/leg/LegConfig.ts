@@ -37,29 +37,29 @@ export const LEG_CONFIG = {
       widthTop: 0.076,
       widthBottom: 0.056,
       length: 0.146, // Calibrated clearance (5.0mm) to knee suprapatellar arch and hip
-      thickness: 0.022,
-      keelProtrusion: 0.012,
+      thickness: 0.016, // Slimmed from 0.024 for form-fitting ceramic quad shell
+      keelProtrusion: 0.009,
     },
     lateralArmor: {
-      width: 0.046,
-      thickness: 0.016,
-      cowlLength: 0.126, // Calibrated clearance (>= 3.0mm) above knee rotary condyle disc
+      width: 0.058, // Streamlined from 0.068 to eliminate block-like flank overhang
+      thickness: 0.012, // Slimmed from 0.018 for tight integration with femur spine
+      cowlLength: 0.130, // Calibrated clearance (3.5mm) above knee rotary condyle bearing
     },
     medialArmor: {
-      width: 0.038,
-      thickness: 0.013,
-      cowlLength: 0.126, // Calibrated clearance (>= 2.5mm) above medial rotary disc
+      width: 0.046,
+      thickness: 0.010,
+      cowlLength: 0.130,
     },
     posteriorHamstring: {
       width: 0.052,
-      length: 0.122,
-      thickness: 0.014,
+      length: 0.126,
+      thickness: 0.012, // Slimmed from 0.016
       fastenerCount: 0,
     },
     trochanter: {
       radius: 0.036,
       height: 0.052,
-      thickness: 0.015,
+      thickness: 0.013,
     },
     ledStrip: {
       width: 0.0030,
@@ -81,16 +81,21 @@ export const LEG_CONFIG = {
     patella: {
       width: 0.030,
       height: 0.046,
-      thickness: 0.011,
-      offsetZ: 0.0250, // Aligned flush with rotary condyle disc housing and leg profile
+      thickness: 0.009, // Slimmed from 0.012
+      offsetZ: 0.022,  // Brought flush with rotary condyle disc radius to eliminate forward gap
       yOffset: 0.000,  // Creates calibrated 5.0mm dark mechanical gap to upper thigh arch
       rotX: 0.000,
     },
-    // Structural dark knee housing
+    // Structural dark knee housing & C-bracket framing the rotary bearing
     housingWidth: 0.036,
     upperStructureHeight: 0.022,
     lowerStructureHeight: 0.018,
-    housingDepth: 0.026,
+    housingDepth: 0.032,
+    jointHousing: {
+      innerRadius: 0.025,
+      outerRadius: 0.0305,
+      width: 0.018,
+    },
     linkage: {
       strutRadius: 0.0036,
       pistonRadius: 0.0022,
@@ -104,7 +109,7 @@ export const LEG_CONFIG = {
     length: 0.284,
     frame: {
       spineWidth: 0.034,
-      spineDepth: 0.040,
+      spineDepth: 0.038, // Slimmed from 0.040
       upperPlateauWidth: 0.036,
       upperPlateauDepth: 0.028,
       upperPlateauHeight: 0.018,
@@ -112,69 +117,74 @@ export const LEG_CONFIG = {
     },
     // Segmented white ceramic armor: flows cleanly from knee shelf down to distal ankle collar
     anteriorKeel: {
-      widthTop: 0.058,
-      widthBottom: 0.044,
-      length: 0.226, // Refined gauntlet extending continuously to meet distal ankle collar
-      thickness: 0.022,
-      keelProtrusion: 0.015,
+      widthTop: 0.050, // Preserved exact width
+      widthBottom: 0.038, // Preserved exact width
+      length: 0.196, // Reduced length along vertical axis (shortened by 30mm)
+      thickness: 0.012, // Preserved exact thickness
+      keelProtrusion: 0.006, // Preserved exact protrusion
     },
     posteriorCalf: {
-      width: 0.058,
-      height: 0.138,
-      depth: 0.042,
-      ventCount: 3,
-      ventWidth: 0.032,
-      ventHeight: 0.0045,
+      width: 0.054, // Preserved exact width
+      height: 0.190, // Increased length along vertical axis (extended by 30mm for more coverage)
+      depth: 0.046, // Preserved exact depth
+      ventCount: 0,
+      spineLedWidth: 0.0030,
+      spineLedLength: 0.108, // Extended to match increased calf height
     },
     ledStrip: {
       width: 0.0026,
       depth: 0.0022,
-      length: 0.165,
+      length: 0.142, // Shortened to match shortened keel shell length
     },
   },
 
   ankle: {
     // Multi-axis spherical gimbal ankle
-    housingRadius: 0.021,
+    housingRadius: 0.0195, // Slimmed from 0.021
     malleolusDiscRadius: 0.019,
-    malleolusDiscWidth: 0.007,
+    malleolusDiscWidth: 0.006, // Slimmed from 0.007
     accentRingRadius: 0.0145,
     achillesDamper: {
-      cylinderRadius: 0.0052,
-      pistonRadius: 0.0032,
-      mountY: 0.056,
-      mountZ: -0.029,
-      targetY: -0.028,
+      cylinderRadius: 0.0048,
+      pistonRadius: 0.0030,
+      mountY: 0.034, // Lowered from 0.056 for compact, proportionate support rod length matching reference
+      mountZ: -0.027, // Aligned with distal shin mounting bracket
+      targetY: -0.026,
       targetZ: -0.048,
     },
   },
 
   foot: {
-    // Athletic robotic foot dimensions
-    length: 0.168,
+    // Athletic low-profile elongated robotic foot matching technical blueprint
+    length: 0.176,
     width: 0.062,
-    height: 0.054,
-    heelOffset: -0.050,
-    toeOffset: 0.118,
-    soleThickness: 0.013,
+    height: 0.040, // Slimmed from 0.044 for ultra sleek low profile
+    heelOffset: -0.052,
+    toeOffset: 0.124,
+    soleThickness: 0.0085, // Sleek, thin high-traction dark sole chassis
     treadPadsCount: 5,
+    lateralAccent: {
+      width: 0.0024,
+      length: 0.088,
+      depth: 0.0022,
+    },
     underglow: {
       width: 0.0035,
       height: 0.003,
       inset: 0.004,
     },
     dorsalPlate: {
-      width: 0.054,
-      length: 0.096,
-      thickness: 0.012,
+      width: 0.050, // Slimmed from 0.054
+      length: 0.106,
+      thickness: 0.009, // Slimmed from 0.012
     },
     toeCap: {
-      width: 0.056,
-      length: 0.042,
-      height: 0.026,
+      width: 0.048, // Slimmed from 0.054
+      length: 0.044,
+      height: 0.015, // Slimmed from 0.020
     },
     heelThruster: {
-      radius: 0.010,
+      radius: 0.009,
       depth: 0.012,
     },
   },

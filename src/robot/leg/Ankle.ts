@@ -165,6 +165,19 @@ export function createAnkle(
     ankleJointGroup.add(sMesh);
   }
 
+  // Polished chrome metallic arch guard cuffs crowning the malleolus discs matching reference
+  const archGuardGeo = geoCache.get('Ankle_ArchGuardGeo_v2', () => {
+    const g = new THREE.TorusGeometry(cfg.malleolusDiscRadius * 1.05, 0.0016, 8, 24, Math.PI * 0.92);
+    g.rotateZ(Math.PI * 0.04);
+    return g;
+  });
+  for (const mSide of [-1, 1]) {
+    const archGuard = new THREE.Mesh(archGuardGeo, materials.metallic);
+    archGuard.rotation.y = Math.PI / 2;
+    archGuard.position.set(mSide * (discSpacing * 0.5 + cfg.malleolusDiscWidth * 0.5 + 0.0005), 0, 0);
+    ankleMetallicGroup.add(archGuard);
+  }
+
   const mergedAnkleCaps = mergeGroupMeshesByMaterial(malleolusCapGroup, materials.armor, side === -1 ? 'AnkleCaps_L' : 'AnkleCaps_R', false);
   if (mergedAnkleCaps) {
     ankleGroup.add(mergedAnkleCaps);
@@ -204,16 +217,16 @@ export function createAnkle(
   damperGroup.add(upperEyelet);
 
   // Hydraulic cylinder casing
-  // Calibrated: 0.056m ensures zero bottom-out warning at full plantarflexion (+0.60 rad)
-  const cylLen = 0.056;
-  const cylGeo = geoCache.get('Ankle_CylGeo_v4', () => new THREE.CylinderGeometry(aCfg.cylinderRadius, aCfg.cylinderRadius, cylLen, 16));
+  // Calibrated: 0.034m ensures zero bottom-out warning at full plantarflexion (+0.60 rad)
+  const cylLen = 0.034;
+  const cylGeo = geoCache.get('Ankle_CylGeo_v6', () => new THREE.CylinderGeometry(aCfg.cylinderRadius, aCfg.cylinderRadius, cylLen, 16));
   const cylinder = new THREE.Mesh(cylGeo, materials.joint);
   cylinder.position.set(0, -cylLen * 0.5, 0);
   cylinder.castShadow = true;
   damperGroup.add(cylinder);
 
   // Cylinder fluid port collar
-  const glandGeo = geoCache.get('Ankle_GlandGeo_v3', () => new THREE.CylinderGeometry(aCfg.cylinderRadius * 1.25, aCfg.cylinderRadius * 1.25, 0.005, 16));
+  const glandGeo = geoCache.get('Ankle_GlandGeo_v6', () => new THREE.CylinderGeometry(aCfg.cylinderRadius * 1.25, aCfg.cylinderRadius * 1.25, 0.005, 16));
   const gland = new THREE.Mesh(glandGeo, materials.joint);
   gland.position.set(0, -cylLen + 0.0025, 0);
   damperGroup.add(gland);
@@ -224,9 +237,9 @@ export function createAnkle(
   damperGroup.add(pistonGroup);
 
   // Polished chrome metallic piston rod extending upward into cylinder
-  // Calibrated: 0.062m ensures plenty of overlap (>10mm) at full dorsiflexion (-0.45 rad)
-  const pistLen = 0.062;
-  const pistGeo = geoCache.get('Ankle_PistGeo_v4', () => new THREE.CylinderGeometry(aCfg.pistonRadius, aCfg.pistonRadius, pistLen, 16));
+  // Calibrated: 0.052m ensures plenty of overlap (>5mm) at full dorsiflexion (-0.45 rad)
+  const pistLen = 0.052;
+  const pistGeo = geoCache.get('Ankle_PistGeo_v6', () => new THREE.CylinderGeometry(aCfg.pistonRadius, aCfg.pistonRadius, pistLen, 16));
   const piston = new THREE.Mesh(pistGeo, materials.metallic);
   piston.position.set(0, pistLen * 0.5, 0);
   piston.castShadow = true;

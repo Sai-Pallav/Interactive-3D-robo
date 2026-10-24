@@ -51,9 +51,9 @@ function createCentralKneeCoverGeometry(
   const geo = new THREE.ExtrudeGeometry(shape, {
     depth: thickness,
     bevelEnabled: true,
-    bevelThickness: 0.0022,
-    bevelSize: 0.0016,
-    bevelSegments: 4,
+    bevelThickness: 0.0016,
+    bevelSize: 0.0012,
+    bevelSegments: 3,
     curveSegments: 24,
   });
   geo.center();
@@ -135,6 +135,35 @@ function createLowerKneeStructureGeometry(
     bevelSegments: 2,
   });
   geo.center();
+  return geo;
+}
+
+/**
+ * Creates the dark structural C-bracket joint housing framing the rotary bearing
+ * from behind, connecting upper housing and lower clevis into a unified joint assembly.
+ */
+function createKneeCBracketGeometry(
+  innerR: number,
+  outerR: number,
+  width: number
+): THREE.BufferGeometry {
+  const shape = new THREE.Shape();
+  const startAngle = -Math.PI * 0.62;
+  const endAngle = Math.PI * 0.62;
+
+  shape.absarc(0, 0, outerR, startAngle, endAngle, false);
+  shape.absarc(0, 0, innerR, endAngle, startAngle, true);
+  shape.closePath();
+
+  const geo = new THREE.ExtrudeGeometry(shape, {
+    depth: width,
+    bevelEnabled: true,
+    bevelThickness: 0.0020,
+    bevelSize: 0.0016,
+    bevelSegments: 2,
+  });
+  geo.center();
+  geo.rotateY(Math.PI / 2);
   return geo;
 }
 
@@ -268,6 +297,18 @@ export function createKnee(
   rearKnuckle.castShadow = true;
   condyleCoreGroup.add(rearKnuckle);
 
+  // C-bracket joint housing framing the rotary bearing from behind
+  const cBracketGeo = geoCache.get('KneeCBracketGeo_v5', () => createKneeCBracketGeometry(
+    cfg.jointHousing?.innerRadius ?? 0.025,
+    cfg.jointHousing?.outerRadius ?? 0.0305,
+    cfg.jointHousing?.width ?? 0.032
+  ));
+  const cBracket = new THREE.Mesh(cBracketGeo, materials.joint);
+  cBracket.position.set(0, 0, 0);
+  cBracket.castShadow = true;
+  cBracket.receiveShadow = true;
+  condyleCoreGroup.add(cBracket);
+
   const mergedCondyle = mergeGroupMeshesByMaterial(
     condyleCoreGroup,
     materials.joint,
@@ -394,7 +435,7 @@ export function createKnee(
   // 5. CENTRAL WHITE KNEE COVER
   // Compact, faceted white ceramic cover centered on knee axis with purple LED slit
   // =========================================================================
-  const coverGeo = geoCache.get('KneePatellaCoverGeo_v4', () => createCentralKneeCoverGeometry(
+  const coverGeo = geoCache.get('KneePatellaCoverGeo_v5', () => createCentralKneeCoverGeometry(
     cfg.patella.width,
     cfg.patella.height,
     cfg.patella.thickness
@@ -417,27 +458,38 @@ export function createKnee(
     patellaShield.add(standoff);
   }
 
-  // Precision Horizontal Capsule / Pill Purple Glowing LED Slit in Dark Recessed Bezel
-  const frontZ = cfg.patella.thickness * 0.5 + 0.0084;
-  const bezelGeo = geoCache.get('KneePatellaBezelGeo_v4', () => new THREE.BoxGeometry(0.0130, 0.0034, 0.0022));
+  // Precision Horizontal Capsule & Inverted Triangle Purple Glowing LED Slit in Dark Recessed Bezel
+  const frontZ = cfg.patella.thickness * 0.5 + 0.0045;
+  const bezelGeo = geoCache.get('KneePatellaBezelGeo_v5', () => new THREE.BoxGeometry(0.0130, 0.0034, 0.0022));
   const patellaBezel = new THREE.Mesh(bezelGeo, materials.joint);
   patellaBezel.name = 'PatellaLedBezel';
   patellaBezel.position.set(0, -0.0065, frontZ - 0.0004);
   patellaShield.add(patellaBezel);
 
-  // Capsule geometry with smooth hemispherical ends
-  const ledCapsuleGeo = geoCache.get('KneeLedCapsuleGeo_v4', () => {
-    const g = new THREE.CapsuleGeometry(0.0011, 0.0075, 8, 16);
-    g.rotateZ(Math.PI / 2);
-    return g;
-  });
-  const patellaLed = new THREE.Mesh(ledCapsuleGeo, materials.purpleEmissive);
+  // Inverted triangle / chevron geometry matching reference blueprint
+  const triShape = new THREE.Shape();
+  const halfTriW = 0.0035;
+  const triH = 0.0048;
+  triShape.moveTo(-halfTriW, triH * 0.4);
+  triShape.lineTo(halfTriW, triH * 0.4);
+  triShape.lineTo(0, -triH * 0.6);
+  triShape.closePath();
+
+  const triGeo = geoCache.get('KneeTriGeo_v5', () => new THREE.ExtrudeGeometry(triShape, {
+    depth: 0.0016,
+    bevelEnabled: true,
+    bevelThickness: 0.0006,
+    bevelSize: 0.0006,
+    bevelSegments: 2,
+  }));
+
+  const patellaLed = new THREE.Mesh(triGeo, materials.purpleEmissive);
   patellaLed.name = side === -1 ? 'PatellaLed_L' : 'PatellaLed_R';
-  patellaLed.position.set(0, -0.0065, frontZ + 0.0008);
+  patellaLed.position.set(0, -0.0055, frontZ + 0.0006);
   patellaShield.add(patellaLed);
   ledMeshes.push(patellaLed);
 
-  const coreCapsuleGeo = geoCache.get('KneeCoreCapsuleGeo_v4', () => {
+  const coreCapsuleGeo = geoCache.get('KneeCoreCapsuleGeo_v5', () => {
     const g = new THREE.CapsuleGeometry(0.0006, 0.0065, 8, 16);
     g.rotateZ(Math.PI / 2);
     return g;
@@ -446,7 +498,7 @@ export function createKnee(
   patellaCore.position.set(0, -0.0065, frontZ + 0.0011);
   patellaShield.add(patellaCore);
 
-  const bloomCapsuleGeo = geoCache.get('KneeBloomCapsuleGeo_v4', () => {
+  const bloomCapsuleGeo = geoCache.get('KneeBloomCapsuleGeo_v5', () => {
     const g = new THREE.CapsuleGeometry(0.0020, 0.0085, 8, 16);
     g.rotateZ(Math.PI / 2);
     return g;
